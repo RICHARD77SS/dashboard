@@ -9,8 +9,8 @@ import usePersistedState from './utils/usePersistedState';
 import GlobalStyle from './Styles/Globalstyles';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router';
-import Header from './Components/Header';
 import Overview from './Components/Overview';
+import TopBar from './Components/TopBar';
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
-        <Route path='/' element={<Header />}>
+        <Route path='/' element={<TopBar />}>
           <Route path='/' element={<Overview />}/>
         </Route>
       </Routes>

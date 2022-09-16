@@ -1,12 +1,14 @@
+import {NavLink} from 'react-router-dom'
 import { Image } from "./styles";
-
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
 const Logo = () => {
   return (
-    <Image>
-      <MdOutlineDashboardCustomize />
-    </Image>
+    <NavLink to='/'>
+      <Image>
+        <MdOutlineDashboardCustomize />
+      </Image>
+    </NavLink>
   )
 }
 

@@ -19,7 +19,7 @@ const Header = () => {
       <ButtonContainer>
         <Button><GiVikingChurch /></Button>
         <Button type='button'>Inc name</Button>
-        <Options>
+        <Options className='option'>
           <Button><AiOutlinePlus /> Criar nova instituição</Button>
           <Button><BsGear />Configurações</Button>
           <Button><GiUpgrade />Upgrade de plano</Button>

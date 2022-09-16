@@ -1,11 +1,14 @@
 import { Option } from "./styles";
 
-interface Props {
+interface Props  {
   children?: React.ReactNode;
+  className?: string;
+  id?: string;
+  
 }
-const Options = ({children}:Props) => {
+const Options = ({children, ...Props}:Props) => {
   return (
-    <Option>
+    <Option {...Props}>
       {children}
     </Option>
   )
