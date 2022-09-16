@@ -6,8 +6,11 @@ import dark from './Styles/Themes/dark';
 
 import usePersistedState from './utils/usePersistedState';
 
-import Wrapper from './Components/Wrapper';
 import GlobalStyle from './Styles/Globalstyles';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router';
+import Header from './Components/Header';
+import Overview from './Components/Overview';
 
 
 function App() {
@@ -19,9 +22,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Wrapper>
-        <p>aaaaa</p>
-      </Wrapper>
+      <Routes>
+        <Route path='/' element={<Header />}>
+          <Route path='/' element={<Overview />}/>
+        </Route>
+      </Routes>
     </ThemeProvider>
   );
 }
