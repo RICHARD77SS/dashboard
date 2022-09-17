@@ -5,6 +5,7 @@ import { FiUsers, FiUser } from "react-icons/fi"
 import Button from "../Button"
 import Input from "../Input"
 import { Container, Content, Box, BoxHeader, BoxContent, BoxRet, BoxRetHeader,BoxRetContent, DivLink,LinkPub,BoxGrid, GridBox, Div, BoxFooter, Classification, BoxColor, GraphContainer,Graph,GraphHeader, Datalist,GraphContent,Data,Birt,BirtHeader,BirtContent,Status,Situation,Description,Divf,Output } from "./styles"
+import { AiOutlineLink } from "react-icons/ai"
 
 const Overview = () => {
   return (
@@ -69,7 +70,7 @@ const Overview = () => {
           <BoxRetContent>
             <LinkPub>
               <p>Ativar link público para que as pessoas se cadastrem diretamente.</p>
-              <span>https://www.link.com/ref</span>
+              <span><AiOutlineLink />https://www.link.com/ref</span>
             </LinkPub>
           </BoxRetContent>
         </BoxRet>
@@ -120,23 +121,23 @@ const Overview = () => {
           </BoxContent>
           <BoxFooter>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='a'></BoxColor>
               <p>Crianças</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='b'></BoxColor>
               <p>Adolescentes</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='c'></BoxColor>
               <p>Jovens</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='d'></BoxColor>
               <p>Adultos</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='e'></BoxColor>
               <p>Idosos</p>
             </Classification>
           </BoxFooter>
@@ -212,27 +213,27 @@ const Overview = () => {
           </BoxContent>
           <BoxFooter>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='a'></BoxColor>
               <p>Crianças</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='b'></BoxColor>
               <p>Adolescentes</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='c'></BoxColor>
               <p>Jovens</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='d'></BoxColor>
               <p>Adultos</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='f'></BoxColor>
               <p>Casais</p>
             </Classification>
             <Classification>
-              <BoxColor></BoxColor>
+              <BoxColor className='g'></BoxColor>
               <p>Famílias</p>
             </Classification>
           </BoxFooter>

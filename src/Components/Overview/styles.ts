@@ -87,11 +87,12 @@ export const BoxRetHeader = styled.header`
 export const BoxRetContent = styled.div`
   width: 100%;
   height: 70%;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   input{
-    min-width: 40px;
+    width: 100px;
     height: 30px;
     border: .5px solid ${Props => Props.theme.colors.sec};
   }
@@ -99,17 +100,19 @@ export const BoxRetContent = styled.div`
     font-size: .9rem;
   }
   span {
-    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
     color: ${Props => Props.theme.colors.pri};
   }
 `
 export const DivLink = styled.div`
   width: auto;
   height: 30px;
-  padding: 0 1rem;
+  padding: 0 .5rem;
   display: flex;
   align-items: center;
-  background: #ccc;
+  background: #f4f4f4;
   border: .5px solid ${Props => Props.theme.colors.sec};
 `
 export const LinkPub = styled.div`
@@ -161,6 +164,27 @@ export const Classification = styled.div`
   display: flex;
   align-items: center;
   margin: 0 .2rem;
+  .a{
+    background: #00BFFF;
+  }
+  .b{
+    background: #32CD32;
+  }
+  .c{
+    background: #FF4500;
+  }
+  .d{
+    background: #9400D3;
+  }
+  .e{
+    background: #FFE4C4;
+  }
+  .f{
+    background: #0000FF;
+  }
+  .g{
+    background: #8B4513;
+  }
   p{
     font-size: .8rem;
   }
@@ -168,8 +192,8 @@ export const Classification = styled.div`
 export const BoxColor = styled.div`
   width: 40px;
   height: 10px;
-  border: 1px solid red;
   margin: 0 .2rem;
+  
 `
 export const Cad = styled.div`
   border-radius: 10px;
@@ -250,6 +274,13 @@ export const Situation = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content:center;
+  color: #0a0;
+  :first-child {
+    color: #000;
+  }
+  :last-child {
+    color: #c00;
+  }
 `
 export const Description = styled.div`
   width: 100%;
