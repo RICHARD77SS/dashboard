@@ -8,6 +8,7 @@ export const Container = styled.header`
   justify-content: space-between;
   position: fixed;
   top: 0;
+  z-index: 50;
   background: ${Props => Props.theme.colors.sec};
   .option {
     display: none;

@@ -8,6 +8,7 @@ export const Nav = styled.nav`
   justify-content: center;
   background: ${Props => Props.theme.colors.pri};
   position: fixed;
+  z-index: 50;
   top: 50px;
   button{
     font-size: 1rem;

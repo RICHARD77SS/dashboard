@@ -1,9 +1,10 @@
 import { GiGreekTemple } from "react-icons/gi"
 import { BiGroup } from "react-icons/bi"
 import { FaGraduationCap } from "react-icons/fa"
+import { FiUsers, FiUser } from "react-icons/fi"
 import Button from "../Button"
 import Input from "../Input"
-import { Container } from "./styles"
+import { Container, Content, Box, BoxHeader, BoxContent, BoxRet, BoxRetHeader,BoxRetContent, DivLink,LinkPub,BoxGrid, GridBox, Div, BoxFooter, Classification, BoxColor, GraphContainer,Graph,GraphHeader, Datalist,GraphContent,Data,Birt,BirtHeader,BirtContent,Status,Situation,Description,Divf,Output } from "./styles"
 
 const Overview = () => {
   return (
@@ -14,10 +15,10 @@ const Overview = () => {
             <h3>Mural</h3>
             <Button>Ver mais</Button>
           </BoxHeader>
-          <BuxContent>
+          <BoxContent>
             <h4>Não há dados disponiveis</h4>
             <Button>+Adicionar items</Button>
-          </BuxContent>
+          </BoxContent>
         </Box>
         <Box>
           <BoxHeader>
@@ -75,7 +76,7 @@ const Overview = () => {
       </Content>
 
       <BoxGrid>
-        <RetBox>
+        <GridBox className='grid1'>
           <Div>
             <FiUsers />
             <h3>1</h3>
@@ -91,17 +92,32 @@ const Overview = () => {
             <h3>0.0% <span>(0)</span></h3>
             <p>Total de Mulheres </p>
           </Div>
-        </RetBox>
-        <Box>
+        </GridBox>
+        <Box className='grid2'>
+          <BoxHeader>
+            <h3>Cadastros</h3>
+            <Button>Ver todos</Button>
+          </BoxHeader>
+          <BoxContent>
+
+          </BoxContent>
+        </Box>
+        <GridBox className='grid3'>
           <BoxHeader>
             <h3>Categorias de pessoas</h3>
             <Button>Ver todos</Button>
           </BoxHeader>
-        </Box>
-        <Box>
+          <BoxContent>
+
+          </BoxContent>
+        </GridBox>
+        <GridBox className='grid4'>
           <BoxHeader>
             <h3>Faixa etária</h3>
           </BoxHeader>
+          <BoxContent>
+
+          </BoxContent>
           <BoxFooter>
             <Classification>
               <BoxColor></BoxColor>
@@ -124,18 +140,9 @@ const Overview = () => {
               <p>Idosos</p>
             </Classification>
           </BoxFooter>
-        </Box>
-
-        <Cad>
-          <CadHeader>
-            <h3>Cadastros</h3>
-            <Button>Ver todos</Button>
-          </CadHeader>
-          <CadContent>
-            
-          </CadContent>
-        </Cad>
-        <Graph>
+        </GridBox>
+        
+        <GraphContainer className='grid5'>
           <GraphHeader>
             <h3>Novos</h3>
             <Datalist>
@@ -158,8 +165,8 @@ const Overview = () => {
 
             </Graph>
           </GraphContent>
-        </Graph>
-        <Birt>
+        </GraphContainer>
+        <Birt className='grid6'>
           <BirtHeader>
             <h3>Birt</h3>
             <Button>Ver todos</Button>
@@ -257,19 +264,19 @@ const Overview = () => {
           </BoxHeader>
           <BoxContent>
             <Description>
-              <p><GiGreekTemple /></p>
-              <p>Total de escolas</p>
-              <p>0</p>
+              
+              <span><span><GiGreekTemple /></span>Total de escolas</span>
+              <span>0</span>
             </Description>
             <Description>
-              <p><FaGraduationCap /></p>
-              <p>Total de turmas</p>
-              <p>0</p>
+              
+              <span><span><FaGraduationCap /></span>Total de turmas</span>
+              <span>0</span>
             </Description>
             <Description>
-              <p><BiGroup /></p>
-              <p>Total de alunos</p>
-              <p>0</p>
+              
+              <span><span><BiGroup /></span>Total de alunos</span>
+              <span>0</span>
             </Description>
           </BoxContent>
         </Box>
@@ -278,27 +285,27 @@ const Overview = () => {
             <h3>Acompanhamento</h3>
           </BoxHeader>
           <BoxContent>
-            <Div>
+            <Divf>
               <Description>
                 <p>Em andamento</p>
                 <p>0</p>
               </Description>
               <Output></Output>
-            </Div>
-            <Div>
+            </Divf>
+            <Divf>
               <Description>
                 <p>Concluído</p>
                 <p>0</p>
               </Description>
               <Output></Output>
-            </Div>
-            <Div>
+            </Divf>
+            <Divf>
               <Description>
                 <p>Atrasados</p>
                 <p>0</p>
               </Description>
               <Output></Output>
-            </Div>
+            </Divf>
           </BoxContent>
         </Box>
       </Content>
