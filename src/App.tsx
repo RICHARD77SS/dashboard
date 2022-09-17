@@ -11,6 +11,7 @@ import { Routes } from 'react-router-dom';
 import { Route } from 'react-router';
 import Overview from './Components/Overview';
 import TopBar from './Components/TopBar';
+import People from './Components/People';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path='/' element={<TopBar />}>
           <Route path='/' element={<Overview />}/>
+          <Route path='/people' element={<People />}/>
         </Route>
       </Routes>
     </ThemeProvider>
