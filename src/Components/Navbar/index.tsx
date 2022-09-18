@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 import { Nav, Vbar } from "./styles";
 import Button from '../Button';
 import Menu from '../Menu';
+import DropPeople from '../DropPeople';
 
 const Navbar = () => {
   return (
@@ -13,7 +14,7 @@ const Navbar = () => {
       </NavLink>
       <Vbar />
       <NavLink className='navlink' to='/people'>
-        <Button id=''>Pessoas</Button>
+        <DropPeople />
       </NavLink>
       <Vbar />
       <NavLink className='navlink' to='/'>

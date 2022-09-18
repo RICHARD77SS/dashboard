@@ -16,13 +16,13 @@ export const Nav = styled.nav`
   button{
     font-size: 1rem;
     height: 50px;
-    padding: 0 .5rem;
+    padding: 0 1rem;
     color: #fff;
     @media (max-width:750px){
     display: none;
   }
     :hover {
-      background: rgba(255,255,255,0.2)
+      background: rgba(255,255,255,0.2);
     }
   }
   .navlink {
