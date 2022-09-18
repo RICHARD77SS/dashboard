@@ -10,7 +10,7 @@ const Navbar = () => {
         <Button id=''>Visão geral</Button>
       </NavLink>
       <Vbar />
-      <NavLink className='navlink' to='/'>
+      <NavLink className='navlink' to='/people'>
         <Button id=''>Pessoas</Button>
       </NavLink>
       <Vbar />
