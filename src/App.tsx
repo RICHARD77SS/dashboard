@@ -14,6 +14,7 @@ import TopBar from './Components/TopBar';
 import People from './Components/People';
 import AddPeople from './Components/AddPeople';
 import AdditionalField from './Components/AdditionalField';
+import Categories from './Components/Categories';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path='/people' element={<People />}/>
           <Route path='/addpeople' element={<AddPeople />}/>
           <Route path='/addfield' element={<AdditionalField />}/>
+          <Route path='/categories' element={<Categories />}/>
         </Route>
       </Routes>
     </ThemeProvider>
