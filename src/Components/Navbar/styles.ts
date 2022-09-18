@@ -10,11 +10,17 @@ export const Nav = styled.nav`
   position: fixed;
   z-index: 50;
   top: 50px;
+  @media (max-width:750px){
+   justify-content: flex-start;
+  }
   button{
     font-size: 1rem;
     height: 50px;
-    width: 100px;
+    padding: 0 .5rem;
     color: #fff;
+    @media (max-width:750px){
+    display: none;
+  }
     :hover {
       background: rgba(255,255,255,0.2)
     }
@@ -27,4 +33,7 @@ export const Vbar = styled.div`
   width: .5px;
   height: 100%;
   background: rgba(0,0,0,0.5);
+  @media (max-width:750px){
+    display: none;
+  }
 `

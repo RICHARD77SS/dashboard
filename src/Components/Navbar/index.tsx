@@ -2,10 +2,12 @@
 import {NavLink} from 'react-router-dom'
 import { Nav, Vbar } from "./styles";
 import Button from '../Button';
+import Menu from '../Menu';
 
 const Navbar = () => {
   return (
     <Nav>
+      <Menu />
       <NavLink className='navlink' to='/'>
         <Button id=''>Visão geral</Button>
       </NavLink>
