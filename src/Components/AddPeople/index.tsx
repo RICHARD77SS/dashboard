@@ -1,20 +1,22 @@
 import React from 'react'
+import Button from '../Button';
 import Input from '../Input';
 
-import { } from './styles';
+import { Container, Form, Content, Fieldset, Data, Header, DataContent, Flex, Block, Foto, InputBlock, Radio } from './styles';
 
 
 const AddPeople = () => {
   return (
     <Container>
       <Form>
+        <legend>Adicionar pessoas</legend>
         <Content>
-
-            <Fieldset>
-              <Data>
-                <Header>
-                  <h3>Dados pessoais</h3>
-                </Header>
+          <Fieldset>
+            <Data>
+              <Header>
+                <h3>Dados pessoais</h3>
+              </Header>
+              <DataContent>
                 <Flex>
                   <Block>
                     <label htmlFor="foto">Foto</label>
@@ -43,8 +45,6 @@ const AddPeople = () => {
                     <Radio>
                       <Input id='masculino' type='radio' />
                       <label htmlFor="masculino">Masculino</label>
-                    </Radio>
-                    <Radio>
                       <Input id='faminino' type='radio' />
                       <label htmlFor="faminino">Faminino</label>
                     </Radio>
@@ -68,11 +68,13 @@ const AddPeople = () => {
                   <label htmlFor="document1">Documento 2</label>
                   <Input id='document2' type='text' />
                 </Block>
-              </Data>
-              <Data>
-                <Header>
-                  <h3>Outras informações</h3>
-                </Header>
+              </DataContent>
+            </Data>
+            <Data>
+              <Header>
+                <h3>Outras informações</h3>
+              </Header>
+              <DataContent>
                 <Block>
                   <label htmlFor="group">Grupo</label>
                   <Input id='group' type='text' />
@@ -100,13 +102,15 @@ const AddPeople = () => {
                     <label htmlFor="nao">Não</label>
                   </Radio>
                 </Block>
-              </Data>
-            </Fieldset>
-            <Fieldset>
-              <Data>
-                <Header>
-                  <h3>Contatos</h3>
-                </Header>
+              </DataContent>
+            </Data>
+          </Fieldset>
+          <Fieldset>
+            <Data>
+              <Header>
+                <h3>Contatos</h3>
+              </Header>
+              <DataContent>
                 <Flex>
                   <Block>
                     <label htmlFor="tel1">Telefone 1</label>
@@ -121,17 +125,19 @@ const AddPeople = () => {
                   <label htmlFor="email">Email</label>
                   <Input id='email' type='email' />
                 </Block>
-              </Data>
-              <Data>
-                <Header>
-                  <h3>Endereço</h3>
-                </Header>
+              </DataContent>
+            </Data>
+            <Data>
+              <Header>
+                <h3>Endereço</h3>
+              </Header>
+              <DataContent>
                 <Block>
                   <label htmlFor="address">Endereço</label>
                   <Input id='address' type='text' />
                 </Block>
                 <Block>
-                  <label htmlFor="number">Number</label>
+                  <label htmlFor="number">Numero</label>
                   <Input id='number' type='text' />
                 </Block>
                 <Flex>
@@ -158,12 +164,15 @@ const AddPeople = () => {
                   <label htmlFor="city">Cidade</label>
                   <Input id='city' type='text' />
                 </Block>
-              </Data>
-              <Data>
-                <Header>
-                  <h3>Anotações</h3>
-                </Header>
-                <textarea title='notation' name="" id="" cols="30" rows="10"></textarea>
+              </DataContent>
+            </Data>
+            <Data>
+              <Header>
+                <h3>Anotações</h3>
+              </Header>
+              <DataContent>
+                <textarea title='notation' name="" id="" cols={30} rows={10}></textarea>
+              </DataContent>
             </Data>
           </Fieldset>
         </Content>
@@ -171,11 +180,14 @@ const AddPeople = () => {
           <Header>
             <h3>Campos adicionais</h3>
           </Header>
+          <DataContent>
+
+          </DataContent>
         </Data>
-        <Box>
+        <Block>
           <Input type='checkbox' />
           <p>Sou consciente das minhas responsabilidades com os dados cadastrados, em conformidade com a LGPD e GDPR. <a href="/">Termos de uso, Políticas de privacidade</a> </p>
-        </Box>
+        </Block>
         <Button type='submit'>Salvar dados</Button>
       </Form>
     </Container>

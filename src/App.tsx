@@ -12,6 +12,7 @@ import { Route } from 'react-router';
 import Overview from './Components/Overview';
 import TopBar from './Components/TopBar';
 import People from './Components/People';
+import AddPeople from './Components/AddPeople';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/' element={<TopBar />}>
           <Route path='/' element={<Overview />}/>
           <Route path='/people' element={<People />}/>
+          <Route path='/addpeople' element={<AddPeople />}/>
         </Route>
       </Routes>
     </ThemeProvider>
