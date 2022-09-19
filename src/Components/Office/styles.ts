@@ -18,8 +18,8 @@ export const Content = styled.div`
   gap: 1rem;
   padding: 1rem;
 `
-export const Categorias = styled.div`
-  width: 100%;
+export const Offices = styled.div`
+  width: 50%;
   display: flex;
   align-items:center;
   flex-direction: column;
@@ -28,7 +28,7 @@ export const Categorias = styled.div`
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
 `
 
-export const CategoriaHeader = styled.div`
+export const OfficeHeader = styled.div`
   width: 100%;
   height: 50px;
   display: flex;
@@ -38,7 +38,7 @@ export const CategoriaHeader = styled.div`
   
 `
 
-export const CategoriasContainer = styled.div`
+export const OfficeContainer = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem;
@@ -54,7 +54,7 @@ export const Thead = styled.thead`
 
 `
 export const Tr = styled.tr`
- 
+
 `
 export const Th = styled.th`
   border: 1px solid ${Props => Props.theme.colors.sec};
@@ -63,7 +63,7 @@ export const Td = styled.td`
   border: 1px solid ${Props => Props.theme.colors.sec};
 `
 
-export const AddCategoria = styled.div`
+export const AddOffice = styled.div`
   width: 100%;
   max-width: 400px;
   height: auto;

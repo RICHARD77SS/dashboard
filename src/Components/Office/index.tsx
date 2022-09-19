@@ -1,16 +1,16 @@
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Categorias,CategoriaHeader, CategoriasContainer, Table, Tr, Th, Td, AddCategoria, AddHeader,AddContainer,InputGroup, Thead, Tbody } from './styles';
+import { Container, Content, Offices,OfficeHeader, OfficeContainer, Table, Tr, Th, Td, AddOffice, AddHeader,AddContainer,InputGroup, Thead, Tbody } from './styles';
 
-const Categories = () => {
+const Office = () => {
   return (
     <Container>
       <Content>
-        <Categorias>
-          <CategoriaHeader>
+        <Offices>
+          <OfficeHeader>
             <h3>Resultados: 0</h3>
-          </CategoriaHeader>
-          <CategoriasContainer>
+          </OfficeHeader>
+          <OfficeContainer>
             <Table>
               <Thead>
                 <Tr>
@@ -27,31 +27,23 @@ const Categories = () => {
                 </Tr>
               </Tbody>
             </Table>
-            <Table>
-              
-              
-            </Table>
-          </CategoriasContainer>
-        </Categorias>
-        <AddCategoria>
+          </OfficeContainer>
+        </Offices>
+        <AddOffice>
           <AddHeader>
-            <h3>Criar categoria</h3>
+            <h3>Criar cargo</h3>
           </AddHeader>
           <AddContainer>
             <InputGroup>
-              <label htmlFor="name">Nome da Categoria</label>
+              <label htmlFor="name">Nome do cargo</label>
               <Input id='name' type='text' />
-            </InputGroup>
-            <InputGroup>
-              <label htmlFor="description">Descrição</label>
-              <Input id='description' type='text' />
             </InputGroup>
             <Button>Criar</Button>
           </AddContainer>
-        </AddCategoria>
+        </AddOffice>
       </Content>
     </Container>
   )
 }
 
-export default Categories;
+export default Office;

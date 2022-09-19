@@ -52,6 +52,7 @@ export const Data = styled.div`
   align-items:  center;
   border-radius: 10px;
   background: ${Props => Props.theme.colors.bac};
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
   input {
     height: 30px;
     border-radius: 5px;

@@ -3,8 +3,10 @@ import { AiOutlineCopy, AiOutlineDownload, AiOutlineEye, AiOutlinePrinter } from
 import { BsArrowDown, BsArrowUp, BsFilter } from 'react-icons/bs';
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Box, BoxHeader, BoxContent, Top, Results, Options,TableContainer,
-   Table, Tr, Th, Td, Page, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex } from './styles';
+import {
+  Container, Content, Box, BoxHeader, BoxContent, Top, Results, Options, TableContainer,
+  Table, Tbody,Tr, Th, Td, Page, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex, Thead
+} from './styles';
 
 
 const People = () => {
@@ -19,7 +21,7 @@ const People = () => {
           <BoxContent>
             <Top>
               <Results>
-                <Input id='result' type='number' />
+                <Input id='result' list='numbers' type='number' step='20' min='20' max='400' />
                 <label htmlFor='result'>Resultados por página</label>
               </Results>
               <Options>
@@ -31,14 +33,18 @@ const People = () => {
             </Top>
             <TableContainer>
               <Table>
-                <Tr>
-                  <Th><Button>Nome completo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                  <Th><Button>E-mail <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                </Tr>
-                <Tr>
-                  <Td>Name here</Td>
-                  <Td>Email here</Td>
-                </Tr>
+                <Thead>
+                  <Tr>
+                    <Th><Button>Nome completo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button>E-mail <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Name here</Td>
+                    <Td>Email here</Td>
+                  </Tr>
+                </Tbody>
               </Table>
             </TableContainer>
             <Page>

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 
 `
 export const Droped = styled.div`
-  width: 200px;
+  width:250px;
   height: auto;
   background: ${Props => Props.theme.colors.sec};
   padding: 1rem;

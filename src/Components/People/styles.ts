@@ -7,6 +7,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem 0;
+  h3{
+    margin: 1rem;
+    
+  }
 `
 export const Content = styled.div`
   width: 100%;
@@ -73,7 +77,7 @@ export const Options = styled.div`
     }
   }
 `
-export const TableContainer = styled.table`
+export const TableContainer = styled.div`
   width: 100%;
   height: auto;
   display: flex;
@@ -84,24 +88,19 @@ export const Table = styled.table`
   width: 100%;
   height: auto;
 `
+export const Tbody = styled.tbody`
+`
+export const Thead = styled.thead`
+
+`
 export const Tr = styled.tr`
-  display: flex;
+
 `
 export const Th = styled.th` 
-  min-width: 180px;
-  height: 50px;
-  padding: 0 1rem;
-  display: flex;
-  align-items:center;
-  border: 1px solid blue;
+  border: 1px solid ${Props => Props.theme.colors.sec};
 `
 export const Td = styled.td`
-  min-width: 180px;
-  height: 50px;
-  padding: 0 1rem;
-  display: flex;
-  align-items:center;
-  border: 1px solid blue;
+  border: 1px solid ${Props => Props.theme.colors.sec};
 `
 export const Page = styled.div`
   display: flex;
@@ -129,6 +128,7 @@ export const Aside = styled.aside`
   align-items:center;
   border-radius: 10px;
   gap: 1rem;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
   button{
     width: 100%;
     height: 40px;

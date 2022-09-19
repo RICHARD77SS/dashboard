@@ -1,6 +1,6 @@
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Field, Header, FieldContent, Table, Tr, Th, Td, AddField, FieldHeader, Box, BoxHeader, BoxContent, InputContainer, InputContainerB } from './styles';
+import { Container, Content, Field, Header, FieldContent, Table, Tr, Th, Td, AddField, FieldHeader, Box, BoxHeader, BoxContent, InputContainer, InputContainerB, Thead, Tbody } from './styles';
 
 const AdditionalField = () => {
   return (
@@ -13,16 +13,20 @@ const AdditionalField = () => {
           <FieldContent>
             <h4>Adicione novos campos ao formulario</h4>
             <Table>
-              <Tr>
-                <Th>Nome</Th>
-                <Th>Tipo</Th>
-                <Th>Ações</Th>
-              </Tr>
-              <Tr>
-                <Td>Name here</Td>
-                <Td>type here</Td>
-                <Td><Button>Editar</Button><Button>Remover</Button></Td>
-              </Tr>
+              <Thead>
+                <Tr>
+                  <Th>Nome</Th>
+                  <Th>Pessoas</Th>
+                  <Th>Ações</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                <Tr>
+                  <Td>Name here</Td>
+                  <Td>type here</Td>
+                  <Td><Button>Editar</Button><Button>Remover</Button></Td>
+                </Tr>
+              </Tbody>
             </Table>
           </FieldContent>
         </Field>

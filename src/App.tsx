@@ -15,6 +15,8 @@ import People from './Components/People';
 import AddPeople from './Components/AddPeople';
 import AdditionalField from './Components/AdditionalField';
 import Categories from './Components/Categories';
+import Office from './Components/Office';
+import CardPersonal from './Components/CardPersonal';
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
           <Route path='/addpeople' element={<AddPeople />}/>
           <Route path='/addfield' element={<AdditionalField />}/>
           <Route path='/categories' element={<Categories />}/>
+          <Route path='/office' element={<Office />}/>
+          <Route path='/cardpersonal' element={<CardPersonal />}/>
         </Route>
       </Routes>
     </ThemeProvider>
