@@ -30,6 +30,10 @@ const AddPeople = () => {
                       <Input type='text' />
                     </Block>
                     <Block>
+                      <label htmlFor="nome">idade</label>
+                      <Input type='number' min='0' max='120'/>
+                    </Block>
+                    <Block>
                       <label htmlFor="senha">Senha</label>
                       <Input type='text' />
                     </Block>
@@ -185,7 +189,7 @@ const AddPeople = () => {
           </DataContent>
         </Data>
         <Block>
-          <Input type='checkbox' />
+          <Input type='checkbox' required />
           <p>Sou consciente das minhas responsabilidades com os dados cadastrados, em conformidade com a LGPD e GDPR. <a href="/">Termos de uso, Políticas de privacidade</a> </p>
         </Block>
         <Button type='submit'>Salvar dados</Button>
