@@ -34,6 +34,12 @@ const DropPeople = () => {
             <NavLink className='navlink' to='/cardpersonal'>
               <Button>Cartão pessoal</Button>
             </NavLink>
+            <NavLink className='navlink' to='/birthday'>
+              <Button>Aniversariantes</Button>
+            </NavLink>
+            <NavLink className='navlink' to='/reports'>
+              <Button>Relatorios</Button>
+            </NavLink>
           </Droped>
         </> : null}
     </Wrapper>
