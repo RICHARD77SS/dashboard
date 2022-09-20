@@ -55,13 +55,27 @@ const ReportsAge = () => {
               <Td>0</Td>
               <Td><Button>Ver pessoas</Button></Td>
             </Tr>
-          </Tbody>
-          <Tbody>
             <Tr>
               <Td>Adolescentes</Td>
               <Td>0</Td>
               <Td><Button>Ver pessoas</Button></Td>
             </Tr>
+            <Tr>
+              <Td>Jovens</Td>
+              <Td>0</Td>
+              <Td><Button>Ver pessoas</Button></Td>
+            </Tr>
+            <Tr>
+              <Td>Adultos</Td>
+              <Td>0</Td>
+              <Td><Button>Ver pessoas</Button></Td>
+            </Tr>
+            <Tr>
+              <Td>Idosos</Td>
+              <Td>0</Td>
+              <Td><Button>Ver pessoas</Button></Td>
+            </Tr>
+           
           </Tbody>
         </Table>
       </Content>

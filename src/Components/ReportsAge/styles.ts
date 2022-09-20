@@ -41,6 +41,7 @@ export const Content = styled.div`
 `
 export const Graph = styled.div`
   width: 100%;
+  min-height: 400px;
   height: auto;
   padding: 1rem;
 `
@@ -95,11 +96,16 @@ export const Thead = styled.thead`
 
 `
 export const Tr = styled.tr`
-
+  :nth-child(odd){
+    background: #eee;
+  }
 `
 export const Th = styled.th` 
   border: 1px solid ${Props => Props.theme.colors.sec};
+  height: 40px;
 `
 export const Td = styled.td`
   border: 1px solid ${Props => Props.theme.colors.sec};
+  height: 40px;
+  
 `
