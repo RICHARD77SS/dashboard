@@ -28,7 +28,7 @@ const Reports = () => {
             <NavLink className='navlink' to='/reports/sex'>
               Sexo
             </NavLink>
-            <NavLink className='navlink' to='/reports/mstate'>
+            <NavLink className='navlink' to='/reports/relations'>
               Estado civil
             </NavLink>
             <NavLink className='navlink' to='/reports/baptism'>
@@ -40,7 +40,7 @@ const Reports = () => {
             <NavLink className='navlink' to='/reports/district'>
               Bairro
             </NavLink>
-            <NavLink className='navlink' to='/reports/permission'>
+            <NavLink className='navlink' to='/reports/permissions'>
               Permissões
             </NavLink>
           </SideContent>

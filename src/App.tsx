@@ -22,6 +22,12 @@ import Reports from './Components/Reports';
 import ReportsOffice from './Components/ReportOffice';
 import ReportsAge from './Components/ReportsAge';
 import ReportsBirth from './Components/ReportsBirth';
+import ReportsSex from './Components/ReportsSex';
+import ReportsRelation from './Components/ReportsRelation';
+import ReportsBaptism from './Components/ReportsBaptism';
+import ReportsConversion from './Components/ReportsConversion';
+import ReportsDistrict from './Components/ReportsDistrict';
+import ReportsPermissions from './Components/ReportsPermissions';
 
 
 function App() {
@@ -48,6 +54,12 @@ function App() {
             <Route path='/reports/office' element={<ReportsOffice />} />
             <Route path='/reports/age' element={<ReportsAge />} />
             <Route path='/reports/birth' element={<ReportsBirth />} />
+            <Route path='/reports/sex' element={<ReportsSex />} />
+            <Route path='/reports/relations' element={<ReportsRelation />} />
+            <Route path='/reports/baptism' element={<ReportsBaptism />} />
+            <Route path='/reports/conversion' element={<ReportsConversion />} />
+            <Route path='/reports/district' element={<ReportsDistrict />} />
+            <Route path='/reports/permissions' element={<ReportsPermissions />} />
           </Route>
         </Route>
       </Routes>

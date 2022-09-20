@@ -39,35 +39,40 @@ export const Content = styled.div`
   height: auto;
   padding: 1rem;
 `
-export const Graph = styled.div`
+export const Top = styled.div`
   width: 100%;
-  min-height: 400px;
-  height: auto;
+  height: 40px;
   padding: 1rem;
-`
-export const Reference = styled.div`
-  width: 100%;
-  height: auto;
-  display: flex;
-  padding: 1rem;
-`
-export const Classification = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 .2rem;
-  .a{
-    background: #00BFFF;
-  }
-  .b{
-    background: #FF4500;
+`
+export const Center = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 1rem;
+  align-items:center;
+  justify-content: flex-end;
+  gap: .5rem;
+`
+export const Options = styled.div`
+  height: auto;
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  button {
+    background: ${Props => Props.theme.colors.sec};
+    padding: 0 1rem;
+    height: 40px;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 5px; 
+    :hover {
+      filter: brightness(1.3);
+    }
   }
 `
-export const BoxColor = styled.div`
-  width: 40px;
-  height: 10px;
-  margin: 0 .2rem;
-  
-`
+
 export const Table = styled.table`
   width: 100%;
   height: auto;
@@ -90,4 +95,23 @@ export const Td = styled.td`
   border: 1px solid ${Props => Props.theme.colors.sec};
   height: 40px;
   
+`
+export const Pages = styled.div`
+  height: auto;
+  display: flex;
+  button {
+    border: 1px solid ${Props => Props.theme.colors.pri};
+    padding: 0 1rem;
+    height: 40px;
+    color: ${Props => Props.theme.colors.pri};
+    font-size: 1rem;
+    border-radius: 5px; 
+    :hover {
+      filter: brightness(1.3);
+    }
+    :nth-child(2) {
+      background: ${Props => Props.theme.colors.pri};
+      color: #fff;
+    }
+  }
 `
