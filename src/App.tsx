@@ -21,6 +21,7 @@ import Birthday from './Components/Birthday';
 import Reports from './Components/Reports';
 import ReportsOffice from './Components/ReportOffice';
 import ReportsAge from './Components/ReportsAge';
+import ReportsBirth from './Components/ReportsBirth';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <Route path='/reports' element={<h3>Escolha um relatorio</h3>} />
             <Route path='/reports/office' element={<ReportsOffice />} />
             <Route path='/reports/age' element={<ReportsAge />} />
+            <Route path='/reports/birth' element={<ReportsBirth />} />
           </Route>
         </Route>
       </Routes>
