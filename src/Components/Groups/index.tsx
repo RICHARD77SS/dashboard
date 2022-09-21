@@ -22,7 +22,7 @@ const Group = () => {
                   <img src="https://img.freepik.com/vetores-gratis/juventude-plana-pessoas-abracando-juntos_52683-13322.jpg?w=740&t=st=1663693866~exp=1663694466~hmac=e0160b834b8bc53200224a2d0c6e2318b32138fbc2add06e7b49d4837cc5227b" alt="" />
                 </CardBg>
                 <CardImg>
-                  <img src="https://img.freepik.com/fotos-gratis/silhueta-de-empresarios-confiantes_1098-1768.jpg?w=740&t=st=1663694031~exp=1663694631~hmac=f64272ec63e1c95579c7ff1d8c4a60c4ad25cc731cd197077f77135b1062a694" alt="" />
+                  <img src="https://img.freepik.com/vetores-gratis/ele-ressuscitou-letras-contra-um-fundo-de-nuvens-e-sol-plano-de-fundo-para-parabens-pela-ressurreicao-de-cristo-ilustracao-vetorial-eps10_87521-2831.jpg?w=740&t=st=1663708091~exp=1663708691~hmac=dd44f2ad46aa3924458538b14d54ed56498aec24b49bd0e556746328697f4207" alt="" />
                 </CardImg>
                 <h4>Group name</h4>
                 <p>0 pessoas</p>

@@ -1,20 +1,12 @@
 import Button from '../Button';
-import {  Container,Header,Foto,Block,Content,Graph } from './styles';
+import ReportsHeader from '../ReportsHeader';
+import {  Container,Content,Graph } from './styles';
 
 
 const ReportsBirth = () => {
   return (
     <Container>
-      <Header>
-        <Foto>
-
-        </Foto>
-        <Block>
-          <h3>Inc Name</h3>
-          <h4>Relatorio: Aniversáriantes</h4>
-        </Block>
-        <Button>Imprimir</Button>
-      </Header>
+      <ReportsHeader logo='' corporation='Inc name' reportsName='Aniversariantes' />
       <Content>
         <Graph>
 

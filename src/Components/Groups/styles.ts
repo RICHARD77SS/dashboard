@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
   h3{
     margin: 1rem;
   }
@@ -57,11 +57,11 @@ export const Card = styled.div`
   align-items:center;
   justify-content: start;
   flex-direction: column;
-  gap: .4rem;
+  gap: .1rem;
   background: ${Props => Props.theme.colors.pri};
   box-shadow: 0 0 5px 0 rgba(0,0,0,0.8);
   h4 {
-    margin-top: 1.4rem;
+    margin-top: 3rem;
   }
   button {
     width: 90%;
@@ -91,8 +91,8 @@ export const CardImg = styled.div`
   height: 70px;
   border-radius: 20px;
   position: absolute;
-  transform: translateY(2rem);
-  box-shadow: 0 0 5px 0 rgba(0,0,0,0.8);
+  transform: translateY(3rem);
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.8);
   img{
     width: 100%;
     height:100%;
@@ -215,6 +215,7 @@ export const InputGroup = styled.div`
 `
 export const Flex = styled.div`
   width: 100%;
+  height: 30px;
   display: flex;
   align-items:center;
   gap: .5rem;

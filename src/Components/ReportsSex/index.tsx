@@ -1,20 +1,12 @@
 import Button from '../Button';
-import {  Container,Header,Foto,Block,Content,Graph, Reference, Classification, BoxColor, Table,Thead,Tr,Th,Tbody,Td } from './styles';
+import ReportsHeader from '../ReportsHeader';
+import {  Container,Content,Graph, Reference, Classification, BoxColor, Table,Thead,Tr,Th,Tbody,Td } from './styles';
 
 
 const ReportsSex = () => {
   return (
     <Container>
-      <Header>
-        <Foto>
-
-        </Foto>
-        <Block>
-          <h3>Inc Name</h3>
-          <h4>Relatorio: Sexo</h4>
-        </Block>
-        <Button>Imprimir</Button>
-      </Header>
+      <ReportsHeader logo='' corporation='Inc name' reportsName='Sexo' />
       <Content>
         <Graph>
 

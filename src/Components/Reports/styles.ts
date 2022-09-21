@@ -25,6 +25,7 @@ export const Sidebar = styled.div`
   flex-direction: column;
   background: ${Props => Props.theme.colors.bac};
   border-radius: 10px;
+  border: 1px solid ${Props => Props.theme.colors.pri};
 `
 export const Header = styled.div`
   width: 100%;
@@ -47,12 +48,16 @@ export const SideContent = styled.div`
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: ${Props =>Props.theme.colors.pri};
+    color: ${Props => Props.theme.colors.text};
     width: 100%;
     height: 30px;
     background: #f4f4f4;
     border-radius: 5px;
     font-size: 1rem;
+    border: 1px solid ${Props => Props.theme.colors.pri};
+    :hover {
+      filter: brightness(.8);
+    }
   }
   .navlink.active {
     background: ${Props => Props.theme.colors.sec};
@@ -68,4 +73,5 @@ export const GraphContainer = styled.div`
   flex-direction: column;
   background: ${Props => Props.theme.colors.bac};
   border-radius: 10px;
+  border: 1px solid ${Props => Props.theme.colors.pri};
 `

@@ -45,38 +45,7 @@ export const BoxContent = styled.div`
   align-items:center;
   padding: 1rem;
 `
-export const Top = styled.div`
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items:center;
-  justify-content: space-between;
-`
-export const Results = styled.div`
-  display: flex;
-  align-items:center;
-  height: 50px;
-  input{
-    width: 80px;
-    height: 40px;
-  }
-`
-export const Options = styled.div`
-  display: flex;
-  align-items:center;
-  gap: 0.5rem;
-  button {
-    background: ${Props => Props.theme.colors.sec};
-    padding: 0 1rem;
-    height: 40px;
-    color: #fff;
-    font-size: 1rem;
-    border-radius: 5px; 
-    :hover {
-      filter: brightness(1.3);
-    }
-  }
-`
+
 export const TableContainer = styled.div`
   width: 100%;
   height: auto;
@@ -84,42 +53,7 @@ export const TableContainer = styled.div`
   overflow-x: scroll;
   background: #f4f4f4;
 `
-export const Table = styled.table`
-  width: 100%;
-  height: auto;
-`
-export const Tbody = styled.tbody`
-`
-export const Thead = styled.thead`
 
-`
-export const Tr = styled.tr`
-
-`
-export const Th = styled.th` 
-  border: 1px solid ${Props => Props.theme.colors.sec};
-`
-export const Td = styled.td`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-`
-export const Page = styled.div`
-  display: flex;
-  align-items:center;
-  button {
-    height: 40px;
-    padding: 0 1rem;
-    background: ${Props => Props.theme.colors.sec};
-    font-size: 1rem;
-    color: #fff;
-    :nth-child(2){
-      background: #fff;
-      color: #000;
-    }
-    :hover {
-      filter: brightness(1.3);
-    }
-  }
-`
 export const Aside = styled.aside`
   width: 30%;
   height: auto;
@@ -128,7 +62,6 @@ export const Aside = styled.aside`
   align-items:center;
   border-radius: 10px;
   gap: 1rem;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
   button{
     width: 100%;
     height: 40px;
@@ -165,8 +98,7 @@ export const FilterOptions = styled.div`
   max-height: 600px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  gap: 1rem;
+  padding: .5rem;
   background: ${Props => Props.theme.colors.bac};
   border-radius:0 0 10px 10px;
   overflow-y: scroll;
@@ -194,5 +126,4 @@ export const Flex = styled.div`
   display: flex;
   align-items:center;
   gap: .5rem;
-  margin: .3rem 0;
 `

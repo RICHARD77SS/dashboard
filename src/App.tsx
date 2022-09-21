@@ -28,6 +28,11 @@ import ReportsBaptism from './Components/ReportsBaptism';
 import ReportsConversion from './Components/ReportsConversion';
 import ReportsDistrict from './Components/ReportsDistrict';
 import ReportsPermissions from './Components/ReportsPermissions';
+import Group from './Components/Groups';
+import AddGroup from './Components/AddGroup';
+import GroupCategorie from './Components/GroupCategorie';
+import GroupReports from './Components/GroupReports';
+import GroupReportsMeetings from './Components/GroupReportsMeetings';
 
 
 function App() {
@@ -61,6 +66,14 @@ function App() {
             <Route path='/reports/district' element={<ReportsDistrict />} />
             <Route path='/reports/permissions' element={<ReportsPermissions />} />
           </Route>
+          <Route path='/groups' element={<Group />} />
+          <Route path='/addgroups' element={<AddGroup />} />
+          <Route path='/groupcategories' element={<GroupCategorie />} />
+          <Route path='/groupreports' element={<GroupReports />} >
+            
+            <Route path='/groupreports/meetings' element={<GroupReportsMeetings />} />
+          </Route>
+            
         </Route>
       </Routes>
     </ThemeProvider>

@@ -1,22 +1,14 @@
 import Button from '../Button';
-import {  Container,Header,Foto,Block,Content,Top,Options,Center, Table,Thead,Tr,Th,Tbody,Td, Pages } from './styles';
+import {  Container,Content,Top,Options,Center, Table,Thead,Tr,Th,Tbody,Td, Pages } from './styles';
 import { AiOutlineCopy, AiOutlineDownload, AiOutlinePrinter, AiOutlineEye } from 'react-icons/ai';
 import Input from '../Input';
+import ReportsHeader from '../ReportsHeader';
 
 
 const ReportsPermissions = () => {
   return (
     <Container>
-      <Header>
-        <Foto>
-
-        </Foto>
-        <Block>
-          <h3>Inc Name</h3>
-          <h4>Relatorio: Permissões</h4>
-        </Block>
-        <Button>Imprimir</Button>
-      </Header>
+      <ReportsHeader logo='' corporation='Inc name' reportsName='Permissões' />
       <Content>
         <Top>
           <Input type='number' />

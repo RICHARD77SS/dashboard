@@ -1,21 +1,13 @@
-import Button from '../Button';
+
 import Input from '../Input';
-import {  Container,Header,Foto,Block,Content,Graph,  Table,Thead,Tr,Th,Tbody,Td } from './styles';
+import ReportsHeader from '../ReportsHeader';
+import {  Container,Content,Graph,  Table,Thead,Tr,Th,Tbody,Td } from './styles';
 
 
 const ReportsConversion = () => {
   return (
     <Container>
-      <Header>
-        <Foto>
-
-        </Foto>
-        <Block>
-          <h3>Inc Name</h3>
-          <h4>Relatorio: Data deConversão</h4>
-        </Block>
-        <Button>Imprimir</Button>
-      </Header>
+      <ReportsHeader logo='' corporation='Inc name' reportsName='Data de conversão' />
       <Content>
         <Input type='data' />
         <Graph>

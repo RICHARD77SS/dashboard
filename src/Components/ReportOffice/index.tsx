@@ -1,20 +1,12 @@
 import Button from '../Button';
-import {  Container,Header,Foto,Block,Content,Table,Thead,Tr,Th,Tbody,Td } from './styles';
+import {  Container,Content,Table,Thead,Tr,Th,Tbody,Td } from './styles';
 import { BsArrowUp, BsArrowDown } from 'react-icons/bs';
+import ReportsHeader from '../ReportsHeader';
 
 const ReportsOffice = () => {
   return (
     <Container>
-      <Header>
-        <Foto>
-
-        </Foto>
-        <Block>
-          <h3>Inc Name</h3>
-          <h4>Relatorio: Cargos</h4>
-        </Block>
-        <Button>Imprimir</Button>
-      </Header>
+      <ReportsHeader logo='' corporation='Inc name' reportsName='Cargos' />
       <Content>
         <Table>
           <Thead>

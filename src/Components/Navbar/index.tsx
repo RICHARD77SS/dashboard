@@ -4,6 +4,7 @@ import { Nav, Vbar } from "./styles";
 import Button from '../Button';
 import Menu from '../Menu';
 import DropPeople from '../DropPeople';
+import DropGroups from '../DropGroups';
 
 const Navbar = () => {
   return (
@@ -17,8 +18,8 @@ const Navbar = () => {
         <DropPeople />
       </NavLink>
       <Vbar />
-      <NavLink className='navlink' to='/'>
-        <Button id=''>Grupos</Button>
+      <NavLink className='navlink' to='/groups'>
+        <DropGroups />
       </NavLink>
       <Vbar />
       <NavLink className='navlink' to='/'>

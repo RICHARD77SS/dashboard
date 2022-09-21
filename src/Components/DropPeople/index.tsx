@@ -40,6 +40,9 @@ const DropPeople = () => {
             <NavLink className='navlink' to='/reports'>
               <Button>Relatorios</Button>
             </NavLink>
+            <NavLink className='navlink' to='/imports'>
+              <Button>Importar/exportar</Button>
+            </NavLink>
           </Droped>
         </> : null}
     </Wrapper>

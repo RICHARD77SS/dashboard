@@ -1,12 +1,18 @@
 import React from 'react';
-import { AiOutlineCopy, AiOutlineDownload, AiOutlineEye, AiOutlinePrinter } from 'react-icons/ai';
+import Table from '../Table'
 import { BsArrowDown, BsArrowUp, BsFilter } from 'react-icons/bs';
 import Button from '../Button';
 import Input from '../Input';
+import TopTableOptions from '../TopTableOptions';
 import {
-  Container, Content, Box, BoxHeader, BoxContent, Top, Results, Options, TableContainer,
-  Table, Tbody,Tr, Th, Td, Page, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex, Thead
+  Container, Content, Box, BoxHeader, BoxContent, TableContainer, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex
 } from './styles';
+import Thead from '../Thead';
+import Tr from '../Tr';
+import Th from '../Th';
+import Tbody from '../Tbody';
+import Td from '../Td';
+import PageSelector from '../PageSelector';
 
 
 const People = () => {
@@ -19,18 +25,7 @@ const People = () => {
             <h3>Resultados: 1</h3>
           </BoxHeader>
           <BoxContent>
-            <Top>
-              <Results>
-                <Input id='result' list='numbers' type='number' step='20' min='20' max='400' />
-                <label htmlFor='result'>Resultados por página</label>
-              </Results>
-              <Options>
-                <Button><AiOutlineCopy /></Button>
-                <Button><AiOutlineDownload /></Button>
-                <Button><AiOutlinePrinter /></Button>
-                <Button><AiOutlineEye />Colunas</Button>
-              </Options>
-            </Top>
+            <TopTableOptions />
             <TableContainer>
               <Table>
                 <Thead>
@@ -47,11 +42,7 @@ const People = () => {
                 </Tbody>
               </Table>
             </TableContainer>
-            <Page>
-              <Button>Anterior</Button>
-              <Button>1</Button>
-              <Button>Próximo</Button>
-            </Page>
+            <PageSelector />
           </BoxContent>
         </Box>
         <Aside>
