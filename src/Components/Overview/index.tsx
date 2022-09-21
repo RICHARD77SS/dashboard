@@ -105,7 +105,7 @@ const Overview = () => {
         </Box>
         <GridBox className='grid3'>
           <BoxHeader>
-            <h3>Categorias de pessoas</h3>
+            <h3>Categorias</h3>
             <Button>Ver todos</Button>
           </BoxHeader>
           <BoxContent>
@@ -169,7 +169,7 @@ const Overview = () => {
         </GraphContainer>
         <Birt className='grid6'>
           <BirtHeader>
-            <h3>Birt</h3>
+            <h3>Aniversariantes</h3>
             <Button>Ver todos</Button>
           </BirtHeader>
           <BirtContent>
@@ -205,7 +205,7 @@ const Overview = () => {
         </Box>
         <Box>
           <BoxHeader>
-            <h3>Categorias de grupos</h3>
+            <h3>Grupos</h3>
             <Button>Ver todos</Button>
           </BoxHeader>
           <BoxContent>

@@ -3,7 +3,7 @@ export default {
   colors: {
     pri: '#1B98E0',
     sec: '#006494',
-    bac: '#e8f1f2',
+    bac: '#fff',
     text: '#000000'
   }
 }

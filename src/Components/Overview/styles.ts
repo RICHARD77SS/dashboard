@@ -8,6 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+
 `
 
 export const Content = styled.div`
@@ -17,6 +18,24 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  h3 {
+    color: #fff;
+  }
+  button {
+    padding: 0 1rem;
+    height: 30px;
+    border-radius: 20px;
+    background: ${Props => Props.theme.colors.sec};
+    color: #fff;
+    font-size: 1rem;
+    :hover {
+      background: #ccc;
+      color: ${Props => Props.theme.colors.sec};
+    }
+  }
+  @media (max-width: 1000px) {
+    flex-wrap: wrap;
+  }
 `
 export const Box = styled.div`
   min-width: 300px;
@@ -24,6 +43,7 @@ export const Box = styled.div`
   min-height: 300px;
   border-radius: 10px;
   background: ${Props => Props.theme.colors.bac};
+  border: 1px solid ${Props => Props.theme.colors.pri};
 `
 export const BoxHeader = styled.header`
   width: 100%;
@@ -32,16 +52,24 @@ export const BoxHeader = styled.header`
   align-items:center;
   justify-content: space-between;
   border-bottom: 1px solid ${Props => Props.theme.colors.pri};
-  filter: brightness(.8);
+  padding: 1rem;
+  border-radius: 10px 10px 0 0;
+  background: ${Props => Props.theme.colors.pri};
+  h3 {
+    color: #fff;
+  }
   button {
     padding: 0 1rem;
     height: 30px;
     border-radius: 20px;
-    background: ${Props => Props.theme.colors.pri};
+    background: ${Props => Props.theme.colors.sec};
     margin: 0 .5rem;
-  }
-  h3 {
-    margin: 0 .5rem;
+    color: #fff;
+    font-size: 1rem;
+    :hover {
+      background: #ccc;
+      color: ${Props => Props.theme.colors.sec};
+    }
   }
 `
 export const BoxContent = styled.div`
@@ -53,12 +81,7 @@ export const BoxContent = styled.div`
   align-items:center;
   justify-content: space-between;
   padding:.51rem;
-  button {
-    padding: 0 1rem;
-    height: 30px;
-    border-radius: 20px;
-    background: ${Props => Props.theme.colors.sec};
-  }
+
 `
 export const BoxRet = styled.div`
   flex: 1;
@@ -73,15 +96,10 @@ export const BoxRetHeader = styled.header`
   display: flex;
   align-items:center;
   justify-content: space-between;
-  h3 {
-    color:${Props => Props.theme.colors.sec};
-  }
-  button {
-    padding: 0 1rem;
-    height: 30px;
-    border-radius: 20px;
-    background: ${Props => Props.theme.colors.sec};
-  }
+  padding: 1rem;
+  border-radius: 10px 10px 0 0;
+  background: ${Props => Props.theme.colors.pri};
+  
 
 `
 export const BoxRetContent = styled.div`
@@ -133,12 +151,29 @@ export const BoxGrid = styled.div`
   "g5 g5 g5 g5 g6 g6"
   ;
   gap: 1rem;
-  .grid1{grid-area: g1;justify-content: center;}
-  .grid2{grid-area: g2;flex-direction: column;}
-  .grid3{grid-area: g3;flex-direction: column;}
-  .grid4{grid-area: g4;flex-direction: column;}
-  .grid5{grid-area: g5;}
-  .grid6{grid-area: g6;}
+  .grid1{
+    grid-area: g1;
+    justify-content: center;
+    border: 1px solid ${Props => Props.theme.colors.pri};
+  }
+  .grid2{
+    grid-area: g2;
+    flex-direction: column;
+    border: 1px solid ${Props => Props.theme.colors.pri};}
+  .grid3{
+    grid-area: g3;
+    flex-direction: column;
+    border: 1px solid ${Props => Props.theme.colors.pri};}
+  .grid4{
+    grid-area: g4;
+    flex-direction: column;
+    border: 1px solid ${Props => Props.theme.colors.pri};}
+  .grid5{
+    grid-area: g5;
+    border: 1px solid ${Props => Props.theme.colors.pri};}
+  .grid6{
+    grid-area: g6;
+    border: 1px solid ${Props => Props.theme.colors.pri};}
 `
 export const GridBox = styled.div`
   display: flex;
@@ -200,7 +235,24 @@ export const Cad = styled.div`
   background: ${Props => Props.theme.colors.bac};
 `
 export const CadHeader = styled.div`
-
+  border-radius: 10px 10px 0 0;
+  background: ${Props => Props.theme.colors.pri};
+  h3 {
+    color: #fff;
+  }
+  button {
+    padding: 0 1rem;
+    height: 30px;
+    border-radius: 20px;
+    background: ${Props => Props.theme.colors.sec};
+    margin: 0 .5rem;
+    color: #fff;
+    font-size: 1rem;
+    :hover {
+      background: #ccc;
+      color: ${Props => Props.theme.colors.sec};
+    }
+  }
 `
 export const CadContent = styled.div`
   
@@ -219,6 +271,11 @@ export const GraphHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 10px 10px 0 0;
+  background: ${Props => Props.theme.colors.pri};
+  h3 {
+    color: #fff;
+  }
   h3{
     margin: 0 1rem;
   }
@@ -251,8 +308,25 @@ export const BirtHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 1rem;
   border-bottom: 1px solid ${Props => Props.theme.colors.pri};
+  border-radius: 10px 10px 0 0;
+  background: ${Props => Props.theme.colors.pri};
+  h3 {
+    color: #fff;
+  }
+  button {
+    padding: 0 1rem;
+    height: 30px;
+    border-radius: 20px;
+    background: ${Props => Props.theme.colors.sec};
+    color: #fff;
+    font-size: 1rem;
+    :hover {
+      background: #ccc;
+      color: ${Props => Props.theme.colors.sec};
+    }
+  }
 `
 export const BirtContent = styled.div`
 
