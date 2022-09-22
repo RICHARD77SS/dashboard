@@ -22,10 +22,8 @@ const GroupReportsMeetings = () => {
       <Content>
         <Top>
           <Block>
-            <Flex>
-              <Input type='data' />
+              <Input type='date' />
               <Button>Ativar Filtro de hierarquia</Button>
-            </Flex>
           </Block>
           <Flex>
             <Block>

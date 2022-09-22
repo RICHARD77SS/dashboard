@@ -33,6 +33,33 @@ import AddGroup from './Components/AddGroup';
 import GroupCategorie from './Components/GroupCategorie';
 import GroupReports from './Components/GroupReports';
 import GroupReportsMeetings from './Components/GroupReportsMeetings';
+import GroupReportsVisitors from './Components/GroupReportsVisitors';
+import GroupReportsAbsent from './Components/GroupReportsAbsent';
+import GroupReportsPresent from './Components/GroupReportsPresent';
+import GroupReportsNoGroups from './Components/GroupReportsNoGroup/index';
+import GroupReportsNewGroups from './Components/GroupReportsNewGroups';
+import GroupReportsActiveGroups from './Components/GroupReportsInactiveGroups';
+import GroupReportsInactiveGroups from './Components/GroupReportsActiveGroups';
+import GroupReportsLider1 from './Components/GroupReportsLider1';
+import GroupReportsLider3 from './Components/GroupReportsLider3';
+import GroupReportsLider4 from './Components/GroupReportsLider4';
+import GroupReportsLider2 from './Components/GroupReportsLider2';
+import GroupReportsGroupsCategories from './Components/GroupReportsGroupsCategories';
+import GroupReportsDayHour from './Components/GroupReportsDayHour';
+import GroupReportsGroupMap from './Components/GroupReportsGroupMap';
+import GroupTableSunday from './Components/GroupTableSunday';
+import GroupTableMonday from './Components/GroupTableMonday';
+import GroupTableTuesday from './Components/GroupTableTuesday';
+import GroupTableWednesday from './Components/GroupTableWednesday';
+import GroupTableThursday from './Components/GroupTableThursday';
+import GroupTableFriday from './Components/GroupTableFriday/index';
+import GroupTableSaturnday from './Components/GroupTableSaturday';
+import PersonsImportsExports from './Components/PersonsImportsExports';
+import GroupsImportsExports from './Components/GroupsImportsExports';
+import Studies from './Components/Studies';
+import Schools from './Components/Schools';
+import Classes from './Components/Classes';
+import PersonalAccompaniment from './Components/PersonalAccompaniment';
 
 
 function App() {
@@ -66,14 +93,40 @@ function App() {
             <Route path='/reports/district' element={<ReportsDistrict />} />
             <Route path='/reports/permissions' element={<ReportsPermissions />} />
           </Route>
+          <Route path='/personsimportsexports' element={<PersonsImportsExports />} />
           <Route path='/groups' element={<Group />} />
           <Route path='/addgroups' element={<AddGroup />} />
           <Route path='/groupcategories' element={<GroupCategorie />} />
           <Route path='/groupreports' element={<GroupReports />} >
-            
             <Route path='/groupreports/meetings' element={<GroupReportsMeetings />} />
+            <Route path='/groupreports/visitorsandpersons' element={< GroupReportsVisitors />} />
+            <Route path='/groupreports/absentpersons' element={< GroupReportsAbsent />} />
+            <Route path='/groupreports/presentpersons' element={< GroupReportsPresent />} />
+            <Route path='/groupreports/nogroupspersons' element={< GroupReportsNoGroups />} />
+            <Route path='/groupreports/groupscategories' element={< GroupReportsGroupsCategories />} />
+            <Route path='/groupreports/newgroups' element={< GroupReportsNewGroups />} />
+            <Route path='/groupreports/activegroups' element={< GroupReportsActiveGroups />} />
+            <Route path='/groupreports/inactivegroups' element={< GroupReportsInactiveGroups />} />
+            <Route path='/groupreports/leader1' element={< GroupReportsLider1 />} />
+            <Route path='/groupreports/leader2' element={< GroupReportsLider2 />} />
+            <Route path='/groupreports/leader3' element={< GroupReportsLider3 />} />
+            <Route path='/groupreports/leader4' element={< GroupReportsLider4 />} />
+            <Route path='/groupreports/dayandhours' element={< GroupReportsDayHour />} >
+              <Route path='/groupreports/dayandhours/sun' element={< GroupTableSunday />} />
+              <Route path='/groupreports/dayandhours/mon' element={< GroupTableMonday />} />
+              <Route path='/groupreports/dayandhours/tue' element={< GroupTableTuesday />} />
+              <Route path='/groupreports/dayandhours/wed' element={< GroupTableWednesday />} />
+              <Route path='/groupreports/dayandhours/thu' element={< GroupTableThursday />} />
+              <Route path='/groupreports/dayandhours/fri' element={< GroupTableFriday />} />
+              <Route path='/groupreports/dayandhours/sat' element={< GroupTableSaturnday />} />
+            </Route>
+            <Route path='/groupreports/mapgroups' element={< GroupReportsGroupMap />} />
           </Route>
-            
+          <Route path='/groupimportexport' element={< GroupsImportsExports />} />
+          <Route path='/studies' element={<Studies />} />
+          <Route path='/schools' element={<Schools />} />
+          <Route path='/classes' element={<Classes />} />
+          <Route path='/personalaccompaniment' element={<PersonalAccompaniment />} />
         </Route>
       </Routes>
     </ThemeProvider>

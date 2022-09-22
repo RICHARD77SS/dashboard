@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import {Container, Content,Sidebar, Header, SideContent, Box, GraphContainer } from './styles';
+import { Container, Content, Sidebar, Header, SideContent, Box, GraphContainer } from './styles';
 
 const GroupReports = () => {
   return (
@@ -18,19 +18,19 @@ const GroupReports = () => {
               <NavLink className='navlink' to='/groupreports/visitorsandpersons'>
                 Pessoas X Visitantes
               </NavLink>
-              <NavLink className='navlink' to='/groupreports/absentperson'>
+              <NavLink className='navlink' to='/groupreports/absentpersons'>
                 Pessoas ausentes
               </NavLink>
-              <NavLink className='navlink' to='/groupreports/presentperson'>
+              <NavLink className='navlink' to='/groupreports/presentpersons'>
                 Pessoas presentes
               </NavLink>
-              <NavLink className='navlink' to='/groupreports/nogroupsperson'>
+              <NavLink className='navlink' to='/groupreports/nogroupspersons'>
                 Pessoas sem grupos
               </NavLink>
             </Box>
             <Box>
               <h3>Crescimento</h3>
-              <NavLink className='navlink' to='/groupreports/groupcategories'>
+              <NavLink className='navlink' to='/groupreports/groupscategories'>
                 Categorias de grupos
               </NavLink>
               <NavLink className='navlink' to='/groupreports/newgroups'>
@@ -45,16 +45,16 @@ const GroupReports = () => {
             </Box>
             <Box>
               <h3>Liderança</h3>
-              <NavLink className='navlink' to='/groupreports/lider1'>
+              <NavLink className='navlink' to='/groupreports/leader1'>
                 Lider 1
               </NavLink>
-              <NavLink className='navlink' to='/groupreports/lider2'>
+              <NavLink className='navlink' to='/groupreports/leader2'>
                 Lider 2
               </NavLink>
-              <NavLink className='navlink' to='/groupreports/lider3'>
+              <NavLink className='navlink' to='/groupreports/leader3'>
                 Lider 3
               </NavLink>
-              <NavLink className='navlink' to='/groupreports/lider4'>
+              <NavLink className='navlink' to='/groupreports/leader4'>
                 Lider 4
               </NavLink>
             </Box>

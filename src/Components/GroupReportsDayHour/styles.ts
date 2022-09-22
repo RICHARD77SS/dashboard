@@ -47,7 +47,7 @@ export const TabButton = styled.div`
     align-items:center;
     justify-content:center;
     border-radius: 5px;
-    background: #eccf;
+    background: #E0FFFF;
     color: #000;
     text-decoration: none;
     font-size: 1rem;

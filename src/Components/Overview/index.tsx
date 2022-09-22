@@ -63,7 +63,6 @@ const Overview = () => {
 
         <BoxRet>
           <BoxRetHeader>
-            <Input type='checkbox' />
             <h3>Link de cadastro público</h3>
             <Button>Habilitar</Button>
           </BoxRetHeader>
@@ -79,17 +78,17 @@ const Overview = () => {
       <BoxGrid>
         <GridBox className='grid1'>
           <Div>
-            <FiUsers />
+            <FiUsers size="25" />
             <h3>1</h3>
             <p>Total de pessoas</p>
           </Div>
           <Div>
-            <FiUser />
+            <FiUser size="25" />
             <h3>0.0% <span>(0)</span> </h3>
             <p>Total de Homens</p>
           </Div>
           <Div>
-            <FiUser />
+            <FiUser size="25" />
             <h3>0.0% <span>(0)</span></h3>
             <p>Total de Mulheres </p>
           </Div>
@@ -145,9 +144,14 @@ const Overview = () => {
         
         <GraphContainer className='grid5'>
           <GraphHeader>
-            <h3>Novos</h3>
+            <h3>Novos Convertidos</h3>
             <Datalist>
-              <Input type='text' />
+              <Input placeholder='  Selecione' id='period' type='text' list='periods' />
+              <datalist id='periods'>
+                <option value="Mensal"></option>
+                <option value="Semestral"></option>
+                <option value="Anual"></option>
+              </datalist>
 
             </Datalist>
           </GraphHeader>

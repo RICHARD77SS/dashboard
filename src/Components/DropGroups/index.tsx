@@ -25,10 +25,10 @@ const DropGroups = () => {
             <NavLink className='navlink' to='/groupcategories'>
               <Button>Categorias de grupos</Button>
             </NavLink>
-            <NavLink className='navlink' to='/groupreports'>
+            <NavLink className='navlink' to='/groupreports/meetings'>
               <Button>Relatorios</Button>
             </NavLink>
-            <NavLink className='navlink' to='/importexport'>
+            <NavLink className='navlink' to='/groupimportexport'>
               <Button>Importat/Exportar</Button>
             </NavLink>
           </Droped>

@@ -1,10 +1,11 @@
 
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Nav, Vbar } from "./styles";
 import Button from '../Button';
 import Menu from '../Menu';
 import DropPeople from '../DropPeople';
 import DropGroups from '../DropGroups';
+import DropStudies from '../DropStudies';
 
 const Navbar = () => {
   return (
@@ -22,10 +23,10 @@ const Navbar = () => {
         <DropGroups />
       </NavLink>
       <Vbar />
-      <NavLink className='navlink' to='/'>
-        <Button id=''>Ensino</Button>
+      <NavLink className='navlink' to='/studies'>
+        <DropStudies />
       </NavLink>
-      <Vbar/>
+      <Vbar />
       <NavLink className='navlink' to='/'>
         <Button id=''>Financeiro</Button>
       </NavLink>
@@ -37,7 +38,7 @@ const Navbar = () => {
       <NavLink className='navlink' to='/'>
         <Button id=''>Agenda</Button>
       </NavLink>
-      <Vbar/>
+      <Vbar />
       <NavLink className='navlink' to='/'>
         <Button id=''>Mídias</Button>
       </NavLink>

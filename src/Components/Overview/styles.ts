@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
+  padding: 6rem 1rem;
 
 `
 
@@ -114,9 +114,6 @@ export const BoxRetContent = styled.div`
     height: 30px;
     border: .5px solid ${Props => Props.theme.colors.sec};
   }
-  p{
-    font-size: .9rem;
-  }
   span {
     display: flex;
     align-items: center;
@@ -130,8 +127,10 @@ export const DivLink = styled.div`
   padding: 0 .5rem;
   display: flex;
   align-items: center;
-  background: #f4f4f4;
   border: .5px solid ${Props => Props.theme.colors.sec};
+  p{
+    font-size: .8rem;
+  }
 `
 export const LinkPub = styled.div`
   width: 100%;
@@ -186,14 +185,24 @@ export const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content:center;
+  font-size: 1rem;
   padding: 1rem;
-  margin: 0 1rem;
+  margin: 1.4rem;
+  color: #00f;
+  :first-child{
+    color:#000;
+  }
+  :last-child {
+    color: #f00;
+  }
+
 `
 export const BoxFooter = styled.div`
   display: flex;
   flex-wrap:wrap;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 `
 export const Classification = styled.div`
   display: flex;

@@ -40,7 +40,7 @@ const DropPeople = () => {
             <NavLink className='navlink' to='/reports'>
               <Button>Relatorios</Button>
             </NavLink>
-            <NavLink className='navlink' to='/imports'>
+            <NavLink className='navlink' to='/personsimportsexports'>
               <Button>Importar/exportar</Button>
             </NavLink>
           </Droped>
