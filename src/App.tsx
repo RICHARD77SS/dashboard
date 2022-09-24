@@ -64,6 +64,8 @@ import StudiesImportsExports from './Components/StudiesImportsExports';
 import StudiesCategories from './Components/StudiesCategories';
 import AddStudies from './Components/AddStudies';
 import Financial from './Components/Financial';
+import FinancialTransactions from './Components/FinancialTransactions';
+import FinancialReports from './Components/FinancialReports';
 
 
 function App() {
@@ -135,6 +137,8 @@ function App() {
           <Route path='/personalaccompaniment' element={<PersonalAccompaniment />} />
           <Route path='/studiesimportexport' element={<StudiesImportsExports />} />
           <Route path='/financial' element={<Financial />} />
+          <Route path='/financialtransactions' element={<FinancialTransactions />} />
+          <Route path='/financialreports' element={<FinancialReports />} />
         </Route>
       </Routes>
     </ThemeProvider>
