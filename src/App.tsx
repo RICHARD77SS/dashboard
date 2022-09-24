@@ -60,6 +60,10 @@ import Studies from './Components/Studies';
 import Schools from './Components/Schools';
 import Classes from './Components/Classes';
 import PersonalAccompaniment from './Components/PersonalAccompaniment';
+import StudiesImportsExports from './Components/StudiesImportsExports';
+import StudiesCategories from './Components/StudiesCategories';
+import AddStudies from './Components/AddStudies';
+import Financial from './Components/Financial';
 
 
 function App() {
@@ -124,9 +128,13 @@ function App() {
           </Route>
           <Route path='/groupimportexport' element={< GroupsImportsExports />} />
           <Route path='/studies' element={<Studies />} />
+          <Route path='/addstudies' element={<AddStudies />} />
+          <Route path='/studiecategories' element={<StudiesCategories />} />
           <Route path='/schools' element={<Schools />} />
           <Route path='/classes' element={<Classes />} />
           <Route path='/personalaccompaniment' element={<PersonalAccompaniment />} />
+          <Route path='/studiesimportexport' element={<StudiesImportsExports />} />
+          <Route path='/financial' element={<Financial />} />
         </Route>
       </Routes>
     </ThemeProvider>

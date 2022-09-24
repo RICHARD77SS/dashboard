@@ -19,6 +19,12 @@ const DropStudies = () => {
             <NavLink className='navlink' to='/studies'>
               <Button>Estudos</Button>
             </NavLink>
+            <NavLink className='navlink' to='/addstudies'>
+              <Button>Adicionar Estudos</Button>
+            </NavLink>
+            <NavLink className='navlink' to='/studiecategories'>
+              <Button>Categorias</Button>
+            </NavLink>
             <NavLink className='navlink' to='/schools'>
               <Button>Escolas</Button>
             </NavLink>

@@ -6,6 +6,7 @@ import Menu from '../Menu';
 import DropPeople from '../DropPeople';
 import DropGroups from '../DropGroups';
 import DropStudies from '../DropStudies';
+import DropFinancial from '../DropFinancial';
 
 const Navbar = () => {
   return (
@@ -27,8 +28,8 @@ const Navbar = () => {
         <DropStudies />
       </NavLink>
       <Vbar />
-      <NavLink className='navlink' to='/'>
-        <Button id=''>Financeiro</Button>
+      <NavLink className='navlink' to='/financial'>
+        <DropFinancial />
       </NavLink>
       <Vbar />
       <NavLink className='navlink' to='/'>
