@@ -2,7 +2,7 @@ import BoxHeader from '../BoxHeader';
 import Container from '../Container';
 import { NavLink, Outlet } from 'react-router-dom';
 import Input from '../Input';
-import { Content, SideNavigator, SideContent, Group, Box, TopOptions, InputBox, InputFlex } from './styles';
+import { Content, SideNavigator, SideContent, Group, Box, TopOptions, InputBox, InputFlex, InputBlock } from './styles';
 
 const FinancialReports = () => {
   return (
@@ -14,7 +14,7 @@ const FinancialReports = () => {
           <SideContent>
             <Group>
               <h3>Fluxo de caixa</h3>
-              <NavLink className='navlink' to='/financialreports/extract'>
+              <NavLink className='navlink' to='/financialreports/extracts'>
                 Extrato
               </NavLink>
               <NavLink className='navlink' to='/financialreports/revenuesandexpenses'>
@@ -67,37 +67,40 @@ const FinancialReports = () => {
         </SideNavigator>
         <Box>
           <TopOptions>
-
-            <InputBox>
+            <InputBlock>
               <label htmlFor="">Tipo</label>
-              <InputFlex>
-                <Input id='rec' type='checkbox' />
-                <label htmlFor="rec">Receita</label>
-              </InputFlex>
-              <InputFlex>
-                <Input id='des' type='checkbox' />
-                <label htmlFor="des">Despesas</label>
-              </InputFlex>
-              <InputFlex>
-                <Input id='env' type='checkbox' />
-                <label htmlFor="env">Enviados</label>
-              </InputFlex>
-              <InputFlex>
-                <Input id='rece' type='checkbox' />
-                <label htmlFor="rece">Recebidos</label>
-              </InputFlex>
-            </InputBox>
-            <InputBox>
+              <InputBox>
+                <InputFlex>
+                  <Input id='rec' type='checkbox' />
+                  <label htmlFor="rec">Receita</label>
+                </InputFlex>
+                <InputFlex>
+                  <Input id='des' type='checkbox' />
+                  <label htmlFor="des">Despesas</label>
+                </InputFlex>
+                <InputFlex>
+                  <Input id='env' type='checkbox' />
+                  <label htmlFor="env">Enviados</label>
+                </InputFlex>
+                <InputFlex>
+                  <Input id='rece' type='checkbox' />
+                  <label htmlFor="rece">Recebidos</label>
+                </InputFlex>
+              </InputBox>
+            </InputBlock>
+            <InputBlock>
               <label htmlFor="">Status</label>
-              <InputFlex>
-                <Input id='pag' type='checkbox' />
-                <label htmlFor="pag">Pagos</label>
-              </InputFlex>
-              <InputFlex>
-                <Input id='pend' type='checkbox' />
-                <label htmlFor="pend">Pendentes</label>
-              </InputFlex>
-            </InputBox>
+              <InputBox>
+                <InputFlex>
+                  <Input id='pag' type='checkbox' />
+                  <label htmlFor="pag">Pagos</label>
+                </InputFlex>
+                <InputFlex>
+                  <Input id='pend' type='checkbox' />
+                  <label htmlFor="pend">Pendentes</label>
+                </InputFlex>
+              </InputBox>
+            </InputBlock>
 
             <InputBox>
               <label htmlFor="date">Período</label>

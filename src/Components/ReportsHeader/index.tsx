@@ -7,15 +7,15 @@ interface Props {
   corporation?: string;
   reportsName?: string;
 }
-const ReportsHeader = (Props:Props) => {
+const ReportsHeader = ({logo, corporation, reportsName}:Props) => {
   return (
     <Header>
       <Foto>
-        <img src={Props.logo} alt="" />
+        <img src={logo} alt="" />
       </Foto>
       <Block>
-        <h3>{Props.corporation}</h3>
-        <h4>Relatorio: {Props.reportsName}</h4>
+        <h3>{corporation}</h3>
+        <h4>Relatorio: {reportsName}</h4>
       </Block>
       <Button>Imprimir</Button>
     </Header>

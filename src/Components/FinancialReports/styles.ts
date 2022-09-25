@@ -4,7 +4,7 @@ export const Content = styled.div`
   width: 100%;
   max-width: 1300px;
   display: flex;
-  align-items:flex-start;
+  align-items:center;
   gap: 1rem;
   padding: 1rem;
 `
@@ -67,6 +67,9 @@ export const Box = styled.div`
   flex-direction: column;
   align-items:center;
   gap: 1rem;
+  border-radius: 10px;
+  background: ${Props => Props.theme.colors.bac};
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
 `
 
 export const TopOptions = styled.div`
@@ -94,17 +97,26 @@ export const InputBox = styled.div`
   flex-direction: column;
   :first-child {
     border: 1px solid ${Props => Props.theme.colors.pri};
-    padding: 1rem;
+    padding: .2rem;
     border-radius: 10px;
+    background: #f4f4f4;
   }
   :nth-child(2) {
      border: 1px solid ${Props => Props.theme.colors.pri};
-     padding: 1rem;
+     padding: .2rem .5rem;
      border-radius: 10px;
+     background: #f4f4f4;
   }
 ` 
 
 export const InputFlex = styled.div`
   display: flex;
   align-items:center;
+  gap :.4rem;
+`
+export const InputBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items:start;
+
 `

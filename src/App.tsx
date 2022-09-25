@@ -66,6 +66,8 @@ import AddStudies from './Components/AddStudies';
 import Financial from './Components/Financial';
 import FinancialTransactions from './Components/FinancialTransactions';
 import FinancialReports from './Components/FinancialReports';
+import FinancialReportsExtract from './Components/FinancialReportsExtract';
+import FinancialReportsRevenues from './Components/FinancialReportsRevenues';
 
 
 function App() {
@@ -138,7 +140,10 @@ function App() {
           <Route path='/studiesimportexport' element={<StudiesImportsExports />} />
           <Route path='/financial' element={<Financial />} />
           <Route path='/financialtransactions' element={<FinancialTransactions />} />
-          <Route path='/financialreports' element={<FinancialReports />} />
+          <Route path='/financialreports' element={<FinancialReports />} >
+            <Route path='/financialreports/extracts' element={<FinancialReportsExtract />} />
+            <Route path='/financialreports/revenuesandexpenses' element={<FinancialReportsRevenues />} />
+          </Route>
         </Route>
       </Routes>
     </ThemeProvider>
