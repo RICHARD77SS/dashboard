@@ -68,6 +68,8 @@ import FinancialTransactions from './Components/FinancialTransactions';
 import FinancialReports from './Components/FinancialReports';
 import FinancialReportsExtract from './Components/FinancialReportsExtract';
 import FinancialReportsRevenues from './Components/FinancialReportsRevenues';
+import FinancialReportsTransfer from './Components/FinancialReportsTransfer';
+import FinancialReportsProjections from './Components/FinancialReportsProjection';
 
 
 function App() {
@@ -143,6 +145,8 @@ function App() {
           <Route path='/financialreports' element={<FinancialReports />} >
             <Route path='/financialreports/extracts' element={<FinancialReportsExtract />} />
             <Route path='/financialreports/revenuesandexpenses' element={<FinancialReportsRevenues />} />
+            <Route path='/financialreports/transfer' element={<FinancialReportsTransfer />} />
+            <Route path='/financialreports/projection' element={<FinancialReportsProjections />} />
           </Route>
         </Route>
       </Routes>
