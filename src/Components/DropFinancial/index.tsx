@@ -28,7 +28,7 @@ const DropFinancial = () => {
             <NavLink className='navlink' to='/financialcategories'>
               <Button>Categorias</Button>
             </NavLink>
-            <NavLink className='navlink' to='/financialacconts'>
+            <NavLink className='navlink' to='/financialaccounts'>
               <Button>Contas</Button>
             </NavLink>
             <NavLink className='navlink' to='/financialcontacts'>

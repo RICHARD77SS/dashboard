@@ -5,5 +5,4 @@ export const BoxSt = styled.div`
   max-width: 1200px;
   height: auto;
   padding: 1rem;
-
 `

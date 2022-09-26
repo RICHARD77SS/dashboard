@@ -29,16 +29,16 @@ const FinancialReports = () => {
             </Group>
             <Group>
               <h3>Receitas</h3>
-              <NavLink className='navlink' to='/financialreports/dayextract'>
+              <NavLink className='navlink' to='/financialreports/dayextractrevenues'>
                 Extrato diário
               </NavLink>
-              <NavLink className='navlink' to='/financialreports/costcenter'>
+              <NavLink className='navlink' to='/financialreports/costcenterrevenues'>
                 Centros de custos
               </NavLink>
               <NavLink className='navlink' to='/financialreports/toreceive'>
                 A receber
               </NavLink>
-              <NavLink className='navlink' to='/financialreports/bycategory'>
+              <NavLink className='navlink' to='/financialreports/revenuesbycategory'>
                 Por categoria
               </NavLink>
               <NavLink className='navlink' to='/financialreports/receiveanualsummary'>
@@ -47,16 +47,16 @@ const FinancialReports = () => {
             </Group>
             <Group>
               <h3>Despesas</h3>
-              <NavLink className='navlink' to='/financialreports/extractday'>
+              <NavLink className='navlink' to='/financialreports/extractdayexpenses'>
                 Extrato diário
               </NavLink>
-              <NavLink className='navlink' to='/financialreports/centercost'>
+              <NavLink className='navlink' to='/financialreports/costcenterexpenses'>
                 Centros de custos
               </NavLink>
               <NavLink className='navlink' to='/financialreports/topay'>
                 A pagar
               </NavLink>
-              <NavLink className='navlink' to='/financialreports/paybycategory'>
+              <NavLink className='navlink' to='/financialreports/expensesbycategory'>
                 Por categoria
               </NavLink>
               <NavLink className='navlink' to='/financialreports/payanualsummary'>

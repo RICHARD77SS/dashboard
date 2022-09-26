@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
-export const Filters = styled.div`
-  width: 100%;
+export const InputBlocks = styled.div`
+  width: auto;
   height: auto;
   display: flex;
-  flex-wrap: wrap;
-  align-items:center;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
   gap: .5rem;
-  padding: 1rem;
 `

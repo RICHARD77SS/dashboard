@@ -70,10 +70,18 @@ import FinancialReportsExtract from './Components/FinancialReportsExtract';
 import FinancialReportsRevenuesExpenses from './Components/FinancialReportsRevenuesExpenses';
 import FinancialReportsTransfer from './Components/FinancialReportsTransfer';
 import FinancialReportsProjections from './Components/FinancialReportsProjection';
-import FinancialReportsDailyStatement from './Components/FinancialReportsDailyStatement';
+import FinancialReportsRevenuesDailyStatement from './Components/FinancialReportsRevenuesDailyStatement';
 import FinancialReportsToReceive from './Components/FinancialReportsToReceive';
-import FinancialReportsByCategories from './Components/FinancialReportsByCategories';
-import FinancialReportsAnualCategory from './Components/FinancialReportsAnualCategory';
+import FinancialReportsRevenuesByCategories from './Components/FinancialReportsRevenuesByCategories';
+import FinancialReportsRevenuesAnualCategory from './Components/FinancialReportsRevenuesAnualCategory';
+import FinancialReportsExpensesDailyStatement from './Components/FinancialReportsExpensesDailyStatement';
+import FinancialReportsToPay from './Components/FinancialReportsToPay';
+import FinancialReportsExpenseByCategories from './Components/FinancialReportsExpenseByCategories';
+import FinancialReportsExpensesAnualCategory from './Components/FinancialReportsExpensesAnualCategory';
+import FinancialReportsCustCenterRevenues from './Components/FinancialReportsCustCenterRevenues';
+import FinancialReportsCustCenterExpenses from './Components/FinancialReportsCustCenterExpenses';
+import FinancialCategories from './Components/FinancialCategories';
+import FinancialAccount from './Components/FinancialAccount';
 
 
 function App() {
@@ -151,11 +159,20 @@ function App() {
             <Route path='/financialreports/revenuesandexpenses' element={<FinancialReportsRevenuesExpenses />} />
             <Route path='/financialreports/transfer' element={<FinancialReportsTransfer />} />
             <Route path='/financialreports/projection' element={<FinancialReportsProjections />} />
-            <Route path='/financialreports/dayextract' element={<FinancialReportsDailyStatement />} />
+            <Route path='/financialreports/dayextractrevenues' element={<FinancialReportsRevenuesDailyStatement />} />
+            <Route path='/financialreports/costcenterrevenues' element={<FinancialReportsCustCenterRevenues />} />
             <Route path='/financialreports/toreceive' element={<FinancialReportsToReceive />} />
-            <Route path='/financialreports/bycategory' element={<FinancialReportsByCategories />} />
-            <Route path='/financialreports/receiveanualsummary' element={<FinancialReportsAnualCategory />} />
+            <Route path='/financialreports/revenuesbycategory' element={<FinancialReportsRevenuesByCategories />} />
+            <Route path='/financialreports/receiveanualsummary' element={<FinancialReportsRevenuesAnualCategory />} />
+
+            <Route path='/financialreports/extractdayexpenses' element={<FinancialReportsExpensesDailyStatement />} />
+            <Route path='/financialreports/costcenterexpenses' element={<FinancialReportsCustCenterExpenses />} />
+            <Route path='/financialreports/topay' element={<FinancialReportsToPay />} />
+            <Route path='/financialreports/expensesbycategory' element={<FinancialReportsExpenseByCategories />} />
+            <Route path='/financialreports/payanualsummary' element={<FinancialReportsExpensesAnualCategory />} />
           </Route>
+          <Route path='/financialcategories' element={<FinancialCategories />} />
+          <Route path='/financialaccounts' element={<FinancialAccount />} />
         </Route>
       </Routes>
     </ThemeProvider>
