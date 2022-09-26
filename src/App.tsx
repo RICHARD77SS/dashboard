@@ -73,6 +73,7 @@ import FinancialReportsProjections from './Components/FinancialReportsProjection
 import FinancialReportsDailyStatement from './Components/FinancialReportsDailyStatement';
 import FinancialReportsToReceive from './Components/FinancialReportsToReceive';
 import FinancialReportsByCategories from './Components/FinancialReportsByCategories';
+import FinancialReportsAnualCategory from './Components/FinancialReportsAnualCategory';
 
 
 function App() {
@@ -153,6 +154,7 @@ function App() {
             <Route path='/financialreports/dayextract' element={<FinancialReportsDailyStatement />} />
             <Route path='/financialreports/toreceive' element={<FinancialReportsToReceive />} />
             <Route path='/financialreports/bycategory' element={<FinancialReportsByCategories />} />
+            <Route path='/financialreports/receiveanualsummary' element={<FinancialReportsAnualCategory />} />
           </Route>
         </Route>
       </Routes>
