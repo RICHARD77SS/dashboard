@@ -67,9 +67,12 @@ import Financial from './Components/Financial';
 import FinancialTransactions from './Components/FinancialTransactions';
 import FinancialReports from './Components/FinancialReports';
 import FinancialReportsExtract from './Components/FinancialReportsExtract';
-import FinancialReportsRevenues from './Components/FinancialReportsRevenues';
+import FinancialReportsRevenuesExpenses from './Components/FinancialReportsRevenuesExpenses';
 import FinancialReportsTransfer from './Components/FinancialReportsTransfer';
 import FinancialReportsProjections from './Components/FinancialReportsProjection';
+import FinancialReportsDailyStatement from './Components/FinancialReportsDailyStatement';
+import FinancialReportsToReceive from './Components/FinancialReportsToReceive';
+import FinancialReportsByCategories from './Components/FinancialReportsByCategories';
 
 
 function App() {
@@ -144,9 +147,12 @@ function App() {
           <Route path='/financialtransactions' element={<FinancialTransactions />} />
           <Route path='/financialreports' element={<FinancialReports />} >
             <Route path='/financialreports/extracts' element={<FinancialReportsExtract />} />
-            <Route path='/financialreports/revenuesandexpenses' element={<FinancialReportsRevenues />} />
+            <Route path='/financialreports/revenuesandexpenses' element={<FinancialReportsRevenuesExpenses />} />
             <Route path='/financialreports/transfer' element={<FinancialReportsTransfer />} />
             <Route path='/financialreports/projection' element={<FinancialReportsProjections />} />
+            <Route path='/financialreports/dayextract' element={<FinancialReportsDailyStatement />} />
+            <Route path='/financialreports/toreceive' element={<FinancialReportsToReceive />} />
+            <Route path='/financialreports/bycategory' element={<FinancialReportsByCategories />} />
           </Route>
         </Route>
       </Routes>

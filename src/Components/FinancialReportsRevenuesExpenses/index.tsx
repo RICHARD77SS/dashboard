@@ -14,7 +14,7 @@ import TopTableOptions from "../TopTableOptions";
 import Tr from "../Tr";
 import { Hr, ResumeBox, ResumeFlex, ResumeBlock, ResumeContent } from "./styles";
 
-const FinancialReportsRevenues = () => {
+const FinancialReportsRevenuesExpenses = () => {
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Fluxo de caixa - Receitas / Despesas' />
@@ -168,4 +168,4 @@ const FinancialReportsRevenues = () => {
   )
 }
 
-export default FinancialReportsRevenues;
+export default FinancialReportsRevenuesExpenses;
