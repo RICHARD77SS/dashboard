@@ -1,0 +1,23 @@
+import styled from 'styled-components'
+
+export const AsideContent = styled.div`
+  width: 100%;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  textarea {
+    width: 100%;
+    min-height: 100px;
+  }
+  button {
+    padding: 0 1rem;
+    height: 30px;
+    border-radius: 20px;
+    background: ${Props => Props.theme.colors.sec};
+    color: #fff;
+    font-size: 1rem;
+  }
+`
