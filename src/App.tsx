@@ -82,6 +82,7 @@ import FinancialReportsCustCenterRevenues from './Components/FinancialReportsCus
 import FinancialReportsCustCenterExpenses from './Components/FinancialReportsCustCenterExpenses';
 import FinancialCategories from './Components/FinancialCategories';
 import FinancialAccount from './Components/FinancialAccount';
+import FinancialContacts from './Components/FinancialContacts';
 
 
 function App() {
@@ -173,6 +174,7 @@ function App() {
           </Route>
           <Route path='/financialcategories' element={<FinancialCategories />} />
           <Route path='/financialaccounts' element={<FinancialAccount />} />
+          <Route path='/financialcontacts' element={<FinancialContacts />} />
         </Route>
       </Routes>
     </ThemeProvider>
