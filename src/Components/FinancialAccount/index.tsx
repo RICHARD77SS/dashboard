@@ -1,3 +1,4 @@
+import Aside from "../Aside";
 import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
@@ -5,7 +6,6 @@ import Button from "../Button";
 import Container from "../Container";
 import Content from "../Content";
 import EditRemove from "../EditRemove";
-import Flex from "../Flex";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
 import Table from "../Table";
@@ -15,7 +15,7 @@ import Th from "../Th";
 import Thead from "../Thead";
 import Tr from "../Tr";
 
-import { Aside, AsideHeader, AsideContent } from './styles';
+import { AsideContent } from './styles';
 
 const FinancialAccount = () => {
   return (
@@ -47,12 +47,10 @@ const FinancialAccount = () => {
           </BoxContent>
         </Box>
         <Aside>
-          <AsideHeader>
-            <h3>+ Criar conta</h3>
-          </AsideHeader>
+          <BoxHeader title="+ Criar conta"/>
           <AsideContent>
             <InputBlock>
-              <label htmlFor="name">Nomde da conta</label>
+              <label htmlFor="name">Nome da conta</label>
               <Input type='text' />
             </InputBlock>
             <InputBlock>

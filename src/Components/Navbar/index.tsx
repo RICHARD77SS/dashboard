@@ -7,6 +7,8 @@ import DropPeople from '../DropPeople';
 import DropGroups from '../DropGroups';
 import DropStudies from '../DropStudies';
 import DropFinancial from '../DropFinancial';
+import DropPatrimonies from '../DropPatrimonies';
+import DropSchedule from '../DropSchedule';
 
 const Navbar = () => {
   return (
@@ -32,12 +34,12 @@ const Navbar = () => {
         <DropFinancial />
       </NavLink>
       <Vbar />
-      <NavLink className='navlink' to='/'>
-        <Button id=''>Patrimônio</Button>
+      <NavLink className='navlink' to='/patrimonies'>
+        <DropPatrimonies />
       </NavLink>
       <Vbar />
-      <NavLink className='navlink' to='/'>
-        <Button id=''>Agenda</Button>
+      <NavLink className='navlink' to='/schedulecalendar'>
+        <DropSchedule />
       </NavLink>
       <Vbar />
       <NavLink className='navlink' to='/'>

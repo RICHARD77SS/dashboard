@@ -83,6 +83,16 @@ import FinancialReportsCustCenterExpenses from './Components/FinancialReportsCus
 import FinancialCategories from './Components/FinancialCategories';
 import FinancialAccount from './Components/FinancialAccount';
 import FinancialContacts from './Components/FinancialContacts';
+import FinancialCostCenter from './Components/FinancialCostCenter';
+import FinancialImportsExports from './Components/FinancialImportsExports';
+import Patrimonies from './Components/Patrimonies';
+import PatrimoniesCategories from './Components/PatrimoniesCategories';
+import PatrimoniesPlaces from './Components/PatrimoniesPlaces';
+import PatrimoniesImportsExports from './Components/PatrimoniesImportsExports';
+import ScheduleCalendar from './Components/ScheduleCalendar';
+import ScheduleEvents from './Components/ScheduleEvents';
+import ScheduleWarnings from './Components/ScheduleWarnings';
+import ScheduleImportsExports from './Components/ScheduleImportsExports';
 
 
 function App() {
@@ -175,6 +185,17 @@ function App() {
           <Route path='/financialcategories' element={<FinancialCategories />} />
           <Route path='/financialaccounts' element={<FinancialAccount />} />
           <Route path='/financialcontacts' element={<FinancialContacts />} />
+          <Route path='/financialcostcenter' element={<FinancialCostCenter />} />
+          <Route path='/financialimportsexports' element={<FinancialImportsExports />} />
+          <Route path='/patrimonies' element={<Patrimonies />} />
+          <Route path='/patrimoniescategory' element={<PatrimoniesCategories />} />
+          <Route path='/patrimoniesplaces' element={<PatrimoniesPlaces />} />
+          <Route path='/patrimoniesimportsexports' element={<PatrimoniesImportsExports />} />
+          <Route path='/schedulecalendar' element={<ScheduleCalendar />} />
+          <Route path='/scheduleevents' element={<ScheduleEvents />} />
+          <Route path='/schedulewarnings' element={<ScheduleWarnings />} />
+          
+          <Route path='/scheduleimportsexports' element={<ScheduleImportsExports />} />
         </Route>
       </Routes>
     </ThemeProvider>
