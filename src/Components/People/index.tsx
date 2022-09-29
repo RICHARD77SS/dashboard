@@ -1,11 +1,10 @@
 import React from 'react';
 import Table from '../Table'
 import { BsArrowDown, BsArrowUp, BsFilter } from 'react-icons/bs';
-import Button from '../Button';
 import Input from '../Input';
 import TopTableOptions from '../TopTableOptions';
 import {
-  Container, Content, Box, BoxHeader, BoxContent, TableContainer, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex
+  TableContainer, Buttonb, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex
 } from './styles';
 import Thead from '../Thead';
 import Tr from '../Tr';
@@ -13,16 +12,25 @@ import Th from '../Th';
 import Tbody from '../Tbody';
 import Td from '../Td';
 import PageSelector from '../PageSelector';
+import { Link } from 'react-router-dom';
+import Container from '../Container';
+import Content from '../Content';
+import Box from '../Box';
+import BoxHeader from '../BoxHeader';
+import BoxContent from '../BoxContent';
+import Aside from '../Aside';
 
 
 const People = () => {
   return (
     <Container>
-      <h3>Pessoas</h3>
+      <br />
+      <br />
+      <h2>Pessoas cadastradas</h2>
+      <br />
       <Content>
         <Box>
-          <BoxHeader>
-            <h3>Resultados: 1</h3>
+          <BoxHeader title='Resultados: 1'>
           </BoxHeader>
           <BoxContent>
             <TopTableOptions />
@@ -30,8 +38,8 @@ const People = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Nome completo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>E-mail <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Nome completo <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>E-mail <p><BsArrowUp /><BsArrowDown /></p></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -46,7 +54,7 @@ const People = () => {
           </BoxContent>
         </Box>
         <Aside>
-          <Button>+Adicionar Pessoas</Button>
+          <Buttonb><Link to='/addpeople'>+Adicionar Pessoas</Link></Buttonb>
           <Filters>
             <FilterHeader>
               <BsFilter />

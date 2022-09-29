@@ -1,9 +1,24 @@
 
+import GraphLineArea from '../GraphLineArea';
 import Input from '../Input';
 import ReportsHeader from '../ReportsHeader';
 import {  Container,Content,Graph,  Table,Thead,Tr,Th,Tbody,Td } from './styles';
 
 
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const LineData = {
+  labels,
+  datasets: [
+    {
+      fill: true,
+      label: 'conversão',
+      data: [1222, 212, 313, 414, 166, 778, 919],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+  ],
+};
 const ReportsConversion = () => {
   return (
     <Container>
@@ -11,7 +26,7 @@ const ReportsConversion = () => {
       <Content>
         <Input type='data' />
         <Graph>
-
+          <GraphLineArea data={LineData}/>
         </Graph>
         <h3>Resultados: 0</h3>
         <Table>

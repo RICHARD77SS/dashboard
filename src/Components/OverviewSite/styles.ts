@@ -27,10 +27,11 @@ export const BoxRetHeader = styled.header`
   button {
     height: 30px;
     padding: 0 1rem;
-    color: #fff;
+    color: #000;
+
     font-size: 1rem;
     border-radius: 10px;
-    background: ${Props => Props.theme.colors.sec};
+    background: ${Props => Props.theme.colors.bac};
   }
 
 `

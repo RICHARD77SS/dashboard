@@ -9,7 +9,9 @@ const AddPeople = () => {
   return (
     <Container>
       <Form>
-        <legend>Adicionar pessoas</legend>
+        <br />
+        <br />
+        <legend><h2>Adicionar pessoas</h2></legend>
         <Content>
           <Fieldset>
             <Data>

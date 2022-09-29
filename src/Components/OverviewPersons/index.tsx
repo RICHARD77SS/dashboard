@@ -3,14 +3,14 @@ import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
 import Button from "../Button";
-import Container from "../Container";
 import Input from "../Input";
 import GraphLineArea from "../GraphLineArea"
 
 import { Grid1, GraphContainer, Datalist, Div } from './styles'
 import Content from "../Content";
 import Block from "../Block";
-import GrapPieArea from "../GrapPieArea";
+import GraphPieArea from "../GraphPieArea";
+import { Link } from 'react-router-dom';
 
 
 const PieData = {
@@ -38,9 +38,9 @@ const PieData = {
   ],
 };
 
-const LineLabel = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-export const LineData = {
-  LineLabel,
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const LineData = {
+  labels,
   datasets: [
     {
       fill: true,
@@ -63,83 +63,80 @@ export const LineData = {
 
 const OverviewPersons = () => {
   return (
-    <Container>
-      <Content>
-        <Block>
-          <Grid1>
-            <Div>
-              <FiUsers size="25" />
-              <h3>1</h3>
-              <p>Total de pessoas</p>
-            </Div>
-            <Div>
-              <FiUser size="25" />
-              <h3>0.0% <span>(0)</span> </h3>
-              <p>Total de Homens</p>
-            </Div>
-            <Div>
-              <FiUser size="25" />
-              <h3>0.0% <span>(0)</span></h3>
-              <p>Total de Mulheres </p>
-            </Div>
-          </Grid1>
+    <Content>
+      <Block>
+        <Grid1>
+          <Div>
+            <FiUsers size="25" />
+            <h3>1</h3>
+            <p>Total de pessoas</p>
+          </Div>
+          <Div>
+            <FiUser size="25" />
+            <h3>0.0% <span>(0)</span> </h3>
+            <p>Total de Homens</p>
+          </Div>
+          <Div>
+            <FiUser size="25" />
+            <h3>0.0% <span>(0)</span></h3>
+            <p>Total de Mulheres </p>
+          </Div>
+        </Grid1>
 
-          <Content>
-            <Box>
-              <BoxHeader title='Cadastros recentes'>
-
-                <Button>Ver todos</Button>
-              </BoxHeader>
-              <BoxContent>
-
-              </BoxContent>
-            </Box>
-            <Box>
-              <BoxHeader title='Categorias'>
-                <Button>Ver todos</Button>
-              </BoxHeader>
-              <BoxContent>
-
-              </BoxContent>
-            </Box>
-          </Content>
+        <Content>
           <Box>
-            <BoxHeader title='Novos Convertidos'>
-              <Datalist>
-                <Input placeholder='  Selecione' id='period' type='text' list='periods' />
-                <datalist id='periods'>
-                  <option value="Mensal"></option>
-                  <option value="Semestral"></option>
-                  <option value="Anual"></option>
-                </datalist>
-              </Datalist>
-            </BoxHeader>
-            <BoxContent>
-              <GraphLineArea data={LineData} />
-            </BoxContent>
-          </Box>
-        </Block>
-        <Block>
-          <Box>
-            <BoxHeader title='Faixa etária'>
-            </BoxHeader>
-            <BoxContent>
-              <GraphContainer>
-                <GrapPieArea data={PieData} />
-              </GraphContainer>
-            </BoxContent>
-          </Box>
-          <Box>
-            <BoxHeader title='Aniversariantes'>
-              <Button>Ver todos</Button>
+            <BoxHeader title='Cadastros recentes'>
+
+              <Button><Link to='/people' >Ver Todos</Link></Button>
             </BoxHeader>
             <BoxContent>
 
             </BoxContent>
           </Box>
-        </Block>
-      </Content>
-    </Container>
+          <Box>
+            <BoxHeader title='Categorias'>
+              <Button><Link to='/categories' >Ver Todos</Link></Button>
+            </BoxHeader>
+            <BoxContent>
+
+            </BoxContent>
+          </Box>
+        </Content>
+        <Box>
+          <BoxHeader title='Novos Convertidos'>
+            <Datalist>
+              <Input placeholder='  Selecione' id='period' type='text' list='periods' />
+              <datalist id='periods'>
+                <option value="Mensal"></option>
+                <option value="Semestral"></option>
+                <option value="Anual"></option>
+              </datalist>
+            </Datalist>
+          </BoxHeader>
+          <BoxContent>
+            <GraphLineArea data={LineData} />
+          </BoxContent>
+        </Box>
+      </Block>
+      <Block>
+        <Box>
+          <BoxHeader title='Faixa etária'>
+          </BoxHeader>
+          <BoxContent>
+            <GraphContainer>
+              <GraphPieArea data={PieData} />
+            </GraphContainer>
+          </BoxContent>
+        </Box>
+        <Box>
+          <BoxHeader title='Aniversariantes do mês'>
+          </BoxHeader>
+          <BoxContent>
+
+          </BoxContent>
+        </Box>
+      </Block>
+    </Content>
   )
 }
 

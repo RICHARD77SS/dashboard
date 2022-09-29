@@ -3,9 +3,10 @@ import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
 import Button from "../Button";
 import Content from "../Content";
-import GrapPieArea from "../GrapPieArea";
+import GrapPieArea from "../GraphPieArea";
 
 import { Status, Situation } from "./styles";
+import { Link } from 'react-router-dom';
 
 const PieData = {
   labels: ['Crianças', 'Adolescentes', 'Jovens', 'Adultos', 'Casais', 'Famílias', 'New categorie'],
@@ -64,7 +65,7 @@ const OverviewGroups = () => {
       </Box>
       <Box>
         <BoxHeader title="Grupos">
-          <Button>Ver todos</Button>
+          <Button><Link to='/groupcategories' >Ver Todos</Link></Button>
         </BoxHeader>
         <BoxContent>
           <GrapPieArea data={PieData} />
@@ -72,7 +73,7 @@ const OverviewGroups = () => {
       </Box>
       <Box>
         <BoxHeader title='Reuniões'>
-          <Button>Ver todos</Button>
+          <Button><Link to='/groupreports/meetings'>Ver todos</Link></Button>
         </BoxHeader>
         <BoxContent>
 

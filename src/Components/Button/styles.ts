@@ -15,5 +15,10 @@ export const Buttons = styled.button`
   a {
     text-decoration: none;
     color: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items:Center;
+    justify-content: center;
   }
 `

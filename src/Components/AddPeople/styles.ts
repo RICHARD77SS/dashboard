@@ -25,6 +25,9 @@ export const Form = styled.div`
     color: #fff;
     background: ${Props => Props.theme.colors.pri};
   }
+  label {
+    font-weight: 600;
+  }
 `
 
 export const Content = styled.div`

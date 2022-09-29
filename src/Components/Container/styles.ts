@@ -6,4 +6,6 @@ export const ContainerSt = styled.div`
   display: flex;
   align-items:center;
   flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
 `

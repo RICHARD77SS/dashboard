@@ -40,7 +40,7 @@ export const Content = styled.div`
   padding: 1rem;
 `
 export const Graph = styled.div`
-  width: 100%;
+  width: 70%;
   min-height: 400px;
   height: auto;
   padding: 1rem;
