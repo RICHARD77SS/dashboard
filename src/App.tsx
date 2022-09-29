@@ -93,6 +93,12 @@ import ScheduleCalendar from './Components/ScheduleCalendar';
 import ScheduleEvents from './Components/ScheduleEvents';
 import ScheduleWarnings from './Components/ScheduleWarnings';
 import ScheduleImportsExports from './Components/ScheduleImportsExports';
+import ScheduleMyAnnotations from './Components/ScheduleMyAnnotations';
+import MediaPhotos from './Components/MediasPhotos';
+import MediaVideos from './Components/MediasVideos';
+import MediaForms from './Components/MediasForms';
+import MediaDocuments from './Components/MediaDocuments';
+import MediaFiles from './Components/MediasFiles';
 
 
 function App() {
@@ -194,8 +200,13 @@ function App() {
           <Route path='/schedulecalendar' element={<ScheduleCalendar />} />
           <Route path='/scheduleevents' element={<ScheduleEvents />} />
           <Route path='/schedulewarnings' element={<ScheduleWarnings />} />
-          
+          <Route path='/scheduleanotation' element={<ScheduleMyAnnotations />} />
           <Route path='/scheduleimportsexports' element={<ScheduleImportsExports />} />
+          <Route path='/mediasphotos' element={<MediaPhotos />} />
+          <Route path='/mediasvideos' element={<MediaVideos />} />
+          <Route path='/mediasforms' element={<MediaForms />} />
+          <Route path='/mediasdocuments' element={<MediaDocuments />} />
+          <Route path='/mediasfiles' element={<MediaFiles />} />
         </Route>
       </Routes>
     </ThemeProvider>

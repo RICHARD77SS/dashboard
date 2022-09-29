@@ -9,6 +9,7 @@ import DropStudies from '../DropStudies';
 import DropFinancial from '../DropFinancial';
 import DropPatrimonies from '../DropPatrimonies';
 import DropSchedule from '../DropSchedule';
+import DropMedias from '../DropMedias';
 
 const Navbar = () => {
   return (
@@ -42,8 +43,8 @@ const Navbar = () => {
         <DropSchedule />
       </NavLink>
       <Vbar />
-      <NavLink className='navlink' to='/'>
-        <Button id=''>Mídias</Button>
+      <NavLink className='navlink' to='/mediasphotos'>
+        <DropMedias />
       </NavLink>
       <Vbar />
       <NavLink className='navlink' to='/'>
