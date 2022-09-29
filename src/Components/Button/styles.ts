@@ -12,4 +12,8 @@ export const Buttons = styled.button`
   :hover {
     filter: brightness(.8);
   }
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
 `

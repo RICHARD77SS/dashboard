@@ -1,16 +1,15 @@
-import { BoxSt } from './styles'
+import { BlockSt } from "./styles";
+
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
-
-const Box = ({ children }: Props) => {
+const Block = ({children}:Props) => {
   return (
-    <BoxSt>
+    <BlockSt>
       {children}
-    </BoxSt>
+    </BlockSt>
   )
 }
 
-
-export default Box;
+export default Block;

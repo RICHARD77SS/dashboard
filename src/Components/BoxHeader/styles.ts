@@ -9,6 +9,7 @@ export const BoxHeaderSt = styled.div`
   justify-content: space-between;
   border-radius: 10px 10px 0 0;
   background: ${Props => Props.theme.colors.pri};
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
   h3 {
     color: #fff;
   }
