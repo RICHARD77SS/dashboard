@@ -22,20 +22,21 @@ const ScheduleCalendar = () => {
         </Box>
         <Aside>
           <BoxHeader title='Categorias' />
-          <AsideContent>
-            <InputBlock>
-              <label htmlFor="name">Nome da Categoria</label>
-              <Input type='text' />
-            </InputBlock>
-            <InputBlock>
-              <label htmlFor="description">Descrição</label>
-              <textarea title='area' name="" id="" ></textarea>
-            </InputBlock>
-            <Button>Criar</Button>
-            <BoxContent>
-
-            </BoxContent>
-          </AsideContent>
+          <BoxContent>
+            <AsideContent>
+              <InputBlock>
+                <label htmlFor="name">Nome da Categoria</label>
+                <Input type='text' />
+              </InputBlock>
+              <InputBlock>
+                <label htmlFor="description">Descrição</label>
+                <textarea title='area' name="" id="" ></textarea>
+              </InputBlock>
+              <Button>Criar</Button>
+              <BoxContent>
+              </BoxContent>
+            </AsideContent>
+          </BoxContent>
         </Aside>
       </Content>
     </Container>

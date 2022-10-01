@@ -9,5 +9,4 @@ export const AsideSt = styled.div`
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
-  gap: 1rem;
 `

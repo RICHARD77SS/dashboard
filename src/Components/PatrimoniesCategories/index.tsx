@@ -70,17 +70,19 @@ const PatrimoniesCategories = () => {
         </Box>
         <Aside>
           <BoxHeader title="+ Criar Categoria" />
-          <AsideContent>
-            <InputBlock>
-              <label htmlFor="name">Nome da Categoria</label>
-              <Input type='text' />
-            </InputBlock>
-            <InputBlock>
-              <label htmlFor="description">Descrição</label>
-              <textarea title='area' name="" id="" ></textarea>
-            </InputBlock>
-            <Button>Criar</Button>
-          </AsideContent>
+          <BoxContent>
+            <AsideContent>
+              <InputBlock>
+                <label htmlFor="name">Nome da Categoria</label>
+                <Input type='text' />
+              </InputBlock>
+              <InputBlock>
+                <label htmlFor="description">Descrição</label>
+                <textarea title='area' name="" id="" ></textarea>
+              </InputBlock>
+              <Button>Criar</Button>
+            </AsideContent>
+          </BoxContent>
         </Aside>
       </Content>
     </Container>
