@@ -5,7 +5,7 @@ import Button from "../Button";
 import Content from "../Content";
 import GrapPieArea from "../GraphPieArea";
 
-import { Status, Situation } from "./styles";
+import { Status, Situation, Graph } from "./styles";
 import { Link } from 'react-router-dom';
 
 const PieData = {
@@ -68,7 +68,9 @@ const OverviewGroups = () => {
           <Button><Link to='/groupcategories' >Ver Todos</Link></Button>
         </BoxHeader>
         <BoxContent>
-          <GrapPieArea data={PieData} />
+          <Graph>
+            <GrapPieArea data={PieData} />
+          </Graph>
         </BoxContent>
       </Box>
       <Box>

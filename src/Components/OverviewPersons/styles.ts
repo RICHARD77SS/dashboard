@@ -101,13 +101,16 @@ export const CadHeader = styled.div`
 `
 export const GraphContainer = styled.div`
   width: 90%;
-  max-width: 400px;
+  max-width: 300px;
   min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
   background: ${Props => Props.theme.colors.bac};
+  @media (max-width: 1100px) {
+    max-width: 500px;
+  }
 `
 export const GraphHeader = styled.div`
   width: 100%;
@@ -160,5 +163,17 @@ export const Situation = styled.div`
   }
   :last-child {
     color: #c00;
+  }
+`
+export const Graph = styled.div`
+  width: 100%;
+  max-width: 600px;
+
+`
+export const Graph1 = styled.div`
+  width: 100%;
+  max-width: 300px;
+  @media (max-width: 1100px) {
+    max-width: 500px;
   }
 `

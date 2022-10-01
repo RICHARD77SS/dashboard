@@ -6,13 +6,37 @@ import Button from "../Button";
 import Input from "../Input";
 import GraphLineArea from "../GraphLineArea"
 
-import { Grid1, GraphContainer, Datalist, Div } from './styles'
+import { Graph, Graph1, Grid1, GraphContainer, Datalist, Div } from './styles'
 import Content from "../Content";
 import Block from "../Block";
 import GraphPieArea from "../GraphPieArea";
 import { Link } from 'react-router-dom';
 
 
+const PieDataCategories = {
+  labels: ['Categorie', 'Categorie1'],
+  datasets: [
+    {
+      labels: '# of Votes',
+      data: [12, 19, ],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
 const PieData = {
   labels: ['Crianças', 'Adolescentes', 'Jovens', 'Adultos', 'Idosos'],
   datasets: [
@@ -98,7 +122,9 @@ const OverviewPersons = () => {
               <Button><Link to='/categories' >Ver Todos</Link></Button>
             </BoxHeader>
             <BoxContent>
-
+              <Graph1>
+                <GraphPieArea data={PieDataCategories} />
+              </Graph1>
             </BoxContent>
           </Box>
         </Content>
@@ -114,7 +140,9 @@ const OverviewPersons = () => {
             </Datalist>
           </BoxHeader>
           <BoxContent>
-            <GraphLineArea data={LineData} />
+            <Graph>
+              <GraphLineArea data={LineData} />
+            </Graph>
           </BoxContent>
         </Box>
       </Block>

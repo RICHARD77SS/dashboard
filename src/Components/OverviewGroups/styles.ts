@@ -25,3 +25,10 @@ export const Situation = styled.div`
     color: #c00;
   }
 `
+export const Graph = styled.div`
+  width: 90%;
+  @media (max-width: 1100px) {
+    width: 40%;
+
+  }
+`
