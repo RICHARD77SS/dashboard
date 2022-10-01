@@ -18,7 +18,7 @@ const PieDataCategories = {
   datasets: [
     {
       labels: '# of Votes',
-      data: [12, 19, ],
+      data: [12, 19 ],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
