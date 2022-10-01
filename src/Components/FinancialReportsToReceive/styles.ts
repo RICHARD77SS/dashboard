@@ -56,3 +56,7 @@ export const ResumeContent = styled.div`
     padding: 0 1rem;
   }
 `
+export const Graph = styled.div`
+  width: 100%;
+  height: auto;
+`

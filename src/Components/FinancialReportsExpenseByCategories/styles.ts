@@ -24,3 +24,7 @@ export const BoxColor = styled.div`
   height: 10px;
 
 `
+export const Graph = styled.div`
+  width: 100%;
+  height: auto;
+`

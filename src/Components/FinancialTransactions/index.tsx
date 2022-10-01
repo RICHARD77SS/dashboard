@@ -16,9 +16,75 @@ import Td from '../Td';
 import { FaPrint } from 'react-icons/fa';
 import { AiFillCopy } from 'react-icons/ai';
 import PageSelector from '../PageSelector';
-import { Content, Flex, Box, Top,Classification, BoxColor,Graph,Aside, AsideHeader,AsideContent, Flex2, Block } from './styles';
+import { Content, Flex, Box,Graph,Aside, AsideHeader,AsideContent, Flex2, Block } from './styles';
 import ButtonContainer from '../ButtonContainer';
+import GraphLineArea from '../GraphLineArea';
 
+
+const LineData = {
+  labels: [
+    '01/01/2022',
+    '02/01/2022',
+    '03/01/2022',
+    '04/01/2022',
+    '05/01/2022',
+    '06/01/2022',
+    '07/01/2022',
+    '08/01/2022',
+    '09/01/2022',
+    '10/01/2022',
+    '11/01/2022',
+    '12/01/2022',
+    '13/01/2022',
+    '14/01/2022',
+    '15/01/2022',
+    '16/01/2022',
+    '17/01/2022',
+    '18/01/2022',
+    '19/01/2022',
+    '20/01/2022',
+    '21/01/2022',
+    '22/01/2022',
+    '23/01/2022',
+    '24/01/2022',
+    '25/01/2022',
+    '26/01/2022',
+    '27/01/2022',
+    '28/01/2022',
+    '29/01/2022',
+    '30/01/2022'
+  ],
+  datasets: [
+    {
+      fill: true,
+      label: 'Receitas',
+      data: [222, 212, 313, 414, 166, 778, 119, 0, 100, 200, 400, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100],
+      borderColor: 'rgb(65, 176, 37)',
+      backgroundColor: 'rgba(32, 248, 3, 0.5)',
+    },
+    {
+      fill: true,
+      label: 'Despesas',
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      borderColor: 'rgb(255, 15, 15)',
+      backgroundColor: 'rgba(255, 0, 0, 0.5)',
+    },
+    {
+      fill: true,
+      label: 'A receber',
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      borderColor: 'rgb(53, 174, 235)',
+      backgroundColor: 'rgba(53, 181, 235, 0.5)',
+    },
+    {
+      fill: true,
+      label: 'A pagar',
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      borderColor: 'rgb(235, 93, 53)',
+      backgroundColor: 'rgba(235, 99, 53, 0.5)',
+    },
+  ],
+};
 const FinancialTransactions = () => {
   return (
     <Container>
@@ -34,26 +100,8 @@ const FinancialTransactions = () => {
         </Flex2>
         <Flex>
           <Box>
-            <Top>
-              <Classification>
-                <BoxColor className='a'></BoxColor>
-                <p>Receitas</p>
-              </Classification>
-              <Classification>
-                <BoxColor className='b'></BoxColor>
-                <p>Despesas</p>
-              </Classification>
-              <Classification>
-                <BoxColor className='c'></BoxColor>
-                <p>A receber</p>
-              </Classification>
-              <Classification>
-                <BoxColor className='d'></BoxColor>
-                <p>A pagar</p>
-              </Classification>
-            </Top>
             <Graph>
-
+              <GraphLineArea data={LineData} />
             </Graph>
           </Box>
           <Aside>

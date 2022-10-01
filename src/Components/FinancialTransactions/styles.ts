@@ -24,7 +24,7 @@ export const Box = styled.div`
   height: auto;
   border-radius: 10px;
   background: ${Props => Props.theme.colors.bac};
-   box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
 `
 
 export const Top = styled.div`
@@ -65,7 +65,7 @@ export const BoxColor = styled.div`
 
 export const Graph = styled.div`
   width: 100%;
-  height: 300px;
+  height: auto;
 `
 
 export const Aside = styled.div`

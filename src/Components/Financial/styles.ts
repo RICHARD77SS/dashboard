@@ -24,16 +24,6 @@ export const Flex = styled.div`
     width: 100%;
   }
 `
-export const Flex2 = styled.div`
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: start;
-  gap: 1rem;
-  @media (max-width: 1100px) {
-    flex-direction: column;
-  }
-`
 export const MiniBox = styled.div`
   min-width: 250px;
   height: 200px;
@@ -153,10 +143,7 @@ export const MidContent = styled.div`
   flex-direction: column;
   padding: 1rem;
 `
-export const Graph = styled.div`
-  width: 200px;
-  height: 200px;
-`
+
 export const Pagamentos = styled.div`
   width: 200px;
   height: 200px;

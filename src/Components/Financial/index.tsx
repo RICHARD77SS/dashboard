@@ -9,7 +9,12 @@ import Input from '../Input';
 import { FaCreditCard } from 'react-icons/fa';
 import { MdContacts } from 'react-icons/md';
 import { BsGraphUp } from 'react-icons/bs';
-import { Content, Flex, Flex2, MiniBox, HeaderMiniBox, ContentMiniBox, ButtonContainer, Block, MidBox, MidHeader, MidContent, Pagamentos,Graph } from './styles'
+import { Content, Flex, MiniBox, HeaderMiniBox, ContentMiniBox, ButtonContainer, Block, MidBox, MidHeader, MidContent, Pagamentos} from './styles'
+import FinancialGraphs from '../FinancialGraphs';
+
+
+
+
 
 const Financial = () => {
   return (
@@ -148,48 +153,7 @@ const Financial = () => {
           </MidBox>
         </Block>
       </Content>
-      <Flex2>
-        <MidBox>
-          <MidHeader>
-            <h3>Resumo anual</h3>
-            <Input type='text' list='year' placeholder='  Periodo' />
-            <datalist id='year'>
-              <option value='2022' />
-              <option value='2021' />
-              <option value='2020' />
-              <option value='2019' />
-              <option value='2018' />
-            </datalist>
-          </MidHeader>
-          <MidContent>
-            <Graph>
-
-            </Graph>
-          </MidContent>
-        </MidBox>
-        <MidBox>
-          <MidHeader>
-            <h3>Resumo mensal</h3>
-            <Input type='text' list='month' placeholder='  Periodo' />
-            <datalist id='month'>
-              <option value='setembro - 2022' />
-              <option value='agosto - 2022' />
-              <option value='julho - 2022' />
-              <option value='junho - 2022' />
-              <option value='maio - 2022' />
-              <option value='abril - 2022' />
-              <option value='março - 2022' />
-              <option value='fevereiro - 2022' />
-              <option value='janeiro - 2022' />
-            </datalist>
-          </MidHeader>
-          <MidContent>
-            <Graph>
-
-            </Graph>
-          </MidContent>
-        </MidBox>
-      </Flex2>
+      <FinancialGraphs />
     </Container>
   )
 }
