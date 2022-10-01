@@ -99,6 +99,7 @@ import MediaVideos from './Components/MediasVideos';
 import MediaForms from './Components/MediasForms';
 import MediaDocuments from './Components/MediaDocuments';
 import MediaFiles from './Components/MediasFiles';
+import Card from './Components/CardMake';
 
 
 function App() {
@@ -207,6 +208,7 @@ function App() {
           <Route path='/mediasforms' element={<MediaForms />} />
           <Route path='/mediasdocuments' element={<MediaDocuments />} />
           <Route path='/mediasfiles' element={<MediaFiles />} />
+          <Route path='/card' element={<Card />} />
         </Route>
       </Routes>
     </ThemeProvider>
