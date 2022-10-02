@@ -2,13 +2,16 @@ import { AiFillTags, AiOutlineMenu, AiOutlinePlus, AiOutlineSearch } from "react
 import { BsTrash } from "react-icons/bs";
 import Button from "../Button";
 import Container from "../Container";
+import Content from "../Content";
+import Input from "../Input";
+import TextEditor from "../TextEditor";
 
-import { Flex1, Notes, TopNotes, NotesContent } from './styles';
+import { Notes, TopNotes, NotesContent, Box, Top, Flex, TextArea, } from './styles';
 
 const ScheduleMyAnnotations = () => {
   return (
     <Container>
-      <Flex1>
+      <Content>
         <Notes>
           <TopNotes>
             <Button>
@@ -27,11 +30,25 @@ const ScheduleMyAnnotations = () => {
               <BsTrash />
             </Button>
           </TopNotes>
-          <NotesContent>
-
-          </NotesContent>
         </Notes>
-      </Flex1>
+        <Box>
+          <Top>
+            <Flex>
+              <Input type='text' placeholder=' Título do estudo' />
+              <Input type='text' list='categories' placeholder=' Categoria' />
+              <datalist id='categories'>
+                <option value='Group name' />
+                <option value='Group here' />
+              </datalist>
+              <Button>Salvar</Button>
+              <Button>Cancelar</Button>
+            </Flex>
+          </Top>
+          <TextArea>
+            <TextEditor />
+          </TextArea>
+        </Box>
+      </Content>
     </Container>
   )
 }

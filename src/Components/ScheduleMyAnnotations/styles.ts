@@ -32,3 +32,62 @@ export const NotesContent = styled.div`
   width: 70%;
   background: #fff;
 `
+export const Box = styled.div`
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  border-radius: 10px;
+  background-color: ${Props => Props.theme.colors.bac};
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+`
+export const Top = styled.div`
+  width: 100%;
+  height: auto;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+`
+export const Flex = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 1rem;
+  input {
+    width: 120px;
+    height: 35px;
+    flex: 1;
+  }
+  button {
+    height: 35px;
+    padding: 0 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: ${Props => Props.theme.colors.sec};
+    color: #fff;
+    :last-child {
+      background: #fff;
+      color: #000;
+    }
+  }
+`
+export const TextEdits = styled.div`
+  width: 100%;
+  display: flex;
+  align-items:center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  gap: .5rem;
+  background: #f4f4f4;
+`
+export const TextArea = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  .ql-container {
+    min-height: 600px;
+  }
+`

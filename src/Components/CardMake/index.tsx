@@ -10,9 +10,9 @@ import Flex from "../Flex"
 import Input from "../Input"
 import InputBlock from "../InputBlock"
 
-import {BoxFlex, Side, Make, CardContent,CardComplete,Backgrounds, Bg} from './styles'
+import { BoxFlex, Side, Make, CardContent, CardComplete, Backgrounds, Bg } from './styles'
 
-const Card = () => {
+const CardMake = () => {
   return (
     <Container>
       <Content>
@@ -156,4 +156,4 @@ const Card = () => {
   )
 }
 
-export default Card
+export default CardMake;

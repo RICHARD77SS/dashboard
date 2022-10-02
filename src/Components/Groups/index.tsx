@@ -2,8 +2,9 @@ import React from 'react';
 
 import { BsFilter } from 'react-icons/bs';
 import Button from '../Button';
+import CardGroup from '../CardGroup';
 import Input from '../Input';
-import { Container, Content, Box, BoxHeader, BoxContent, CardsContainer,  Page, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex } from './styles';
+import { Container, Content, Box, BoxHeader, BoxContent, CardsContainer, Page, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex } from './styles';
 
 
 const Group = () => {
@@ -17,7 +18,7 @@ const Group = () => {
           </BoxHeader>
           <BoxContent>
             <CardsContainer>
-             
+              <CardGroup />
             </CardsContainer>
             <Page>
               <Button>Anterior</Button>

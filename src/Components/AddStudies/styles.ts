@@ -64,13 +64,8 @@ export const TextArea = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem;
-  textarea{
-    width: 100%;
-    border: none;
-    :focus {
-      border: none;
-      outline: none;
-    }
+  .ql-container {
+    min-height: 600px;
   }
 `
 export const Aside = styled.div`
