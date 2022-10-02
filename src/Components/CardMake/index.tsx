@@ -1,4 +1,4 @@
-import Aside from "../Aside"
+
 import Block from "../Block"
 import Box from "../Box"
 import BoxContent from "../BoxContent"
@@ -10,7 +10,7 @@ import Flex from "../Flex"
 import Input from "../Input"
 import InputBlock from "../InputBlock"
 
-import {BoxFlex, Side, Make, CardContent,CardComplete,Backgrounds, Bg, AsideContent} from './styles'
+import {BoxFlex, Side, Make, CardContent,CardComplete,Backgrounds, Bg} from './styles'
 
 const Card = () => {
   return (
@@ -19,6 +19,7 @@ const Card = () => {
         <Block>
           <Box>
             <BoxHeader title='Frente do cartão'>
+              <Input placeholder='Nome do cartão' type='text' />
               <Flex>
                 <Button>Salvar</Button>
                 <Button>Cancelar</Button>
@@ -27,10 +28,22 @@ const Card = () => {
             <BoxContent>
               <BoxFlex>
                 <Side>
-                  <Input placeholder='Titulos e legenda' type='color' />
-                  <Input placeholder='Texto dentro dos' type='color' />
-                  <Input placeholder='Texto Personalizado' type='color' />
-                  <Input placeholder='Fundo do cartão' type='color' />
+                  <Flex>
+                    <p>Titulos e legenda</p>
+                    <Input type='color' />
+                  </Flex>
+                  <Flex>
+                    <p>Texto dentro dos</p>
+                    <Input type='color' />
+                  </Flex>
+                  <Flex>
+                    <p>Texto Personalizado</p>
+                    <Input type='color' />
+                  </Flex>
+                  <Flex>
+                    <p>Fundo do cartão</p>
+                    <Input type='color' />
+                  </Flex>
                 </Side>
                 <Make>
                   <CardContent>
@@ -79,10 +92,22 @@ const Card = () => {
             <BoxContent>
               <BoxFlex>
                 <Side>
-                  <Input placeholder='Titulos e legenda' type='color' />
-                  <Input placeholder='Texto dentro dos' type='color' />
-                  <Input placeholder='Texto Personalizado' type='color' />
-                  <Input placeholder='Fundo do cartão' type='color' />
+                  <Flex>
+                    <p>Titulos e legenda</p>
+                    <Input type='color' />
+                  </Flex>
+                  <Flex>
+                    <p>Texto dentro dos</p>
+                    <Input type='color' />
+                  </Flex>
+                  <Flex>
+                    <p>Texto Personalizado</p>
+                    <Input type='color' />
+                  </Flex>
+                  <Flex>
+                    <p>Fundo do cartão</p>
+                    <Input type='color' />
+                  </Flex>
                 </Side>
                 <Make>
                   <CardContent>
@@ -126,11 +151,6 @@ const Card = () => {
             </BoxContent>
           </Box>
         </Block>
-        <Aside>
-          <AsideContent>
-            we
-          </AsideContent>
-        </Aside>
       </Content>
     </Container>
   )

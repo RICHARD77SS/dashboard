@@ -45,8 +45,3 @@ export const Bg = styled.div`
   border-radius: 10px;
   background: #555;
 `
-
-export const AsideContent = styled.div`
-  width: 100%;
-  background: #555;
-`
