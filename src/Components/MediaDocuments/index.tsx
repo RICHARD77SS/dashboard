@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import Box from "../Box"
 import BoxContent from "../BoxContent"
 import BoxHeader from "../BoxHeader"
@@ -10,7 +11,7 @@ import Th from "../Th"
 import Thead from "../Thead"
 import Tr from "../Tr"
 
-import {Content, FlexBetween} from './styles'
+import { Content, FlexBetween } from './styles'
 
 const MediaDocuments = () => {
   return (
@@ -21,8 +22,10 @@ const MediaDocuments = () => {
           <BoxContent>
             <FlexBetween>
               <p>Aqui ficam seus modelos de documentos personalizados.</p>
-              <Button>Criar novo</Button>
+              <Link to='/documenteditor'><Button>Criar novo</Button></Link>
             </FlexBetween>
+            <br />
+            <br />
             <Table>
               <Thead>
                 <Tr>
@@ -38,11 +41,16 @@ const MediaDocuments = () => {
               </Tbody>
             </Table>
           </BoxContent>
+
         </Box>
+        <br />
+        <br />
         <Box>
           <BoxHeader title='Meus modelos' />
           <BoxContent>
             <p>Utilize nossos modelos prontos para gerar documentos ou copie e personalize como você desejar.</p>
+            <br />
+            <br />
             <Table>
               <Thead>
                 <Tr>

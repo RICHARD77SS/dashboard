@@ -2,6 +2,7 @@ import React from 'react'
 import { BiCopyAlt, BiLeftArrow } from 'react-icons/bi';
 import { BsPencilSquare } from 'react-icons/bs';
 import { MdFormatAlignCenter } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import Aside from '../Aside';
 import Box from "../Box";
 import BoxContent from "../BoxContent";
@@ -105,7 +106,7 @@ const MediaForms = () => {
       </Box>
       <Box>
         <BoxHeader title="Seus formulários" >
-          <Button>+ adicionar</Button>
+          <Link to='/forms/add'><Button>+ adicionar</Button></Link>
         </BoxHeader>
         <BoxContent>
           <Content>

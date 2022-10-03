@@ -1,4 +1,4 @@
-
+import React from 'react'
 import Container from '../Container';
 import Input from '../Input';
 import {Content, Box, Top, Flex,Aside,MiniBox } from './styles';
@@ -10,6 +10,7 @@ import TextArea from '../TextArea';
 
 
 const AddStudies = () => {
+  const [value, setValue] = React.useState('');
   return (
     <Container>
       <h3>Crie um estudo</h3>
@@ -28,7 +29,7 @@ const AddStudies = () => {
             </Flex>
           </Top>
           <TextArea>
-            <TextEditor />
+            <TextEditor value={value} setValue={setValue} />
           </TextArea>
         </Box>
         <Aside>

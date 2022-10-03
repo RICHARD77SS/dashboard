@@ -28,10 +28,6 @@ export const TopNotes = styled.div`
     color: #fff;
   }
 `
-export const NotesContent = styled.div`
-  width: 70%;
-  background: #fff;
-`
 export const Box = styled.div`
   width: 80%;
   height: auto;

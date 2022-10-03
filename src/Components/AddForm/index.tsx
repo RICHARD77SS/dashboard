@@ -18,6 +18,7 @@ import TextEditor from '../TextEditor';
 import { Inputs, Buttons } from './styles';
 const AddForm = () => {
   const [newField, setNewField] = React.useState(0);
+  const [value, setValue] = React.useState('');
 
   console.log(newField)
   return (
@@ -52,7 +53,7 @@ const AddForm = () => {
           <BoxHeader title='Descrição' />
           <BoxContent>
             <TextArea height='200px'>
-              <TextEditor />
+              <TextEditor value={value} setValue={setValue} />
             </TextArea>
           </BoxContent>
         </Box>

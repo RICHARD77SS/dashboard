@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-function TextEditor() {
-  const [value, setValue] = useState('');
+
+
+interface Props {
+  value: any;
+  setValue: any;
+}
+function TextEditor({value, setValue}:Props) {
+  
   const modules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons

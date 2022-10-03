@@ -1,6 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import Box from '../Box';
+import BoxContent from '../BoxContent';
+import BoxHeader from '../BoxHeader';
 import Button from '../Button';
-import { Container, Content, Box, BoxHeader, BoxContent, Top, Table, THead, Tr, Th, TBody, Td } from './styles'
+import Container from '../Container';
+import EditRemove from '../EditRemove';
+import FlexBetween from '../FlexBetween';
+import Table from '../Table';
+import Tbody from '../Tbody';
+import Td from '../Td';
+import Th from '../Th';
+import Thead from '../Thead';
+import Tr from '../Tr';
+import { Content } from './styles'
 
 
 const CardPersonal = () => {
@@ -9,31 +22,30 @@ const CardPersonal = () => {
       <h3>Cartão pessoal</h3>
       <Content>
         <Box>
-          <BoxHeader>
-            <h3>Meus modelos</h3>
+          <BoxHeader title='Meus modelos'>
           </BoxHeader>
           <BoxContent>
-            <Top>
+            <FlexBetween>
               <p>Todos os modelos de cartões pessoais que você cria ou edita ficam disponíveis aqui.</p>
-              <Button>Criar novo</Button>
-            </Top>
+              <Link to='/card'><Button>Criar novo</Button></Link>
+            </FlexBetween>
             <Table>
-              <THead>
+              <Thead>
                 <Tr>
                   <Th>Nome do modelo</Th>
                   <Th>Criado em</Th>
                   <Th>Atualizado em</Th>
                   <Th>Ações</Th>
                 </Tr>
-              </THead>
-              <TBody>
+              </Thead>
+              <Tbody>
                 <Tr>
                   <Td>Model Name</Td>
                   <Td>Data</Td>
                   <Td>Data</Td>
-                  <Td><Button>Editar</Button><Button>Remover</Button></Td>
+                  <Td><EditRemove /></Td>
                 </Tr>
-              </TBody>
+              </Tbody>
             </Table>
           </BoxContent>
         </Box>
@@ -42,10 +54,7 @@ const CardPersonal = () => {
             <h3>Escolha um Modelo</h3>
           </BoxHeader>
           <BoxContent>
-            <Top>
-              <p>Escolha um de nossos modelos prontos para usar ou editar</p>
-            </Top>
-            
+            <p>Escolha um de nossos modelos prontos para usar ou editar</p>
           </BoxContent>
         </Box>
       </Content>

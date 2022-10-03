@@ -9,6 +9,10 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background: #f3f3f3;
+    a {
+      color: #f3f3f3;
+      text-decoration: none;
+    }
   }
 `
 export default GlobalStyle;

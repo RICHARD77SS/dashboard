@@ -1,3 +1,4 @@
+import React from 'react';
 import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
@@ -11,7 +12,9 @@ import { Flexs } from "./styles";
 
 
 
+
 const DocumentEditor = () => {
+  const [value, setValue] = React.useState('');
   return (
     <Container>
       <Content>
@@ -20,7 +23,7 @@ const DocumentEditor = () => {
           <BoxContent>
             <Flexs><Input type='text' /><Button>Salvar</Button><Button>Cancelar</Button></Flexs>
             <TextArea height="600px">
-              <TextEditor />
+              <TextEditor value={value} setValue={setValue} />
             </TextArea>
           </BoxContent>
         </Box>

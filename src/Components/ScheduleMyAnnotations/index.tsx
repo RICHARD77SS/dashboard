@@ -1,3 +1,4 @@
+import React from  'react'
 import { AiFillTags, AiOutlineMenu, AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import Button from "../Button";
@@ -6,9 +7,16 @@ import Content from "../Content";
 import Input from "../Input";
 import TextEditor from "../TextEditor";
 
-import { Notes, TopNotes, NotesContent, Box, Top, Flex, TextArea, } from './styles';
+import { Notes, TopNotes, Box, Top, Flex, TextArea, } from './styles';
 
 const ScheduleMyAnnotations = () => {
+  const [value, setValue] = React.useState('');
+
+  function getValues() {
+    window.alert('Salvo')
+    console.log(value)
+
+  }
   return (
     <Container>
       <Content>
@@ -40,12 +48,12 @@ const ScheduleMyAnnotations = () => {
                 <option value='Group name' />
                 <option value='Group here' />
               </datalist>
-              <Button>Salvar</Button>
+              <Button onClick={()=>{getValues()}}>Salvar</Button>
               <Button>Cancelar</Button>
             </Flex>
           </Top>
           <TextArea>
-            <TextEditor />
+            <TextEditor value={value} setValue={setValue} />
           </TextArea>
         </Box>
       </Content>

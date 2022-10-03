@@ -9,4 +9,7 @@ export const TextAreaSt = styled.div<Props>`
   .ql-container {
     min-height: ${Props => Props.height};
   }
+  .ql-editor {
+    min-height: ${Props => Props.height};
+  }
 `

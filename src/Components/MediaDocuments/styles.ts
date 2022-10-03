@@ -11,10 +11,9 @@ export const Content = styled.div`
   button {
     padding: 0 1rem;
     height: 30px;
-    background: ${Props => Props.theme.colors.sec};
-    border-radius: 10px;
+    background: ${Props => Props.theme.colors.pri};
+    border-radius: 20px;
     color:#fff;
-
   }
 `
 export const FlexBetween = styled.div`
@@ -23,4 +22,12 @@ export const FlexBetween = styled.div`
   display: flex;
   align-items:center;
   justify-content: space-between;
+  button {
+    padding: 0 1rem;
+    height: 40px;
+    background: ${Props => Props.theme.colors.pri};
+    border-radius: 20px;
+    color:#fff;
+
+  }
 `
