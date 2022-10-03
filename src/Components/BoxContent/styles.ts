@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const BoxContentSt = styled.div`
   width: 100%;
   height: auto;
-  min-height: 300px;
   padding: 1rem;
   display: flex;
   align-items:center;

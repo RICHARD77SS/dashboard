@@ -100,6 +100,7 @@ import MediaForms from './Components/MediasForms';
 import MediaDocuments from './Components/MediaDocuments';
 import MediaFiles from './Components/MediasFiles';
 import CardMake from './Components/CardMake';
+import AddForm from './Components/AddForm';
 
 
 function App() {
@@ -208,7 +209,11 @@ function App() {
           <Route path='/mediasforms' element={<MediaForms />} />
           <Route path='/mediasdocuments' element={<MediaDocuments />} />
           <Route path='/mediasfiles' element={<MediaFiles />} />
+
+        
           <Route path='/card' element={<CardMake />} />
+          <Route path='/forms/add' element={<AddForm />} />
+        
         </Route>
       </Routes>
     </ThemeProvider>

@@ -1,11 +1,12 @@
 
 import Container from '../Container';
 import Input from '../Input';
-import {Content, Box, Top, Flex,TextArea,Aside,MiniBox } from './styles';
+import {Content, Box, Top, Flex,Aside,MiniBox } from './styles';
 import BoxHeader from '../BoxHeader';
 import BoxContent from '../BoxContent';
 import Button from '../Button';
 import TextEditor from '../TextEditor';
+import TextArea from '../TextArea';
 
 
 const AddStudies = () => {

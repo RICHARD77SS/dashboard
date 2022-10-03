@@ -60,14 +60,6 @@ export const TextEdits = styled.div`
   gap: .5rem;
   background: #f4f4f4;
 `
-export const TextArea = styled.div`
-  width: 100%;
-  height: auto;
-  padding: 1rem;
-  .ql-container {
-    min-height: 600px;
-  }
-`
 export const Aside = styled.div`
   width: 20%;
   min-width: 150px;
