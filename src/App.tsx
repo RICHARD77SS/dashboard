@@ -101,6 +101,7 @@ import MediaDocuments from './Components/MediaDocuments';
 import MediaFiles from './Components/MediasFiles';
 import CardMake from './Components/CardMake';
 import AddForm from './Components/AddForm';
+import DocumentEditor from './Components/DocumentEditor';
 
 
 function App() {
@@ -213,6 +214,7 @@ function App() {
         
           <Route path='/card' element={<CardMake />} />
           <Route path='/forms/add' element={<AddForm />} />
+          <Route path='/documenteditor' element={<DocumentEditor />} />
         
         </Route>
       </Routes>
