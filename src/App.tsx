@@ -210,12 +210,9 @@ function App() {
           <Route path='/mediasforms' element={<MediaForms />} />
           <Route path='/mediasdocuments' element={<MediaDocuments />} />
           <Route path='/mediasfiles' element={<MediaFiles />} />
-
-        
           <Route path='/card' element={<CardMake />} />
           <Route path='/forms/add' element={<AddForm />} />
           <Route path='/documenteditor' element={<DocumentEditor />} />
-        
         </Route>
       </Routes>
     </ThemeProvider>

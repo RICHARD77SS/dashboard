@@ -54,7 +54,7 @@ export const BoxContent = styled.div`
   flex-direction: column;
   gap: .5rem;
   padding: 1rem 0;
-    button {
+  button {
     padding: .5rem;
     background: ${Props => Props.theme.colors.sec};
     color: #fff;
@@ -63,6 +63,20 @@ export const BoxContent = styled.div`
     :hover {
       filter: brightness(.8);
     }
+    p{
+      position: absolute;
+      z-index: 9;
+    }
+  }
+  input[type=file] {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    cursor: pointer;
+  }
+  input[type=text]{
+    width: 350px;
   }
 `
 
@@ -93,4 +107,12 @@ export const Closed = styled.button`
   right: 0;
   background: rgba(0,0,0,0.4);
   z-index: 0;
+`
+export const CutImage = styled.div`
+  width: 380px;
+  height: 200px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `

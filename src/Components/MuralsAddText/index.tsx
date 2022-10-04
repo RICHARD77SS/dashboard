@@ -40,15 +40,15 @@ const MuralsAddText = ({ children, onClick }: Props) => {
               <BoxFlex>
                 <BoxBLock>
                   <Bg>Texto</Bg>
-                  <Input type='checkbox' />
+                  <Input name='text' type='radio' />
                 </BoxBLock>
                 <BoxBLock>
                   <Bg>Texto</Bg>
-                  <Input type='checkbox' />
+                  <Input name='text' type='radio' />
                 </BoxBLock>
                 <BoxBLock>
                   <Bg>Texto</Bg>
-                  <Input type='checkbox' />
+                  <Input name='text' type='radio' />
                 </BoxBLock>
               </BoxFlex>
             </Block>
@@ -56,22 +56,22 @@ const MuralsAddText = ({ children, onClick }: Props) => {
               <InputBlock>
                 <p>Status</p>
                 <Flex>
-                  <Input id='publi' type='radio' />
+                  <Input name='status' id='publi' type='radio' />
                   <label htmlFor="publi">Publicado</label>
                 </Flex>
                 <Flex>
-                  <Input id='despubli' type='radio' />
+                  <Input name='status' id='despubli' type='radio' />
                   <label htmlFor="despubli">Despublicado</label>
                 </Flex>
               </InputBlock>
               <InputBlock>
                 <p>Despublicar automaticamente</p>
                 <Flex>
-                  <Input id='never' type='radio' />
+                  <Input name='despublicar' id='never' type='radio' />
                   <label htmlFor="never">Nunca</label>
                 </Flex>
                 <Flex>
-                  <Input id='postdate' type='radio' />
+                  <Input name='despublicar' id='postdate' type='radio' />
                   <label htmlFor="postdate">Após esta data</label>
                 </Flex>
               </InputBlock>
