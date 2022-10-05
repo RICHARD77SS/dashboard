@@ -1,3 +1,4 @@
+import React from 'react';
 import Aside from "../Aside";
 import Box from "../Box";
 import BoxContent from "../BoxContent";
@@ -5,20 +6,33 @@ import BoxHeader from "../BoxHeader";
 import Button from "../Button";
 import Container from "../Container";
 import Content from "../Content";
+import Flex from '../Flex';
 import Input from "../Input";
 import InputBlock from "../InputBlock";
+import ModalAddVideo from '../ModalAddVideo';
 
 import { AsideContent } from './styles';
 
 const MediaVideos = () => {
+  const [addVideo, setAddVideo] = React.useState(false)
   return (
     <Container>
       <h3>Álbuns de Videos</h3>
+      {addVideo ?
+        <>
+          <ModalAddVideo onClick={() => { setAddVideo(false) }}>
+            <Button onClick={() => { setAddVideo(false) }}>
+              Close
+            </Button>
+          </ModalAddVideo>
+        </> : null}
       <Content>
         <Box>
           <BoxHeader title="Resultados: 0" >
-            <Button>Editar</Button>
-            <Button>Remover</Button>
+            <Flex>
+              <Button onClick={() => { setAddVideo(true) }}>Editar</Button>
+              <Button>Remover</Button>
+            </Flex>
           </BoxHeader>
           <BoxContent>
             <Content>

@@ -102,6 +102,8 @@ import MediaFiles from './Components/MediasFiles';
 import CardMake from './Components/CardMake';
 import AddForm from './Components/AddForm';
 import DocumentEditor from './Components/DocumentEditor';
+import MediasCreateAlbum from './Components/MediasCreateAlbum';
+import ViewGroup from './Components/ViewGroup';
 
 
 function App() {
@@ -213,6 +215,10 @@ function App() {
           <Route path='/card' element={<CardMake />} />
           <Route path='/forms/add' element={<AddForm />} />
           <Route path='/documenteditor' element={<DocumentEditor />} />
+
+
+          <Route path='/medias/photos/album' element={<MediasCreateAlbum />} />
+          <Route path='/groups/viewgroup' element={<ViewGroup />} />
         </Route>
       </Routes>
     </ThemeProvider>

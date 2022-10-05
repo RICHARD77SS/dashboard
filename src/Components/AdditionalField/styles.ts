@@ -43,24 +43,7 @@ export const FieldContent = styled.div`
   padding: 1rem;
   gap: 1rem;
 `
-export const Table = styled.table`
-  width: 100%;
-`
-export const Tbody = styled.tbody`
 
-`
-export const Thead = styled.thead`
-
-`
-export const Tr = styled.tr`
-
-`
-export const Th = styled.th`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-`
-export const Td = styled.td`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-`
 export const AddField = styled.div`
   width: 50%;
   height: auto;

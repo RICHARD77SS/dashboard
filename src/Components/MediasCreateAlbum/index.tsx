@@ -6,12 +6,15 @@ import Button from '../Button';
 import Container from '../Container';
 import Flex from '../Flex';
 import Input from '../Input';
+import ModalEdit from '../ModalEdit';
 
 import { Submit, Flex1 } from './styles';
 
 const MAX_COUNT = 10;
 
 const MediasCreateAlbum = () => {
+  const [edit, setEdit] = React.useState(false)
+
   const [uploadedFiles, setUploadedFiles] = React.useState<any[]>([])
   const [fileLimit, setFileLimit] = React.useState(false);
 
@@ -39,20 +42,27 @@ const MediasCreateAlbum = () => {
     handleUploadFiles(chosenFiles);
   }
   console.log(uploadedFiles)
+
   return (
     <Container>
       <br />
       <br />
       <h2>Álbum</h2>
+      {edit ?
+        <>
+          <ModalEdit onClick={() => { setEdit(false) }}>
+            <Button onClick={() => { setEdit(false) }}>Close</Button>
+          </ModalEdit>
+        </> : null}
       <Box>
         <BoxHeader title='Album'>
           <Flex>
-            <Button>Editar</Button>
+            <Button onClick={() => { setEdit(true) }}>Editar</Button>
             <Button>Remover álbum</Button>
           </Flex>
         </BoxHeader>
         <BoxContent>
-          <p>Teste album</p>
+          <p>Album name</p>
           <Submit>
             <h4>Arraste ou selecione um arquivo</h4>
             <Input id='fileUpload' type='file' multiple
