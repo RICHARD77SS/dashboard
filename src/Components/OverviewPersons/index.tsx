@@ -6,7 +6,7 @@ import Button from "../Button";
 import Input from "../Input";
 import GraphLineArea from "../GraphLineArea"
 
-import { Graph, Graph1, Grid1, GraphContainer, Datalist, Div } from './styles'
+import { Graph, Graph1, Grid1, GraphContainer, Datalist, Div, User, Image } from './styles'
 import Content from "../Content";
 import Block from "../Block";
 import GraphPieArea from "../GraphPieArea";
@@ -114,7 +114,18 @@ const OverviewPersons = () => {
               <Button><Link to='/people' >Ver Todos</Link></Button>
             </BoxHeader>
             <BoxContent>
-
+              <User>
+                <Image>
+                  <img src="https://img.freepik.com/vetores-gratis/astronauta-bonito-montando-foguete-e-acenando-a-mao-dos-desenhos-animados-icone-ilustracao-conceito-de-icone-de-tecnologia-cientifica_138676-2130.jpg?w=740&t=st=1664997511~exp=1664998111~hmac=0e0f26a1417993c6751a47745c3406bc9f8407caca60fc3f31f4b53b6f6c051f" alt="" />
+                </Image>
+                <p>User name</p>
+              </User>
+              <User>
+                <Image>
+                  <img src="https://img.freepik.com/vetores-gratis/astronauta-bonito-montando-foguete-e-acenando-a-mao-dos-desenhos-animados-icone-ilustracao-conceito-de-icone-de-tecnologia-cientifica_138676-2130.jpg?w=740&t=st=1664997511~exp=1664998111~hmac=0e0f26a1417993c6751a47745c3406bc9f8407caca60fc3f31f4b53b6f6c051f" alt="" />
+                </Image>
+                <p>User name</p>
+              </User>
             </BoxContent>
           </Box>
           <Box>

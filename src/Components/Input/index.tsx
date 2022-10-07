@@ -3,10 +3,10 @@ import { Inputc } from "./styles";
 
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-
+  ref?: React.MutableRefObject<HTMLInputElement | null>
 }
 
-const Input = (Props:Props) => {
+const Input = (Props: Props) => {
   return (
     <Inputc {...Props} />
   )

@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items:  center;
 `
 
-export const Form = styled.div`
+export const Form = styled.form`
   width: 100%;
   max-width: 1300px;
   height: 100%;
@@ -38,13 +38,14 @@ export const Content = styled.div`
   gap: 1rem;
 `
 
-export const Fieldset = styled.div`
+export const Fieldset = styled.fieldset`
   width: 50%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items:  center;
   gap: 1rem;
+  border: none;
 `
 
 export const Data = styled.div`
@@ -59,7 +60,7 @@ export const Data = styled.div`
   input {
     height: 30px;
     border-radius: 5px;
-    border-color: ${Props =>Props.theme.colors.pri};
+    border-color: ${Props => Props.theme.colors.pri};
   }
 `
 

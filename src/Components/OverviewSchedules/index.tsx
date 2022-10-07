@@ -5,7 +5,7 @@ import BoxHeader from "../BoxHeader";
 import Button from "../Button";
 import Content from "../Content";
 
-import { Buttonb } from './styles';
+import { Buttonb, Anotation } from './styles';
 
 const OverviewSchedules = () => {
   return (
@@ -34,7 +34,9 @@ const OverviewSchedules = () => {
           <Button><Link to='/scheduleanotation'>Ver mais</Link></Button>
         </BoxHeader>
         <BoxContent>
-          <h4>Não há dados disponiveis</h4>
+          <Anotation>
+            <p>Anotation</p>
+          </Anotation>
           <Buttonb><Link to='/scheduleanotation' >+Adicionar items</Link></Buttonb>
         </BoxContent>
       </Box>

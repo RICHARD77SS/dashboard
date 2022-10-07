@@ -177,3 +177,28 @@ export const Graph1 = styled.div`
     max-width: 500px;
   }
 `
+export const User = styled.button`
+  width: 300px;
+  min-height: 60px;
+  display: flex;
+  align-items:center;
+  gap: 1rem;
+  background: #f4f4f4 !important;
+  border: none;
+  :hover {
+    filter: brightness(.8);
+  }
+  p {
+    color: #000;
+  }
+`
+export const Image = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  img{
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+  }
+`

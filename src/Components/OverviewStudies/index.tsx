@@ -4,14 +4,15 @@ import BoxHeader from "../BoxHeader";
 import Button from "../Button";
 import Content from "../Content";
 
-import { Description, Divf } from "./styles"
 import { GiGreekTemple } from 'react-icons/gi';
 import { FaGraduationCap } from 'react-icons/fa';
 import { BiGroup } from 'react-icons/bi';
 import ProgressBar from "../ProgressBar";
 import { Link } from "react-router-dom";
+import InputBlock from "../InputBlock";
 
 
+import { Description, Divf, Studie, Image } from "./styles"
 
 
 
@@ -27,7 +28,15 @@ const OverviewStudies = () => {
           <Button><Link to='/studies'>Ver todos</Link></Button>
         </BoxHeader>
         <BoxContent>
-
+          <Studie>
+            <Image>
+              <img src="" alt="" />
+            </Image>
+            <InputBlock>
+              <h4>Estudie name</h4>
+              <p>5 de outubro de 2022</p>
+            </InputBlock>
+          </Studie>
         </BoxContent>
       </Box>
       <Box>

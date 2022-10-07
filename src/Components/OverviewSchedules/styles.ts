@@ -17,3 +17,19 @@ export const Buttonb = styled.div`
     color: #fff;
   }
 `
+export const Anotation = styled.div`
+  width: 100%;
+  height: 30px;
+  background: #f4f4f4;
+  display: flex;
+  align-items:Center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  :hover {
+    filter: brightness(.8);
+  }
+  p{
+    text-decoration: underline;
+  }
+`

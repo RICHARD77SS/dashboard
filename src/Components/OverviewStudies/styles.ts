@@ -29,3 +29,25 @@ export const Output = styled.div`
   height: 40px;
   background: #ccc;
 `
+export const Studie = styled.div`
+  width: 100%;
+  height: 100px;
+  background: #f4f4f4;
+  display: flex;
+  align-items:center;
+  gap: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  :hover {
+    filter: brightness(.8);
+  }
+`
+export const Image = styled.div`
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`
