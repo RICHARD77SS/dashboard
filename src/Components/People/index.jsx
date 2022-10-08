@@ -1,11 +1,11 @@
 import React from 'react';
-import Table from '../Table'
 import { BsArrowDown, BsArrowUp, BsFilter } from 'react-icons/bs';
 import Input from '../Input';
 import TopTableOptions from '../TopTableOptions';
 import {
-  TableContainer, Buttonb, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex
+  TableContainer, Buttonb, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex,
 } from './styles';
+import Table from '../Table'
 import Thead from '../Thead';
 import Tr from '../Tr';
 import Th from '../Th';
@@ -15,13 +15,21 @@ import PageSelector from '../PageSelector';
 import { Link } from 'react-router-dom';
 import Container from '../Container';
 import Content from '../Content';
-import Box from '../Box';
+import BoxB from '../BoxB';
 import BoxHeader from '../BoxHeader';
 import BoxContent from '../BoxContent';
 import Aside from '../Aside';
 
+import { useAxios } from '../../hooks/useAxios'
 
 const People = () => {
+  const { data } = useAxios('person')
+
+  var date = new Date()
+  var day = date.getDate()
+  var month = date.getMonth() + 1
+  var year = date.getFullYear()
+
   return (
     <Container>
       <br />
@@ -29,7 +37,7 @@ const People = () => {
       <h2>Pessoas cadastradas</h2>
       <br />
       <Content>
-        <Box>
+        <BoxB>
           <BoxHeader title='Resultados: 1'>
           </BoxHeader>
           <BoxContent>
@@ -40,19 +48,71 @@ const People = () => {
                   <Tr>
                     <Th>Nome completo <p><BsArrowUp /><BsArrowDown /></p></Th>
                     <Th>E-mail <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Data de nascimento <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Telefones <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Idade <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Sexo <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Endereço <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>CEP <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Cidade <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Documento 1 <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Documento 2 <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Estado civil<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Escolaridade<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Nome do cônjuge<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Data de conversão<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Criado em <p><BsArrowUp /><BsArrowDown /></p></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  <Tr>
-                    <Td>Name here</Td>
-                    <Td>Email here</Td>
-                  </Tr>
+                  {data?.person?.map((persons) => {
+                    var birthday = new Date(persons.birth)
+
+                    var age_now = year - birthday.getFullYear()
+                    var mont = month - birthday.getMonth()
+                    if (mont < 0 || (mont === 0 && day < birthday.getDate())) {
+                      age_now--;
+                    }
+
+                    var baptizeds = persons.baptized
+                    if (baptizeds === true) {
+                      var baptizeds = "Sim"
+                    } else {
+                      var baptizeds = "Não"
+                    }
+
+                    
+                    return (
+                      <Tr key={persons._id}>
+                        <Td>{persons.name}</Td>
+                        <Td>{persons.email}</Td>
+                        <Td>{persons.birth}</Td>
+                        <Td>{persons.phone1},{persons.phone2}</Td>
+                        <Td>{persons.birth}</Td>
+                        <Td>{age_now}</Td>
+                        <Td>{persons.sex}</Td>
+                        <Td>{persons.address}</Td>
+                        <Td>{persons.zipcode}</Td>
+                        <Td>{persons.city}</Td>
+                        <Td>{persons.document1}</Td>
+                        <Td>{persons.document2}</Td>
+                        <Td>{persons.marital}</Td>
+                        <Td>{persons.schooling}</Td>
+                        <Td>{persons.name}</Td>
+                        <Td>{persons.conversion}</Td>
+                        <Td>{baptizeds}</Td>
+                        <Td>{persons.conversion}</Td>
+                      </Tr>
+                    )
+                  })}
                 </Tbody>
               </Table>
             </TableContainer>
             <PageSelector />
           </BoxContent>
-        </Box>
+        </BoxB>
         <Aside>
           <Buttonb><Link to='/addpeople'>+Adicionar Pessoas</Link></Buttonb>
           <Filters>

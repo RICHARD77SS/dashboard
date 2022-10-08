@@ -2,11 +2,8 @@ import useSWR from 'swr';
 
 import api from '../services/api';
 
-interface Props {
-  url: string;
-}
 
-export function useAxios({url}:Props) {
+export function useAxios(url) {
   const { data, error, mutate } = useSWR(url,
     async (url) => {
       const response = await api.get(url);
