@@ -22,6 +22,7 @@ import Aside from '../Aside';
 
 import { useAxios } from '../../hooks/useAxios'
 
+
 const People = () => {
   const { data } = useAxios('person')
 
@@ -29,7 +30,6 @@ const People = () => {
   var day = date.getDate()
   var month = date.getMonth() + 1
   var year = date.getFullYear()
-
   return (
     <Container>
       <br />
@@ -67,7 +67,7 @@ const People = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person?.map((persons) => {
+                  {data?.person?.map((persons, index) => {
                     var birthday = new Date(persons.birth)
 
                     var age_now = year - birthday.getFullYear()
@@ -83,10 +83,10 @@ const People = () => {
                       var baptizeds = "Não"
                     }
 
-                    
+
                     return (
                       <Tr key={persons._id}>
-                        <Td>{persons.name}</Td>
+                        <Td><Link to={`/persons/details/${index}`}>{persons.name} </Link>{index}</Td>
                         <Td>{persons.email}</Td>
                         <Td>{persons.birth}</Td>
                         <Td>{persons.phone1},{persons.phone2}</Td>

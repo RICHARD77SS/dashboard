@@ -105,6 +105,7 @@ import DocumentEditor from './Components/DocumentEditor';
 import MediasCreateAlbum from './Components/MediasCreateAlbum';
 import ViewGroup from './Components/ViewGroup';
 import { PersonContextProvider } from './contexts/personContext';
+import PersonDetails from './Components/PersonDetails';
 
 function App() {
   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', light);
@@ -223,6 +224,9 @@ function App() {
 
             <Route path='/medias/photos/album' element={<MediasCreateAlbum />} />
             <Route path='/groups/viewgroup' element={<ViewGroup />} />
+            <Route path='/persons/details/' element={<PersonDetails />} >
+              <Route path='/persons/details/:id' element={<PersonDetails />} />
+            </Route>
           </Route>
         </Routes>
       </PersonContextProvider>

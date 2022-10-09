@@ -164,9 +164,14 @@ export function PersonContextProvider({ children }) {
       }
       mutate(updatedPerson, false)
     }
-
+  }
+  function handleEdit(personId, personName, personEmail) {
+    setName(personName)
+    setEmail(personEmail)
+    setId(personId)
   }
   return <PersonContext.Provider value={{
+    handleEdit,
     name,
     nameHandler,
     email,
