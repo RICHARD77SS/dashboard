@@ -1,3 +1,4 @@
+import React from 'react'
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
 import Button from "../Button";
@@ -6,32 +7,32 @@ import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import Tab from "../Tab";
 import TabsPerson from "../TabsPersons";
-
+import { useParams } from 'react-router-dom';
 import { Top, Image, BasicInfos, Block, BlockContainer, Aside, Box, Group, Infos } from './styles'
 
+import { useAxios } from '../../hooks/useAxios';
 
-interface Props {
-  name?: string;
-}
-const PersonDetails = ({ name, ...Props }: Props) => {
+const PersonDetails = () => {
+  const { data } = useAxios('person')
+  const { id } = useParams();
   return (
-    <Container {...Props}>
+    <Container >
       <Top>
         <Image>
           <img src="" alt="user image" />
         </Image>
         <BasicInfos>
-          <h2>{name}</h2>
+          <h2>{data?.person[`${id}`].name}</h2>
           <FlexBetween>
             <Block>
-              <p><b>Idade:</b>22</p>
-              <p><b>Categorias:</b>nenhum</p>
-              <p><b>Cargos:</b>nenhum</p>
+              <p><b>Idade:</b>{data?.person[`${id}`].birth}</p>
+              <p><b>Categorias:</b>{data?.person[`${id}`].category}</p>
+              <p><b>Cargos:</b>{data?.person[`${id}`].office}</p>
             </Block>
             <Block>
-              <p><b>Endereço:</b>endereço</p>
-              <p><b>Telefones:</b>+55 11 99832-3324</p>
-              <p><b>E-mail:</b>Email@email.com</p>
+              <p><b>Endereço:</b>{data?.person[`${id}`].address},{data?.person[`${id}`].city},{data?.person[`${id}`].state},{data?.person[`${id}`].number}</p>
+              <p><b>Telefones:</b>{data?.person[`${id}`].phone1}, {data?.person[`${id}`].phone2}</p>
+              <p><b>E-mail:</b>{data?.person[`${id}`].email}</p>
             </Block>
           </FlexBetween>
         </BasicInfos>
