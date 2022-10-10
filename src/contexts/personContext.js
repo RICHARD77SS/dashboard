@@ -146,16 +146,7 @@ export function PersonContextProvider({ children }) {
       baptized
     }
     if (id) {
-      api.put(`person/${id}`, person)
-      const updatedPerson = {
-        person: data.person?.map((person) => {
-          if (person._id === id) {
-            return { ...person, name, email };
-          }
-          return person;
-        })
-      }
-      mutate(updatedPerson, false);
+
     } else {
       api.post('person', person);
 
@@ -165,13 +156,82 @@ export function PersonContextProvider({ children }) {
       mutate(updatedPerson, false)
     }
   }
-  function handleEdit(personId, personName, personEmail) {
-    setName(personName)
-    setEmail(personEmail)
-    setId(personId)
+  function handleEdit(id) {
+    const person = {
+      name,
+      email,
+      password,
+      birth,
+      sex,
+      schooling,
+      marital,
+      document1,
+      document2,
+      phone1,
+      phone2,
+      address,
+      number,
+      district,
+      zipcode,
+      country,
+      state,
+      city,
+      group,
+      category,
+      office,
+      conversion,
+      notes,
+      baptized
+    }
+    api.put(`person/${id}`, person)
+    const updatedPerson = {
+      person: data.person?.map((persons) => {
+        if (persons._id === id) {
+          return {
+            ...persons,
+            name,
+            email,
+            password,
+            birth,
+            sex,
+            schooling,
+            marital,
+            document1,
+            document2,
+            phone1,
+            phone2,
+            address,
+            number,
+            district,
+            zipcode,
+            country,
+            state,
+            city,
+            group,
+            category,
+            office,
+            conversion,
+            notes,
+            baptized };
+        }
+        return persons;
+      }),
+    };
+    mutate(updatedPerson, false);
+  }
+
+  function handleDelete(id) {
+    api.delete(`person/${id}`);
+
+    const updatedPerson = {
+      person: data.person?.filter((persons) => persons._id !== id)
+    };
+
+    mutate(updatedPerson, false);
   }
   return <PersonContext.Provider value={{
     handleEdit,
+    handleDelete,
     name,
     nameHandler,
     email,
@@ -220,7 +280,9 @@ export function PersonContextProvider({ children }) {
     conversionHandler,
     notesHandler,
     baptizedHandler,
-    handleSubmit
+    handleSubmit,
+    setId,
+    id
   }}>
     {children}
   </PersonContext.Provider>

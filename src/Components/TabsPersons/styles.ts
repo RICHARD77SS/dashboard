@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TabContainer = styled.div`
-  width: 70%;
+  width: 100%;
   height: auto;
   display: flex;
   align-items:Center;
@@ -10,6 +10,7 @@ export const TabContainer = styled.div`
   padding: 1rem;
   gap: 1rem;
   border-radius: 10px;
+
 `
 export const TabsButtons = styled.div`
   width: 100%;
@@ -19,6 +20,7 @@ export const TabsButtons = styled.div`
   background: ${Props => Props.theme.colors.pri};
   gap: 1rem;
   border-radius: 10px;
+  flex-wrap: wrap; 
   .active {
     background: ${Props => Props.theme.colors.sec};
     color: ${Props => Props.theme.colors.bac};

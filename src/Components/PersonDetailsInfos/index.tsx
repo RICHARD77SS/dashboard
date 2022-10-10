@@ -35,44 +35,46 @@ const PersonDetailsInfos = (Props: Props) => {
           <Box>
             <BoxHeader title='Dados pessoais'></BoxHeader>
             <BoxContent>
-              <p><b>Nome:</b>{Props.name}</p>
-              <p><b>Data de nascimento:</b>{Props.birth}</p>
-              <p><b>Faixa etária:</b></p>
-              <p><b>Sexo:</b></p>
-              <p><b>Escolaridade:</b></p>
-              <p><b>Estado civil:</b></p>
-              <p><b>Documento 1:</b></p>
-              <p><b>Documento 2:</b></p>
+              <p><b>Nome: &nbsp;</b>{Props.name}</p>
+              <p><b>Data de nascimento: &nbsp;</b>{Props.birth}</p>
+              <p><b>Faixa etária: &nbsp;</b>{Props.ageGroup}</p>
+              <p><b>Sexo: &nbsp;</b>{Props.sex}</p>
+              <p><b>Escolaridade: &nbsp;</b>{Props.schooling}</p>
+              <p><b>Estado civil: &nbsp;</b>{Props.marital}</p>
+              <p><b>Documento 1: &nbsp;</b>{Props.document1}</p>
+              <p><b>Documento 2: &nbsp;</b>{Props.document2}</p>
             </BoxContent>
           </Box>
           <Box>
             <BoxHeader title='Outras informações'></BoxHeader>
             <BoxContent>
-              <p><b>Categorias:</b></p>
-              <p><b>Cargos:</b></p>
-              <p><b>Data de conversão:</b></p>
-              <p><b>Batizado:</b></p>
-              <p><b>Perfil criado em:</b></p>
+              <p><b>Categorias: &nbsp;</b>{Props.category}</p>
+              <p><b>Cargos: &nbsp;</b>{Props.office}</p>
+              <p><b>Data de conversão: &nbsp;</b>{Props.conversion}</p>
+              <p><b>Batizado: &nbsp;</b>{Props.batizm}</p>
+              <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>
             </BoxContent>
           </Box>
+        </Block>
+        <Block>
           <Box>
             <BoxHeader title='Contatos'></BoxHeader>
             <BoxContent>
-              <p><b>Telefone 1:</b></p>
-              <p><b>Telefone 2:</b></p>
-              <p><b>E-mail:</b></p>
+              <p><b>Telefone 1: &nbsp;</b>{Props.phone1}</p>
+              <p><b>Telefone 2: &nbsp;</b>{Props.phone2}</p>
+              <p><b>E-mail: &nbsp;</b>{Props.email}</p>
             </BoxContent>
           </Box>
           <Box>
             <BoxHeader title='Endereço'></BoxHeader>
             <BoxContent>
-              <p><b>Endereço:</b></p>
-              <p><b>Bairro:</b></p>
-              <p><b>Número:</b></p>
-              <p><b>CEP:</b></p>
-              <p><b>Cidade:</b></p>
-              <p><b>Estado:</b></p>
-              <p><b>País:</b></p>
+              <p><b>Endereço: &nbsp;  </b>{Props.addres}</p>
+              <p><b>Bairro: &nbsp; </b>{Props.district}</p>
+              <p><b>Número: &nbsp; </b>{Props.number}</p>
+              <p><b>CEP: &nbsp; </b>{Props.zipcode}</p>
+              <p><b>Cidade: &nbsp; </b>{Props.city}</p>
+              <p><b>Estado: &nbsp; </b>{Props.state}</p>
+              <p><b>País: &nbsp; </b>{Props.country}</p>
             </BoxContent>
           </Box>
           <Box>

@@ -67,7 +67,7 @@ const People = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person?.map((persons, index) => {
+                  {data?.person?.map((persons: any, index: any) => {
                     var birthday = new Date(persons.birth)
 
                     var age_now = year - birthday.getFullYear()
@@ -78,19 +78,36 @@ const People = () => {
 
                     var baptizeds = persons.baptized
                     if (baptizeds === true) {
-                      var baptizeds = "Sim"
+                      baptizeds = "Sim"
                     } else {
-                      var baptizeds = "Não"
+                      baptizeds = "Não"
                     }
 
+                    var age_group = ''
+
+                    if (age_now >= 0 && age_now <= 12) {
+                      age_group = "Criança"
+                    }
+                    if (age_now >= 12 && age_now <= 18) {
+                      age_group = "Jovem"
+                    }
+                    if (age_now >= 18 && age_now <= 28) {
+                      age_group = "Jovem"
+                    }
+                    if (age_now >= 28 && age_now <= 55) {
+                      age_group = "Adulto"
+                    }
+                    if (age_now >= 55 && age_now <= 145) {
+                      age_group = "Idoso"
+                    }
 
                     return (
                       <Tr key={persons._id}>
-                        <Td><Link to={`/persons/details/${index}`}>{persons.name} </Link>{index}</Td>
+                        <Td><Link to={`/persons/details/${index}`}><pre>{persons.name}</pre></Link></Td>
                         <Td>{persons.email}</Td>
                         <Td>{persons.birth}</Td>
                         <Td>{persons.phone1},{persons.phone2}</Td>
-                        <Td>{persons.birth}</Td>
+                        <Td>{age_group}</Td>
                         <Td>{age_now}</Td>
                         <Td>{persons.sex}</Td>
                         <Td>{persons.address}</Td>

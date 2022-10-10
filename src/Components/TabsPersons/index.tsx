@@ -9,19 +9,34 @@ const TabsPerson = (Props: Props) => {
   const [selectedTab, setSelectedTab] = useState(0)
 
   if (selectedTab === 0) {
-    document.querySelector('.Todos')?.classList.add('active')
+    document.querySelector('.Informações')?.classList.add('active')
   } else {
-    document.querySelector('.Todos')?.classList.remove('active')
+    document.querySelector('.Informações')?.classList.remove('active')
   }
   if (selectedTab === 1) {
-    document.querySelector('.Clientes')?.classList.add('active')
+    document.querySelector('.Campos')?.classList.add('active')
   } else {
-    document.querySelector('.Clientes')?.classList.remove('active')
+    document.querySelector('.Campos')?.classList.remove('active')
   }
   if (selectedTab === 2) {
-    document.querySelector('.Amigos')?.classList.add('active')
+    document.querySelector('.Financeiro')?.classList.add('active')
   } else {
-    document.querySelector('.Amigos')?.classList.remove('active')
+    document.querySelector('.Financeiro')?.classList.remove('active')
+  }
+  if (selectedTab === 3) {
+    document.querySelector('.Editar')?.classList.add('active')
+  } else {
+    document.querySelector('.Editar')?.classList.remove('active')
+  }
+  if (selectedTab === 4) {
+    document.querySelector('.Permissões')?.classList.add('active')
+  } else {
+    document.querySelector('.Permissões')?.classList.remove('active')
+  }
+  if (selectedTab === 4) {
+    document.querySelector('.Remover')?.classList.add('active')
+  } else {
+    document.querySelector('.Remover')?.classList.remove('active')
   }
   return (
     <TabContainer>

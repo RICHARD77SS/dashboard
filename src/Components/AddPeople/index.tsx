@@ -523,7 +523,7 @@ const AddPeople = () => {
                     id='conversion'
                     value={conversion}
                     onChange={conversionHandler}
-                    type='data'
+                    type='date'
                     ref={inputRef12}
                     onKeyDown={e => {
                       if (e.key === 'Enter') e.preventDefault();
