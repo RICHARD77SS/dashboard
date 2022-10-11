@@ -7,17 +7,18 @@ import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import Tab from "../Tab";
 import TabsPerson from "../TabsPersons";
-import { useParams } from 'react-router-dom';
-import { Top, Image, BasicInfos, Block, BlockContainer, Aside, Box, Group, Infos } from './styles'
+import { useParams, Link } from 'react-router-dom';
+import { Top, Image, BasicInfos, Block, BlockContainer, Aside, Box, Group, Infos, RemoveConteiner, ModalContainer, Modal } from './styles'
 
 import { useAxios } from '../../hooks/useAxios';
 import PersonDetailsInfos from '../PersonDetailsInfos';
 import PersonDetailsEdit from '../PersonDetailsEdit';
+import { PersonContext } from '../../contexts/personContext';
 
 const PersonDetails = () => {
   const { data } = useAxios('person')
   const { id } = useParams();
-
+  const { handleDelete } = React.useContext(PersonContext);
   var date = new Date()
   var day = date.getDate()
   var month = date.getMonth() + 1
@@ -55,6 +56,14 @@ const PersonDetails = () => {
   if (age_now >= 55 && age_now <= 145) {
     age_group = "Idoso"
   }
+
+  let BirthDate = new Date(data?.person[`${id}`].birth)
+  let Birth = BirthDate.toLocaleDateString();
+
+  let ConversionDate = new Date(data?.person[`${id}`].conversion)
+  let Conversion = ConversionDate.toLocaleDateString()
+
+  const [modal, setModal] = React.useState(false);
   return (
     <Container >
       <Top>
@@ -65,14 +74,18 @@ const PersonDetails = () => {
           <h2>{data?.person[`${id}`].name}</h2>
           <FlexBetween>
             <Block>
-              <p><b>Idade:</b>{age_now}</p>
-              <p><b>Categorias:</b>{data?.person[`${id}`].category}</p>
-              <p><b>Cargos:</b>{data?.person[`${id}`].office}</p>
+              <p><b>Idade:&nbsp;</b>{age_now}</p>
+              <br />
+              <p><b>Categorias:&nbsp;</b>{data?.person[`${id}`].category}</p>
+              <br />
+              <p><b>Cargos:&nbsp;</b>{data?.person[`${id}`].office}</p>
             </Block>
             <Block>
-              <p><b>Endereço:</b>{data?.person[`${id}`].address},{data?.person[`${id}`].city},{data?.person[`${id}`].state},{data?.person[`${id}`].number}</p>
-              <p><b>Telefones:</b>{data?.person[`${id}`].phone1}, {data?.person[`${id}`].phone2}</p>
-              <p><b>E-mail:</b>{data?.person[`${id}`].email}</p>
+              <p><b>Endereço:&nbsp;</b>{data?.person[`${id}`].address},{data?.person[`${id}`].city},{data?.person[`${id}`].state},{data?.person[`${id}`].number}</p>
+              <br />
+              <p><b>Telefones:&nbsp;</b>{data?.person[`${id}`].phone1}, {data?.person[`${id}`].phone2}</p>
+              <br />
+              <p><b>E-mail:&nbsp;</b>{data?.person[`${id}`].email}</p>
             </Block>
           </FlexBetween>
         </BasicInfos>
@@ -117,7 +130,7 @@ const PersonDetails = () => {
             <Tab title='Informações'>
               <PersonDetailsInfos
                 name={data?.person[`${id}`].name}
-                birth={data?.person[`${id}`].birth}
+                birth={Birth}
                 ageGroup={age_group}
                 sex={data?.person[`${id}`].sex}
                 schooling={data?.person[`${id}`].schooling}
@@ -126,9 +139,9 @@ const PersonDetails = () => {
                 document2={data?.person[`${id}`].document2}
                 category={data?.person[`${id}`].category}
                 office={data?.person[`${id}`].office}
-                conversion={data?.person[`${id}`].conversion}
+                conversion={Conversion}
                 batizm={baptizeds}
-                dataCreation={data?.person[`${id}`].conversion}
+                dataCreation={data?.person[`${id}`].registerDate}
                 phone1={data?.person[`${id}`].phone1}
                 phone2={data?.person[`${id}`].phone2}
                 email={data?.person[`${id}`].email}
@@ -139,6 +152,7 @@ const PersonDetails = () => {
                 city={data?.person[`${id}`].city}
                 state={data?.person[`${id}`].state}
                 country={data?.person[`${id}`].country}
+                notes={data?.person[`${id}`].notes}
               />
             </Tab>
             <Tab title='Campos adicionais'>
@@ -150,7 +164,7 @@ const PersonDetails = () => {
             <Tab title='Editar'>
               <PersonDetailsEdit
                 name={data?.person[`${id}`].name}
-                birth={data?.person[`${id}`].birth}
+                birth={Birth}
                 ageGroup={age_group}
                 sex={data?.person[`${id}`].sex}
                 schooling={data?.person[`${id}`].schooling}
@@ -159,9 +173,9 @@ const PersonDetails = () => {
                 document2={data?.person[`${id}`].document2}
                 category={data?.person[`${id}`].category}
                 office={data?.person[`${id}`].office}
-                conversion={data?.person[`${id}`].conversion}
+                conversion={Conversion}
                 batizm={baptizeds}
-                dataCreation={data?.person[`${id}`].conversion}
+                dataCreation={data?.person[`${id}`].registerDate}
                 phone1={data?.person[`${id}`].phone1}
                 phone2={data?.person[`${id}`].phone2}
                 email={data?.person[`${id}`].email}
@@ -181,7 +195,17 @@ const PersonDetails = () => {
 
             </Tab>
             <Tab title='Remover'>
-
+              <RemoveConteiner>
+                <Button onClick={() => setModal(true)}>Remover usuario</Button>
+                {modal ?
+                  <ModalContainer>
+                    <Modal>
+                      <Link to='/people'><Button onClick={() => handleDelete(data?.person[`${id}`]._id)}>Remover</Button></Link>
+                      <Button onClick={() => setModal(false)}>Cancelar</Button>
+                    </Modal>
+                  </ModalContainer>
+                  : null}
+              </RemoveConteiner>
             </Tab>
           </TabsPerson>
         </Infos>
