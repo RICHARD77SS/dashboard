@@ -34,6 +34,7 @@ export function PersonContextProvider({ children }) {
   const [conversion, setConversion] = React.useState('')
   const [notes, setNotes] = React.useState('')
   const [baptized, setBaptized] = React.useState()
+  const [registerDate, setRegisterDate] = React.useState()
 
   const [id, setId] = React.useState('');
 
@@ -143,10 +144,47 @@ export function PersonContextProvider({ children }) {
       office,
       conversion,
       notes,
-      baptized
+      baptized,
+      registerDate
     }
     if (id) {
-
+      api.put(`person/${id}`, person)
+      const updatedPerson = {
+        person: data.person?.map((persons) => {
+          if (persons._id === id) {
+            return {
+              ...persons,
+              name,
+              email,
+              password,
+              birth,
+              sex,
+              schooling,
+              marital,
+              document1,
+              document2,
+              phone1,
+              phone2,
+              address,
+              number,
+              district,
+              zipcode,
+              country,
+              state,
+              city,
+              group,
+              category,
+              office,
+              conversion,
+              notes,
+              baptized,
+              registerDate
+            };
+          }
+          return persons;
+        }),
+      };
+      mutate(updatedPerson, false);
     } else {
       api.post('person', person);
 
@@ -181,7 +219,8 @@ export function PersonContextProvider({ children }) {
       office,
       conversion,
       notes,
-      baptized
+      baptized,
+      registerDate
     }
     api.put(`person/${id}`, person)
     const updatedPerson = {
@@ -212,7 +251,9 @@ export function PersonContextProvider({ children }) {
             office,
             conversion,
             notes,
-            baptized };
+            baptized,
+            registerDate
+          };
         }
         return persons;
       }),
@@ -222,7 +263,7 @@ export function PersonContextProvider({ children }) {
 
   function handleDelete(id) {
     api.delete(`person/${id}`);
-
+    window.alert('Usuario Deletado')
     const updatedPerson = {
       person: data.person?.filter((persons) => persons._id !== id)
     };
@@ -230,6 +271,8 @@ export function PersonContextProvider({ children }) {
     mutate(updatedPerson, false);
   }
   return <PersonContext.Provider value={{
+    registerDate,
+    setRegisterDate,
     handleEdit,
     handleDelete,
     name,

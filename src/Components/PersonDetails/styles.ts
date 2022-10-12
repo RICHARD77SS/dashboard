@@ -90,3 +90,46 @@ export const Infos = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
 `
+export const RemoveConteiner = styled.div`
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  gap: 1rem;
+  background: ${Props => Props.theme.colors.bac};
+  border-radius: 10px;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
+`
+export const ModalContainer = styled.div`
+  position:fixed;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.4);
+`
+export const Modal = styled.div`
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+  gap: 2rem;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  button {
+    padding: 1rem;
+    border-radius: 30px;
+    background: ${Props => Props.theme.colors.pri};
+    font-size: 1rem;
+    color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+  }
+`

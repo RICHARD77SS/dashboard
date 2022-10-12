@@ -1,7 +1,7 @@
-import BoxContent from "../BoxContent";
+
 import BoxHeader from "../BoxHeader";
 
-import { Container, Content, Block, Box } from './styles'
+import { Container, Content, Block, Box, BoxContent } from './styles'
 interface Props {
   name?: string;
   birth?: string;
@@ -26,6 +26,7 @@ interface Props {
   city?: string;
   state?: string;
   country?: string;
+  notes?: string;
 }
 const PersonDetailsInfos = (Props: Props) => {
   return (
@@ -81,6 +82,7 @@ const PersonDetailsInfos = (Props: Props) => {
             <BoxHeader title='Anotações'></BoxHeader>
             <BoxContent>
               <p><b>Anotações</b></p>
+              <textarea title='anotations' name="" id="" value={Props.notes}></textarea>
             </BoxContent>
           </Box>
         </Block>

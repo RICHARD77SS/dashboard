@@ -42,6 +42,12 @@ export const FieldContent = styled.div`
   flex-direction: column;
   padding: 1rem;
   gap: 1rem;
+  button {
+    padding: .5rem;
+    background:  ${Props => Props.theme.colors.pri};
+    border-radius: 5px;
+    color: #fff;
+  }
 `
 
 export const AddField = styled.div`

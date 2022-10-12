@@ -23,7 +23,7 @@ export const Form = styled.form`
   gap: 1rem;
 `
 export const Block = styled.div`
-  width: auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -34,6 +34,10 @@ export const Block = styled.div`
 `
 export const Box = styled.div`
   width: 100%;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  flex: 1;
 `
 export const BoxContent = styled.div`
   width: 100%;
@@ -64,9 +68,11 @@ export const Modal = styled.div`
   display: flex;
   align-items:center;
   justify-content:center;
+  flex-direction: column;
   background: #fff;
   border-radius: 10px;
   gap: 2rem;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   button {
     padding: 1rem;
     border-radius: 30px;

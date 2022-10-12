@@ -3,7 +3,7 @@ import BoxHeader from "../BoxHeader";
 import Button from "../Button";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
-import { Container, Form, Block, Box,BoxContent, ModalContainer, Modal } from './styles'
+import { Container, Form, Block, Box, BoxContent, ModalContainer, Modal } from './styles'
 import { PersonContext } from './../../contexts/personContext';
 import React from "react";
 
@@ -89,7 +89,8 @@ const PersonDetailsEdit = (Props: Props) => {
     setId,
     id,
     handleEdit,
-    handleDelete
+    registerDate,
+    setRegisterDate
   } = React.useContext(PersonContext)
   const [modal, setModal] = React.useState(false);
 
@@ -146,14 +147,14 @@ const PersonDetailsEdit = (Props: Props) => {
 
                 <p><b>Estado civil: &nbsp;</b>{Props.marital}</p>
                 <p><b>Novo Estado civil: &nbsp;</b>{marital}</p>
-                <Input type='text' value={marital} onChange={maritalHandler} list='civilstate'/>
+                <Input type='text' value={marital} onChange={maritalHandler} list='civilstate' />
                 <datalist id='civilstate'>
-                      <option value='Solteiro(a)' />
-                      <option value='Casado(a)' />
-                      <option value='Viúvo(a)' />
-                      <option value='Divorciado(a)' />
-                      <option value='Outros' />
-                    </datalist>
+                  <option value='Solteiro(a)' />
+                  <option value='Casado(a)' />
+                  <option value='Viúvo(a)' />
+                  <option value='Divorciado(a)' />
+                  <option value='Outros' />
+                </datalist>
               </InputBlock>
               <InputBlock>
 
@@ -206,7 +207,7 @@ const PersonDetailsEdit = (Props: Props) => {
 
                 <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>
                 <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>
-                <Input type='text' value={Props.dataCreation} onChange={() => { }} />
+                <Input type='text' value={registerDate} onChange={setRegisterDate} />
               </InputBlock>
             </BoxContent>
           </Box>
@@ -286,6 +287,9 @@ const PersonDetailsEdit = (Props: Props) => {
             <BoxHeader title='Anotações'></BoxHeader>
             <BoxContent>
               <p><b>Anotações</b></p>
+              <textarea title='text' name="" id="" value={Props.notes} ></textarea>
+
+              <p><b>Novas Anotações</b></p>
               <textarea title='text' name="" id="" value={notes} onChange={notesHandler} ></textarea>
             </BoxContent>
           </Box>
@@ -293,6 +297,7 @@ const PersonDetailsEdit = (Props: Props) => {
         {modal ?
           <ModalContainer>
             <Modal>
+              <h2>Deseja salvar as alterações?</h2>
               <Button onClick={() => { handleEdit(id) }}>Salvar</Button>
               <Button onClick={() => { setModal(false) }} >Cancelar</Button>
             </Modal>

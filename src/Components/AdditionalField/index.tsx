@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Field, Header, FieldContent, AddField, FieldHeader, Box, BoxHeader, BoxContent, InputContainer, InputContainerB} from './styles';
+import { Container, Content, Field, Header, FieldContent, AddField, FieldHeader, Box, BoxHeader, BoxContent, InputContainer, InputContainerB } from './styles';
 import NewImputFieldCheck from '../NewImputFieldCheck';
 import NewImputFieldRadio from '../NewImputFieldRadio';
 import NewImputFieldText from '../NewImputFieldText';
@@ -14,18 +14,24 @@ import Th from '../Th';
 import Tbody from '../Tbody';
 import Td from '../Td';
 
-
+import { useAxios } from '../../hooks/useAxios';
+import { ExtraFieldsContext } from '../../contexts/extraFieldsContext';
 const AdditionalField = () => {
   const [openCheck, setOpenCheck] = React.useState(false)
   const [openRadio, setOpenRadio] = React.useState(false)
   const [openText, setOpenText] = React.useState(false)
   const [openTextArea, setOpenTextArea] = React.useState(false)
+
+  const { data } = useAxios('extraFields')
+  var Lenght = data?.extraFields.length
+  console.log(data)
+
   return (
     <Container>
       <Content>
         <Field>
           <Header>
-            <h3>Resultados: 0</h3>
+            <h3>Resultados:{Lenght}</h3>
           </Header>
           <FieldContent>
             <h4>Adicione novos campos ao formulario</h4>
@@ -33,16 +39,22 @@ const AdditionalField = () => {
               <Thead>
                 <Tr>
                   <Th>Nome</Th>
-                  <Th>Pessoas</Th>
+                  <Th>tipo</Th>
+                  <Th>Opções</Th>
                   <Th>Ações</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>Name here</Td>
-                  <Td>type here</Td>
-                  <Td><Button>Editar</Button><Button>Remover</Button></Td>
-                </Tr>
+                {data?.extraFields?.map((fields: any) => {
+                  return (
+                    <Tr>
+                      <Td>{fields.inputName}</Td>
+                      <Td>{fields.inputType}</Td>
+                      <Td>{fields.inputOption}</Td>
+                      <Td><Button>Editar</Button><Button>Remover</Button></Td>
+                    </Tr>
+                  )
+                })}
               </Tbody>
             </Table>
           </FieldContent>

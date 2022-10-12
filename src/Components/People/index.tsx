@@ -30,6 +30,8 @@ const People = () => {
   var day = date.getDate()
   var month = date.getMonth() + 1
   var year = date.getFullYear()
+
+  var Lenght = data?.person.length
   return (
     <Container>
       <br />
@@ -38,7 +40,7 @@ const People = () => {
       <br />
       <Content>
         <BoxB>
-          <BoxHeader title='Resultados: 1'>
+          <BoxHeader title={`Resultados:${Lenght}`}>
           </BoxHeader>
           <BoxContent>
             <TopTableOptions />
@@ -67,7 +69,10 @@ const People = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
+
                   {data?.person?.map((persons: any, index: any) => {
+
+
                     var birthday = new Date(persons.birth)
 
                     var age_now = year - birthday.getFullYear()
@@ -101,26 +106,31 @@ const People = () => {
                       age_group = "Idoso"
                     }
 
+                    let Birth = birthday.toLocaleDateString()
+
+
+                    let ConversionDate = new Date(persons.conversion)
+                    let Conversion = ConversionDate.toLocaleDateString()
                     return (
                       <Tr key={persons._id}>
                         <Td><Link to={`/persons/details/${index}`}><pre>{persons.name}</pre></Link></Td>
                         <Td>{persons.email}</Td>
-                        <Td>{persons.birth}</Td>
-                        <Td>{persons.phone1},{persons.phone2}</Td>
+                        <Td>{Birth}</Td>
+                        <Td>{persons.phone1},<br />{persons.phone2}</Td>
                         <Td>{age_group}</Td>
                         <Td>{age_now}</Td>
                         <Td>{persons.sex}</Td>
-                        <Td>{persons.address}</Td>
+                        <Td><pre>{persons.address}</pre></Td>
                         <Td>{persons.zipcode}</Td>
-                        <Td>{persons.city}</Td>
+                        <Td><pre>{persons.city}</pre></Td>
                         <Td>{persons.document1}</Td>
                         <Td>{persons.document2}</Td>
                         <Td>{persons.marital}</Td>
-                        <Td>{persons.schooling}</Td>
+                        <Td><pre>{persons.schooling}</pre></Td>
                         <Td>{persons.name}</Td>
-                        <Td>{persons.conversion}</Td>
+                        <Td>{Conversion}</Td>
                         <Td>{baptizeds}</Td>
-                        <Td>{persons.conversion}</Td>
+                        <Td><pre>{persons.registerDate}</pre></Td>
                       </Tr>
                     )
                   })}

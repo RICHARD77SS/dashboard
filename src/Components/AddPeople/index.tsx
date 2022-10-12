@@ -2,9 +2,10 @@ import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
 
-import { Container, Form, Content, Fieldset, Data, Header, DataContent, Flex, Block, Foto, InputBlock, Radio } from './styles';
+import { Container, Form, Content, Fieldset, Data, Header, DataContent, Flex, Block, Foto, InputBlock } from './styles';
 
 import { PersonContext } from '../../contexts/personContext';
+import { useAxios } from './../../hooks/useAxios';
 const AddPeople = () => {
 
   const inputRef1 = React.useRef<HTMLInputElement | null>(null);
@@ -298,14 +299,26 @@ const AddPeople = () => {
     officeHandler,
     conversionHandler,
     notesHandler,
-    baptizedHandler
+    baptizedHandler,
+    setRegisterDate,
+
   } = React.useContext(PersonContext)
+
+  const { data } = useAxios('person')
+  var Lenght = data?.person.length
+
+  function getDate() {
+    let DateNow = new Date().toLocaleString() + ""
+    setRegisterDate(DateNow)
+  }
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
         <br />
         <br />
         <legend><h2>Adicionar pessoas</h2></legend>
+        <h3>Pessoas: ({Lenght})</h3>
         <Content>
           <Fieldset>
             <Data>
@@ -565,7 +578,7 @@ const AddPeople = () => {
                       id='phone1'
                       value={phone1}
                       onChange={phone1Handler}
-                      type='tel'
+                      type='number'
                       ref={inputRef14}
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
@@ -579,7 +592,7 @@ const AddPeople = () => {
                       id='phone2'
                       value={phone2}
                       onChange={phone2Handler}
-                      type='tel'
+                      type='number'
                       ref={inputRef15}
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
@@ -740,7 +753,7 @@ const AddPeople = () => {
           <Input name='accepted' type='checkbox' required />
           <p>Sou consciente das minhas responsabilidades com os dados cadastrados, em conformidade com a LGPD e GDPR. <a href="/">Termos de uso, Políticas de privacidade</a> </p>
         </Block>
-        <Button type='submit'>Salvar dados</Button>
+        <Button type='submit' onClick={() => getDate()}>Salvar dados</Button>
       </Form>
     </Container>
   )
