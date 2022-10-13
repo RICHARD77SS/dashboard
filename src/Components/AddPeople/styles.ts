@@ -59,9 +59,14 @@ export const Data = styled.div`
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
   input {
     height: 30px;
-    border-radius: 5px;
-    border-color: ${Props => Props.theme.colors.pri};
+    border-color: ${Props => Props.theme.colors.text};
+    background: #dde;
   }
+  input[type=radio]{
+    width: 20px;
+    height: 20px;
+  }
+
 `
 
 export const Header = styled.div`
@@ -78,6 +83,7 @@ export const DataContent = styled.div`
   flex-direction: column;
   align-items:  center;
   padding: 1rem;
+  gap: 1rem;
 `
 export const Flex = styled.div`
   width: 100%;
@@ -92,7 +98,8 @@ export const Block = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items:  center;
+  align-items:  start;
+  padding: .5rem 0;
   input{
     width: 100%;
   }

@@ -5,7 +5,7 @@ import Input from '../Input';
 import { Container, Form, Content, Fieldset, Data, Header, DataContent, Flex, Block, Foto, InputBlock } from './styles';
 
 import { PersonContext } from '../../contexts/personContext';
-import { useAxios } from './../../hooks/useAxios';
+import { useAxios } from '../../hooks/useAxios';
 const AddPeople = () => {
 
   const inputRef1 = React.useRef<HTMLInputElement | null>(null);
@@ -301,7 +301,12 @@ const AddPeople = () => {
     notesHandler,
     baptizedHandler,
     setRegisterDate,
-
+    spouse,
+    convertedSpouse,
+    baptismDate,
+    spouseHandler,
+    convertedSpouseHandler,
+    baptismDateHandler
   } = React.useContext(PersonContext)
 
   const { data } = useAxios('person')
@@ -311,6 +316,7 @@ const AddPeople = () => {
     let DateNow = new Date().toLocaleString() + ""
     setRegisterDate(DateNow)
   }
+  const { data: datafield } = useAxios('extraFields')
 
   return (
     <Container>
@@ -400,7 +406,7 @@ const AddPeople = () => {
                     </datalist>
                   </Block>
                 </Flex>
-                <Flex>
+                <Block>
                   <Block>
                     <label htmlFor="schooling">Escolaridade</label>
                     <input
@@ -450,8 +456,32 @@ const AddPeople = () => {
                       <option value='Divorciado(a)' />
                       <option value='Outros' />
                     </datalist>
+                    <Flex>
+                      <Block>
+                        <label htmlFor="conjugue">Nome do Cônjugue</label>
+                        <Input type='text' value={spouse} onChange={spouseHandler} />
+                      </Block>
+                      <Block>
+                        <label htmlFor="convertedspouse">Cônjugue convertido</label>
+                        <input
+                          name='convertedspouse'
+                          id='convertedspouse'
+                          type='text'
+                          onChange={convertedSpouseHandler}
+                          list='convertedSpouse'
+                          onKeyDown={e => {
+                            if (e.key === 'Enter') e.preventDefault();
+                          }}
+                        />
+                        <datalist id='convertedSpouse'>
+                          <option value='Sim' />
+                          <option value='Não' />
+                        </datalist>
+                      </Block>
+                    </Flex>
+
                   </Block>
-                </Flex>
+                </Block>
                 <Block>
                   <label htmlFor="document1">Documento 1</label>
                   <input
@@ -543,24 +573,30 @@ const AddPeople = () => {
                     }}
                   />
                 </Block>
-                <Block>
-                  <label htmlFor="baptized">Batizado(Sim ou Não)</label>
-                  <input
-                    name='baptized'
-                    id='baptized'
-                    type='text'
-                    onChange={baptizedHandler}
-                    list='baptis'
-                    ref={inputRef13}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
-                  />
-                  <datalist id='baptis'>
-                    <option value='Sim' />
-                    <option value='Não' />
-                  </datalist>
-                </Block>
+                <Flex>
+                  <Block>
+                    <label htmlFor="baptized">Batizado(Sim ou Não)</label>
+                    <input
+                      name='baptized'
+                      id='baptized'
+                      type='text'
+                      onChange={baptizedHandler}
+                      list='baptis'
+                      ref={inputRef13}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') e.preventDefault();
+                      }}
+                    />
+                    <datalist id='baptis'>
+                      <option value='Sim' />
+                      <option value='Não' />
+                    </datalist>
+                  </Block>
+                  <Block>
+                    <label htmlFor="baptismdate">Data de batismo</label>
+                    <input id='baptismdate' type='date' value={baptismDate} onChange={baptismDateHandler} />
+                  </Block>
+                </Flex>
               </DataContent>
             </Data>
           </Fieldset>
@@ -746,7 +782,35 @@ const AddPeople = () => {
             <h3>Campos adicionais</h3>
           </Header>
           <DataContent>
-
+            {datafield?.extraFields?.map((fields: any, index: any) => {
+              if (fields.inputOption.length === 0) {
+                return (
+                  <Data>
+                    <Header>
+                      <h3>{fields.inputName}</h3>
+                    </Header>
+                    <input title='input' type={fields.inputType} />
+                  </Data>
+                )
+              }
+              return (
+                <Data key={index}>
+                  <Header>
+                    <h3>{fields.inputName}</h3>
+                  </Header>
+                  <DataContent>
+                    {fields.inputOption?.map((input: any, index: any) => {
+                      return (
+                        <Flex key={index}>
+                          <label htmlFor={input}>{input}</label>
+                          <input name='input' id={input} type={fields.inputType} />
+                        </Flex>
+                      )
+                    })}
+                  </DataContent>
+                </Data>
+              )
+            })}
           </DataContent>
         </Data>
         <Block>
