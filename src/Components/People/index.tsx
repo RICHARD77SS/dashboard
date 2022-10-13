@@ -64,6 +64,7 @@ const People = () => {
                     <Th>Escolaridade<p><BsArrowUp /><BsArrowDown /></p></Th>
                     <Th>Nome do cônjuge<p><BsArrowUp /><BsArrowDown /></p></Th>
                     <Th>Data de conversão<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Batizado<p><BsArrowUp /><BsArrowDown /></p></Th>
                     <Th>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Th>
                     <Th>Criado em <p><BsArrowUp /><BsArrowDown /></p></Th>
                   </Tr>
@@ -108,7 +109,7 @@ const People = () => {
 
                     let Birth = birthday.toLocaleDateString()
 
-
+                    console.log(persons)
                     let ConversionDate = new Date(persons.conversion)
                     let Conversion = ConversionDate.toLocaleDateString()
                     return (
@@ -127,9 +128,10 @@ const People = () => {
                         <Td>{persons.document2}</Td>
                         <Td>{persons.marital}</Td>
                         <Td><pre>{persons.schooling}</pre></Td>
-                        <Td>{persons.name}</Td>
+                        <Td>{persons.spouse}</Td>
                         <Td>{Conversion}</Td>
                         <Td>{baptizeds}</Td>
+                        <Td>{persons.baptismDate}</Td>
                         <Td><pre>{persons.registerDate}</pre></Td>
                       </Tr>
                     )

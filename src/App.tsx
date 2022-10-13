@@ -104,8 +104,8 @@ import AddForm from './Components/AddForm';
 import DocumentEditor from './Components/DocumentEditor';
 import MediasCreateAlbum from './Components/MediasCreateAlbum';
 import ViewGroup from './Components/ViewGroup';
-import { PersonContextProvider } from './contexts/personContext';
 import PersonDetails from './Components/PersonDetails';
+import { PersonContextProvider } from './contexts/personContext';
 import { ExtraFieldsContextProvider } from './contexts/extraFieldsContext';
 
 function App() {

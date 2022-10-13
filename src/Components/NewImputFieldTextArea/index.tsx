@@ -1,20 +1,30 @@
+import React from 'react'
 import Button from "../Button";
 import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
-import { Container, Content, Box, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
+import { Container, Content, Form, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
 
-
+import { ExtraFieldsContext } from "../../contexts/extraFieldsContext";
 interface Props {
   children?: React.ReactNode;
   onClick?: any;
 }
 const NewImputFieldTextArea = ({ children, onClick }: Props) => {
-  
+  const {
+    handleSubmit,
+    inputName,
+    inputNameHandle,
+    setInputType
+  } = React.useContext(ExtraFieldsContext)
+
+  React.useEffect(() => {
+    setInputType("textarea")
+  }, [])
   return (
     <Container>
       <Content>
-        <Box>
+        <Form onSubmit={handleSubmit}>
           <BoxHeader>
             <FlexBetween>
               <h3>Criar</h3>
@@ -24,13 +34,19 @@ const NewImputFieldTextArea = ({ children, onClick }: Props) => {
           <BoxContent>
             <InputBlock>
               <label htmlFor="name">Nome do campo</label>
-              <Input id='name' placeholder='Nome do campo' type='text' />
+              <Input
+                id='name'
+                placeholder='Nome do campo'
+                type='text'
+                value={inputName}
+                onChange={inputNameHandle}
+              />
             </InputBlock>
           </BoxContent>
           <BoxFooter>
-            <Button>Salvar</Button>
+            <Button type='submit'>Salvar</Button>
           </BoxFooter>
-        </Box>
+        </Form>
       </Content>
       <Closed onClick={onClick}></Closed>
     </Container>

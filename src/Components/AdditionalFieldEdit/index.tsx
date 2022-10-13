@@ -5,35 +5,45 @@ import { ExtraFieldsContext } from "../../contexts/extraFieldsContext";
 import React from "react";
 
 import { Container, Content, Form } from './styles'
+import { useAxios } from "../../hooks/useAxios";
 
 
-interface Props {
-  id?: string;
-}
-const AdditionalFieldEdit = ({id}:Props) => {
+
+const AdditionalFieldEdit = () => {
+  const { data } = useAxios('extraFields')
   const {
-    handleSubmit,
+    handleEdit,
     inputName,
     inputType,
     inputOption,
     inputNameHandle,
-    inputTypeHandle,
     inputOptionHandle,
     setInputType,
     inputOptionFocusOut,
     closeModall,
-    setId
+    setId,
+    index,
+    id
   } = React.useContext(ExtraFieldsContext)
-  setInputType("text")
+
+  React.useEffect(() => {
+    setInputType("text")
+    let indexx = index
+    let ids = data?.extraFields[indexx]?._id
+    setId(ids)
+
+  }, [])
   const type = inputType
-  setId(id)
+
+
   return (
     <Container>
-      
+
       <Content>
-        <Form onSubmit={handleSubmit}>
-          <Button onClick={()=>{closeModall()}}>Close</Button>
+        <Form>
+          <Button onClick={() => { closeModall() }}>Close</Button>
           <InputBlock>
+
             <label htmlFor="name">Nome do campo</label>
             <Input
               id='name'
@@ -49,21 +59,18 @@ const AdditionalFieldEdit = ({id}:Props) => {
             <Input
               type='type'
               placeholder='Escreva aqui (o campo vazio será removido)'
-              value={inputOption}
               onChange={inputOptionHandle}
               onBlur={inputOptionFocusOut}
             />
             <Input
               type='type'
               placeholder='Escreva aqui (o campo vazio será removido)'
-              value={inputOption}
               onChange={inputOptionHandle}
               onBlur={inputOptionFocusOut}
             />
             <Input
               type='type'
               placeholder='Escreva aqui (o campo vazio será removido)'
-              value={inputOption}
               onChange={inputOptionHandle}
               onBlur={inputOptionFocusOut}
             />
@@ -72,7 +79,7 @@ const AdditionalFieldEdit = ({id}:Props) => {
             </div>
           </InputBlock>
           <Button type='button'>Adicionar</Button>
-          <Button type='submit'>Enivar</Button>
+          <Button type='submit' onClick={() => { handleEdit(id) }}>Enivar</Button>
         </Form>
       </Content>
     </Container>

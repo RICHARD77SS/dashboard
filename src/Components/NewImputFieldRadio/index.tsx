@@ -1,20 +1,32 @@
+import React from "react";
 import Button from "../Button";
 import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
-import { Container, Content, Box, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
+import { Container, Content, Form, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
 
-
+import { ExtraFieldsContext } from "../../contexts/extraFieldsContext";
 interface Props {
   children?: React.ReactNode;
   onClick?: any;
 }
 const NewImputFieldRadio = ({ children, onClick }: Props) => {
-  
+  const { handleSubmit,
+    inputName,
+    inputNameHandle,
+    inputOptionHandle,
+    setInputType,
+    inputOptionFocusOut
+  } = React.useContext(ExtraFieldsContext)
+
+  React.useEffect(() => {
+    setInputType("radio")
+  }, [])
+
   return (
     <Container>
       <Content>
-        <Box>
+        <Form onSubmit={handleSubmit}>
           <BoxHeader>
             <FlexBetween>
               <h3>Criar</h3>
@@ -24,20 +36,44 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
           <BoxContent>
             <InputBlock>
               <label htmlFor="name">Nome do campo</label>
-              <Input id='name' placeholder='Nome do campo' type='text' />
+              <Input
+                id='name'
+                placeholder='Nome do campo'
+                type='text'
+                value={inputName}
+                onChange={inputNameHandle}
+              />
             </InputBlock>
-            <InputBlock>
+            <InputBlock >
               <label htmlFor=" ">Opções</label>
-              <Input type='text' placeholder='Escreva aqui (o campo vazio será removido)' />
-              <Input type='text' placeholder='Escreva aqui (o campo vazio será removido)' />
-              <Input type='text' placeholder='Escreva aqui (o campo vazio será removido)' />
+              <Input
+                name='radio_button'
+                type='text'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                onChange={inputOptionHandle}
+                onBlur={inputOptionFocusOut}
+              />
+              <Input
+                name='radio_button'
+                type='text'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                onChange={inputOptionHandle}
+                onBlur={inputOptionFocusOut}
+              />
+              <Input
+                name='radio_button'
+                type='text'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                onChange={inputOptionHandle}
+                onBlur={inputOptionFocusOut}
+              />
             </InputBlock>
-            <Button>+ Adicionar nova opção</Button>
+            <Button type='button'>+ Adicionar nova opção</Button>
           </BoxContent>
           <BoxFooter>
-            <Button>Salvar</Button>
+            <Button type='submit'>Salvar</Button>
           </BoxFooter>
-        </Box>
+        </Form>
       </Content>
       <Closed onClick={onClick}></Closed>
     </Container>

@@ -90,13 +90,15 @@ const PersonDetailsEdit = (Props: Props) => {
     id,
     handleEdit,
     registerDate,
-    setRegisterDate
+    setRegisterDate,
+    registerDateHandler
   } = React.useContext(PersonContext)
   const [modal, setModal] = React.useState(false);
 
   setId(Props.id)
   return (
     <Container >
+  
       <Form >
         <Block>
           <Box>
@@ -195,19 +197,23 @@ const PersonDetailsEdit = (Props: Props) => {
                 <p><b>Data de conversão: &nbsp;</b>{Props.conversion}</p>
                 <p><b>Nova Data de conversão: &nbsp;</b>{conversion}</p>
 
-                <Input type='text' value={conversion} onChange={conversionHandler} />
+                <Input type='date' value={conversion} onChange={conversionHandler} />
               </InputBlock>
               <InputBlock>
 
                 <p><b>Batizado: &nbsp;</b>{Props.batizm}</p>
                 <p><b>Novo Batizado: &nbsp;</b>{baptized}</p>
-                <Input type='text' value={baptized} onChange={baptizedHandler} />
+                <Input type='text' onChange={baptizedHandler} list='baptism' />
+                <datalist id='baptism'>
+                  <option value='Sim' />
+                  <option value='Não' />
+                </datalist>
               </InputBlock>
               <InputBlock>
 
                 <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>
-                <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>
-                <Input type='text' value={registerDate} onChange={setRegisterDate} />
+                <p><b>Novo Perfil criado em: &nbsp;</b>{registerDate}</p>
+                <Input type='date' onChange={registerDateHandler} />
               </InputBlock>
             </BoxContent>
           </Box>

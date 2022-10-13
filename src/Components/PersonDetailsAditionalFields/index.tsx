@@ -1,4 +1,5 @@
 
+import { IndexType } from "typescript";
 import { useAxios } from "../../hooks/useAxios";
 import BoxHeader from "../BoxHeader";
 import Flex from "../Flex";
@@ -11,20 +12,22 @@ interface Props {
 const PersonDetailsAditionalFields = (Props: Props) => {
   const { data } = useAxios('extraFields')
   console.log(data)
+
   return (
     <Container >
       <Content>
         <Block>
-          {data?.extraFields?.map((fields: any) => {
+          {data?.extraFields?.map((fields: any, index: any) => {
+
             return (
-              <Box>
+              <Box key={index}>
                 <BoxHeader title={fields.inputName}></BoxHeader>
                 <BoxContent>
-                  {fields.inputOption.map((input: any) => {
+                  {fields.inputOption.map((input: any, index: any) => {
                     return (
-                      <Flex>
+                      <Flex key={index}>
                         <label htmlFor="">{input}</label>
-                        <Input type={fields.inputType} />
+                        <Input disabled name='input' type={fields.inputType} />
                       </Flex>
                     )
                   })}
@@ -32,16 +35,6 @@ const PersonDetailsAditionalFields = (Props: Props) => {
               </Box>
             )
           })}
-        </Block>
-
-        <Block>
-          <Box>
-            <BoxHeader title='Contatos'></BoxHeader>
-            <BoxContent>
-
-            </BoxContent>
-          </Box>
-
         </Block>
       </Content>
     </Container>

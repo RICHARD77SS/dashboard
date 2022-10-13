@@ -21,7 +21,7 @@ export const Content = styled.div`
   z-index: 15;
 `
 
-export const Form = styled.form`
+export const Box = styled.div`
   width: 100%;
   height: auto;
   display: flex;

@@ -5,7 +5,7 @@ import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
 
-import { Container, Content, Box, BoxHeader, BoxContent, BoxFooter, Closed } from '../NewImputFieldCheck/styles'
+import { Container, Content, Box, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
 
 interface Props {
   children?: React.ReactNode;
@@ -29,7 +29,7 @@ const ModalAddVideo = ({ children, onClick }: Props) => {
             </InputBlock>
             <InputBlock>
               <label htmlFor="link">Link/URL do Vídeo (Youtube)</label>
-              <Input id="link" type='text' placeholder='Video link'/>
+              <Input id="link" type='text' placeholder='Video link' />
             </InputBlock>
           </BoxContent>
           <BoxFooter>

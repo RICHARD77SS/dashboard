@@ -42,6 +42,7 @@ export const FieldContent = styled.div`
   flex-direction: column;
   padding: 1rem;
   gap: 1rem;
+  overflow-x: scroll;
   button {
     padding: .5rem;
     background:  ${Props => Props.theme.colors.pri};

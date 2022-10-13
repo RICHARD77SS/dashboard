@@ -14,6 +14,8 @@ import { useAxios } from '../../hooks/useAxios';
 import PersonDetailsInfos from '../PersonDetailsInfos';
 import PersonDetailsEdit from '../PersonDetailsEdit';
 import { PersonContext } from '../../contexts/personContext';
+import PersonDetailsAditionalFields from '../PersonDetailsAditionalFields';
+import PersonDetailsFinancial from '../PersonDetailsFinancial';
 
 const PersonDetails = () => {
   const { data } = useAxios('person')
@@ -156,10 +158,10 @@ const PersonDetails = () => {
               />
             </Tab>
             <Tab title='Campos adicionais'>
-
+              <PersonDetailsAditionalFields />
             </Tab>
             <Tab title='Financeiro'>
-
+              <PersonDetailsFinancial />
             </Tab>
             <Tab title='Editar'>
               <PersonDetailsEdit
@@ -196,6 +198,7 @@ const PersonDetails = () => {
             </Tab>
             <Tab title='Remover'>
               <RemoveConteiner>
+                <h3>Está ação não podera ser desfeita</h3>
                 <Button onClick={() => setModal(true)}>Remover usuario</Button>
                 {modal ?
                   <ModalContainer>

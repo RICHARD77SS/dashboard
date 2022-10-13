@@ -33,9 +33,11 @@ export function PersonContextProvider({ children }) {
   const [office, setOffice] = React.useState('')
   const [conversion, setConversion] = React.useState('')
   const [notes, setNotes] = React.useState('')
-  const [baptized, setBaptized] = React.useState()
-  const [registerDate, setRegisterDate] = React.useState()
-
+  const [baptized, setBaptized] = React.useState(false)
+  const [spouse, setSpouse] = React.useState('')
+  const [convertedSpouse, setConvertedSpouse] = React.useState('')
+  const [baptismDate,setBaptismDate] = React.useState('')
+  const [registerDate, setRegisterDate] = React.useState('')
   const [id, setId] = React.useState('');
 
   function nameHandler(event) {
@@ -107,15 +109,31 @@ export function PersonContextProvider({ children }) {
   function notesHandler(event) {
     setNotes(event.target.value);
   }
+  function registerDateHandler(event) {
+    setRegisterDate(event.target.value);
+  }
   function baptizedHandler(event) {
-    if (event.target.value === "Sim") {
+    if (event.target.value === "Sim" || "sim") {
       setBaptized(true);
-    }
-    if (event.target.value === "Não") {
+    } 
+    if (event.target.value === "Não" || "não") {
       setBaptized(false);
     }
   }
-
+  function convertedSpouseHandler(event) {
+    if (event.target.value === "Sim" || "sim") {
+      setConvertedSpouse(true);
+    }
+    if (event.target.value === "Não" || "não") {
+      setConvertedSpouse(false);
+    }
+  }
+  function spouseHandler(event) {
+    setSpouse(event.target.value);
+  }
+  function baptismDateHandler(event) {
+    setBaptismDate(event.target.value)
+  }
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -145,7 +163,10 @@ export function PersonContextProvider({ children }) {
       conversion,
       notes,
       baptized,
-      registerDate
+      registerDate,
+      spouse,
+      convertedSpouse,
+      baptismDate
     }
     if (id) {
       api.put(`person/${id}`, person)
@@ -178,7 +199,10 @@ export function PersonContextProvider({ children }) {
               conversion,
               notes,
               baptized,
-              registerDate
+              registerDate,
+              spouse,
+              convertedSpouse,
+              baptismDate
             };
           }
           return persons;
@@ -220,7 +244,10 @@ export function PersonContextProvider({ children }) {
       conversion,
       notes,
       baptized,
-      registerDate
+      registerDate,
+      spouse,
+      convertedSpouse,
+      baptismDate
     }
     api.put(`person/${id}`, person)
     const updatedPerson = {
@@ -252,7 +279,10 @@ export function PersonContextProvider({ children }) {
             conversion,
             notes,
             baptized,
-            registerDate
+            registerDate,
+            spouse,
+            convertedSpouse,
+            baptismDate
           };
         }
         return persons;
@@ -273,6 +303,7 @@ export function PersonContextProvider({ children }) {
   return <PersonContext.Provider value={{
     registerDate,
     setRegisterDate,
+    registerDateHandler,
     handleEdit,
     handleDelete,
     name,
@@ -325,7 +356,13 @@ export function PersonContextProvider({ children }) {
     baptizedHandler,
     handleSubmit,
     setId,
-    id
+    id,
+    spouse,
+    convertedSpouse,
+    baptismDate,
+    spouseHandler,
+    convertedSpouseHandler,
+    baptismDateHandler
   }}>
     {children}
   </PersonContext.Provider>

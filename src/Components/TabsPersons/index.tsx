@@ -33,7 +33,7 @@ const TabsPerson = (Props: Props) => {
   } else {
     document.querySelector('.Permissões')?.classList.remove('active')
   }
-  if (selectedTab === 4) {
+  if (selectedTab === 5) {
     document.querySelector('.Remover')?.classList.add('active')
   } else {
     document.querySelector('.Remover')?.classList.remove('active')

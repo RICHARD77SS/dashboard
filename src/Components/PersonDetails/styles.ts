@@ -101,6 +101,13 @@ export const RemoveConteiner = styled.div`
   background: ${Props => Props.theme.colors.bac};
   border-radius: 10px;
   box-shadow: 0 0 5px 0 rgba(0,0,0,0.4);
+  button{
+    background: #900;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+  }
 `
 export const ModalContainer = styled.div`
   position:fixed;
@@ -131,5 +138,8 @@ export const Modal = styled.div`
     font-size: 1rem;
     color: #fff;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+    :nth-child(2){
+      background: #900;
+    }
   }
 `

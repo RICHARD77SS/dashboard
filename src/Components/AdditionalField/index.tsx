@@ -16,18 +16,34 @@ import Td from '../Td';
 
 import { useAxios } from '../../hooks/useAxios';
 import { ExtraFieldsContext } from '../../contexts/extraFieldsContext';
-const AdditionalField = () => {
-  const [openCheck, setOpenCheck] = React.useState(false)
-  const [openRadio, setOpenRadio] = React.useState(false)
-  const [openText, setOpenText] = React.useState(false)
-  const [openTextArea, setOpenTextArea] = React.useState(false)
+import AdditionalFieldEdit from '../AdditionalFieldEdit';
 
+const AdditionalField = () => {
   const { data } = useAxios('extraFields')
-  var Lenght = data?.extraFields.length
-  console.log(data)
+  var Lenght = data?.extraFields?.length
+  const {
+    handleDelete,
+    openModal,
+    OpenModall,
+    openCheck,
+    openModalCheck,
+    setOpenCheck,
+    openRadio,
+    setOpenRadio,
+    openText,
+    setOpenText,
+    openTextArea,
+    setOpenTextArea,
+    openModalRadio,
+    openModalText,
+    openModalTextArea
+  } = React.useContext(ExtraFieldsContext)
 
   return (
     <Container>
+      {openModal ?
+        <AdditionalFieldEdit></AdditionalFieldEdit>
+        : null}
       <Content>
         <Field>
           <Header>
@@ -45,13 +61,20 @@ const AdditionalField = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                {data?.extraFields?.map((fields: any) => {
+                {data?.extraFields?.map((fields: any, index: any) => {
                   return (
-                    <Tr>
+                    <Tr key={index}>
                       <Td>{fields.inputName}</Td>
                       <Td>{fields.inputType}</Td>
                       <Td>{fields.inputOption}</Td>
-                      <Td><Button>Editar</Button><Button>Remover</Button></Td>
+                      <Td><Button onClick={() => {
+                        OpenModall(index)
+
+                      }}>Editar</Button>
+                        <Button onClick={() =>
+                          handleDelete(fields._id)}>Remover</Button>
+                      </Td>
+
                     </Tr>
                   )
                 })}
@@ -85,7 +108,7 @@ const AdditionalField = () => {
                     <Input id='r3' type='checkbox' />
                     <label htmlFor="r3">Resposta 3</label>
                   </InputContainer>
-                  <Button onClick={() => { setOpenCheck(true) }}>Criar novo</Button>
+                  <Button onClick={() => { openModalCheck() }}>Criar novo</Button>
                 </BoxContent>
                 {openCheck ?
                   <NewImputFieldCheck onClick={() => { setOpenCheck(false) }}>
@@ -112,7 +135,7 @@ const AdditionalField = () => {
                     <Input id='p3' type='radio' />
                     <label htmlFor="p3">Resposta 3</label>
                   </InputContainer>
-                  <Button onClick={() => { setOpenRadio(true) }}>Criar novo</Button>
+                  <Button onClick={() => { openModalRadio() }}>Criar novo</Button>
                 </BoxContent>
                 {openRadio ?
                   <NewImputFieldRadio onClick={() => { setOpenRadio(false) }}>
@@ -134,7 +157,7 @@ const AdditionalField = () => {
                     <Input id='text' type='text' />
                     <label htmlFor="text">Pergunta</label>
                   </InputContainerB>
-                  <Button onClick={() => { setOpenText(true) }}>Criar novo</Button>
+                  <Button onClick={() => { openModalText() }}>Criar novo</Button>
                 </BoxContent>
                 {openText ?
                   <NewImputFieldText onClick={() => { setOpenText(false) }}>
@@ -153,7 +176,7 @@ const AdditionalField = () => {
                     <textarea title="textarea" name="" id="" ></textarea>
                     <label htmlFor="text">Pergunta</label>
                   </InputContainerB>
-                  <Button onClick={() => { setOpenTextArea(true) }}>Criar novo</Button>
+                  <Button onClick={() => { openModalTextArea() }}>Criar novo</Button>
                 </BoxContent>
                 {openTextArea ?
                   <NewImputFieldTextArea onClick={() => { setOpenTextArea(false) }}>
