@@ -1,8 +1,29 @@
+import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Categorias,CategoriaHeader, CategoriasContainer, Table, Tr, Th, Td, AddCategoria, AddHeader,AddContainer,InputGroup, Thead, Tbody } from './styles';
-
+import { Container, Content, Categorias, CategoriaHeader, CategoriasContainer, AddCategoria, AddHeader, Form, InputGroup } from './styles';
+import { CategoryContext } from '../../contexts/category';
+import { useAxios } from '../../hooks/useAxios';
+import Table from '../Table';
+import Thead from '../Thead';
+import Tr from '../Tr';
+import Th from '../Th';
+import Tbody from '../Tbody';
+import Td from '../Td';
+import CategoriesEdit from '../CategoriesEdit';
+import Flex from '../Flex';
 const Categories = () => {
+  const { categoryName,
+    categoryNameHandler,
+    categoryDescription,
+    categoryDescriptionHandler,
+    handleSubmit,
+    openModal,
+    handleEditt,
+    handleDelete
+  } = React.useContext(CategoryContext)
+  const { data } = useAxios('category')
+  console.log(data)
   return (
     <Container>
       <Content>
@@ -15,21 +36,30 @@ const Categories = () => {
               <Thead>
                 <Tr>
                   <Th>Nome</Th>
+                  <Th>descrição</Th>
                   <Th>Pessoas</Th>
                   <Th>Ações</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>Name here</Td>
-                  <Td>type here</Td>
-                  <Td><Button>Editar</Button><Button>Remover</Button></Td>
-                </Tr>
+                {data?.category.map((category: any, index: any) => {
+                  return (
+                    <Tr key={index}>
+                      <Td>{category.categoryName}</Td>
+                      <Td>{category.categoryDescription}</Td>
+                      <Td></Td>
+                      <Td>
+                        <Flex>
+                          <Button onClick={() => handleEditt(category._id, category.categoryName, category.categoryDescription)}>Editar</Button>
+                          <Button onClick={() => handleDelete(category._id)}>Remover</Button>
+
+                        </Flex>
+                      </Td>
+                    </Tr>
+
+                  )
+                })}
               </Tbody>
-            </Table>
-            <Table>
-              
-              
             </Table>
           </CategoriasContainer>
         </Categorias>
@@ -37,17 +67,17 @@ const Categories = () => {
           <AddHeader>
             <h3>Criar categoria</h3>
           </AddHeader>
-          <AddContainer>
+          <Form onSubmit={handleSubmit}>
             <InputGroup>
               <label htmlFor="name">Nome da Categoria</label>
-              <Input id='name' type='text' />
+              <Input id='name' type='text' value={categoryName} onChange={categoryNameHandler} />
             </InputGroup>
             <InputGroup>
               <label htmlFor="description">Descrição</label>
-              <Input id='description' type='text' />
+              <Input id='description' type='text' value={categoryDescription} onChange={categoryDescriptionHandler} />
             </InputGroup>
-            <Button>Criar</Button>
-          </AddContainer>
+            <Button type='submit'>Criar</Button>
+          </Form>
         </AddCategoria>
       </Content>
     </Container>

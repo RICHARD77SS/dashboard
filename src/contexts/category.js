@@ -3,6 +3,9 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import CategoriesEdit from '../Components/CategoriesEdit';
+
+export const CategoryContext = React.createContext();
 
 export function CategoryContextProvider({ children }) {
   const { data, mutate } = useAxios('category');
@@ -10,11 +13,20 @@ export function CategoryContextProvider({ children }) {
   const [id, setId] = React.useState();
   const [categoryName, setCategoryName] = React.useState()
   const [categoryDescription, setCategoryDescription] = React.useState()
+
+  const [openModal, setOpenModal] = React.useState(false)
+
   function categoryNameHandler(event) {
     setCategoryName(event.target.value);
   }
   function categoryDescriptionHandler(event) {
     setCategoryDescription(event.target.value);
+  }
+
+  function CloseModal() {
+    setOpenModal(false)
+    setCategoryName('')
+    setCategoryDescription('')
   }
 
   function handleSubmit(event) {
@@ -75,8 +87,13 @@ export function CategoryContextProvider({ children }) {
     };
     mutate(updatedCategory, false);
   }
-
-  return <CategoryContextProvider.Provider value={{
+  function handleEditt(categoryId, categoryName, CategoryName) {
+    setCategoryName(categoryName);
+    setCategoryDescription(CategoryName);
+    setId(categoryId);
+    setOpenModal(true);
+  }
+  return <CategoryContext.Provider value={{
     categoryName,
     categoryDescription,
     categoryNameHandler,
@@ -85,8 +102,13 @@ export function CategoryContextProvider({ children }) {
     handleEdit,
     handleDelete,
     setId,
-    id
+    id,
+    openModal,
+    handleEditt,
+    setOpenModal,
+    CloseModal
   }}>
     {children}
-  </CategoryContextProvider.Provider>
+    {openModal && <CategoriesEdit />}
+  </CategoryContext.Provider>
 }

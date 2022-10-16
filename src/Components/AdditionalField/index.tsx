@@ -71,9 +71,11 @@ const AdditionalField = () => {
                         {fields?.inputOption?.option2},<br />
                         {fields?.inputOption?.option3}
                       </Td>
-                      <Td><Button onClick={() => { OpenModal1(index, fields.inputName) }}>Editar</Button>
-                        <Button onClick={() =>
-                          handleDelete(fields._id)}>Remover</Button>
+                      <Td>
+                        <Flex>
+                          <Button onClick={() => OpenModal1(index, fields.inputName)}>Editar</Button>
+                          <Button onClick={() => handleDelete(fields._id)}>Remover</Button>
+                        </Flex>
                       </Td>
 
                     </Tr>
