@@ -14,9 +14,12 @@ export function ExtraFieldsContextProvider({ children }) {
 
   const [inputName, setInputName] = React.useState('')
   const [inputType, setInputType] = React.useState('')
-  const [inputOption, setInputOption] = React.useState([])
-
-  const [openModal, setOpenModal] = React.useState()
+  const [inputOption, setInputOption] = React.useState({
+    option1: '',
+    option2: '',
+    option3: ''
+  })
+  const [openModalEdit1, setOpenModal1] = React.useState()
   const [index, setIndex] = React.useState()
 
   const [openCheck, setOpenCheck] = React.useState(false)
@@ -31,45 +34,45 @@ export function ExtraFieldsContextProvider({ children }) {
     setInputType(event.target.value);
   }
   function inputOptionHandle(event) {
-    setInputOption([...inputOption]);
+    setInputOption({ ...inputOption, [event.target.name]: event.target.value });
 
   }
   function inputOptionFocusOut(event) {
     if (event.target.value !== "") {
-      setInputOption(inputOption.concat(event.target.value));
+      setInputOption(inputOption.concat(event.target.value).splice(0, 3));
     }
 
   }
 
   function openModalCheck() {
     setInputName('')
-    setInputOption([])
+
     setOpenCheck(true)
   }
   function openModalRadio() {
     setInputName('')
-    setInputOption([])
+
     setOpenRadio(true)
   }
   function openModalText() {
     setInputName('')
-    setInputOption([])
+    setInputOption({})
     setOpenText(true)
   }
   function openModalTextArea() {
     setInputName('')
-    setInputOption([])
+    setInputOption({})
     setOpenTextArea(true)
   }
 
-  function OpenModall(index) {
-    setInputName('')
-    setInputOption([])
-    setOpenModal(true)
+  function OpenModal1(index, name) {
+    setInputName(name)
+
+    setOpenModal1(true)
     setIndex(index)
   }
   function closeModall() {
-    setOpenModal(false)
+    setOpenModal1(false)
   }
 
   function handleSubmit(event) {
@@ -85,31 +88,13 @@ export function ExtraFieldsContextProvider({ children }) {
       inputType,
       inputOption
     }
-
-    if (id) {
-      api.put(`extraFields/${id}`, extraFields)
-      const updatedExtraFields = {
-        extraFields: data.extraFields?.map((extraFields) => {
-          if (extraFields._id === id) {
-            return {
-              ...extraFields,
-              inputName,
-              inputType,
-              inputOption
-            };
-          }
-          return extraFields
-        }),
-      };
-      mutate(updatedExtraFields, false);
-    } else {
-      api.post('extraFields', extraFields);
-      const updatedExtraFields = {
-        extraFields: [...data.extraFields, extraFields]
-      }
-      mutate(updatedExtraFields, false)
+    api.post('extraFields', extraFields);
+    const updatedExtraFields = {
+      extraFields: [...data.extraFields, extraFields]
     }
-    setOpenModal(false)
+    mutate(updatedExtraFields, false)
+
+    setOpenModal1(false)
 
   }
   function handleDelete(id) {
@@ -121,6 +106,7 @@ export function ExtraFieldsContextProvider({ children }) {
     mutate(updatedExtraFields, false);
   }
   function handleEdit(id) {
+
     const extraFields = {
       inputName,
       inputType,
@@ -158,8 +144,8 @@ export function ExtraFieldsContextProvider({ children }) {
     handleEdit,
     setId,
     inputOptionFocusOut,
-    openModal,
-    OpenModall,
+    openModalEdit1,
+    OpenModal1,
     closeModall,
     openCheck,
     setOpenCheck,
@@ -177,6 +163,6 @@ export function ExtraFieldsContextProvider({ children }) {
     setOpenTextArea,
   }}>
     {children}
-    {openModal && <AdditionalFieldEdit />}
+    {openModalEdit1 && <AdditionalFieldEdit />}
   </ExtraFieldsContext.Provider>
 }

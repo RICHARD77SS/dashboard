@@ -67,19 +67,19 @@ const NewImputFieldCheck = ({ children, onClick }: Props) => {
                 type='text'
                 placeholder='Escreva aqui (o campo vazio será removido)'
                 onChange={inputOptionHandle}
-                onBlur={inputOptionFocusOut}
+                name='option1'
               />
               <Input
                 type='text'
                 placeholder='Escreva aqui (o campo vazio será removido)'
                 onChange={inputOptionHandle}
-                onBlur={inputOptionFocusOut}
+                name='option2'
               />
               <Input
                 type='text'
                 placeholder='Escreva aqui (o campo vazio será removido)'
                 onChange={inputOptionHandle}
-                onBlur={inputOptionFocusOut}
+                name='option3'
               />
               <div id="options">
 

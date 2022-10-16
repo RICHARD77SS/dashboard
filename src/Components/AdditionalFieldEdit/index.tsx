@@ -6,6 +6,7 @@ import React from "react";
 
 import { Container, Content, Form } from './styles'
 import { useAxios } from "../../hooks/useAxios";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 
 
@@ -14,12 +15,9 @@ const AdditionalFieldEdit = () => {
   const {
     handleEdit,
     inputName,
-    inputType,
     inputOption,
     inputNameHandle,
     inputOptionHandle,
-    setInputType,
-    inputOptionFocusOut,
     closeModall,
     setId,
     index,
@@ -27,13 +25,12 @@ const AdditionalFieldEdit = () => {
   } = React.useContext(ExtraFieldsContext)
 
   React.useEffect(() => {
-    setInputType("text")
+
     let indexx = index
     let ids = data?.extraFields[indexx]?._id
     setId(ids)
 
   }, [])
-  const type = inputType
 
 
   return (
@@ -41,44 +38,76 @@ const AdditionalFieldEdit = () => {
 
       <Content>
         <Form>
-          <Button onClick={() => { closeModall() }}>Close</Button>
+          <Button onClick={() => { closeModall() }}><AiOutlineCloseCircle size='30' /></Button>
           <InputBlock>
 
             <label htmlFor="name">Nome do campo</label>
             <Input
               id='name'
               placeholder='Nome do campo'
-              type={type}
+              type='text'
               value={inputName}
               onChange={inputNameHandle}
 
             />
           </InputBlock>
-          <InputBlock >
-            <label htmlFor=" ">Opções</label>
-            <Input
-              type='type'
-              placeholder='Escreva aqui (o campo vazio será removido)'
-              onChange={inputOptionHandle}
-              onBlur={inputOptionFocusOut}
-            />
-            <Input
-              type='type'
-              placeholder='Escreva aqui (o campo vazio será removido)'
-              onChange={inputOptionHandle}
-              onBlur={inputOptionFocusOut}
-            />
-            <Input
-              type='type'
-              placeholder='Escreva aqui (o campo vazio será removido)'
-              onChange={inputOptionHandle}
-              onBlur={inputOptionFocusOut}
-            />
-            <div id="options">
+          {data?.extraFields[index].inputType === 'checkbox' ?
+            <InputBlock >
+              <label htmlFor=" ">Opções</label>
+              <Input
+                type='type'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                name='option1'
+                onChange={inputOptionHandle}
+              />
+              <Input
+                type='type'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                name='option2'
+                onChange={inputOptionHandle}
+              />
+              <Input
+                type='type'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                name='option3'
+                onChange={inputOptionHandle}
+              />
+              <div id="options">
 
-            </div>
-          </InputBlock>
-          <Button type='button'>Adicionar</Button>
+              </div>
+              <Button type='button'>Adicionar</Button>
+            </InputBlock>
+            : null
+          }
+          {data?.extraFields[index].inputType === 'radio' ?
+            <InputBlock >
+              <label htmlFor=" ">Opções</label>
+              <Input
+                type='type'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                name='option1'
+                onChange={inputOptionHandle}
+              />
+              <Input
+                type='type'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                name='option2'
+                onChange={inputOptionHandle}
+              />
+              <Input
+                type='type'
+                placeholder='Escreva aqui (o campo vazio será removido)'
+                name='option3'
+                onChange={inputOptionHandle}
+              />
+              <div id="options">
+
+              </div>
+              <Button type='button'>Adicionar</Button>
+            </InputBlock>
+            : null
+          }
+
           <Button type='submit' onClick={() => { handleEdit(id) }}>Enivar</Button>
         </Form>
       </Content>

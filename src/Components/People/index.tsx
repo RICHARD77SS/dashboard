@@ -108,8 +108,6 @@ const People = () => {
                     }
 
                     let Birth = birthday.toLocaleDateString()
-
-                    console.log(persons)
                     let ConversionDate = new Date(persons.conversion)
                     let Conversion = ConversionDate.toLocaleDateString()
                     return (

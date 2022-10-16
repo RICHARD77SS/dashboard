@@ -13,7 +13,7 @@ export const Content = styled.div`
 export const Block = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
 `
 export const Box = styled.div`

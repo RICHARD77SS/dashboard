@@ -1,5 +1,5 @@
 
-import { IndexType } from "typescript";
+
 import { useAxios } from "../../hooks/useAxios";
 import BoxHeader from "../BoxHeader";
 import Flex from "../Flex";
@@ -18,21 +18,85 @@ const PersonDetailsAditionalFields = (Props: Props) => {
       <Content>
         <Block>
           {data?.extraFields?.map((fields: any, index: any) => {
+            if (fields?.inputType === 'checkbox') {
+              return (
+                <Box key={index}>
+                  <BoxHeader title={fields?.inputName}></BoxHeader>
 
+                  <BoxContent>
+                    <Flex>
+                      <Input type={fields.inputType} name='' />
+                      <label htmlFor="">
+                        {fields?.inputOption?.option1}
+                      </label>
+                    </Flex>
+                    <Flex>
+                      <Input type={fields.inputType} name='' />
+                      <label htmlFor="">
+                        {fields?.inputOption?.option2}
+                      </label>
+                    </Flex>
+                    <Flex>
+                      <Input type={fields.inputType} name='' />
+                      <label htmlFor="">
+                        {fields?.inputOption?.option3}
+                      </label>
+                    </Flex>
+                  </BoxContent>
+                </Box>)
+            }
+            if (fields?.inputType === 'radio') {
+              return (
+                <Box key={index}>
+                  <BoxHeader title={fields?.inputName}></BoxHeader>
+
+                  <BoxContent>
+                    <Flex>
+                      <Input type={fields.inputType} name='' />
+                      <label htmlFor="">
+                        {fields?.inputOption?.option1}
+                      </label>
+                    </Flex>
+                    <Flex>
+                      <Input type={fields.inputType} name='' />
+                      <label htmlFor="">
+                        {fields?.inputOption?.option2}
+                      </label>
+                    </Flex>
+                    <Flex>
+                      <Input type={fields.inputType} name='' />
+                      <label htmlFor="">
+                        {fields?.inputOption?.option3}
+                      </label>
+                    </Flex>
+                  </BoxContent>
+                </Box>)
+            }
+            if (fields?.inputType === 'text') {
+              return (
+                <Box key={index}>
+                  <BoxHeader title={fields?.inputName}></BoxHeader>
+                  <BoxContent>
+                    <Flex>
+                      <Input type={fields.inputType} name='' />
+                    </Flex>
+                  </BoxContent>
+                </Box>)
+            }
+            if (fields?.inputType === 'textarea') {
+              return (
+                <Box key={index}>
+                  <BoxHeader title={fields?.inputName}></BoxHeader>
+                  <BoxContent>
+                    <Flex>
+                      <textarea title='textarea'></textarea>
+                    </Flex>
+                  </BoxContent>
+                </Box>)
+            }
             return (
-              <Box key={index}>
-                <BoxHeader title={fields.inputName}></BoxHeader>
-                <BoxContent>
-                  {fields.inputOption.map((input: any, index: any) => {
-                    return (
-                      <Flex key={index}>
-                        <label htmlFor="">{input}</label>
-                        <Input disabled name='input' type={fields.inputType} />
-                      </Flex>
-                    )
-                  })}
-                </BoxContent>
-              </Box>
+              <>
+              </>
             )
           })}
         </Block>

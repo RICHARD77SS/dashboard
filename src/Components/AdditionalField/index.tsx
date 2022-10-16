@@ -23,8 +23,8 @@ const AdditionalField = () => {
   var Lenght = data?.extraFields?.length
   const {
     handleDelete,
-    openModal,
-    OpenModall,
+    openModalEdit1,
+    OpenModal1,
     openCheck,
     openModalCheck,
     setOpenCheck,
@@ -41,7 +41,7 @@ const AdditionalField = () => {
 
   return (
     <Container>
-      {openModal ?
+      {openModalEdit1 ?
         <AdditionalFieldEdit></AdditionalFieldEdit>
         : null}
       <Content>
@@ -62,15 +62,16 @@ const AdditionalField = () => {
               </Thead>
               <Tbody>
                 {data?.extraFields?.map((fields: any, index: any) => {
+  
                   return (
                     <Tr key={index}>
-                      <Td>{fields.inputName}</Td>
-                      <Td>{fields.inputType}</Td>
-                      <Td>{fields.inputOption}</Td>
-                      <Td><Button onClick={() => {
-                        OpenModall(index)
-
-                      }}>Editar</Button>
+                      <Td>{fields?.inputName}</Td>
+                      <Td>{fields?.inputType}</Td>
+                      <Td>{fields?.inputOption?.option1},<br />
+                        {fields?.inputOption?.option2},<br />
+                        {fields?.inputOption?.option3}
+                      </Td>
+                      <Td><Button onClick={() => { OpenModal1(index, fields.inputName) }}>Editar</Button>
                         <Button onClick={() =>
                           handleDelete(fields._id)}>Remover</Button>
                       </Td>

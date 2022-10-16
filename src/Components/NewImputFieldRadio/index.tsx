@@ -47,25 +47,25 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
             <InputBlock >
               <label htmlFor=" ">Opções</label>
               <Input
-                name='radio_button'
+                
                 type='text'
                 placeholder='Escreva aqui (o campo vazio será removido)'
                 onChange={inputOptionHandle}
-                onBlur={inputOptionFocusOut}
+                name='option1'
               />
               <Input
-                name='radio_button'
+                
                 type='text'
                 placeholder='Escreva aqui (o campo vazio será removido)'
                 onChange={inputOptionHandle}
-                onBlur={inputOptionFocusOut}
+                name='option2'
               />
               <Input
-                name='radio_button'
+                
                 type='text'
                 placeholder='Escreva aqui (o campo vazio será removido)'
                 onChange={inputOptionHandle}
-                onBlur={inputOptionFocusOut}
+                name='option3'
               />
             </InputBlock>
             <Button type='button'>+ Adicionar nova opção</Button>
