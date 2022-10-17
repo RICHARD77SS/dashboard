@@ -1,14 +1,28 @@
+import React from 'react';
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Offices,OfficeHeader, OfficeContainer, Table, Tr, Th, Td, AddOffice, AddHeader,AddContainer,InputGroup, Thead, Tbody } from './styles';
+import Table from '../Table';
+import Tbody from '../Tbody';
+import Td from '../Td';
+import Th from '../Th';
+import Thead from '../Thead';
+import Tr from '../Tr';
+import Flex from '../Flex';
+import { Container, Content, Offices, OfficeHeader, OfficeContainer, Form, AddHeader, AddContainer, InputGroup } from './styles';
+
+import { PositionsContext } from '../../contexts/positionsContexts'
+import { useAxios } from '../../hooks/useAxios'
 
 const Office = () => {
+  const { data } = useAxios('positions')
+  const { name, nameHandler, handleSubmit, handleEdit, handleDelete } = React.useContext(PositionsContext);
+
   return (
     <Container>
       <Content>
         <Offices>
           <OfficeHeader>
-            <h3>Resultados: 0</h3>
+            <h3>Resultados: {data?.positions.length}</h3>
           </OfficeHeader>
           <OfficeContainer>
             <Table>
@@ -20,27 +34,37 @@ const Office = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>Name here</Td>
-                  <Td>type here</Td>
-                  <Td><Button>Editar</Button><Button>Remover</Button></Td>
-                </Tr>
+                {data?.positions?.map((positions: any, index: any) => {
+                  return (
+                    <Tr key={index}>
+                      <Td>{positions.name}</Td>
+                      <Td>type here</Td>
+                      <Td>
+                        <Flex>
+                          <Button type='button' onClick={() => handleEdit(positions._id, positions.name)}>Editar</Button>
+                          <Button type='button' onClick={() => handleDelete(positions._id)}>Remover</Button>
+                        </Flex>
+                      </Td>
+                    </Tr>
+                  )
+                })}
+
               </Tbody>
             </Table>
           </OfficeContainer>
         </Offices>
-        <AddOffice>
+        <Form onSubmit={handleSubmit}>
           <AddHeader>
             <h3>Criar cargo</h3>
           </AddHeader>
           <AddContainer>
             <InputGroup>
               <label htmlFor="name">Nome do cargo</label>
-              <Input id='name' type='text' />
+              <Input id='name' type='text' value={name} onChange={nameHandler} />
             </InputGroup>
-            <Button>Criar</Button>
+            <Button type='submit'>Criar</Button>
           </AddContainer>
-        </AddOffice>
+        </Form>
       </Content>
     </Container>
   )
