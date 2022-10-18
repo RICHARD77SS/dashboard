@@ -277,7 +277,6 @@ const AddPeople = () => {
     office,
     conversion,
     notes,
-    baptized,
     passwordHandler,
     birthHandler,
     sexHandler,
@@ -302,11 +301,12 @@ const AddPeople = () => {
     baptizedHandler,
     setRegisterDate,
     spouse,
-    convertedSpouse,
     baptismDate,
     spouseHandler,
     convertedSpouseHandler,
-    baptismDateHandler
+    baptismDateHandler,
+    baptized,
+    convertedSpouse
   } = React.useContext(PersonContext)
 
   const { data } = useAxios('person')
@@ -318,6 +318,9 @@ const AddPeople = () => {
   }
   const { data: datafield } = useAxios('extraFields')
 
+  const { data: dataCategory } = useAxios('category')
+
+  const { data: dataPositions } = useAxios('positions')
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -388,40 +391,18 @@ const AddPeople = () => {
                   </Block>
                   <Block>
                     <label htmlFor="sex">Sexo</label>
-                    <input
-                      id='sex'
-                      type='text'
-                      name='sex'
-                      value={sex}
-                      onChange={sexHandler}
-                      list='sexo'
-                      ref={inputRef4}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
-                    />
-                    <datalist id='sexo'>
+                    <select title='sex' id='sexo' value={sex}
+                      onChange={sexHandler}>
                       <option value='Masculino' />
                       <option value='feminino' />
-                    </datalist>
+                    </select>
                   </Block>
                 </Flex>
                 <Block>
                   <Block>
                     <label htmlFor="schooling">Escolaridade</label>
-                    <input
-                      name='schooling'
-                      id='schooling'
-                      value={schooling}
-                      onChange={schoolingHandler}
-                      type='text'
-                      list='scool'
-                      ref={inputRef5}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
-                    />
-                    <datalist id='scool'>
+                    <select title='school' id='scool' value={schooling}
+                      onChange={schoolingHandler}>
                       <option value='Maternal' />
                       <option value='Educação infantil' />
                       <option value='Ensino fundamental' />
@@ -433,53 +414,34 @@ const AddPeople = () => {
                       <option value='Ensino superior - Doutorado' />
                       <option value='Outros' />
                       <option value='Nenhum' />
-                    </datalist>
+                    </select>
                   </Block>
                   <Block>
                     <label htmlFor="marital">Estado civil</label>
-                    <input
-                      name='marital'
-                      id='marital'
-                      value={marital}
-                      onChange={maritalHandler}
-                      type='text'
-                      list='civilstate'
-                      ref={inputRef6}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
-                    />
-                    <datalist id='civilstate'>
-                      <option value='Solteiro(a)' />
-                      <option value='Casado(a)' />
-                      <option value='Viúvo(a)' />
-                      <option value='Divorciado(a)' />
-                      <option value='Outros' />
-                    </datalist>
-                    <Flex>
-                      <Block>
-                        <label htmlFor="conjugue">Nome do Cônjugue</label>
-                        <Input type='text' value={spouse} onChange={spouseHandler} />
-                      </Block>
-                      <Block>
-                        <label htmlFor="convertedspouse">Cônjugue convertido</label>
-                        <input
-                          name='convertedspouse'
-                          id='convertedspouse'
-                          type='text'
-                          onChange={convertedSpouseHandler}
-                          list='convertedSpouse'
-                          onKeyDown={e => {
-                            if (e.key === 'Enter') e.preventDefault();
-                          }}
-                        />
-                        <datalist id='convertedSpouse'>
-                          <option value='Sim' />
-                          <option value='Não' />
-                        </datalist>
-                      </Block>
-                    </Flex>
-
+                    <select title='civilstate' id='civilstate' value={marital}
+                      onChange={maritalHandler}>
+                      <option value='Solteiro(a)' >Solteiro(a)</option>
+                      <option value='Casado(a)' >Casado(a)</option>
+                      <option value='Viúvo(a)' >Viúvo(a)</option>
+                      <option value='Divorciado(a)' >Divorciado(a)</option>
+                      <option value='Outros' >Outros</option>
+                    </select>
+                    {marital === 'Casado(a)' ?
+                    
+                      <Flex>
+                        <Block>
+                          <label htmlFor="conjugue">Nome do Cônjugue</label>
+                          <Input type='text' value={spouse} onChange={spouseHandler} />
+                        </Block>
+                        <Block>
+                          <label htmlFor="convertedspouse">Cônjugue convertido</label>
+                          <select title='selecte' id='convertedSpouse' value={convertedSpouse} onChange={convertedSpouseHandler}>
+                            <option value='true' >Sim</option>
+                            <option value='false' >Não</option>
+                          </select>
+                        </Block>
+                      </Flex>
+                    :null}
                   </Block>
                 </Block>
                 <Block>
@@ -533,31 +495,27 @@ const AddPeople = () => {
                 </Block>
                 <Block>
                   <label htmlFor="category">Categoria</label>
-                  <input
-                    name='category'
-                    id='category'
-                    value={category}
-                    onChange={categoryHandler}
-                    type='text'
-                    ref={inputRef10}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
-                  />
+                  <select title='sel' id='categories' value={category}
+                    onChange={categoryHandler}>
+                    <option value='' ></option>
+
+                    {dataCategory?.category.map((category: any) => {
+                      return (
+                        <option value={category.categoryName}>{category.categoryName}</option>
+                      )
+                    })}
+                  </select>
                 </Block>
                 <Block>
                   <label htmlFor="office">Cargo</label>
-                  <input
-                    name='office'
-                    id='office'
-                    value={office}
-                    onChange={officeHandler}
-                    type='text'
-                    ref={inputRef11}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
-                  />
+                  <select title='select' id='positions' onChange={officeHandler} value={office}>
+                    <option value='' ></option>
+                    {dataPositions?.positions.map((positions: any) => {
+                      return (
+                        <option value={positions.name} >{positions.name}</option>
+                      )
+                    })}
+                  </select>
                 </Block>
                 <Block>
                   <label htmlFor="conversion">Data da conversão</label>
@@ -576,25 +534,17 @@ const AddPeople = () => {
                 <Flex>
                   <Block>
                     <label htmlFor="baptized">Batizado(Sim ou Não)</label>
-                    <input
-                      name='baptized'
-                      id='baptized'
-                      type='text'
-                      onChange={baptizedHandler}
-                      list='baptis'
-                      ref={inputRef13}
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
-                    />
-                    <datalist id='baptis'>
-                      <option value='Sim' />
-                      <option value='Não' />
-                    </datalist>
+                    <select title='sele' id='baptis' value={baptized} onChange={baptizedHandler}>
+                      <option value='true' >Sim</option>
+                      <option value='false' >Não</option>
+                    </select>
                   </Block>
                   <Block>
-                    <label htmlFor="baptismdate">Data de batismo</label>
-                    <input id='baptismdate' type='date' value={baptismDate} onChange={baptismDateHandler} />
+                    {baptized ?
+                      <>
+                        <label htmlFor="baptismdate">Data de batismo</label>
+                        <input id='baptismdate' type='date' value={baptismDate} onChange={baptismDateHandler} />
+                      </> : null}
                   </Block>
                 </Flex>
               </DataContent>
@@ -783,32 +733,85 @@ const AddPeople = () => {
           </Header>
           <DataContent>
             {datafield?.extraFields?.map((fields: any, index: any) => {
-              if (fields.inputOption.length === 0) {
+              if (fields?.inputType === 'checkbox') {
                 return (
-                  <Data>
-                    <Header>
-                      <h3>{fields.inputName}</h3>
-                    </Header>
-                    <input title='input' type={fields.inputType} />
-                  </Data>
-                )
+                  <Data key={index}>
+                    <Header title={fields?.inputName}></Header>
+
+                    <DataContent>
+                      <Flex>
+                        <Input type={fields.inputType} name='' />
+                        <label htmlFor="">
+                          {fields?.inputOption?.option1}
+                        </label>
+                      </Flex>
+                      <Flex>
+                        <Input type={fields.inputType} name='' />
+                        <label htmlFor="">
+                          {fields?.inputOption?.option2}
+                        </label>
+                      </Flex>
+                      <Flex>
+                        <Input type={fields.inputType} name='' />
+                        <label htmlFor="">
+                          {fields?.inputOption?.option3}
+                        </label>
+                      </Flex>
+                    </DataContent>
+                  </Data>)
+              }
+              if (fields?.inputType === 'radio') {
+                return (
+                  <Data key={index}>
+                    <Header title={fields?.inputName}></Header>
+
+                    <DataContent>
+                      <Flex>
+                        <Input type={fields.inputType} name='' />
+                        <label htmlFor="">
+                          {fields?.inputOption?.option1}
+                        </label>
+                      </Flex>
+                      <Flex>
+                        <Input type={fields.inputType} name='' />
+                        <label htmlFor="">
+                          {fields?.inputOption?.option2}
+                        </label>
+                      </Flex>
+                      <Flex>
+                        <Input type={fields.inputType} name='' />
+                        <label htmlFor="">
+                          {fields?.inputOption?.option3}
+                        </label>
+                      </Flex>
+                    </DataContent>
+                  </Data>)
+              }
+              if (fields?.inputType === 'text') {
+                return (
+                  <Data key={index}>
+                    <Header title={fields?.inputName}></Header>
+                    <DataContent>
+                      <Flex>
+                        <Input type={fields.inputType} name='' />
+                      </Flex>
+                    </DataContent>
+                  </Data>)
+              }
+              if (fields?.inputType === 'textarea') {
+                return (
+                  <Data key={index}>
+                    <Header title={fields?.inputName}></Header>
+                    <DataContent>
+                      <Flex>
+                        <textarea title='textarea'></textarea>
+                      </Flex>
+                    </DataContent>
+                  </Data>)
               }
               return (
-                <Data key={index}>
-                  <Header>
-                    <h3>{fields.inputName}</h3>
-                  </Header>
-                  <DataContent>
-                    {fields.inputOption?.map((input: any, index: any) => {
-                      return (
-                        <Flex key={index}>
-                          <label htmlFor={input}>{input}</label>
-                          <input name='input' id={input} type={fields.inputType} />
-                        </Flex>
-                      )
-                    })}
-                  </DataContent>
-                </Data>
+                <>
+                </>
               )
             })}
           </DataContent>

@@ -113,20 +113,10 @@ export function PersonContextProvider({ children }) {
     setRegisterDate(event.target.value);
   }
   function baptizedHandler(event) {
-    if (event.target.value === "Sim" || "sim") {
-      setBaptized(true);
-    } 
-    if (event.target.value === "Não" || "não") {
-      setBaptized(false);
-    }
+    setBaptized(event.target.value)
   }
   function convertedSpouseHandler(event) {
-    if (event.target.value === "Sim" || "sim") {
-      setConvertedSpouse(true);
-    }
-    if (event.target.value === "Não" || "não") {
-      setConvertedSpouse(false);
-    }
+    setConvertedSpouse(event.target.value);
   }
   function spouseHandler(event) {
     setSpouse(event.target.value);

@@ -15,13 +15,12 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
     inputName,
     inputNameHandle,
     inputOptionHandle,
-    setInputType,
-    inputOptionFocusOut
+    setInputType
   } = React.useContext(ExtraFieldsContext)
 
   React.useEffect(() => {
     setInputType("radio")
-  }, [])
+  }, [setInputType])
 
   return (
     <Container>

@@ -18,12 +18,8 @@ import Tab from '../Tab';
 
 const Birthday = () => {
   const { data } = useAxios('person')
-  const jan = document.getElementById('jan')?.parentNode
-
-  const ago = document.getElementById('ago')
 
 
-  console.log(!ago)
   return (
     <Container>
       <ContainerHeader>
@@ -45,7 +41,7 @@ const Birthday = () => {
                     <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
-                <Tbody id='jan'>
+                <Tbody >
 
                   {data?.person.map((person: any, index: any) => {
                     const data = new Date(person.birth)
@@ -249,7 +245,7 @@ const Birthday = () => {
                     <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
-                <Tbody id='ago'>
+                <Tbody>
                   {data?.person.map((person: any, index: any) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1

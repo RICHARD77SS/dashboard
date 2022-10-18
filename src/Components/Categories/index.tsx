@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
 import { Container, Content, Categorias, CategoriaHeader, CategoriasContainer, AddCategoria, AddHeader, Form, InputGroup } from './styles';
-import { CategoryContext } from '../../contexts/category';
+import { CategoryContext } from '../../contexts/categoryContext';
 import { useAxios } from '../../hooks/useAxios';
 import Table from '../Table';
 import Thead from '../Thead';
@@ -10,7 +10,6 @@ import Tr from '../Tr';
 import Th from '../Th';
 import Tbody from '../Tbody';
 import Td from '../Td';
-import CategoriesEdit from '../CategoriesEdit';
 import Flex from '../Flex';
 const Categories = () => {
   const { categoryName,
@@ -18,18 +17,19 @@ const Categories = () => {
     categoryDescription,
     categoryDescriptionHandler,
     handleSubmit,
-    openModal,
-    handleEditt,
+    handleEdit,
     handleDelete
   } = React.useContext(CategoryContext)
   const { data } = useAxios('category')
-  console.log(data)
+  let length = data?.category?.length
+
+  console.log()
   return (
     <Container>
       <Content>
         <Categorias>
           <CategoriaHeader>
-            <h3>Resultados: 0</h3>
+            <h3>Resultados: {length}</h3>
           </CategoriaHeader>
           <CategoriasContainer>
             <Table>
@@ -43,6 +43,7 @@ const Categories = () => {
               </Thead>
               <Tbody>
                 {data?.category.map((category: any, index: any) => {
+
                   return (
                     <Tr key={index}>
                       <Td>{category.categoryName}</Td>
@@ -50,7 +51,7 @@ const Categories = () => {
                       <Td></Td>
                       <Td>
                         <Flex>
-                          <Button onClick={() => handleEditt(category._id, category.categoryName, category.categoryDescription)}>Editar</Button>
+                          <Button onClick={() => handleEdit(category._id, category.categoryName, category.categoryDescription)}>Editar</Button>
                           <Button onClick={() => handleDelete(category._id)}>Remover</Button>
 
                         </Flex>

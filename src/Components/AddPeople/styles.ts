@@ -100,8 +100,12 @@ export const Block = styled.div`
   flex-direction: column;
   align-items:  start;
   padding: .5rem 0;
-  input{
+  input,select{
     width: 100%;
+    height: 30px;
+    border-color: ${Props => Props.theme.colors.text};
+    background: #dde;
+    color: #000;
   }
   input[type=checkbox]{
     width: 30px;

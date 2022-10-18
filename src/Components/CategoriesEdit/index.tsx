@@ -3,12 +3,12 @@ import Input from '../Input';
 
 import { Container, Content, Form } from './styles'
 
-import { CategoryContext } from '../../contexts/category';
+import { CategoryContext } from '../../contexts/categoryContext';
 import Button from '../Button';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const CategoriesEdit = () => {
-  const { categoryName, categoryDescription, categoryNameHandler, categoryDescriptionHandler, handleSubmit, setOpenModal, CloseModal } = React.useContext(CategoryContext)
+  const { categoryName, categoryDescription, categoryNameHandler, categoryDescriptionHandler, handleSubmit, CloseModal } = React.useContext(CategoryContext)
   return (
     <Container>
       <Content>

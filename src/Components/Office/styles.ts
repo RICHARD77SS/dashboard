@@ -42,28 +42,15 @@ export const OfficeContainer = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem;
+  button {
+    padding: .5rem;
+    background:  ${Props => Props.theme.colors.pri};
+    border-radius: 5px;
+    color: #fff;
+  }
 `
 
-export const Table = styled.table`
-  width: 100%;
-`
-export const Tbody = styled.tbody`
-
-`
-export const Thead = styled.thead`
-
-`
-export const Tr = styled.tr`
-
-`
-export const Th = styled.th`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-`
-export const Td = styled.td`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-`
-
-export const AddOffice = styled.div`
+export const Form = styled.form`
   width: 100%;
   max-width: 400px;
   height: auto;

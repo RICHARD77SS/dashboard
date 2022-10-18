@@ -15,7 +15,6 @@ const AdditionalFieldEdit = () => {
   const {
     handleEdit,
     inputName,
-    inputOption,
     inputNameHandle,
     inputOptionHandle,
     closeModall,
@@ -30,7 +29,7 @@ const AdditionalFieldEdit = () => {
     let ids = data?.extraFields[indexx]?._id
     setId(ids)
 
-  }, [])
+  }, [setId,index,data])
 
 
   return (

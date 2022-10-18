@@ -22,7 +22,7 @@ const NewImputFieldCheck = ({ children, onClick }: Props) => {
 
   React.useEffect(() => {
     setInputType("checkbox")
-  },[])
+  }, [setInputType])
 
   function add() {
 
