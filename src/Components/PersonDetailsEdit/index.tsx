@@ -95,7 +95,11 @@ const PersonDetailsEdit = (Props: Props) => {
   } = React.useContext(PersonContext)
   const [modal, setModal] = React.useState(false);
 
-  setId(Props.id)
+  React.useEffect(() => {
+    setId(Props.id)
+    
+  }, [setId])
+  
   return (
     <Container >
   

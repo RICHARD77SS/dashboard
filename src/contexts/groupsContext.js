@@ -111,12 +111,45 @@ export function GroupsContextProvider({ children }) {
       city,
       anotations
     }
-    api.post('groups', groups);
-    const updatedGroups = {
-      groups: [...data.groups, groups]
+    if (id) {
+      api.put(`groups/${id}`, groups)
+      const updatedGroups = {
+        groups: data.groups?.map((groups) => {
+          if (groups._id === id) {
+            return {
+              ...groups,
+              name,
+              image,
+              creationDate,
+              weekDay,
+              sex,
+              time,
+              category,
+              originGroup,
+              lider1,
+              lider2,
+              lider3,
+              lider4,
+              address,
+              district,
+              number,
+              country,
+              state,
+              city,
+              anotations
+            }
+          }
+          return groups
+        }),
+      };
+      mutate(updatedGroups, false);
+    } else {
+      api.post('groups', groups);
+      const updatedGroups = {
+        groups: [...data.groups, groups]
+      }
+      mutate(updatedGroups, false)
     }
-    mutate(updatedGroups, false)
-
   }
   function handleDelete(id) {
     api.delete(`groups/${id}`);
@@ -126,59 +159,17 @@ export function GroupsContextProvider({ children }) {
     }
     mutate(updatedGroups, false)
   }
-  function handleEdit(id) {
-    const groups = {
-      name,
-      image,
-      creationDate,
-      weekDay,
-      sex,
-      time,
-      category,
-      originGroup,
-      lider1,
-      lider2,
-      lider3,
-      lider4,
-      address,
-      district,
-      number,
-      country,
-      state,
-      city,
-      anotations
-    }
-    api.put(`groups/${id}`, groups)
-    const updatedGroups = {
-      groups: data.groups?.map((groups) => {
-        if (groups._id === id) {
-          return {
-            ...groups,
-            name,
-            image,
-            creationDate,
-            weekDay,
-            sex,
-            time,
-            category,
-            originGroup,
-            lider1,
-            lider2,
-            lider3,
-            lider4,
-            address,
-            district,
-            number,
-            country,
-            state,
-            city,
-            anotations
-          }
-        }
-        return groups
-      }),
-    };
-    mutate(updatedGroups, false);
+  function handleEdit(gid, gname, gimage, gcreationdate, gweekday, gsex, gtime, gcategory, gorigingroup, glider1) {
+    setId(gid)
+    setName(gname)
+    setImage(gimage)
+    setCreationDate(gcreationdate)
+    setWeekDay(gweekday)
+    setSex(gsex)
+    setTime(gtime)
+    setCategory(gcategory)
+    setOriginGroup(gorigingroup)
+    setLider1(glider1)
   }
   return <GroupsContext.Provider value={{
     name,
@@ -220,6 +211,7 @@ export function GroupsContextProvider({ children }) {
     cityHandler,
     anotationsHandler,
     setId,
+    id,
     handleDelete,
     handleSubmit,
     handleEdit

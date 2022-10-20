@@ -18,8 +18,6 @@ import Tab from '../Tab';
 
 const Birthday = () => {
   const { data } = useAxios('person')
-
-
   return (
     <Container>
       <ContainerHeader>
@@ -50,7 +48,6 @@ const Birthday = () => {
 
                       return (
                         <Tr key={index}>
-                          <Td>{data.toLocaleDateString()}</Td>
                           <Td>Image here</Td>
                           <Td>{person.name}</Td>
                         </Tr>

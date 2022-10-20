@@ -1,3 +1,4 @@
+import React from "react";
 import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
@@ -9,6 +10,9 @@ import GraphLineArea from "../GraphLineArea";
 import Input from "../Input";
 
 import { Card, CardBg, CardImg, Liders, SubLiderImg, LiderImg } from './styles'
+import { Link, useParams } from 'react-router-dom';
+import { useAxios } from "../../hooks/useAxios";
+import { GroupsContext } from "../../contexts/groupsContext";
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 const LineData = {
   labels,
@@ -29,17 +33,19 @@ const LineData = {
     },
   ],
 };
-
 const ViewGroup = () => {
+  const { id } = useParams()
+  const { data: dataGroup } = useAxios('groups')
+  const { handleDelete, handleEdit } = React.useContext(GroupsContext)
   return (
     <Container>
       <Content>
         <Card>
           <CardBg>
-            <img src="https://img.freepik.com/vetores-gratis/juventude-plana-pessoas-abracando-juntos_52683-13322.jpg?w=740&t=st=1663693866~exp=1663694466~hmac=e0160b834b8bc53200224a2d0c6e2318b32138fbc2add06e7b49d4837cc5227b" alt="" />
+            <img src={dataGroup?.groups[`${id}`].image} alt="" />
           </CardBg>
           <CardImg>
-            <img src="https://img.freepik.com/vetores-gratis/ele-ressuscitou-letras-contra-um-fundo-de-nuvens-e-sol-plano-de-fundo-para-parabens-pela-ressurreicao-de-cristo-ilustracao-vetorial-eps10_87521-2831.jpg?w=740&t=st=1663708091~exp=1663708691~hmac=dd44f2ad46aa3924458538b14d54ed56498aec24b49bd0e556746328697f4207" alt="" />
+            <img src={dataGroup?.groups[`${id}`].image} alt="" />
           </CardImg>
           <h4>Group name</h4>
           <p>0 pessoas</p>
@@ -66,49 +72,70 @@ const ViewGroup = () => {
         </Box>
         <Box>
           <BoxHeader title='Pessoas'>
-            <Button>Editar</Button>
-            <Button>Remover</Button>
+            <Link to='/addgroups'><Button onClick={() => handleEdit(
+              dataGroup?.groups[`${id}`]._id,
+              dataGroup?.groups[`${id}`].name,
+              dataGroup?.groups[`${id}`].image,
+              dataGroup?.groups[`${id}`].creationDate,
+              dataGroup?.groups[`${id}`].weekDay,
+              dataGroup?.groups[`${id}`].sex,
+              dataGroup?.groups[`${id}`].time,
+              dataGroup?.groups[`${id}`].category,
+              dataGroup?.groups[`${id}`].originGroup,
+              dataGroup?.groups[`${id}`].lider1,
+            )
+            }>Editar</Button></Link>
+            <Link to='/groups'>
+              <Button type='button' onClick={() => handleDelete(dataGroup?.groups[`${id}`]._id)}>Remover</Button>
+            </Link>
           </BoxHeader>
           <BoxContent>
             <Flex>
               <p><b>Data de abertura:</b></p>
-              <p>21/03/2013</p>
+              <p>{dataGroup?.groups[`${id}`].creationDate}</p>
             </Flex>
             <Flex>
               <p><b>Dia da semana</b></p>
-              <p>Terça-feira(Noite)</p>
+              <p>{dataGroup?.groups[`${id}`].weekDay}</p>
             </Flex>
             <Flex>
               <p><b>Perfil:</b></p>
-              <p>Masculino/feminino</p>
+              <p>{dataGroup?.groups[`${id}`].sex}</p>
             </Flex>
             <Flex>
               <p><b>Categorias:</b></p>
-              <p> Famílias; Casais; Adultos; Jovens; Adolescentes; Crianças</p>
+              <p> {dataGroup?.groups[`${id}`].category}</p>
             </Flex>
             <Flex>
               <p><b>Grupo de origem:</b></p>
-              <p>Groupname</p>
+              <p>{dataGroup?.groups[`${id}`].name}</p>
             </Flex>
             <Flex>
               <p><b>Lider 1:</b></p>
-              <p>Lider</p>
+              <p>{dataGroup?.groups[`${id}`].lider1}</p>
             </Flex>
             <Flex>
               <p><b>Lider 2:</b></p>
-              <p>Lider</p>
+              <p>{dataGroup?.groups[`${id}`].lider2}</p>
             </Flex>
             <Flex>
               <p><b>Lider 3:</b></p>
-              <p>Lider</p>
+              <p>{dataGroup?.groups[`${id}`].lider3}</p>
             </Flex>
             <Flex>
               <p><b>Lider 4:</b></p>
-              <p>Lider</p>
+              <p>{dataGroup?.groups[`${id}`].lider4}</p>
             </Flex>
             <Flex>
               <p><b>Endereço:</b></p>
-              <p>Endereço</p>
+              <p>
+                {dataGroup?.groups[`${id}`].address},
+                {dataGroup?.groups[`${id}`].district},
+                {dataGroup?.groups[`${id}`].country},
+                {dataGroup?.groups[`${id}`].state},
+                {dataGroup?.groups[`${id}`].city},
+                {dataGroup?.groups[`${id}`].number}
+              </p>
             </Flex>
           </BoxContent>
         </Box>

@@ -36,7 +36,7 @@ export function PersonContextProvider({ children }) {
   const [baptized, setBaptized] = React.useState(false)
   const [spouse, setSpouse] = React.useState('')
   const [convertedSpouse, setConvertedSpouse] = React.useState('')
-  const [baptismDate,setBaptismDate] = React.useState('')
+  const [baptismDate, setBaptismDate] = React.useState('')
   const [registerDate, setRegisterDate] = React.useState('')
   const [id, setId] = React.useState('');
 
@@ -158,55 +158,11 @@ export function PersonContextProvider({ children }) {
       convertedSpouse,
       baptismDate
     }
-    if (id) {
-      api.put(`person/${id}`, person)
-      const updatedPerson = {
-        person: data.person?.map((persons) => {
-          if (persons._id === id) {
-            return {
-              ...persons,
-              name,
-              email,
-              password,
-              birth,
-              sex,
-              schooling,
-              marital,
-              document1,
-              document2,
-              phone1,
-              phone2,
-              address,
-              number,
-              district,
-              zipcode,
-              country,
-              state,
-              city,
-              group,
-              category,
-              office,
-              conversion,
-              notes,
-              baptized,
-              registerDate,
-              spouse,
-              convertedSpouse,
-              baptismDate
-            };
-          }
-          return persons;
-        }),
-      };
-      mutate(updatedPerson, false);
-    } else {
-      api.post('person', person);
-
-      const updatedPerson = {
-        person: [...data.person, person]
-      }
-      mutate(updatedPerson, false)
+    api.post('person', person);
+    const updatedPerson = {
+      person: [...data.person, person]
     }
+    mutate(updatedPerson, false)
   }
   function handleEdit(id) {
     const person = {

@@ -5,9 +5,13 @@ import Button from '../Button';
 import CardGroup from '../CardGroup';
 import Input from '../Input';
 import { Container, Content, Box, BoxHeader, BoxContent, CardsContainer, Page, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex } from './styles';
+import { Link } from 'react-router-dom';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const Group = () => {
+  const { data: dataGroups } = useAxios('groups')
+
   return (
     <Container>
       <h3>Grupos</h3>
@@ -18,7 +22,13 @@ const Group = () => {
           </BoxHeader>
           <BoxContent>
             <CardsContainer>
-              <CardGroup />
+              {dataGroups?.groups?.map((groups: any, index: any) => {
+                return (
+                  <CardGroup key={index} bg={groups.image} image={groups.image} name={groups.name}>
+                    <Link to={`/groups/viewgroup/${index}`}><Button>Visualizar</Button></Link>
+                  </CardGroup>
+                )
+              })}
             </CardsContainer>
             <Page>
               <Button>Anterior</Button>
@@ -28,7 +38,7 @@ const Group = () => {
           </BoxContent>
         </Box>
         <Aside>
-          <Button>+Adicionar Grupo</Button>
+          <Link to='/addgroups'><Button>+Adicionar Grupo</Button></Link>
           <Filters>
             <FilterHeader>
               <BsFilter />

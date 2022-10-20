@@ -56,7 +56,7 @@ export const Data = styled.div`
   input {
     height: 30px;
     border-radius: 5px;
-    border-color: ${Props =>Props.theme.colors.pri};
+    border-color: ${Props => Props.theme.colors.pri};
   }
 `
 
@@ -90,6 +90,12 @@ export const Block = styled.div`
   display: flex;
   flex-direction: column;
   align-items:  start;
+  select {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border-color: ${Props => Props.theme.colors.pri};
+  }
   input{
     width: 100%;
   }
@@ -113,10 +119,4 @@ export const InputBlock = styled.div`
   Input {
     width: 100%;
   }
-`
-
-export const Radio = styled.div`
-  display: flex;
-  align-items: center;
-  gap: .5rem;
 `

@@ -48,6 +48,7 @@ export const CardsContainer = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem;
+  display: flex;
 `
 
 
