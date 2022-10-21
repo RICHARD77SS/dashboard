@@ -49,6 +49,7 @@ export const CardsContainer = styled.div`
   height: auto;
   padding: 1rem;
   display: flex;
+  gap: 1rem;
 `
 
 

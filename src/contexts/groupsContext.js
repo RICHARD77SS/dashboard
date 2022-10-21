@@ -3,7 +3,6 @@ import React from 'react'
 import api from '../services/api'
 
 import { useAxios } from '../hooks/useAxios';
-
 export const GroupsContext = React.createContext();
 
 export function GroupsContextProvider({ children }) {
@@ -11,6 +10,7 @@ export function GroupsContextProvider({ children }) {
   const [id, setId] = React.useState()
   const [name, setName] = React.useState()
   const [image, setImage] = React.useState()
+  const [bg, setBg] = React.useState()
   const [creationDate, setCreationDate] = React.useState()
   const [weekDay, setWeekDay] = React.useState()
   const [sex, setSex] = React.useState()
@@ -28,12 +28,22 @@ export function GroupsContextProvider({ children }) {
   const [state, setState] = React.useState()
   const [city, setCity] = React.useState()
   const [anotations, setAnotations] = React.useState()
+  const [participants, setParticipants] = React.useState([
+    {
+      image: '',
+      name: '',
+      index: 0
+    }
+  ])
 
   function nameHandler(event) {
     setName(event.target.value)
   }
   function imageHandler(event) {
     setImage(event.target.value)
+  }
+  function bgHandler(event) {
+    setBg(event.target.value)
   }
   function creationDateHandler(event) {
     setCreationDate(event.target.value)
@@ -86,13 +96,16 @@ export function GroupsContextProvider({ children }) {
   function anotationsHandler(event) {
     setAnotations(event.target.value)
   }
+  function participantsHandler(event) {
+    setAnotations(event.target.value)
+  }
 
   function handleSubmit(event) {
     event.preventDefault()
-    window.alert('Grupo adicionado')
     const groups = {
       name,
       image,
+      bg,
       creationDate,
       weekDay,
       sex,
@@ -109,10 +122,12 @@ export function GroupsContextProvider({ children }) {
       country,
       state,
       city,
-      anotations
+      anotations,
+      participants
     }
     if (id) {
-      api.put(`groups/${id}`, groups)
+      api.put(`groups/${id}`, groups);
+      window.alert('Grupo Editado com sucesso');
       const updatedGroups = {
         groups: data.groups?.map((groups) => {
           if (groups._id === id) {
@@ -120,6 +135,7 @@ export function GroupsContextProvider({ children }) {
               ...groups,
               name,
               image,
+              bg,
               creationDate,
               weekDay,
               sex,
@@ -136,7 +152,8 @@ export function GroupsContextProvider({ children }) {
               country,
               state,
               city,
-              anotations
+              anotations,
+              participants
             }
           }
           return groups
@@ -145,6 +162,7 @@ export function GroupsContextProvider({ children }) {
       mutate(updatedGroups, false);
     } else {
       api.post('groups', groups);
+      window.alert('Grupo adicionado');
       const updatedGroups = {
         groups: [...data.groups, groups]
       }
@@ -159,9 +177,33 @@ export function GroupsContextProvider({ children }) {
     }
     mutate(updatedGroups, false)
   }
-  function handleEdit(gid, gname, gimage, gcreationdate, gweekday, gsex, gtime, gcategory, gorigingroup, glider1) {
+  function handleEdit(
+    gid,
+    gname,
+    gimage,
+    gbg,
+    gcreationdate,
+    gweekday,
+    gsex,
+    gtime,
+    gcategory,
+    gorigingroup,
+    glider1,
+    glider2,
+    glider3,
+    glider4,
+    gaddress,
+    gdistrict,
+    gnumber,
+    gcountry,
+    gstate,
+    gcity,
+    ganotations,
+    gparticipants
+  ) {
     setId(gid)
     setName(gname)
+    setBg(gbg)
     setImage(gimage)
     setCreationDate(gcreationdate)
     setWeekDay(gweekday)
@@ -170,10 +212,22 @@ export function GroupsContextProvider({ children }) {
     setCategory(gcategory)
     setOriginGroup(gorigingroup)
     setLider1(glider1)
+    setLider2(glider2)
+    setLider3(glider3)
+    setLider4(glider4)
+    setAddress(gaddress)
+    setDistrict(gdistrict)
+    setNumber(gnumber)
+    setCountry(gcountry)
+    setState(gstate)
+    setCity(gcity)
+    setAnotations(ganotations)
+    setParticipants(gparticipants)
   }
   return <GroupsContext.Provider value={{
     name,
     image,
+    bg,
     creationDate,
     weekDay,
     sex,
@@ -191,8 +245,10 @@ export function GroupsContextProvider({ children }) {
     state,
     city,
     anotations,
+    participants,
     nameHandler,
     imageHandler,
+    bgHandler,
     creationDateHandler,
     weekDayHandler,
     sexHandler,
@@ -210,11 +266,12 @@ export function GroupsContextProvider({ children }) {
     stateHandler,
     cityHandler,
     anotationsHandler,
+    participantsHandler,
     setId,
     id,
     handleDelete,
     handleSubmit,
-    handleEdit
+    handleEdit,
   }}>
     {children}
   </GroupsContext.Provider>

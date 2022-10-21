@@ -42,7 +42,7 @@ const ViewGroup = () => {
       <Content>
         <Card>
           <CardBg>
-            <img src={dataGroup?.groups[`${id}`].image} alt="" />
+            <img src={dataGroup?.groups[`${id}`].bg} alt="" />
           </CardBg>
           <CardImg>
             <img src={dataGroup?.groups[`${id}`].image} alt="" />
@@ -76,6 +76,7 @@ const ViewGroup = () => {
               dataGroup?.groups[`${id}`]._id,
               dataGroup?.groups[`${id}`].name,
               dataGroup?.groups[`${id}`].image,
+              dataGroup?.groups[`${id}`].bg,
               dataGroup?.groups[`${id}`].creationDate,
               dataGroup?.groups[`${id}`].weekDay,
               dataGroup?.groups[`${id}`].sex,
@@ -83,6 +84,17 @@ const ViewGroup = () => {
               dataGroup?.groups[`${id}`].category,
               dataGroup?.groups[`${id}`].originGroup,
               dataGroup?.groups[`${id}`].lider1,
+              dataGroup?.groups[`${id}`].lider2,
+              dataGroup?.groups[`${id}`].lider3,
+              dataGroup?.groups[`${id}`].lider4,
+              dataGroup?.groups[`${id}`].address,
+              dataGroup?.groups[`${id}`].district,
+              dataGroup?.groups[`${id}`].number,
+              dataGroup?.groups[`${id}`].country,
+              dataGroup?.groups[`${id}`].state,
+              dataGroup?.groups[`${id}`].city,
+              dataGroup?.groups[`${id}`].anotations,
+              dataGroup?.groups[`${id}`].participants,
             )
             }>Editar</Button></Link>
             <Link to='/groups'>
