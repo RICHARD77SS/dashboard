@@ -12,6 +12,7 @@ export function PersonContextProvider({ children }) {
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [image, setImage] = React.useState('');
   const [password, setPassword] = React.useState('')
   const [birth, setBirth] = React.useState('')
   const [sex, setSex] = React.useState('')
@@ -35,7 +36,7 @@ export function PersonContextProvider({ children }) {
   const [notes, setNotes] = React.useState('')
   const [baptized, setBaptized] = React.useState(false)
   const [spouse, setSpouse] = React.useState('')
-  const [convertedSpouse, setConvertedSpouse] = React.useState('')
+  const [convertedSpouse, setConvertedSpouse] = React.useState(false)
   const [baptismDate, setBaptismDate] = React.useState('')
   const [registerDate, setRegisterDate] = React.useState('')
   const [id, setId] = React.useState('');
@@ -45,6 +46,9 @@ export function PersonContextProvider({ children }) {
   }
   function emailHandler(event) {
     setEmail(event.target.value);
+  }
+  function imageHandler(event) {
+    setImage(event.target.value);
   }
   function passwordHandler(event) {
     setPassword(event.target.value);
@@ -127,10 +131,11 @@ export function PersonContextProvider({ children }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    window.alert('Usuario Cadastrado')
+
     const person = {
       name,
       email,
+      image,
       password,
       birth,
       sex,
@@ -159,6 +164,7 @@ export function PersonContextProvider({ children }) {
       baptismDate
     }
     api.post('person', person);
+    window.alert('Usuario Cadastrado')
     const updatedPerson = {
       person: [...data.person, person]
     }
@@ -168,6 +174,7 @@ export function PersonContextProvider({ children }) {
     const person = {
       name,
       email,
+      image,
       password,
       birth,
       sex,
@@ -203,6 +210,7 @@ export function PersonContextProvider({ children }) {
             ...persons,
             name,
             email,
+            image,
             password,
             birth,
             sex,
@@ -278,6 +286,7 @@ export function PersonContextProvider({ children }) {
     conversion,
     notes,
     baptized,
+    image,
     passwordHandler,
     birthHandler,
     sexHandler,
@@ -308,7 +317,9 @@ export function PersonContextProvider({ children }) {
     baptismDate,
     spouseHandler,
     convertedSpouseHandler,
-    baptismDateHandler
+    baptismDateHandler,
+    imageHandler,
+    setName
   }}>
     {children}
   </PersonContext.Provider>

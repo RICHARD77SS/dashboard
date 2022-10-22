@@ -124,6 +124,10 @@ export const Foto = styled.div`
   flex-direction: column;
   align-items:  start;
   background: #ddd;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 export const InputBlock = styled.div`

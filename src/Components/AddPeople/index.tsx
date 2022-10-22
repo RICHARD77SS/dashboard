@@ -306,7 +306,9 @@ const AddPeople = () => {
     convertedSpouseHandler,
     baptismDateHandler,
     baptized,
-    convertedSpouse
+    convertedSpouse,
+    image,
+    imageHandler
   } = React.useContext(PersonContext)
 
   const { data } = useAxios('person')
@@ -321,6 +323,8 @@ const AddPeople = () => {
   const { data: dataCategory } = useAxios('category')
 
   const { data: dataPositions } = useAxios('positions')
+
+  const { data: dataGroups } = useAxios('groups')
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -339,7 +343,8 @@ const AddPeople = () => {
                   <Block>
                     <label htmlFor="foto">Foto</label>
                     <Foto>
-
+                      <img src={image} alt="" />
+                      <input title='image' type='text' value={image} onChange={imageHandler} />
                     </Foto>
                   </Block>
                   <InputBlock>
@@ -392,9 +397,10 @@ const AddPeople = () => {
                   <Block>
                     <label htmlFor="sex">Sexo</label>
                     <select title='sex' id='sexo' value={sex}
-                      onChange={sexHandler}>
-                      <option value='Masculino' />
-                      <option value='feminino' />
+                      onChange={sexHandler} required>
+                      <option value='' ></option>
+                      <option value='Masculino' >Masculino</option>
+                      <option value='Feminino' >Feminino</option>
                     </select>
                   </Block>
                 </Flex>
@@ -403,17 +409,17 @@ const AddPeople = () => {
                     <label htmlFor="schooling">Escolaridade</label>
                     <select title='school' id='scool' value={schooling}
                       onChange={schoolingHandler}>
-                      <option value='Maternal' />
-                      <option value='Educação infantil' />
-                      <option value='Ensino fundamental' />
-                      <option value='Ensino medio' />
-                      <option value='Ensino superior - Tecnólogo' />
-                      <option value='Ensino superior - Bacharel' />
-                      <option value='Ensino superior - Mestrado' />
-                      <option value='Ensino superior - Licenciatura' />
-                      <option value='Ensino superior - Doutorado' />
-                      <option value='Outros' />
-                      <option value='Nenhum' />
+                      <option value='Maternal' >Maternal</option>
+                      <option value='Educação infantil'>Educação infantil</option>
+                      <option value='Ensino fundamental' >Ensino fundamental</option>
+                      <option value='Ensino medio' >Ensino medio</option>
+                      <option value='Ensino superior - Tecnólogo' >Ensino superior - Tecnólogo</option>
+                      <option value='Ensino superior - Bacharel' >Ensino superior - Bacharel</option>
+                      <option value='Ensino superior - Mestrado' >Ensino superior - Mestrado</option>
+                      <option value='Ensino superior - Licenciatura' >Ensino superior - Licenciatura</option>
+                      <option value='Ensino superior - Doutorado'>Ensino superior - Doutorado</option>
+                      <option value='Outros' >Outros</option>
+                      <option value='Nenhum' >Nenhum</option>
                     </select>
                   </Block>
                   <Block>
@@ -427,7 +433,7 @@ const AddPeople = () => {
                       <option value='Outros' >Outros</option>
                     </select>
                     {marital === 'Casado(a)' ?
-                    
+
                       <Flex>
                         <Block>
                           <label htmlFor="conjugue">Nome do Cônjugue</label>
@@ -441,7 +447,7 @@ const AddPeople = () => {
                           </select>
                         </Block>
                       </Flex>
-                    :null}
+                      : null}
                   </Block>
                 </Block>
                 <Block>
@@ -481,38 +487,42 @@ const AddPeople = () => {
               <DataContent>
                 <Block>
                   <label htmlFor="group">Grupo</label>
-                  <input
-                    name='group'
-                    id='group'
-                    value={group}
-                    onChange={groupHandler}
-                    type='text'
-                    ref={inputRef9}
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
-                  />
-                </Block>
-                <Block>
-                  <label htmlFor="category">Categoria</label>
-                  <select title='sel' id='categories' value={category}
-                    onChange={categoryHandler}>
-                    <option value='' ></option>
-
-                    {dataCategory?.category.map((category: any) => {
+                  <select id='group' value={group} onChange={groupHandler}>
+                    <option value=''></option>
+                    {dataGroups?.groups.map((groups: any, index: any) => {
                       return (
-                        <option value={category.categoryName}>{category.categoryName}</option>
+                        //<Flex>
+                        //<input id={groups.name} type='checkbox' value={groups.name} />
+                        //<label htmlFor={groups.name} >{groups.name}</label>
+                        //</Flex>
+                        <option key={index} value={groups.name}>{groups.name}</option>
                       )
                     })}
                   </select>
                 </Block>
                 <Block>
+                  <label htmlFor="category">Categoria</label>
+                  <select id='category' value={category} onChange={categoryHandler}>
+                    <option value=''></option>
+                    {dataCategory?.category.map((category: any, index: any) => {
+                      return (
+                        //<Flex>
+                        //<input id={category.categoryName} type='checkbox' value={category.categoryName} />
+                        //<label htmlFor={category.categoryName}>{category.categoryName}</label>
+                        //</Flex>
+                        <option key={index} value={category.categoryName}>{category.categoryName}</option>
+                      )
+                    })}
+                  </select>
+
+                </Block>
+                <Block>
                   <label htmlFor="office">Cargo</label>
                   <select title='select' id='positions' onChange={officeHandler} value={office}>
                     <option value='' ></option>
-                    {dataPositions?.positions.map((positions: any) => {
+                    {dataPositions?.positions.map((positions: any, index: any) => {
                       return (
-                        <option value={positions.name} >{positions.name}</option>
+                        <option key={index} value={positions.name} >{positions.name}</option>
                       )
                     })}
                   </select>

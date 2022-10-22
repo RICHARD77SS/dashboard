@@ -91,18 +91,19 @@ const PersonDetailsEdit = (Props: Props) => {
     handleEdit,
     registerDate,
     setRegisterDate,
-    registerDateHandler
+    registerDateHandler,
+    setName
   } = React.useContext(PersonContext)
   const [modal, setModal] = React.useState(false);
 
   React.useEffect(() => {
     setId(Props.id)
-    
+    setName(Props.name)
   }, [setId])
-  
+
   return (
     <Container >
-  
+
       <Form >
         <Block>
           <Box>
@@ -128,7 +129,11 @@ const PersonDetailsEdit = (Props: Props) => {
 
                 <p><b>Sexo: &nbsp;</b>{Props.sex}</p>
                 <p><b>Novo Sexo: &nbsp;</b>{sex}</p>
-                <Input type='text' value={sex} onChange={sexHandler} />
+                <select title='sex' value={sex} onChange={sexHandler} >
+                  <option value=''></option>
+                  <option value='Masculino'>Masculino</option>
+                  <option value='Feminino'>Feminino</option>
+                </select>
               </InputBlock>
               <InputBlock>
 
