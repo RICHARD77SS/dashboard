@@ -27,6 +27,7 @@ interface Props {
   state?: string;
   country?: string;
   notes?: string;
+  group?: string;
 }
 const PersonDetailsInfos = (Props: Props) => {
   return (
@@ -51,6 +52,7 @@ const PersonDetailsInfos = (Props: Props) => {
             <BoxContent>
               <p><b>Categorias: &nbsp;</b>{Props.category}</p>
               <p><b>Cargos: &nbsp;</b>{Props.office}</p>
+              <p><b>Grupos: &nbsp;</b>{Props.group}</p>
               <p><b>Data de conversão: &nbsp;</b>{Props.conversion}</p>
               <p><b>Batizado: &nbsp;</b>{Props.batizm}</p>
               <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>

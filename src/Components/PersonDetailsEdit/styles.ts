@@ -50,6 +50,21 @@ export const BoxContent = styled.div`
   background: ${Props => Props.theme.colors.bac};
   gap: 1rem;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+  select {
+    width: 100%;
+    min-width: 200px;
+    height: 30px;
+    background: #eee;
+    border-radius: 5px;
+    border-color: #ddd;
+  }
+  input {
+    min-width: 200px;
+    height: 30px;
+    background: #eee;
+    border-radius: 5px;
+    border-color: #ddd;
+  }
 `
 export const ModalContainer = styled.div`
   position:fixed;

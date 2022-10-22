@@ -6,9 +6,11 @@ import InputBlock from "../InputBlock";
 import { Container, Form, Block, Box, BoxContent, ModalContainer, Modal } from './styles'
 import { PersonContext } from './../../contexts/personContext';
 import React from "react";
+import { useAxios } from "../../hooks/useAxios";
 
 interface Props {
   name?: string;
+  image?: string;
   birth?: string;
   ageGroup?: string;
   sex?: string;
@@ -90,16 +92,80 @@ const PersonDetailsEdit = (Props: Props) => {
     id,
     handleEdit,
     registerDate,
-    setRegisterDate,
     registerDateHandler,
-    setName
+    setName,
+    setEmail,
+    setPassword,
+    setBirth,
+    setSex,
+    setSchooling,
+    setMarital,
+    setDocument1,
+    setDocument2,
+    setPhone1,
+    setPhone2,
+    setAddress,
+    setNumber,
+    setDistrict,
+    setZipcode,
+    setCountry,
+    setState,
+    setCity,
+    setRegisterDate,
+    setGroup,
+    setCategory,
+    setOffice,
+    setConversion,
+    setNotes,
+    setBaptized,
+    setImage,
   } = React.useContext(PersonContext)
   const [modal, setModal] = React.useState(false);
 
   React.useEffect(() => {
     setId(Props.id)
     setName(Props.name)
+    setEmail(Props.email)
+    setPassword(Props.password)
+    setBirth(formateBirt)
+    setSex(Props.sex)
+    setSchooling(Props.schooling)
+    setMarital(Props.marital)
+    setDocument1(Props.document1)
+    setDocument2(Props.document2)
+    setPhone1(Props.phone1)
+    setPhone2(Props.phone2)
+    setAddress(Props.addres)
+    setNumber(Props.number)
+    setDistrict(Props.district)
+    setZipcode(Props.zipcode)
+    setCountry(Props.country)
+    setState(Props.state)
+    setCity(Props.city)
+    setGroup(Props.group)
+    setCategory(Props.category)
+    setOffice(Props.office)
+    setConversion(fromatConversionDate)
+    setNotes(Props.notes)
+    setBaptized(Props.batizm)
+    setImage(Props.image)
+    setRegisterDate(yy + '-' + mm + '-' + dd)
+
   }, [setId])
+  const { data: dataCategory } = useAxios('category')
+  const { data: dataGroups } = useAxios('groups')
+  const { data: dataPositions } = useAxios('positions')
+
+  let bdate = Props.birth
+  let formateBirt = bdate?.split('T')[0]
+
+  let conversionDate = Props.conversion
+  let fromatConversionDate = conversionDate?.split('T')[0]
+
+  let creationDate = Props.dataCreation?.split(' ')[0]
+  let dd = creationDate?.split('/')[0]
+  let mm = creationDate?.split('/')[1]
+  let yy = creationDate?.split('/')[2]
 
   return (
     <Container >
@@ -110,73 +176,57 @@ const PersonDetailsEdit = (Props: Props) => {
             <BoxHeader title='Dados pessoais'></BoxHeader>
             <BoxContent>
               <InputBlock>
-                <p><b>Nome: &nbsp;</b>{Props.name}</p>
-                <p><b>Novo Nome: &nbsp;</b>{name}</p>
+                <p><b>Nome: &nbsp;</b></p>
                 <Input title='a' type='text' value={name} onChange={nameHandler} />
               </InputBlock>
               <InputBlock>
-                <p><b>Senha: &nbsp;</b>{Props.password}</p>
-                <p><b>Nova Senha: &nbsp;</b>{password}</p>
+                <p><b>Senha: &nbsp;</b></p>
                 <Input title='a' type='text' value={password} onChange={passwordHandler} />
               </InputBlock>
               <InputBlock>
-
-                <p><b>Data de nascimento: &nbsp;</b>{Props.birth}</p>
-                <p><b>Nova Data de nascimento: &nbsp;</b>{birth}</p>
+                <p><b>Data de nascimento: &nbsp;</b><br /></p>
                 <Input type='date' value={birth} onChange={birthHandler} />
               </InputBlock>
               <InputBlock>
-
-                <p><b>Sexo: &nbsp;</b>{Props.sex}</p>
-                <p><b>Novo Sexo: &nbsp;</b>{sex}</p>
+                <p><b>Sexo: &nbsp;</b></p>
                 <select title='sex' value={sex} onChange={sexHandler} >
                   <option value=''></option>
-                  <option value='Masculino'>Masculino</option>
-                  <option value='Feminino'>Feminino</option>
+                  <option value='masculino'>Masculino</option>
+                  <option value='feminino'>Feminino</option>
                 </select>
               </InputBlock>
               <InputBlock>
-
-                <p><b>Escolaridade: &nbsp;</b>{Props.schooling}</p>
-                <p><b>Nova Escolaridade: &nbsp;</b>{schooling}</p>
-                <Input type='text' value={schooling} onChange={schoolingHandler} list='scool' />
-                <datalist id='scool'>
-                  <option value='Maternal' />
-                  <option value='Educação infantil' />
-                  <option value='Ensino fundamental' />
-                  <option value='Ensino medio' />
-                  <option value='Ensino superior - Tecnólogo' />
-                  <option value='Ensino superior - Bacharel' />
-                  <option value='Ensino superior - Mestrado' />
-                  <option value='Ensino superior - Licenciatura' />
-                  <option value='Ensino superior - Doutorado' />
-                  <option value='Outros' />
-                  <option value='Nenhum' />
-                </datalist>
+                <p><b>Escolaridade: &nbsp;</b></p>
+                <select title='school' id='scool' value={schooling} onChange={schoolingHandler}>
+                  <option value='Maternal' >Maternal</option>
+                  <option value='Educação infantil'>Educação infantil</option>
+                  <option value='Ensino fundamental' >Ensino fundamental</option>
+                  <option value='Ensino medio' >Ensino medio</option>
+                  <option value='Ensino superior - Tecnólogo' >Ensino superior - Tecnólogo</option>
+                  <option value='Ensino superior - Bacharel' >Ensino superior - Bacharel</option>
+                  <option value='Ensino superior - Mestrado' >Ensino superior - Mestrado</option>
+                  <option value='Ensino superior - Licenciatura' >Ensino superior - Licenciatura</option>
+                  <option value='Ensino superior - Doutorado'>Ensino superior - Doutorado</option>
+                  <option value='Outros' >Outros</option>
+                  <option value='Nenhum' >Nenhum</option>
+                </select>
               </InputBlock>
               <InputBlock>
-
-                <p><b>Estado civil: &nbsp;</b>{Props.marital}</p>
-                <p><b>Novo Estado civil: &nbsp;</b>{marital}</p>
-                <Input type='text' value={marital} onChange={maritalHandler} list='civilstate' />
-                <datalist id='civilstate'>
-                  <option value='Solteiro(a)' />
-                  <option value='Casado(a)' />
-                  <option value='Viúvo(a)' />
-                  <option value='Divorciado(a)' />
-                  <option value='Outros' />
-                </datalist>
+                <p><b>Estado civil: &nbsp;</b></p>
+                <select title='civilstate' value={marital} onChange={maritalHandler} id='civilstate'>
+                  <option value='Solteiro(a)' >Solteiro(a)</option>
+                  <option value='Casado(a)' >Casado(a)</option>
+                  <option value='Viúvo(a)' >Viúvo(a)</option>
+                  <option value='Divorciado(a)' >Divorciado(a)</option>
+                  <option value='Outros' >Outros</option>
+                </select>
               </InputBlock>
               <InputBlock>
-
-                <p><b>Documento 1: &nbsp;</b>{Props.document1}</p>
-                <p><b>Novo Documento 1: &nbsp;</b>{document1}</p>
+                <p><b>Documento 1: &nbsp;</b></p>
                 <Input type='text' value={document1} onChange={document1Handler} />
               </InputBlock>
               <InputBlock>
-
-                <p><b>Documento 2: &nbsp;</b>{Props.document2}</p>
-                <p><b>Novo Documento 2: &nbsp;</b>{document2}</p>
+                <p><b>Documento 2: &nbsp;</b></p>
                 <Input type='text' value={document2} onChange={document2Handler} />
               </InputBlock>
             </BoxContent>
@@ -185,44 +235,63 @@ const PersonDetailsEdit = (Props: Props) => {
             <BoxHeader title='Outras informações'></BoxHeader>
             <BoxContent>
               <InputBlock>
-
-                <p><b>Categorias: &nbsp;</b>{Props.category}</p>
-                <p><b>Novo Categorias: &nbsp;</b>{category}</p>
-                <Input type='text' value={category} onChange={categoryHandler} />
+                <p><b>Categorias: &nbsp;</b></p>
+                <select title='category' id='category' value={category} onChange={categoryHandler}>
+                  <option value=''></option>
+                  {dataCategory?.category.map((category: any, index: any) => {
+                    return (
+                      //<Flex>
+                      //<input id={category.categoryName} type='checkbox' value={category.categoryName} />
+                      //<label htmlFor={category.categoryName}>{category.categoryName}</label>
+                      //</Flex>
+                      <option key={index} value={category.categoryName}>{category.categoryName}</option>
+                    )
+                  })}
+                </select>
               </InputBlock>
               <InputBlock>
 
-                <p><b>Grupo: &nbsp;</b>{Props.group}</p>
-                <p><b>Novo Grupo: &nbsp;</b>{group}</p>
-                <Input type='text' value={group} onChange={groupHandler} />
+                <p><b>Grupo: &nbsp;</b></p>
+                <select title='group' id='group' value={group} onChange={groupHandler}>
+                  <option value=''></option>
+                  {dataGroups?.groups.map((groups: any, index: any) => {
+                    return (
+                      //<Flex>
+                      //<input id={groups.name} type='checkbox' value={groups.name} />
+                      //<label htmlFor={groups.name} >{groups.name}</label>
+                      //</Flex>
+                      <option key={index} value={groups.name}>{groups.name}</option>
+                    )
+                  })}
+                </select>
               </InputBlock>
               <InputBlock>
-                <p><b>Cargos: &nbsp;</b>{Props.office}</p>
-                <p><b>Novo Cargos: &nbsp;</b>{office}</p>
-
-                <Input type='text' value={office} onChange={officeHandler} />
+                <p><b>Cargos: &nbsp;</b></p>
+                <select title='select' id='positions' onChange={officeHandler} value={office}>
+                  <option value='' ></option>
+                  {dataPositions?.positions.map((positions: any, index: any) => {
+                    return (
+                      <option key={index} value={positions.name} >{positions.name}</option>
+                    )
+                  })}
+                </select>
               </InputBlock>
               <InputBlock>
-                <p><b>Data de conversão: &nbsp;</b>{Props.conversion}</p>
-                <p><b>Nova Data de conversão: &nbsp;</b>{conversion}</p>
-
+                <p><b>Data de conversão: &nbsp;</b></p>
                 <Input type='date' value={conversion} onChange={conversionHandler} />
               </InputBlock>
               <InputBlock>
 
-                <p><b>Batizado: &nbsp;</b>{Props.batizm}</p>
-                <p><b>Novo Batizado: &nbsp;</b>{baptized}</p>
-                <Input type='text' onChange={baptizedHandler} list='baptism' />
-                <datalist id='baptism'>
-                  <option value='Sim' />
-                  <option value='Não' />
-                </datalist>
+                <p><b>Batizado: &nbsp;</b></p>
+                <select title='baptizm' id='baptism' value={baptized} onChange={baptizedHandler}>
+                  <option value='true' >Sim</option>
+                  <option value='false' >Não</option>
+                </select>
               </InputBlock>
               <InputBlock>
 
-                <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>
-                <p><b>Novo Perfil criado em: &nbsp;</b>{registerDate}</p>
-                <Input type='date' onChange={registerDateHandler} />
+                <p><b>Perfil criado em: &nbsp;</b></p>
+                <Input type='date' onChange={registerDateHandler} value={registerDate} />
               </InputBlock>
             </BoxContent>
           </Box>
@@ -233,20 +302,17 @@ const PersonDetailsEdit = (Props: Props) => {
             <BoxContent>
               <InputBlock>
 
-                <p><b>Telefone 1: &nbsp;</b>{Props.phone1} </p>
-                <p><b>Novo Telefone 1: &nbsp;</b>{phone1} </p>
+                <p><b>Telefone 1: &nbsp;</b></p>
                 <Input type='text' value={phone1} onChange={phone1Handler} />
               </InputBlock>
               <InputBlock>
 
-                <p><b>Telefone 2: &nbsp;</b>{Props.phone2}</p>
-                <p><b>Novo Telefone 2: &nbsp;</b>{phone2}</p>
+                <p><b>Telefone 2: &nbsp;</b></p>
                 <Input type='text' value={phone2} onChange={phone2Handler} />
               </InputBlock>
               <InputBlock>
 
-                <p><b>E-mail: &nbsp;</b>{Props.email}</p>
-                <p><b>Novo E-mail: &nbsp;</b>{email}</p>
+                <p><b>E-mail: &nbsp;</b></p>
                 <Input type='email' value={email} onChange={emailHandler} />
               </InputBlock>
             </BoxContent>
@@ -255,45 +321,32 @@ const PersonDetailsEdit = (Props: Props) => {
             <BoxHeader title='Endereço'></BoxHeader>
             <BoxContent>
               <InputBlock>
-                <p><b>Endereço: &nbsp;  </b>{Props.addres}</p>
-                <p><b>Novo Endereço: &nbsp;  </b>{address}</p>
-
+                <p><b>Endereço: &nbsp;  </b></p>
                 <Input type='text' value={address} onChange={addressHandler} />
               </InputBlock>
               <InputBlock>
 
-                <p><b>Bairro: &nbsp; </b>{Props.district}</p>
-                <p><b>Novo Bairro: &nbsp; </b>{district}</p>
+                <p><b>Bairro: &nbsp; </b></p>
                 <Input type='text' value={district} onChange={districtHandler} />
               </InputBlock>
               <InputBlock>
-                <p><b>Número: &nbsp; </b>{Props.number}</p>
-                <p><b>Novo Número: &nbsp; </b>{number}</p>
-
+                <p><b>Número: &nbsp; </b></p>
                 <Input type='text' value={number} onChange={numberHandler} />
               </InputBlock>
               <InputBlock>
-                <p><b>CEP: &nbsp; </b>{Props.zipcode}</p>
-                <p><b>Novo CEP: &nbsp; </b>{zipcode}</p>
-
+                <p><b>CEP: &nbsp; </b></p>
                 <Input type='text' value={zipcode} onChange={zipcodeHandler} />
               </InputBlock>
               <InputBlock>
-
-                <p><b>Cidade: &nbsp; </b>{Props.city}</p>
-                <p><b>Nova Cidade: &nbsp; </b>{city}</p>
+                <p><b>Cidade: &nbsp; </b></p>
                 <Input type='text' value={city} onChange={cityHandler} />
               </InputBlock>
               <InputBlock>
-                <p><b>Estado: &nbsp; </b>{Props.state}</p>
-                <p><b>Novo Estado: &nbsp; </b>{state}</p>
-
+                <p><b>Estado: &nbsp; </b></p>
                 <Input type='text' value={state} onChange={stateHandler} />
               </InputBlock>
               <InputBlock>
-
-                <p><b>País: &nbsp; </b>{Props.country}</p>
-                <p><b>Novo País: &nbsp; </b>{country}</p>
+                <p><b>País: &nbsp; </b></p>
                 <Input type='text' value={country} onChange={countryHandler} />
               </InputBlock>
             </BoxContent>
@@ -301,10 +354,7 @@ const PersonDetailsEdit = (Props: Props) => {
           <Box>
             <BoxHeader title='Anotações'></BoxHeader>
             <BoxContent>
-              <p><b>Anotações</b></p>
-              <textarea title='text' name="" id="" value={Props.notes} ></textarea>
-
-              <p><b>Novas Anotações</b></p>
+              <p><b> Anotações</b></p>
               <textarea title='text' name="" id="" value={notes} onChange={notesHandler} ></textarea>
             </BoxContent>
           </Box>

@@ -34,13 +34,6 @@ const PersonDetails = () => {
     age_now--;
   }
 
-  var baptizeds = data?.person[`${id}`].baptized
-  if (baptizeds === true) {
-    baptizeds = "Sim"
-  } else {
-    baptizeds = "Não"
-  }
-
   var age_group = ''
 
   if (age_now >= 0 && age_now <= 12) {
@@ -70,7 +63,7 @@ const PersonDetails = () => {
     <Container >
       <Top>
         <Image>
-          <img src="" alt="user image" />
+          <img src={data?.person[`${id}`].image} alt="user image" />
         </Image>
         <BasicInfos>
           <h2>{data?.person[`${id}`].name}</h2>
@@ -142,7 +135,7 @@ const PersonDetails = () => {
                 category={data?.person[`${id}`].category}
                 office={data?.person[`${id}`].office}
                 conversion={Conversion}
-                batizm={baptizeds}
+                batizm={data?.person[`${id}`].baptized}
                 dataCreation={data?.person[`${id}`].registerDate}
                 phone1={data?.person[`${id}`].phone1}
                 phone2={data?.person[`${id}`].phone2}
@@ -155,6 +148,7 @@ const PersonDetails = () => {
                 state={data?.person[`${id}`].state}
                 country={data?.person[`${id}`].country}
                 notes={data?.person[`${id}`].notes}
+                group={data?.person[`${id}`].group}
               />
             </Tab>
             <Tab title='Campos adicionais'>
@@ -166,7 +160,8 @@ const PersonDetails = () => {
             <Tab title='Editar'>
               <PersonDetailsEdit
                 name={data?.person[`${id}`].name}
-                birth={Birth}
+                password={data?.person[`${id}`].password}
+                birth={data?.person[`${id}`].birth}
                 ageGroup={age_group}
                 sex={data?.person[`${id}`].sex}
                 schooling={data?.person[`${id}`].schooling}
@@ -175,8 +170,8 @@ const PersonDetails = () => {
                 document2={data?.person[`${id}`].document2}
                 category={data?.person[`${id}`].category}
                 office={data?.person[`${id}`].office}
-                conversion={Conversion}
-                batizm={baptizeds}
+                conversion={data?.person[`${id}`].conversion}
+                batizm={data?.person[`${id}`].baptized}
                 dataCreation={data?.person[`${id}`].registerDate}
                 phone1={data?.person[`${id}`].phone1}
                 phone2={data?.person[`${id}`].phone2}
