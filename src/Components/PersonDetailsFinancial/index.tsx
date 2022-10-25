@@ -13,8 +13,12 @@ import { useAxios } from '../../hooks/useAxios';
 
 import { Box, Top, TableContainer } from './styles'
 import { FinancialContext } from '../../contexts/financialContext';
-const PersonDetailsFinancial = () => {
+interface Props {
+  name?: String;
+}
+const PersonDetailsFinancial = ({ name }: Props) => {
   const { modal, handleEdit, OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
+
   const { data } = useAxios('financial')
   return (
     <Box>
@@ -43,30 +47,35 @@ const PersonDetailsFinancial = () => {
               const formatedDate = datef.toLocaleDateString()
 
               const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'brl', })
+              if (name === financial.receivedFrom) {
+                return (
+                  <Tr key={index}>
+                    <Td><Button onClick={() => handleEdit(financial._id,
+                      financial.date,
+                      financial.description,
+                      financial.value,
+                      financial.paidOut,
+                      financial.receivedFrom,
+                      financial.category,
+                      financial.account,
+                      financial.costCenter,
+                      financial.typeOfPayment,
+                      financial.documentNumber,
+                      financial.competence,
+                      financial.notes,
+                      financial.file)}>{formatedDate}</Button></Td>
+                    <Td><Button >{financial.description}</Button></Td>
+                    <Td><Button>{financial.category}</Button></Td>
+                    <Td><Button>{financial.file}</Button></Td>
+                    <Td><Button className={financial.revenuesExpenses ? 'green' : 'red'}>{financial.revenuesExpenses ? '' : '-'}&nbsp;{formatter.format(financial.value)}</Button></Td>
+                  </Tr>
+                )
+              }
               return (
-                <Tr key={index}>
-                  <Td><Button onClick={() => handleEdit(financial._id,
-                    financial.date,
-                    financial.description,
-                    financial.value,
-                    financial.paidOut,
-                    financial.receivedFrom,
-                    financial.category,
-                    financial.account,
-                    financial.costCenter,
-                    financial.typeOfPayment,
-                    financial.documentNumber,
-                    financial.competence,
-                    financial.notes,
-                    financial.file)}>{formatedDate}</Button></Td>
-                  <Td><Button >{financial.description}</Button></Td>
-                  <Td><Button>{financial.category}</Button></Td>
-                  <Td><Button>{financial.file}</Button></Td>
-                  <Td><Button>{formatter.format(financial.value)}</Button></Td>
-                </Tr>
+                <>
+                </>
               )
             })}
-          </Tbody>
         </Table>
       </TableContainer>
       <PageSelector />

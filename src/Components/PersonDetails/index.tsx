@@ -63,7 +63,7 @@ const PersonDetails = () => {
     <Container >
       <Top>
         <Image>
-          <img src={data?.person[`${id}`].image} alt="user image" />
+          <img src={data?.person[`${id}`].image} alt="user" />
         </Image>
         <BasicInfos>
           <h2>{data?.person[`${id}`].name}</h2>
@@ -94,7 +94,7 @@ const PersonDetails = () => {
             </BoxHeader>
             <BoxContent>
               <Group>
-                <img src="" alt="group image" />
+                <img src="" alt="group " />
                 <Block>
                   <p>Group name</p>
                   <p><span>Lider 1</span></p>
@@ -116,7 +116,7 @@ const PersonDetails = () => {
           <Box>
             <BoxHeader title='Acompanhamento pessoal'></BoxHeader>
             <BoxContent>
-              <Input type="text" value='' disabled />
+              <Input type="text" disabled />
             </BoxContent>
           </Box>
         </Aside>
@@ -155,7 +155,7 @@ const PersonDetails = () => {
               <PersonDetailsAditionalFields />
             </Tab>
             <Tab title='Financeiro'>
-              <PersonDetailsFinancial />
+              <PersonDetailsFinancial name={data?.person[`${id}`].name} />
             </Tab>
             <Tab title='Editar'>
               <PersonDetailsEdit

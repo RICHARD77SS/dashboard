@@ -61,13 +61,14 @@ const MakeRevenues = () => {
     handleDelete,
     id
   } = React.useContext(FinancialContext)
-  console.log(revenuesExpenses)
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
         <BoxHeader title={revenuesExpenses ? 'Criar Receita' : 'Criar Despesa'}>
           <Button type='button' onClick={() => setModal(false)}><AiOutlineCloseCircle size={30} /></Button>
-          {id ? <Button onClick={() => handleDelete(id)}>Apagar</Button> : null}
+          {id ?
+            <Button onClick={() => handleDelete(id)}>Apagar</Button>
+            : null}
         </BoxHeader>
         <BoxContent>
           <Flex>
@@ -81,7 +82,7 @@ const MakeRevenues = () => {
             </InputBlock>
             <InputBlock>
               <label htmlFor="value">Valor</label>
-              <Input type='number' placeholder='0.00' value={value} onChange={valueHandler} />
+              <Input type='number' placeholder='0.00' min='0' value={value} onChange={valueHandler} />
             </InputBlock>
             <InputBlock>
               <label htmlFor="pay">Pago?</label>

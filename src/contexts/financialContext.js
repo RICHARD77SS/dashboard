@@ -30,13 +30,16 @@ export function FinancialContextProvider({
   function OpenRevenues() {
     setRevenuesExpenses(true)
     setModal(true)
+    AddNew()
   }
   function OpenExpenses() {
     setRevenuesExpenses(false)
     setModal(true)
+    AddNew()
   }
 
   function AddNew() {
+    setId('')
     setDate('')
     setDescription('')
     setValue()
@@ -154,6 +157,7 @@ export function FinancialContextProvider({
   function handleDelete(id) {
     api.delete(`financial/${id}`);
     window.alert('financial removido')
+    setModal(false)
     const updatedFinancial = {
       financial: data.financial?.filter((financial) => financial._id !== id)
     };
@@ -220,6 +224,7 @@ export function FinancialContextProvider({
     handleSubmit,
     handleDelete,
     setId,
+    id,
     setModal,
     modal,
     handleEdit,

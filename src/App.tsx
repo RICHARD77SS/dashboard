@@ -110,6 +110,7 @@ import { ExtraFieldsContextProvider } from './contexts/extraFieldsContext';
 import { CategoryContextProvider } from './contexts/categoryContext';
 import { PositionsContextProvider } from './contexts/positionsContexts';
 import { GroupsContextProvider } from './contexts/groupsContext';
+import { FinancialContextProvider } from './contexts/financialContext';
 
 
 function App() {
@@ -126,118 +127,120 @@ function App() {
           <CategoryContextProvider>
             <PositionsContextProvider>
               <GroupsContextProvider>
-                <Routes>
-                  <Route path='/' element={<TopBar />}>
-                    <Route path='/' element={<Overview />} />
+                <FinancialContextProvider>
+                  <Routes>
+                    <Route path='/' element={<TopBar />}>
+                      <Route path='/' element={<Overview />} />
 
-                    <Route path='/people' element={<People />} />
+                      <Route path='/people' element={<People />} />
 
 
-                    <Route path='/addpeople' element={<AddPeople />} />
-                    <Route path='/addfield' element={<AdditionalField />} />
-                    <Route path='/categories' element={<Categories />} />
-                    <Route path='/office' element={<Office />} />
-                    <Route path='/cardpersonal' element={<CardPersonal />} />
-                    <Route path='/birthday' element={<Birthday />} />
-                    <Route path='/reports' element={<Reports />} >
-                      <Route path='/reports' element={<h3>Escolha um relatorio</h3>} />
-                      <Route path='/reports/office' element={<ReportsOffice />} />
-                      <Route path='/reports/age' element={<ReportsAge />} />
-                      <Route path='/reports/birth' element={<ReportsBirth />} />
-                      <Route path='/reports/sex' element={<ReportsSex />} />
-                      <Route path='/reports/relations' element={<ReportsRelation />} />
-                      <Route path='/reports/baptism' element={<ReportsBaptism />} />
-                      <Route path='/reports/conversion' element={<ReportsConversion />} />
-                      <Route path='/reports/district' element={<ReportsDistrict />} />
-                      <Route path='/reports/permissions' element={<ReportsPermissions />} />
-                    </Route>
-                    <Route path='/personsimportsexports' element={<PersonsImportsExports />} />
-                    <Route path='/groups' element={<Group />} />
-                    <Route path='/addgroups' element={<AddGroup />} />
-                    <Route path='/groupcategories' element={<GroupCategorie />} />
-                    <Route path='/groupreports' element={<GroupReports />} >
-                      <Route path='/groupreports/meetings' element={<GroupReportsMeetings />} />
-                      <Route path='/groupreports/visitorsandpersons' element={< GroupReportsVisitors />} />
-                      <Route path='/groupreports/absentpersons' element={< GroupReportsAbsent />} />
-                      <Route path='/groupreports/presentpersons' element={< GroupReportsPresent />} />
-                      <Route path='/groupreports/nogroupspersons' element={< GroupReportsNoGroups />} />
-                      <Route path='/groupreports/groupscategories' element={< GroupReportsGroupsCategories />} />
-                      <Route path='/groupreports/newgroups' element={< GroupReportsNewGroups />} />
-                      <Route path='/groupreports/activegroups' element={< GroupReportsActiveGroups />} />
-                      <Route path='/groupreports/inactivegroups' element={< GroupReportsInactiveGroups />} />
-                      <Route path='/groupreports/leader1' element={< GroupReportsLider1 />} />
-                      <Route path='/groupreports/leader2' element={< GroupReportsLider2 />} />
-                      <Route path='/groupreports/leader3' element={< GroupReportsLider3 />} />
-                      <Route path='/groupreports/leader4' element={< GroupReportsLider4 />} />
-                      <Route path='/groupreports/dayandhours' element={< GroupReportsDayHour />} >
-                        <Route path='/groupreports/dayandhours/sun' element={< GroupTableSunday />} />
-                        <Route path='/groupreports/dayandhours/mon' element={< GroupTableMonday />} />
-                        <Route path='/groupreports/dayandhours/tue' element={< GroupTableTuesday />} />
-                        <Route path='/groupreports/dayandhours/wed' element={< GroupTableWednesday />} />
-                        <Route path='/groupreports/dayandhours/thu' element={< GroupTableThursday />} />
-                        <Route path='/groupreports/dayandhours/fri' element={< GroupTableFriday />} />
-                        <Route path='/groupreports/dayandhours/sat' element={< GroupTableSaturnday />} />
+                      <Route path='/addpeople' element={<AddPeople />} />
+                      <Route path='/addfield' element={<AdditionalField />} />
+                      <Route path='/categories' element={<Categories />} />
+                      <Route path='/office' element={<Office />} />
+                      <Route path='/cardpersonal' element={<CardPersonal />} />
+                      <Route path='/birthday' element={<Birthday />} />
+                      <Route path='/reports' element={<Reports />} >
+                        <Route path='/reports' element={<h3>Escolha um relatorio</h3>} />
+                        <Route path='/reports/office' element={<ReportsOffice />} />
+                        <Route path='/reports/age' element={<ReportsAge />} />
+                        <Route path='/reports/birth' element={<ReportsBirth />} />
+                        <Route path='/reports/sex' element={<ReportsSex />} />
+                        <Route path='/reports/relations' element={<ReportsRelation />} />
+                        <Route path='/reports/baptism' element={<ReportsBaptism />} />
+                        <Route path='/reports/conversion' element={<ReportsConversion />} />
+                        <Route path='/reports/district' element={<ReportsDistrict />} />
+                        <Route path='/reports/permissions' element={<ReportsPermissions />} />
                       </Route>
-                      <Route path='/groupreports/mapgroups' element={< GroupReportsGroupMap />} />
-                    </Route>
-                    <Route path='/groupimportexport' element={< GroupsImportsExports />} />
-                    <Route path='/studies' element={<Studies />} />
-                    <Route path='/addstudies' element={<AddStudies />} />
-                    <Route path='/studiecategories' element={<StudiesCategories />} />
-                    <Route path='/schools' element={<Schools />} />
-                    <Route path='/classes' element={<Classes />} />
-                    <Route path='/personalaccompaniment' element={<PersonalAccompaniment />} />
-                    <Route path='/studiesimportexport' element={<StudiesImportsExports />} />
-                    <Route path='/financial' element={<Financial />} />
-                    <Route path='/financialtransactions' element={<FinancialTransactions />} />
-                    <Route path='/financialreports' element={<FinancialReports />} >
-                      <Route path='/financialreports/extracts' element={<FinancialReportsExtract />} />
-                      <Route path='/financialreports/revenuesandexpenses' element={<FinancialReportsRevenuesExpenses />} />
-                      <Route path='/financialreports/transfer' element={<FinancialReportsTransfer />} />
-                      <Route path='/financialreports/projection' element={<FinancialReportsProjections />} />
-                      <Route path='/financialreports/dayextractrevenues' element={<FinancialReportsRevenuesDailyStatement />} />
-                      <Route path='/financialreports/costcenterrevenues' element={<FinancialReportsCustCenterRevenues />} />
-                      <Route path='/financialreports/toreceive' element={<FinancialReportsToReceive />} />
-                      <Route path='/financialreports/revenuesbycategory' element={<FinancialReportsRevenuesByCategories />} />
-                      <Route path='/financialreports/receiveanualsummary' element={<FinancialReportsRevenuesAnualCategory />} />
+                      <Route path='/personsimportsexports' element={<PersonsImportsExports />} />
+                      <Route path='/groups' element={<Group />} />
+                      <Route path='/addgroups' element={<AddGroup />} />
+                      <Route path='/groupcategories' element={<GroupCategorie />} />
+                      <Route path='/groupreports' element={<GroupReports />} >
+                        <Route path='/groupreports/meetings' element={<GroupReportsMeetings />} />
+                        <Route path='/groupreports/visitorsandpersons' element={< GroupReportsVisitors />} />
+                        <Route path='/groupreports/absentpersons' element={< GroupReportsAbsent />} />
+                        <Route path='/groupreports/presentpersons' element={< GroupReportsPresent />} />
+                        <Route path='/groupreports/nogroupspersons' element={< GroupReportsNoGroups />} />
+                        <Route path='/groupreports/groupscategories' element={< GroupReportsGroupsCategories />} />
+                        <Route path='/groupreports/newgroups' element={< GroupReportsNewGroups />} />
+                        <Route path='/groupreports/activegroups' element={< GroupReportsActiveGroups />} />
+                        <Route path='/groupreports/inactivegroups' element={< GroupReportsInactiveGroups />} />
+                        <Route path='/groupreports/leader1' element={< GroupReportsLider1 />} />
+                        <Route path='/groupreports/leader2' element={< GroupReportsLider2 />} />
+                        <Route path='/groupreports/leader3' element={< GroupReportsLider3 />} />
+                        <Route path='/groupreports/leader4' element={< GroupReportsLider4 />} />
+                        <Route path='/groupreports/dayandhours' element={< GroupReportsDayHour />} >
+                          <Route path='/groupreports/dayandhours/sun' element={< GroupTableSunday />} />
+                          <Route path='/groupreports/dayandhours/mon' element={< GroupTableMonday />} />
+                          <Route path='/groupreports/dayandhours/tue' element={< GroupTableTuesday />} />
+                          <Route path='/groupreports/dayandhours/wed' element={< GroupTableWednesday />} />
+                          <Route path='/groupreports/dayandhours/thu' element={< GroupTableThursday />} />
+                          <Route path='/groupreports/dayandhours/fri' element={< GroupTableFriday />} />
+                          <Route path='/groupreports/dayandhours/sat' element={< GroupTableSaturnday />} />
+                        </Route>
+                        <Route path='/groupreports/mapgroups' element={< GroupReportsGroupMap />} />
+                      </Route>
+                      <Route path='/groupimportexport' element={< GroupsImportsExports />} />
+                      <Route path='/studies' element={<Studies />} />
+                      <Route path='/addstudies' element={<AddStudies />} />
+                      <Route path='/studiecategories' element={<StudiesCategories />} />
+                      <Route path='/schools' element={<Schools />} />
+                      <Route path='/classes' element={<Classes />} />
+                      <Route path='/personalaccompaniment' element={<PersonalAccompaniment />} />
+                      <Route path='/studiesimportexport' element={<StudiesImportsExports />} />
+                      <Route path='/financial' element={<Financial />} />
+                      <Route path='/financialtransactions' element={<FinancialTransactions />} />
+                      <Route path='/financialreports' element={<FinancialReports />} >
+                        <Route path='/financialreports/extracts' element={<FinancialReportsExtract />} />
+                        <Route path='/financialreports/revenuesandexpenses' element={<FinancialReportsRevenuesExpenses />} />
+                        <Route path='/financialreports/transfer' element={<FinancialReportsTransfer />} />
+                        <Route path='/financialreports/projection' element={<FinancialReportsProjections />} />
+                        <Route path='/financialreports/dayextractrevenues' element={<FinancialReportsRevenuesDailyStatement />} />
+                        <Route path='/financialreports/costcenterrevenues' element={<FinancialReportsCustCenterRevenues />} />
+                        <Route path='/financialreports/toreceive' element={<FinancialReportsToReceive />} />
+                        <Route path='/financialreports/revenuesbycategory' element={<FinancialReportsRevenuesByCategories />} />
+                        <Route path='/financialreports/receiveanualsummary' element={<FinancialReportsRevenuesAnualCategory />} />
 
-                      <Route path='/financialreports/extractdayexpenses' element={<FinancialReportsExpensesDailyStatement />} />
-                      <Route path='/financialreports/costcenterexpenses' element={<FinancialReportsCustCenterExpenses />} />
-                      <Route path='/financialreports/topay' element={<FinancialReportsToPay />} />
-                      <Route path='/financialreports/expensesbycategory' element={<FinancialReportsExpenseByCategories />} />
-                      <Route path='/financialreports/payanualsummary' element={<FinancialReportsExpensesAnualCategory />} />
-                    </Route>
-                    <Route path='/financialcategories' element={<FinancialCategories />} />
-                    <Route path='/financialaccounts' element={<FinancialAccount />} />
-                    <Route path='/financialcontacts' element={<FinancialContacts />} />
-                    <Route path='/financialcostcenter' element={<FinancialCostCenter />} />
-                    <Route path='/financialimportsexports' element={<FinancialImportsExports />} />
-                    <Route path='/patrimonies' element={<Patrimonies />} />
-                    <Route path='/patrimoniescategory' element={<PatrimoniesCategories />} />
-                    <Route path='/patrimoniesplaces' element={<PatrimoniesPlaces />} />
-                    <Route path='/patrimoniesimportsexports' element={<PatrimoniesImportsExports />} />
-                    <Route path='/schedulecalendar' element={<ScheduleCalendar />} />
-                    <Route path='/scheduleevents' element={<ScheduleEvents />} />
-                    <Route path='/schedulewarnings' element={<ScheduleWarnings />} />
-                    <Route path='/scheduleanotation' element={<ScheduleMyAnnotations />} />
-                    <Route path='/scheduleimportsexports' element={<ScheduleImportsExports />} />
-                    <Route path='/mediasphotos' element={<MediaPhotos />} />
-                    <Route path='/mediasvideos' element={<MediaVideos />} />
-                    <Route path='/mediasforms' element={<MediaForms />} />
-                    <Route path='/mediasdocuments' element={<MediaDocuments />} />
-                    <Route path='/mediasfiles' element={<MediaFiles />} />
-                    <Route path='/card' element={<CardMake />} />
-                    <Route path='/forms/add' element={<AddForm />} />
-                    <Route path='/documenteditor' element={<DocumentEditor />} />
+                        <Route path='/financialreports/extractdayexpenses' element={<FinancialReportsExpensesDailyStatement />} />
+                        <Route path='/financialreports/costcenterexpenses' element={<FinancialReportsCustCenterExpenses />} />
+                        <Route path='/financialreports/topay' element={<FinancialReportsToPay />} />
+                        <Route path='/financialreports/expensesbycategory' element={<FinancialReportsExpenseByCategories />} />
+                        <Route path='/financialreports/payanualsummary' element={<FinancialReportsExpensesAnualCategory />} />
+                      </Route>
+                      <Route path='/financialcategories' element={<FinancialCategories />} />
+                      <Route path='/financialaccounts' element={<FinancialAccount />} />
+                      <Route path='/financialcontacts' element={<FinancialContacts />} />
+                      <Route path='/financialcostcenter' element={<FinancialCostCenter />} />
+                      <Route path='/financialimportsexports' element={<FinancialImportsExports />} />
+                      <Route path='/patrimonies' element={<Patrimonies />} />
+                      <Route path='/patrimoniescategory' element={<PatrimoniesCategories />} />
+                      <Route path='/patrimoniesplaces' element={<PatrimoniesPlaces />} />
+                      <Route path='/patrimoniesimportsexports' element={<PatrimoniesImportsExports />} />
+                      <Route path='/schedulecalendar' element={<ScheduleCalendar />} />
+                      <Route path='/scheduleevents' element={<ScheduleEvents />} />
+                      <Route path='/schedulewarnings' element={<ScheduleWarnings />} />
+                      <Route path='/scheduleanotation' element={<ScheduleMyAnnotations />} />
+                      <Route path='/scheduleimportsexports' element={<ScheduleImportsExports />} />
+                      <Route path='/mediasphotos' element={<MediaPhotos />} />
+                      <Route path='/mediasvideos' element={<MediaVideos />} />
+                      <Route path='/mediasforms' element={<MediaForms />} />
+                      <Route path='/mediasdocuments' element={<MediaDocuments />} />
+                      <Route path='/mediasfiles' element={<MediaFiles />} />
+                      <Route path='/card' element={<CardMake />} />
+                      <Route path='/forms/add' element={<AddForm />} />
+                      <Route path='/documenteditor' element={<DocumentEditor />} />
 
 
-                    <Route path='/medias/photos/album' element={<MediasCreateAlbum />} />
-                    <Route path='/groups/viewgroup/:id' element={<ViewGroup />} />
-                    <Route path='/persons/details/' element={<PersonDetails />} >
-                      <Route path='/persons/details/:id' element={<PersonDetails />} />
+                      <Route path='/medias/photos/album' element={<MediasCreateAlbum />} />
+                      <Route path='/groups/viewgroup/:id' element={<ViewGroup />} />
+                      <Route path='/persons/details/' element={<PersonDetails />} >
+                        <Route path='/persons/details/:id' element={<PersonDetails />} />
+                      </Route>
                     </Route>
-                  </Route>
-                </Routes>
+                  </Routes>
+                </FinancialContextProvider>
               </GroupsContextProvider>
             </PositionsContextProvider>
           </CategoryContextProvider>

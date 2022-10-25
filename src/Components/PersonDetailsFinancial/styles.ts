@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Box =  styled.div`
+export const Box = styled.div`
   width: 100%;
   height: auto;
   display: flex;
@@ -12,7 +12,7 @@ export const Box =  styled.div`
   gap: 1rem;
 `
 
-export const Top =  styled.div`
+export const Top = styled.div`
   width: 100%;
   height: auto;
   display: flex;
@@ -30,11 +30,16 @@ export const Top =  styled.div`
   }
 `
 
-export const TableContainer =  styled.div`
+export const TableContainer = styled.div`
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items:center;
-
+  .green {
+    color: #090;
+  }
+  .red{
+    color: #b00;
+  }
 `
