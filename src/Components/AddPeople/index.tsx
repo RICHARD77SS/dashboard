@@ -315,7 +315,7 @@ const AddPeople = () => {
   var Lenght = data?.person.length
 
   function getDate() {
-    let DateNow = new Date().toLocaleString() + ""
+    let DateNow = new Date().toISOString()
     setRegisterDate(DateNow)
   }
   const { data: datafield } = useAxios('extraFields')
