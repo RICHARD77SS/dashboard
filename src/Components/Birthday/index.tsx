@@ -2,7 +2,7 @@ import Button from '../Button';
 import Input from '../Input';
 import { useAxios } from '../../hooks/useAxios';
 
-import { Container, ContainerHeader, Content, Header, BoxContent, Top, Center, Options, Bottom } from './styles';
+import { Container, ContainerHeader, Content, Header, BoxContent, Center, Options, Bottom } from './styles';
 
 import { AiOutlineCopy, AiOutlineDownload, AiOutlinePrinter, AiOutlineEye } from 'react-icons/ai';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
@@ -18,6 +18,79 @@ import Tab from '../Tab';
 
 const Birthday = () => {
   const { data } = useAxios('person')
+
+  let janeiro = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 1 ? data.getMonth() + 1 : null
+  })
+  let jan = janeiro?.filter((i: number) => i === 2).length
+
+  let fevereiro = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 2 ? data.getMonth() + 1 : null
+  })
+  let fev = fevereiro?.filter((i: number) => i === 2).length
+
+  let marco = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 3 ? data.getMonth() + 1 : null
+  })
+  let mar = marco?.filter((i: number) => i === 3).length
+
+  let abril = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 4 ? data.getMonth() + 1 : null
+  })
+  let abr = abril?.filter((i: number) => i === 4).length
+
+  let maio = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 5 ? data.getMonth() + 1 : null
+  })
+  let mai = maio?.filter((i: number) => i === 5).length
+
+  let junho = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 6 ? data.getMonth() + 1 : null
+  })
+  let jun = junho?.filter((i: number) => i === 6).length
+
+  let julho = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 7 ? data.getMonth() + 1 : null
+  })
+  let jul = julho?.filter((i: number) => i === 7).length
+
+  let agosto = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 8 ? data.getMonth() + 1 : null
+  })
+  let ago = agosto?.filter((i: number) => i === 8).length
+
+  let setembro = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 9 ? data.getMonth() + 1 : null
+  })
+  let set = setembro?.filter((i: number) => i === 9).length
+
+  let outubro = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 10 ? data.getMonth() + 1 : null
+  })
+  let out = outubro?.filter((i: number) => i === 10).length
+
+  let novembro = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 11 ? data.getMonth() + 1 : null
+  })
+  let nov = novembro?.filter((i: number) => i === 11).length
+
+  let dezembro = data?.person.map((person: any, index: any) => {
+    const data = new Date(person.birth)
+    return data.getMonth() + 1 === 12 ? data.getMonth() + 1 : null
+  })
+  let dez = dezembro?.filter((i: number) => i === 12).length
+  
   return (
     <Container>
       <ContainerHeader>
@@ -30,7 +103,7 @@ const Birthday = () => {
         </Header>
         <BoxContent>
           <TabsBirthday>
-            <Tab title={`Jan ${(0)}`}>
+            <Tab title={`Jan (${jan})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -59,7 +132,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Fev ${(0)}`}>
+            <Tab title={`Fev (${fev})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -88,7 +161,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Mar ${(0)}`}>
+            <Tab title={`Mar (${mar})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -117,7 +190,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Abr ${(0)}`}>
+            <Tab title={`Abr (${abr})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -146,7 +219,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Mai ${(0)}`}>
+            <Tab title={`Mai (${mai})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -175,7 +248,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Jun ${(0)}`}>
+            <Tab title={`Jun (${jun})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -204,7 +277,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Jul ${(0)}`}>
+            <Tab title={`Jul (${jul})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -233,7 +306,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Ago ${(0)}`}>
+            <Tab title={`Ago (${ago})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -263,7 +336,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Set ${(0)}`}>
+            <Tab title={`Set (${set})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -292,7 +365,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Out ${(0)}`}>
+            <Tab title={`Out (${out})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -321,7 +394,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Nov ${(0)}`}>
+            <Tab title={`Nov (${nov})`}>
               <Table>
                 <Thead>
                   <Tr>
@@ -350,7 +423,7 @@ const Birthday = () => {
                 </Tbody>
               </Table>
             </Tab>
-            <Tab title={`Dez ${(0)}`}>
+            <Tab title={`Dez (${dez})`}>
               <Table>
                 <Thead>
                   <Tr>
