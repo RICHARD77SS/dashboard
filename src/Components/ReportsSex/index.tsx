@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+import { useAxios } from '../../hooks/useAxios';
 import Button from '../Button';
+import GraphContainer from '../GraphConteiner';
 import GraphPieArea from '../GraphPieArea';
 import ReportsHeader from '../ReportsHeader';
 import Table from '../Table';
@@ -7,37 +10,44 @@ import Td from '../Td';
 import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
-import { Container, Graph } from './styles';
+import { Container} from './styles';
 
 
-const male = 10
-const female = 10
-
-const PieData = {
-  labels: ['Feminino', 'Masculino'],
-  datasets: [
-    {
-      labels: '# of Votes',
-      data: [male, female],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 const ReportsSex = () => {
+  const { data } = useAxios('person')
+  let mens = data?.person.map((person: any, index: any) => {
+    return person.sex === 'masculino' ? person.sex : 0
+  })
+  let male = mens?.filter((i: string) => i === 'masculino').length
+
+  let womans = data?.person.map((person: any, index: any) => {
+    return person.sex === 'feminino' ? person.sex : 0
+  })
+  let female = womans?.filter((i: string) => i === 'feminino').length
+  const PieData = {
+    labels: ['Feminino', 'Masculino'],
+    datasets: [
+      {
+        labels: '# of Votes',
+        data: [male, female],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Sexo' />
-      <Graph>
+      <GraphContainer>
         <GraphPieArea data={PieData} />
-      </Graph>
+      </GraphContainer>
       <Table>
         <Thead>
           <Tr>
@@ -50,12 +60,12 @@ const ReportsSex = () => {
           <Tr>
             <Td>Feminino</Td>
             <Td>{female}</Td>
-            <Td><Button>Ver pessoas</Button></Td>
+            <Td><Link to='/people'><Button>Ver pessoas</Button></Link></Td>
           </Tr>
           <Tr>
             <Td>Masculino</Td>
             <Td>{male}</Td>
-            <Td><Button>Ver pessoas</Button></Td>
+            <Td><Link to='/people'><Button>Ver pessoas</Button></Link></Td>
           </Tr>
         </Tbody>
       </Table>
