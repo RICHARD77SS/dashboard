@@ -3,7 +3,7 @@ import BoxHeader from "../BoxHeader";
 import Button from "../Button";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
-import { Container, Form, Block, Box, BoxContent, ModalContainer, Modal } from './styles'
+import { Container, Form, Block, Box, BoxContent, ModalContainer, Modal, Imagem } from './styles'
 import { PersonContext } from './../../contexts/personContext';
 import React from "react";
 import { useAxios } from "../../hooks/useAxios";
@@ -88,6 +88,8 @@ const PersonDetailsEdit = (Props: Props) => {
     conversionHandler,
     notesHandler,
     baptizedHandler,
+    image,
+    imageHandler,
     setId,
     id,
     handleEdit,
@@ -119,15 +121,27 @@ const PersonDetailsEdit = (Props: Props) => {
     setNotes,
     setBaptized,
     setImage,
+    modal, setModal
   } = React.useContext(PersonContext)
-  const [modal, setModal] = React.useState(false);
 
+  const { data: dataCategory } = useAxios('category')
+  const { data: dataGroups } = useAxios('groups')
+  const { data: dataPositions } = useAxios('positions')
+
+  let bdate = Props.birth
+  let formatBirt = bdate?.split('T')[0]
+
+  let conversionDate = Props.conversion
+  let formatConversionDate = conversionDate?.split('T')[0]
+
+  let creationDate = registerDate?.split('T')[0]
+  console.log(creationDate)
   React.useEffect(() => {
     setId(Props.id)
     setName(Props.name)
     setEmail(Props.email)
     setPassword(Props.password)
-    setBirth(formateBirt)
+    setBirth(formatBirt)
     setSex(Props.sex)
     setSchooling(Props.schooling)
     setMarital(Props.marital)
@@ -145,27 +159,39 @@ const PersonDetailsEdit = (Props: Props) => {
     setGroup(Props.group)
     setCategory(Props.category)
     setOffice(Props.office)
-    setConversion(fromatConversionDate)
+    setConversion(formatConversionDate)
     setNotes(Props.notes)
     setBaptized(Props.batizm)
     setImage(Props.image)
-    setRegisterDate(yy + '-' + mm + '-' + dd)
+    setRegisterDate(Props.dataCreation)
 
-  }, [setId])
-  const { data: dataCategory } = useAxios('category')
-  const { data: dataGroups } = useAxios('groups')
-  const { data: dataPositions } = useAxios('positions')
-
-  let bdate = Props.birth
-  let formateBirt = bdate?.split('T')[0]
-
-  let conversionDate = Props.conversion
-  let fromatConversionDate = conversionDate?.split('T')[0]
-
-  let creationDate = Props.dataCreation?.split(' ')[0]
-  let dd = creationDate?.split('/')[0]
-  let mm = creationDate?.split('/')[1]
-  let yy = creationDate?.split('/')[2]
+  }, [setId, Props.id,
+    setName, Props.name,
+    setEmail, Props.email,
+    setPassword, Props.password,
+    setBirth, formatBirt,
+    setSex, Props.sex,
+    setSchooling, Props.schooling,
+    setMarital, Props.marital,
+    setDocument1, Props.document1,
+    setDocument2, Props.document2,
+    setPhone1, Props.phone1,
+    setPhone2, Props.phone2,
+    setAddress, Props.addres,
+    setNumber, Props.number,
+    setDistrict, Props.district,
+    setZipcode, Props.zipcode,
+    setCountry, Props.country,
+    setState, Props.state,
+    setCity, Props.city,
+    setGroup, Props.group,
+    setCategory, Props.category,
+    setOffice, Props.office,
+    setConversion, formatConversionDate,
+    setNotes, Props.notes,
+    setBaptized, Props.batizm,
+    setImage, Props.image,
+    setRegisterDate, Props.dataCreation])
 
   return (
     <Container >
@@ -175,6 +201,10 @@ const PersonDetailsEdit = (Props: Props) => {
           <Box>
             <BoxHeader title='Dados pessoais'></BoxHeader>
             <BoxContent>
+              <Imagem>
+                <img src={image} alt="" />
+                <Input type='text' value={image} onChange={imageHandler} />
+              </Imagem>
               <InputBlock>
                 <p><b>Nome: &nbsp;</b></p>
                 <Input title='a' type='text' value={name} onChange={nameHandler} />
@@ -291,7 +321,7 @@ const PersonDetailsEdit = (Props: Props) => {
               <InputBlock>
 
                 <p><b>Perfil criado em: &nbsp;</b></p>
-                <Input type='date' onChange={registerDateHandler} value={registerDate} />
+                <Input type='date' onChange={registerDateHandler} value={creationDate} />
               </InputBlock>
             </BoxContent>
           </Box>
@@ -363,8 +393,8 @@ const PersonDetailsEdit = (Props: Props) => {
           <ModalContainer>
             <Modal>
               <h2>Deseja salvar as alterações?</h2>
-              <Button onClick={() => { handleEdit(id) }}>Salvar</Button>
-              <Button onClick={() => { setModal(false) }} >Cancelar</Button>
+              <Button type='button' onClick={() => { handleEdit(id) }}>Salvar</Button>
+              <Button type='button' onClick={() => { setModal(false) }} >Cancelar</Button>
             </Modal>
           </ModalContainer>
           : null}
