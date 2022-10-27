@@ -1,7 +1,10 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import {Container, Content,Sidebar, Header, SideContent,GraphContainer } from './styles';
+import { useAxios } from '../../hooks/useAxios';
+import { Container, Content, Sidebar, Header, SideContent, GraphContainer, Box } from './styles';
 
 const Reports = () => {
+  const { data } = useAxios('extrafields')
+  console.log(data)
   return (
     <Container>
       <Content>
@@ -13,12 +16,16 @@ const Reports = () => {
             <NavLink className='navlink' to='/reports/office'>
               Cargos
             </NavLink>
-            <NavLink className='navlink' to='/reports/addfield'>
+            <Box>
               Campos adicionais
-            </NavLink>
-            <NavLink className='navlink' to='/reports/new'>
-              Aditional Field
-            </NavLink>
+              {data?.extraFields.map((fields: any, index: number) => {
+                return (
+                  <NavLink className='navlink' to={`/reports/${fields.inputName}`}>
+                    {fields.inputName}
+                  </NavLink>
+                )
+              })}
+            </Box>
             <NavLink className='navlink' to='/reports/age'>
               Faixa etária
             </NavLink>
