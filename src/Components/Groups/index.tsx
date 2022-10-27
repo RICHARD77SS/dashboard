@@ -24,7 +24,16 @@ const Group = () => {
             <CardsContainer>
               {dataGroups?.groups?.map((groups: any, index: any) => {
                 return (
-                  <CardGroup key={index} bg={groups.image} image={groups.image} name={groups.name}>
+                  <CardGroup key={index}
+                    bg={groups.image}
+                    image={groups.image}
+                    name={groups.name}
+                    lider1={groups.lider1.name}
+                    lider2={groups.lider2.name}
+                    lider3={groups.lider3.name}
+                    lider1Image={groups.lider1.image}
+                    lider2Image={groups.lider2.image}
+                    lider3Image={groups.lider3.image}>
                     <Link to={`/groups/viewgroup/${index}`}><Button>Visualizar</Button></Link>
                   </CardGroup>
                 )
