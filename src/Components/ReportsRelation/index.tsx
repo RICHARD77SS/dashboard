@@ -1,5 +1,6 @@
 import { useAxios } from '../../hooks/useAxios';
 import Button from '../Button';
+import GraphContainer from '../GraphConteiner';
 import GraphPieArea from '../GraphPieArea';
 import ReportsHeader from '../ReportsHeader';
 import Table from '../Table';
@@ -8,7 +9,7 @@ import Td from '../Td';
 import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
-import { Container, Graph } from './styles';
+import { Container } from './styles';
 
 const ReportsRelation = () => {
   const { data } = useAxios('person')
@@ -51,9 +52,9 @@ const ReportsRelation = () => {
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Estado civil' />
-      <Graph>
+      <GraphContainer>
         <GraphPieArea data={PieData} />
-      </Graph>
+      </GraphContainer>
       <Table>
         <Thead>
           <Tr>
