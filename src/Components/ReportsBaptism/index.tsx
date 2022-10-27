@@ -1,4 +1,6 @@
+import { useAxios } from '../../hooks/useAxios';
 import Button from '../Button';
+import GraphContainer from '../GraphConteiner';
 import GraphPieArea from '../GraphPieArea';
 import ReportsHeader from '../ReportsHeader';
 import Table from '../Table';
@@ -7,36 +9,38 @@ import Td from '../Td';
 import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
-import { Container, Graph} from './styles';
+import { Container } from './styles';
 
-const yes = 10
-const no = 10
-
-const PieData = {
-  labels: ['Feminino', 'Masculino'],
-  datasets: [
-    {
-      labels: '# of Votes',
-      data: [yes, no],
-      backgroundColor: [
-        'rgba(253, 0, 0, 0.2)',
-        'rgba(72, 235, 54, 0.2)',
-      ],
-      borderColor: [
-        '#f61818',
-        '#36eb39',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 const ReportsBaptism = () => {
+  const { data } = useAxios('person')
+  let baptism = data?.person.map((person: any) => person.baptized)
+  const yes = baptism?.map((baptizm: any) => baptizm === true ? baptizm : 0).filter((i: any) => i === true).length
+  const no = baptism?.map((baptizm: any) => baptizm === false ? baptizm : 0).filter((i: any) => i === false).length
+
+  const PieData = {
+    labels: ['Feminino', 'Masculino'],
+    datasets: [
+      {
+        labels: '# of Votes',
+        data: [yes, no],
+        backgroundColor: [
+          'rgba(253, 0, 0, 0.2)',
+          'rgba(72, 235, 54, 0.2)',
+        ],
+        borderColor: [
+          '#f61818',
+          '#36eb39',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Batizados' />
-      <Graph>
+      <GraphContainer>
         <GraphPieArea data={PieData} />
-      </Graph>
+      </GraphContainer>
       <Table>
         <Thead>
           <Tr>
