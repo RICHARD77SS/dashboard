@@ -54,8 +54,8 @@ const PersonDetailsInfos = (Props: Props) => {
               <p><b>Cargos: &nbsp;</b>{Props.office}</p>
               <p><b>Grupos: &nbsp;</b>{Props.group}</p>
               <p><b>Data de conversão: &nbsp;</b>{Props.conversion}</p>
-              <p><b>Batizado: &nbsp;</b>{Props.batizm}</p>
-              <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation}</p>
+              <p><b>Batizado: &nbsp;</b>{Props.batizm ? 'Sim' : 'Não'}</p>
+              <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation?.split('T')[0]}</p>
             </BoxContent>
           </Box>
         </Block>
@@ -84,7 +84,7 @@ const PersonDetailsInfos = (Props: Props) => {
             <BoxHeader title='Anotações'></BoxHeader>
             <BoxContent>
               <p><b>Anotações</b></p>
-              <textarea title='anotations' name="" id="" value={Props.notes}></textarea>
+              <textarea title='anotations' name="" id="" value={Props.notes} readOnly></textarea>
             </BoxContent>
           </Box>
         </Block>
