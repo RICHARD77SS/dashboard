@@ -1,10 +1,24 @@
+import React from 'react'
 import { AiFillLock, AiOutlinePlus } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { GroupCategoryContext } from '../../contexts/groupCategoryContext';
+import { useAxios } from '../../hooks/useAxios';
 import Button from '../Button';
+import Flex from '../Flex';
 import Input from '../Input';
-import { Container, Content, Categorias,CategoriaHeader, CategoriasContainer, Table, Tr, Th, Td, AddCategoria, AddHeader,AddContainer,InputGroup, Thead, Tbody } from './styles';
+import Table from '../Table';
+import Tbody from '../Tbody';
+import Td from '../Td';
+import Th from '../Th';
+import Thead from '../Thead';
+import Tr from '../Tr';
+import { Container, Content, Categorias, CategoriaHeader, CategoriasContainer, AddCategoria, AddHeader, Form, InputGroup } from './styles';
 
-const GroupCategorie
- = () => {
+const GroupCategorie = () => {
+  const { data } = useAxios('groupCategory')
+  const { data: dataGroup } = useAxios('groups')
+  const { handleSubmit, handleEdit, handleDelete, nameHandler, descriptionHandler, name, description } = React.useContext(GroupCategoryContext)
+  console.log(dataGroup?.groups.map((group: any) => group.category))
   return (
     <Container>
       <Content>
@@ -23,41 +37,24 @@ const GroupCategorie
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>Name here</Td>
-                  <Td><Button>Visualizar 0 grupos</Button></Td>
-                  <Td><Button>Editar</Button><Button>Remover</Button></Td>
-                </Tr>
-                <Tr>
-                  <Td>Familias <AiFillLock /></Td>
-                  <Td><Button>Visualizar 1 grupos</Button></Td>
-                  <Td></Td>
-                </Tr>
-                <Tr>
-                  <Td>Casais <AiFillLock /></Td>
-                  <Td><Button>Visualizar 1 grupos</Button></Td>
-                  <Td></Td>
-                </Tr>
-                <Tr>
-                  <Td>Adultos <AiFillLock /></Td>
-                  <Td><Button>Visualizar 1 grupos</Button></Td>
-                  <Td></Td>
-                </Tr>
-                <Tr>
-                  <Td>Jovens <AiFillLock /></Td>
-                  <Td><Button>Visualizar 0 grupos</Button></Td>
-                  <Td></Td>
-                </Tr>
-                <Tr>
-                  <Td>Adolescentes <AiFillLock /></Td>
-                  <Td><Button>Visualizar 0 grupos</Button></Td>
-                  <Td></Td>
-                </Tr>
-                <Tr>
-                  <Td>Crianças <AiFillLock /></Td>
-                  <Td><Button>Visualizar 0 grupos</Button></Td>
-                  <Td></Td>
-                </Tr>
+                {data?.groupCategory.map((category: any, index: number) => {
+                  return (
+                    <Tr key={index}>
+                      <Td>{category.name}</Td>
+                      <Td><Link to='/groups'><pre>Visualizar {dataGroup?.groups.map((group: any) => group.category).filter((categoria: any) => categoria === category.name).length} grupos</pre></Link></Td>
+                      <Td>
+                        {category.description !== 'fixed' ?
+                          <Flex>
+                            <Button type='button' onClick={() => handleEdit(category._id, category.name, category.description)}>Editar</Button>
+                            <Button type='button' onClick={() => handleDelete(category._id)}>Remover</Button>
+                          </Flex>
+                          :
+                          <></>
+                        }
+                      </Td>
+                    </Tr>
+                  )
+                })}
 
               </Tbody>
             </Table>
@@ -67,17 +64,17 @@ const GroupCategorie
           <AddHeader>
             <h3><AiOutlinePlus />Criar categoria</h3>
           </AddHeader>
-          <AddContainer>
+          <Form onSubmit={handleSubmit}>
             <InputGroup>
               <label htmlFor="name">Nome da Categoria</label>
-              <Input id='name' type='text' />
+              <Input id='name' type='text' value={name} onChange={nameHandler} />
             </InputGroup>
             <InputGroup>
               <label htmlFor="description">Descrição</label>
-              <Input id='description' type='text' />
+              <Input id='description' type='text' value={description} onChange={descriptionHandler} />
             </InputGroup>
             <Button>Criar</Button>
-          </AddContainer>
+          </Form >
         </AddCategoria>
       </Content>
     </Container>
@@ -85,4 +82,4 @@ const GroupCategorie
 }
 
 export default GroupCategorie
-;
+  ;
