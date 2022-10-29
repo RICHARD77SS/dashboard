@@ -27,7 +27,7 @@ export const Container = styled.div`
 `
 export const Graph = styled.div`
   width: 100%;
-  min-height: 400px;
+  max-width: 900px;
   height: auto;
   padding: 1rem;
 `

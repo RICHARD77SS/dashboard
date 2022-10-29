@@ -11,8 +11,6 @@ interface Props {
 }
 const PersonDetailsAditionalFields = (Props: Props) => {
   const { data } = useAxios('extraFields')
-  console.log(data)
-
   return (
     <Container >
       <Content>

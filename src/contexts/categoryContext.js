@@ -11,30 +11,30 @@ export function CategoryContextProvider({ children }) {
   const { data, mutate } = useAxios('category');
 
   const [id, setId] = React.useState();
-  const [categoryName, setCategoryName] = React.useState()
-  const [categoryDescription, setCategoryDescription] = React.useState()
+  const [name, setName] = React.useState()
+  const [description, setDescription] = React.useState()
 
   const [openModal, setOpenModal] = React.useState(false)
 
-  function categoryNameHandler(event) {
-    setCategoryName(event.target.value);
+  function nameHandler(event) {
+    setName(event.target.value);
   }
-  function categoryDescriptionHandler(event) {
-    setCategoryDescription(event.target.value);
+  function descriptionHandler(event) {
+    setDescription(event.target.value);
   }
 
   function CloseModal() {
     setOpenModal(false)
-    setCategoryName('')
-    setCategoryDescription('')
+    setName('')
+    setDescription('')
   }
 
   function handleSubmit(event) {
     event.preventDefault()
     window.alert('category adicionada')
     const category = {
-      categoryName,
-      categoryDescription
+      name,
+      description
     }
     if (id) {
       api.put(`category/${id}`, category)
@@ -43,8 +43,8 @@ export function CategoryContextProvider({ children }) {
           if (category._id === id) {
             return {
               ...category,
-              categoryName,
-              categoryDescription
+              name,
+              description
             };
           }
           return category
@@ -68,17 +68,17 @@ export function CategoryContextProvider({ children }) {
     mutate(updatedCategory, false)
   }
 
-  function handleEdit(categoryId, categoryName, CategoryName) {
-    setCategoryName(categoryName);
-    setCategoryDescription(CategoryName);
+  function handleEdit(categoryId, categoryName, categoryDescription) {
+    setName(categoryName);
+    setDescription(categoryDescription);
     setId(categoryId);
     setOpenModal(true);
   }
   return <CategoryContext.Provider value={{
-    categoryName,
-    categoryDescription,
-    categoryNameHandler,
-    categoryDescriptionHandler,
+    name,
+    description,
+    nameHandler,
+    descriptionHandler,
     handleSubmit,
     handleDelete,
     setId,

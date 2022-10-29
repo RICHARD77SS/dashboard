@@ -6,6 +6,7 @@ import ReportsHeader from '../ReportsHeader';
 import { Container, Graph } from './styles';
 
 
+
 const ReportsBirth = () => {
   const { data } = useAxios('person')
 

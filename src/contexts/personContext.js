@@ -9,7 +9,7 @@ export const PersonContext = React.createContext();
 
 export function PersonContextProvider({ children }) {
   const { data, mutate } = useAxios('person')
-
+  const [modal, setModal] = React.useState(false);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [image, setImage] = React.useState('');
@@ -170,7 +170,7 @@ export function PersonContextProvider({ children }) {
     }
     mutate(updatedPerson, false)
   }
-  function handleEdit(id) {
+  function handleEdit(pid) {
     const person = {
       name,
       email,
@@ -202,10 +202,10 @@ export function PersonContextProvider({ children }) {
       convertedSpouse,
       baptismDate
     }
-    api.put(`person/${id}`, person)
+    api.put(`person/${pid}`, person)
     const updatedPerson = {
       person: data.person?.map((persons) => {
-        if (persons._id === id) {
+        if (persons._id === pid) {
           return {
             ...persons,
             name,
@@ -239,6 +239,7 @@ export function PersonContextProvider({ children }) {
             baptismDate
           };
         }
+        setModal(false)
         return persons;
       }),
     };
@@ -315,6 +316,7 @@ export function PersonContextProvider({ children }) {
     spouse,
     convertedSpouse,
     baptismDate,
+    modal,
     spouseHandler,
     convertedSpouseHandler,
     baptismDateHandler,
@@ -344,6 +346,7 @@ export function PersonContextProvider({ children }) {
     setNotes,
     setBaptized,
     setImage,
+    setModal
   }}>
     {children}
   </PersonContext.Provider>

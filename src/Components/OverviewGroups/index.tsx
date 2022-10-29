@@ -7,39 +7,51 @@ import GrapPieArea from "../GraphPieArea";
 
 import { Status, Situation, Graph } from "./styles";
 import { Link } from 'react-router-dom';
-
-const PieData = {
-  labels: ['Crianças', 'Adolescentes', 'Jovens', 'Adultos', 'Casais', 'Famílias', 'New categorie'],
-  datasets: [
-    {
-      labels: '# of Votes',
-      data: [6, 2, 3, 5, 2, 5, 10],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 159, 255, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(255, 159, 255, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+import { useAxios } from "../../hooks/useAxios";
 const OverviewGroups = () => {
+
+  const { data: groupCategory } = useAxios('groupCategory')
+  const { data: dataGroups } = useAxios('groups')
+
+  let label = groupCategory?.groupCategory.map((name: any) => name.name)
+
+  let groupCategoryValues = label?.map((labels: any) => {
+    return dataGroups?.groups.map((groups: any) => groups.category).filter((category: any) => category === labels).length
+  })
+
+  const PieData = {
+
+    labels: label,
+    datasets: [
+      {
+        labels: '# of Votes',
+        data: groupCategoryValues,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 159, 255, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 159, 255, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <Content>
-      <Box>
+      <Box width='500px'>
         <BoxHeader title='Situação'>
         </BoxHeader>
         <BoxContent>
@@ -63,17 +75,17 @@ const OverviewGroups = () => {
           <p>Grupos que enviaram frequência de reunião nos últimos 30 dias são automaticamente marcados como ATIVOS.</p>
         </BoxContent>
       </Box>
-      <Box>
+      <Box width='400px'>
         <BoxHeader title="Grupos">
           <Button><Link to='/groupcategories' >Ver Todos</Link></Button>
         </BoxHeader>
-        <BoxContent>
+        <BoxContent width='400px'>
           <Graph>
             <GrapPieArea data={PieData} />
           </Graph>
         </BoxContent>
       </Box>
-      <Box>
+      <Box width='400px'>
         <BoxHeader title='Reuniões'>
           <Button><Link to='/groupreports/meetings'>Ver todos</Link></Button>
         </BoxHeader>

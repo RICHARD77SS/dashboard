@@ -6,21 +6,39 @@ import { useAxios } from '../hooks/useAxios';
 export const GroupsContext = React.createContext();
 
 export function GroupsContextProvider({ children }) {
+
+  const { data: dataPerson } = useAxios('person')
   const { data, mutate } = useAxios('groups');
   const [id, setId] = React.useState()
   const [name, setName] = React.useState()
   const [image, setImage] = React.useState()
   const [bg, setBg] = React.useState()
   const [creationDate, setCreationDate] = React.useState()
-  const [weekDay, setWeekDay] = React.useState()
-  const [sex, setSex] = React.useState()
-  const [time, setTime] = React.useState()
-  const [category, setCategory] = React.useState()
+  const [weekDay, setWeekDay] = React.useState('Domingo')
+  const [sex, setSex] = React.useState('Ambos')
+  const [time, setTime] = React.useState('Manhã')
+  const [category, setCategory] = React.useState('Familias')
   const [originGroup, setOriginGroup] = React.useState()
-  const [lider1, setLider1] = React.useState()
-  const [lider2, setLider2] = React.useState()
-  const [lider3, setLider3] = React.useState()
-  const [lider4, setLider4] = React.useState()
+  const [lider1, setLider1] = React.useState({
+    image: '',
+    name: '',
+    index: -1
+  })
+  const [lider2, setLider2] = React.useState({
+    image: '',
+    name: '',
+    index: -1
+  })
+  const [lider3, setLider3] = React.useState({
+    image: '',
+    name: '',
+    index: -1
+  })
+  const [lider4, setLider4] = React.useState({
+    image: '',
+    name: '',
+    index: -1
+  })
   const [address, setAddress] = React.useState()
   const [district, setDistrict] = React.useState()
   const [number, setNumber] = React.useState()
@@ -64,16 +82,32 @@ export function GroupsContextProvider({ children }) {
     setOriginGroup(event.target.value)
   }
   function lider1Handler(event) {
-    setLider1(event.target.value)
+    setLider1({
+      image: dataPerson?.person?.[event.target.value].image,
+      name: dataPerson?.person?.[event.target.value].name,
+      index: event.target.value
+    })
   }
   function lider2Handler(event) {
-    setLider2(event.target.value)
+    setLider2({
+      image: dataPerson?.person?.[event.target.value].image,
+      name: dataPerson?.person?.[event.target.value].name,
+      index: event.target.value
+    })
   }
   function lider3Handler(event) {
-    setLider3(event.target.value)
+    setLider3({
+      image: dataPerson?.person?.[event.target.value].image,
+      name: dataPerson?.person?.[event.target.value].name,
+      index: event.target.value
+    })
   }
   function lider4Handler(event) {
-    setLider4(event.target.value)
+    setLider4({
+      image: dataPerson?.person?.[event.target.value].image,
+      name: dataPerson?.person?.[event.target.value].name,
+      index: event.target.value
+    })
   }
   function addressHandler(event) {
     setAddress(event.target.value)

@@ -52,13 +52,13 @@ const ViewGroup = () => {
           <p>Liderança</p>
           <Liders>
             <SubLiderImg>
-              <img src="https://img.freepik.com/fotos-gratis/mulher-de-negocios-executivo-em-um-escritorio_1303-16020.jpg?w=740&t=st=1663694328~exp=1663694928~hmac=510f0aaa58d630452c9bd0e7ac087d41af956778c00d5398202f1bb8b83ea1bb" alt="" />
+              <img src={dataGroup?.groups[`${id}`].lider2.image} alt="" />
             </SubLiderImg>
             <LiderImg>
-              <img src="https://img.freepik.com/fotos-gratis/mulher-de-negocios-executivo-em-um-escritorio_1303-16020.jpg?w=740&t=st=1663694328~exp=1663694928~hmac=510f0aaa58d630452c9bd0e7ac087d41af956778c00d5398202f1bb8b83ea1bb" alt="" />
+              <img src={dataGroup?.groups[`${id}`].lider1.image} alt="" />
             </LiderImg>
             <SubLiderImg>
-              <img src="https://img.freepik.com/fotos-gratis/mulher-de-negocios-executivo-em-um-escritorio_1303-16020.jpg?w=740&t=st=1663694328~exp=1663694928~hmac=510f0aaa58d630452c9bd0e7ac087d41af956778c00d5398202f1bb8b83ea1bb" alt="" />
+              <img src={dataGroup?.groups[`${id}`].lider3.image} alt="" />
             </SubLiderImg>
           </Liders>
         </Card>
@@ -66,7 +66,7 @@ const ViewGroup = () => {
           <BoxHeader title='Pessoas'>
             <Button>+ Adicionar</Button>
           </BoxHeader>
-          <BoxContent>
+          <BoxContent height='440px'>
             <Input type='search' />
           </BoxContent>
         </Box>
@@ -101,7 +101,7 @@ const ViewGroup = () => {
               <Button type='button' onClick={() => handleDelete(dataGroup?.groups[`${id}`]._id)}>Remover</Button>
             </Link>
           </BoxHeader>
-          <BoxContent>
+          <BoxContent height='440px'>
             <Flex>
               <p><b>Data de abertura:</b></p>
               <p>{dataGroup?.groups[`${id}`].creationDate}</p>
@@ -124,19 +124,19 @@ const ViewGroup = () => {
             </Flex>
             <Flex>
               <p><b>Lider 1:</b></p>
-              <p>{dataGroup?.groups[`${id}`].lider1}</p>
+              <p>{dataGroup?.groups[`${id}`].lider1.name}</p>
             </Flex>
             <Flex>
               <p><b>Lider 2:</b></p>
-              <p>{dataGroup?.groups[`${id}`].lider2}</p>
+              <p>{dataGroup?.groups[`${id}`].lider2.name}</p>
             </Flex>
             <Flex>
               <p><b>Lider 3:</b></p>
-              <p>{dataGroup?.groups[`${id}`].lider3}</p>
+              <p>{dataGroup?.groups[`${id}`].lider3.name}</p>
             </Flex>
             <Flex>
               <p><b>Lider 4:</b></p>
-              <p>{dataGroup?.groups[`${id}`].lider4}</p>
+              <p>{dataGroup?.groups[`${id}`].lider4.name}</p>
             </Flex>
             <Flex>
               <p><b>Endereço:</b></p>
@@ -157,7 +157,7 @@ const ViewGroup = () => {
           <BoxHeader title='Reuniões recentes'>
             <Button>+ Nova reunião</Button>
           </BoxHeader>
-          <BoxContent>
+          <BoxContent height='340px'>
             <h3>Não há dados</h3>
           </BoxContent>
         </Box>

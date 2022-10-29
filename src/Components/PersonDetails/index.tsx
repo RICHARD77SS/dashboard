@@ -40,7 +40,7 @@ const PersonDetails = () => {
     age_group = "Criança"
   }
   if (age_now >= 12 && age_now <= 18) {
-    age_group = "Jovem"
+    age_group = "Adolescente"
   }
   if (age_now >= 18 && age_now <= 28) {
     age_group = "Jovem"

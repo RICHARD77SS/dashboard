@@ -8,7 +8,6 @@ import BoxContent from '../BoxContent';
 import BoxHeader from '../BoxHeader';
 import Button from '../Button';
 import Flex from '../Flex';
-import FlexBetween from '../FlexBetween';
 import Input from '../Input';
 import InputBlock from '../InputBlock';
 

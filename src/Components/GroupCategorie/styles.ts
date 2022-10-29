@@ -42,32 +42,13 @@ export const CategoriasContainer = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem;
-`
-
-export const Table = styled.table`
-  width: 100%;
-`
-export const Tbody = styled.tbody`
-
-`
-export const Thead = styled.thead`
-
-`
-export const Tr = styled.tr`
-    :nth-child(odd){
-    background: #eee;
+  button {
+    padding: 0 1rem;
+    height: 20px;
+    border-radius: 5px;
+    color: #f4f4f4;
+    background: ${Props => Props.theme.colors.sec};
   }
-  :nth-child(even) {
-    background: #eef;
-  }
-`
-export const Th = styled.th`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-  height: 30px;
-`
-export const Td = styled.td`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-  height: 30px;
 `
 
 export const AddCategoria = styled.div`
@@ -92,7 +73,7 @@ export const AddHeader = styled.div`
   border-radius: 10px 10px 0 0;
 `
 
-export const AddContainer = styled.div`
+export const Form = styled.form`
   width: 100%;
   height: auto;
   display: flex;

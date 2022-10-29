@@ -7,11 +7,13 @@ import Button from "../Button";
 
 import GraphLineArea from "../GraphLineArea"
 
-import { Content, Graph, Graph1, Grid1, GraphContainer, Datalist, Div, User, Image } from './styles'
+import { Flex, Graph, Grid1, GraphContainer, Datalist, Div, User, Image } from './styles'
 import Block from "../Block";
 import GraphPieArea from "../GraphPieArea";
 import { Link } from 'react-router-dom';
 import { useAxios } from "../../hooks/useAxios";
+import Content from '../Content';
+
 
 const OverviewPersons = () => {
   const { data: dataPerson } = useAxios('person')
@@ -21,6 +23,11 @@ const OverviewPersons = () => {
   var day = date.getDate()
   var month = date.getMonth() + 1
   var year = date.getFullYear()
+
+  let birthdayMonth = dataPerson?.person.map((person: any) => {
+    let dateBirth = new Date(person.birth).getMonth() + 1
+    return dateBirth === month ? { name: person.name, image: person.image } : null;
+  });
 
   function getAllDays(years: any, months: any) {
     const date = new Date(years, months, 1);
@@ -149,6 +156,16 @@ const OverviewPersons = () => {
 
 
   //--------------------------------
+
+  let dayDate = dataPerson?.person.map((person: any, index: any) => {
+    let dayDate = new Date(person.registerDate).getDate()
+    return dayDate
+  })
+  let perMonth = monthString?.map((day: any) => {
+    return dayDate?.map((dateDay: any) => dateDay).filter((dt: any) => dt === day).length
+  })
+
+  //--------------------
   const [periodo, setPeriodo] = React.useState('Mensal')
   function periodoHandler(event: any) {
     setPeriodo(event.target.value)
@@ -202,13 +219,17 @@ const OverviewPersons = () => {
   let Idoso = AgeGroup?.map((agp: string, index: number) => { return agp === 'Idoso' ? agp : 0 })?.filter((i: string) => i === 'Idoso').length
 
 
-  let personsInCategory = dataPerson?.person.map((personcategory: any, index: number) => {
-    return personcategory.category
-  })
   let cat = dataCategory?.category.map((category: any, index: number) => {
 
     return category.categoryName
   })
+
+  let valueCategory = cat?.map((categ: any) => {
+    return dataPerson?.person.map((person: any) => person.category).filter((category: any) => category === categ).length
+  })
+
+
+
 
   const PieData = {
     labels: ['Crianças', 'Adolescentes', 'Jovens', 'Adultos', 'Idosos'],
@@ -240,7 +261,7 @@ const OverviewPersons = () => {
     datasets: [
       {
         labels: '# of Votes',
-        data: [12, 19],
+        data: valueCategory,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -267,14 +288,14 @@ const OverviewPersons = () => {
       {
         fill: true,
         label: periodo === 'Mensal' ? 'Mes Atual' : periodo === 'Semanal' ? 'Semana Atual' : periodo === 'Anual' ? 'Ano Atual' : null,
-        data: periodo === 'Mensal' ? [jan, feb, mar, abr, jun, jul, aug, sep, oct, nov, dez] : periodo === 'Semanal' ? [monday, tuesday, wednesday, thursday, friday, saturnday, sunday] : periodo === 'Anual' ? [jan, feb, mar, abr, may, jun, jul, aug, sep, oct, nov, dez] : null,
+        data: periodo === 'Mensal' ? perMonth : periodo === 'Semanal' ? [monday, tuesday, wednesday, thursday, friday, saturnday, sunday] : periodo === 'Anual' ? [jan, feb, mar, abr, may, jun, jul, aug, sep, oct, nov, dez] : null,
         borderColor: 'rgb(255, 162, 235)',
         backgroundColor: 'rgba(255, 162, 235, 0.5)',
       },
       {
         fill: true,
         label: periodo === 'Mensal' ? 'Mes Anterior' : periodo === 'Semanal' ? 'Semana Anterior' : periodo === 'Anual' ? 'Ano Anterior' : null,
-        data: periodo === 'Mensal' ? [jan, feb, mar, abr, jun, jul, aug, sep, oct, nov, dez] : periodo === 'Semanal' ? [monday, tuesday, wednesday, thursday, friday, saturnday, sunday] : periodo === 'Anual' ? [jan, feb, mar, abr, may, jun, jul, aug, sep, oct, nov, dez] : null,
+        data: periodo === 'Mensal' ? perMonth : periodo === 'Semanal' ? [monday, tuesday, wednesday, thursday, friday, saturnday, sunday] : periodo === 'Anual' ? [jan, feb, mar, abr, may, jun, jul, aug, sep, oct, nov, dez] : null,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
@@ -302,40 +323,7 @@ const OverviewPersons = () => {
             <p>Total de Mulheres </p>
           </Div>
         </Grid1>
-
-        <Content>
-          <Box>
-            <BoxHeader title='Cadastros recentes'>
-
-              <Button><Link to='/people' >Ver Todos</Link></Button>
-            </BoxHeader>
-            <BoxContent>
-              <User>
-                <Image>
-                  <img src="https://img.freepik.com/vetores-gratis/astronauta-bonito-montando-foguete-e-acenando-a-mao-dos-desenhos-animados-icone-ilustracao-conceito-de-icone-de-tecnologia-cientifica_138676-2130.jpg?w=740&t=st=1664997511~exp=1664998111~hmac=0e0f26a1417993c6751a47745c3406bc9f8407caca60fc3f31f4b53b6f6c051f" alt="" />
-                </Image>
-                <p>User name</p>
-              </User>
-              <User>
-                <Image>
-                  <img src="https://img.freepik.com/vetores-gratis/astronauta-bonito-montando-foguete-e-acenando-a-mao-dos-desenhos-animados-icone-ilustracao-conceito-de-icone-de-tecnologia-cientifica_138676-2130.jpg?w=740&t=st=1664997511~exp=1664998111~hmac=0e0f26a1417993c6751a47745c3406bc9f8407caca60fc3f31f4b53b6f6c051f" alt="" />
-                </Image>
-                <p>User name</p>
-              </User>
-            </BoxContent>
-          </Box>
-          <Box>
-            <BoxHeader title='Categorias'>
-              <Button><Link to='/categories' >Ver Todos</Link></Button>
-            </BoxHeader>
-            <BoxContent>
-              <GraphContainer>
-                <GraphPieArea data={PieDataCategories} />
-              </GraphContainer>
-            </BoxContent>
-          </Box>
-        </Content>
-        <Box>
+        <Box width='620px'>
           <BoxHeader title='Novos Convertidos'>
             <Datalist>
               <select title='period' placeholder='  Selecione o periodo' value={periodo} onChange={periodoHandler} >
@@ -351,9 +339,60 @@ const OverviewPersons = () => {
             </Graph>
           </BoxContent>
         </Box>
+        <Content>
+          <Box width='300px'>
+            <BoxHeader title='Cadastros recentes'>
+
+              <Button><Link to='/people' >Ver Todos</Link></Button>
+            </BoxHeader>
+            <BoxContent>
+              {dataPerson?.person.map((person: any, index: number) => {
+
+                return (
+                  <User key={index}>
+                    <Image>
+                      <img src={person.image} alt="" />
+                    </Image>
+                    <p>{person.name}</p>
+                  </User>
+                )
+              })}
+            </BoxContent>
+          </Box>
+          <Box width='300px'>
+            <BoxHeader title='Aniversariantes do mês'>
+            </BoxHeader>
+            <BoxContent>
+              {birthdayMonth?.map((person: any, index: number) => {
+                if (person?.name || person?.image)
+                  return (
+                    <User key={index}>
+                      <Image>
+                        <img src={person?.image} alt="" />
+                      </Image>
+                      <p>{person?.name}</p>
+                    </User>
+
+                  )
+                return <></>
+              })}
+            </BoxContent>
+          </Box>
+        </Content>
+
       </Block>
-      <Block>
-        <Box>
+      <Flex>
+        <Box width='350px'>
+          <BoxHeader title='Categorias'>
+            <Button><Link to='/categories' >Ver Todos</Link></Button>
+          </BoxHeader>
+          <BoxContent>
+            <GraphContainer>
+              <GraphPieArea data={PieDataCategories} />
+            </GraphContainer>
+          </BoxContent>
+        </Box>
+        <Box width='350px'>
           <BoxHeader title='Faixa etária'>
           </BoxHeader>
           <BoxContent>
@@ -362,14 +401,7 @@ const OverviewPersons = () => {
             </GraphContainer>
           </BoxContent>
         </Box>
-        <Box>
-          <BoxHeader title='Aniversariantes do mês'>
-          </BoxHeader>
-          <BoxContent>
-
-          </BoxContent>
-        </Box>
-      </Block>
+      </Flex>
     </Content>
   )
 }

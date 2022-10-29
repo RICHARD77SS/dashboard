@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export const BoxSt = styled.div`
-  width: 100%;
+interface Props {
+  width?: string;
+  height?: string;
+}
+export const BoxSt = styled.div<Props>`
+  width: ${Props => Props.width};
   max-width: 1200px;
-  height: auto;
+  height: ${Props => Props.height};
 `

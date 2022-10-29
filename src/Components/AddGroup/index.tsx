@@ -8,10 +8,10 @@ import { GroupsContext } from '../../contexts/groupsContext';
 import { Link } from 'react-router-dom';
 
 const AddGroup = () => {
-  ;
+
   const { data: dataPerson } = useAxios('person');
   const { data: dataGroups } = useAxios('groups');
-  const { data: dataCategory } = useAxios('category');
+  const { data: groupCategory } = useAxios('groupCategory');
   const {
     name,
     image,
@@ -53,7 +53,7 @@ const AddGroup = () => {
     anotationsHandler,
     handleSubmit
   } = React.useContext(GroupsContext)
-  console.log(dataCategory)
+
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -80,6 +80,8 @@ const AddGroup = () => {
                     </Block>
                   </InputBlock>
                 </Flex>
+                <br />
+                <br />
                 <Flex>
                   <Block>
                     <label htmlFor="creationdate">Data de Criação</label>
@@ -102,9 +104,9 @@ const AddGroup = () => {
                   <Block>
                     <label htmlFor="perfil">Perfil</label>
                     <select title='perfil' id='perfil' value={sex} onChange={sexHandler}>
-                      <option value="Feminino">Feminino</option>
-                      <option value="Masculino">Masculino</option>
                       <option value="Ambos">Ambos</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
                     </select>
                   </Block>
                   <Block>
@@ -120,15 +122,15 @@ const AddGroup = () => {
                   <Block>
                     <label htmlFor="category">Categoria</label>
                     <select title='category' value={category} onChange={categoryHandler}>
-                      <option value='Famili'>Familias</option>
+                      <option value='Familias'>Familias</option>
                       <option value='Casais'>Casais</option>
                       <option value='Adultos'>Adultos</option>
                       <option value='Jovens'>Jovens</option>
                       <option value='Adolescentes'>Adolescentes</option>
                       <option value='Crianças'>Crianças</option>
-                      {dataCategory.category.map((category: any, index: any) => {
+                      {groupCategory?.groupCategory.map((category: any, index: any) => {
                         return (
-                          <option value={category.name} >{category.categoryName}</option>
+                          <option value={category.name}>{category.name}</option>
                         )
                       })}
                     </select>
@@ -154,48 +156,48 @@ const AddGroup = () => {
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider1">Lider 1</label>
-                  <select title='firstlider' id='firstliders' value={lider1} onChange={lider1Handler} >
+                  <label htmlFor="lider1">Lider 1:&nbsp;{lider1?.name}</label>
+                  <select title='firstlider' id='firstliders' onChange={lider1Handler} >
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
                       return (
-                        <option key={index} value={person.name}>{person.name}</option>
+                        <option key={index} value={index}>{person.name}</option>
 
                       )
                     })}
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider2">Lider 2</label>
-                  <select title='secondLeader' id='secondLeader' value={lider2} onChange={lider2Handler}>
+                  <label htmlFor="lider2">Lider 2&nbsp;{lider2?.name}</label>
+                  <select title='secondLeader' id='secondLeader' onChange={lider2Handler}>
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
                       return (
-                        <option key={index} value={person.name}>{person.name}</option>
+                        <option key={index} value={index}>{person.name}</option>
 
                       )
                     })}
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider3">Lider 3</label>
-                  <select title='tirdLeader' id='tirdLeader' value={lider3} onChange={lider3Handler}>
+                  <label htmlFor="lider3">Lider 3&nbsp;{lider3?.name}</label>
+                  <select title='tirdLeader' id='tirdLeader' onChange={lider3Handler}>
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
                       return (
-                        <option key={index} value={person.name}>{person.name}</option>
+                        <option key={index} value={index}>{person.name}</option>
 
                       )
                     })}
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider4">Lider 4</label>
-                  <select title='fourLeader' id='fourLeader' value={lider4} onChange={lider4Handler}>
+                  <label htmlFor="lider4">Lider 4&nbsp;{lider4?.name}</label>
+                  <select title='fourLeader' id='fourLeader' onChange={lider4Handler}>
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
                       return (
-                        <option key={index} value={person.name}>{person.name}</option>
+                        <option key={index} value={index}>{person.name}</option>
 
                       )
                     })}
@@ -254,14 +256,7 @@ const AddGroup = () => {
             </Data>
           </Fieldset>
         </Content>
-        <Data>
-          <Header>
-            <h3>Campos adicionais</h3>
-          </Header>
-          <DataContent>
 
-          </DataContent>
-        </Data>
         <Flex>
           <Button type='submit'>Salvar</Button>
           <Link to='/groups'><Button type='button'>Voltar</Button></Link>

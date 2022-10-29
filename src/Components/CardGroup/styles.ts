@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Card = styled.div`
   width: 200px;
-  height: 300px;
+  height: 350px;
   border-radius: 10px;
   display:flex;
   align-items:center;
@@ -25,6 +25,7 @@ export const Card = styled.div`
     font-size: 1rem;
     color: #f4f4f4;
     border:1px solid #f4f4f4;
+    transform: translateY(3.5rem);
   }
 `
 export const CardBg = styled.div`
@@ -54,6 +55,7 @@ export const Liders = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+ 
 `
 export const SubLiderImg = styled.div`
   width: 30px;
@@ -66,6 +68,15 @@ export const SubLiderImg = styled.div`
     height:100%;
     border-radius: 40px;
  }
+  p {
+   display: none;
+   color: #fff;
+   width: 70px;
+   overflow: hidden;
+ }
+  :hover p {
+   display: block;
+ }
 `
 export const LiderImg = styled.div`
   width: 40px;
@@ -76,5 +87,12 @@ export const LiderImg = styled.div`
     width: 100%;
     height:100%;
     border-radius: 40px;
+ }
+  p {
+    opacity:0;
+    color: #fff;
+ }
+ :hover p {
+    opacity:1;
  }
 `

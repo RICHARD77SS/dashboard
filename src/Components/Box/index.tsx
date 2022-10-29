@@ -2,11 +2,13 @@ import { BoxSt } from './styles'
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
+  width?: string;
+  height?: string;
 }
 
-const Box = ({ children }: Props) => {
+const Box = ({ children,width,height }: Props) => {
   return (
-    <BoxSt>
+    <BoxSt width={width} height={height}>
       {children}
     </BoxSt>
   )

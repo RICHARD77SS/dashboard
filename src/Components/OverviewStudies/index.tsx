@@ -22,7 +22,7 @@ const OverviewStudies = () => {
   const late = "17%"
   return (
     <Content>
-      <Box>
+      <Box width='350px'>
         <BoxHeader>
           <h3>Estudos</h3>
           <Button><Link to='/studies'>Ver todos</Link></Button>
@@ -39,7 +39,7 @@ const OverviewStudies = () => {
           </Studie>
         </BoxContent>
       </Box>
-      <Box>
+      <Box width='350px'>
         <BoxHeader>
           <h3>Escolas</h3>
 
@@ -62,7 +62,7 @@ const OverviewStudies = () => {
           </Description>
         </BoxContent>
       </Box>
-      <Box>
+      <Box width='350px'>
         <BoxHeader>
           <h3>Acompanhamento</h3>
         </BoxHeader>

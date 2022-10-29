@@ -42,7 +42,7 @@ const PersonDetailsFinancial = ({ name }: Props) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data?.financial.map((financial: any, index: any) => {
+            {data?.financial.map((financial: any, index: number) => {
               const datef = new Date(financial.date)
               const formatedDate = datef.toLocaleDateString()
 
@@ -76,6 +76,7 @@ const PersonDetailsFinancial = ({ name }: Props) => {
                 </>
               )
             })}
+          </Tbody>
         </Table>
       </TableContainer>
       <PageSelector />

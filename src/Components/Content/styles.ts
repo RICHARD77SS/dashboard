@@ -6,10 +6,12 @@ export const Flexstart = styled.div`
   height: auto;
   display: flex;
   gap: 1rem;
-  align-items:flex-start;
+  align-items:center;
   justify-content: center;
-  @media (max-width: 763px) {
-    flex-direction: column-reverse;
-    align-items: center;
+  @media (max-width: 1100px){
+    flex-wrap:wrap;
+  }
+  @media (max-width: 768px){
+    flex-direction: column;
   }
 ` 

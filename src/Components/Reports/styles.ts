@@ -75,3 +75,13 @@ export const GraphContainer = styled.div`
   border-radius: 10px;
   border: 1px solid ${Props => Props.theme.colors.pri};
 `
+export const Box = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  background: ${Props => Props.theme.colors.bac};
+  border-radius: 10px;
+  border: 1px solid ${Props => Props.theme.colors.pri};
+`

@@ -39,6 +39,18 @@ export const Box = styled.div`
   flex-direction: column;
   flex: 1;
 `
+export const Imagem = styled.div`
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  
+  img{
+    width: 100%;
+    height: 100%;
+  }
+`
 export const BoxContent = styled.div`
   width: 100%;
   height: auto;

@@ -67,6 +67,7 @@ const People = () => {
                     <Th>Batizado<p><BsArrowUp /><BsArrowDown /></p></Th>
                     <Th>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Th>
                     <Th>Criado em <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Categoria <p><BsArrowUp /><BsArrowDown /></p></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -131,6 +132,7 @@ const People = () => {
                         <Td>{baptizeds}</Td>
                         <Td>{persons.baptismDate}</Td>
                         <Td><pre>{persons.registerDate}</pre></Td>
+                        <Td><pre>{persons.category}</pre></Td>
                       </Tr>
                     )
                   })}

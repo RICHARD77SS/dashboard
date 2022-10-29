@@ -6,6 +6,13 @@ export const Container = styled.div`
   display: flex;
   align-items:center;
   flex-direction: column;
+  button {
+    padding: 0 1rem;
+    height: 20px;
+    border-radius: 10px;
+    background: ${Props => Props.theme.colors.sec};
+    color: #fff;
+  }
 `
 export const Header = styled.div`
  width: 100%;
@@ -13,13 +20,6 @@ export const Header = styled.div`
   align-items:center;
   gap: 1rem;
   padding: 1rem;
-  button {
-    padding: 0 1rem;
-    height: 30px;
-    border-radius: 10px;
-    background: ${Props => Props.theme.colors.sec};
-    color: #fff;
-  }
 `
 export const Foto = styled.div`
   width: 100px;
@@ -36,12 +36,6 @@ export const Block = styled.div`
 `
 export const Content = styled.div`
   width: 100%;
-  height: auto;
-  padding: 1rem;
-`
-export const Graph = styled.div`
-  width: 70%;
-  min-height: 400px;
   height: auto;
   padding: 1rem;
 `
