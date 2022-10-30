@@ -13,44 +13,50 @@ import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
 import GraphPieArea from '../GraphPieArea';
+import { useAxios } from '../../hooks/useAxios';
 
-const children = 5
-const teenagers = 5
-const youth = 5
-const adults = 5
-const couples = 5
-const families = 5
-const newcat = 5
 
-const PieData = {
-  labels: ['Crianças', 'Adolescentes', 'Jovens', 'Adultos', 'Casais', 'Famílias', 'New categorie'],
-  datasets: [
-    {
-      labels: '# of Votes',
-      data: [children, teenagers, youth, adults, couples, families, newcat],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 159, 255, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(255, 159, 255, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 const GroupReportsGroupsCategories = () => {
+
+  const { data: groupCategory } = useAxios('groupCategory')
+  const { data: dataGroups } = useAxios('groups')
+
+  let label = groupCategory?.groupCategory.map((name: any) => name.name)
+
+  let groupCategoryValues = label?.map((labels: any) => {
+    return dataGroups?.groups.map((groups: any) => groups.category).filter((category: any) => category === labels).length
+  })
+
+  const PieData = {
+
+    labels: label,
+    datasets: [
+      {
+        labels: '# of Votes',
+        data: groupCategoryValues,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 159, 255, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 159, 255, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Novos Grupos' />
@@ -65,34 +71,18 @@ const GroupReportsGroupsCategories = () => {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>Crianças</Td>
-            <Td>{children}</Td>
-          </Tr>
-          <Tr>
-            <Td>Adolescentes</Td>
-            <Td>{teenagers}</Td>
-          </Tr>
-          <Tr>
-            <Td>Jovens</Td>
-            <Td>{youth}</Td>
-          </Tr>
-          <Tr>
-            <Td>Adultos</Td>
-            <Td>{adults}</Td>
-          </Tr>
-          <Tr>
-            <Td>Casais</Td>
-            <Td>{couples}</Td>
-          </Tr>
-          <Tr>
-            <Td>Familias</Td>
-            <Td>{families}</Td>
-          </Tr>
-          <Tr>
-            <Td>New categorie</Td>
-            <Td>{newcat}</Td>
-          </Tr>
+          {label.map((label: any, index: number) => {
+            let values = groupCategoryValues.map((values: any) => {
+              return values
+            })
+            return (
+              <Tr key={index}>
+                <Td>{label}</Td>
+                <Td>{values[index]}</Td>
+              </Tr>
+            )
+          })}
+
         </Tbody>
       </Table>
       <PageSelector />
