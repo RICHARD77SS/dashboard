@@ -8,248 +8,6 @@ import { PersonContext } from '../../contexts/personContext';
 import { useAxios } from '../../hooks/useAxios';
 const AddPeople = () => {
 
-  const inputRef1 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef2 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef3 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef4 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef5 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef6 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef7 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef8 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef9 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef10 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef11 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef12 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef13 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef14 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef15 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef16 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef17 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef18 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef19 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef20 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef21 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef22 = React.useRef<HTMLInputElement | null>(null);
-  const inputRef23 = React.useRef<HTMLInputElement | null>(null);
-
-
-  React.useEffect(() => {
-    if (!inputRef1.current) return;
-
-    inputRef1.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef2.current?.focus();
-      }
-    }
-  }, [inputRef1, inputRef2])
-
-  React.useEffect(() => {
-    if (!inputRef2.current) return;
-
-    inputRef2.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef3.current?.focus();
-      }
-    }
-  }, [inputRef2, inputRef3])
-
-  React.useEffect(() => {
-    if (!inputRef3.current) return;
-
-    inputRef3.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef4.current?.focus();
-      }
-    }
-  }, [inputRef3, inputRef4])
-
-  React.useEffect(() => {
-    if (!inputRef4.current) return;
-
-    inputRef4.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef5.current?.focus();
-      }
-    }
-  }, [inputRef4, inputRef5])
-
-  React.useEffect(() => {
-    if (!inputRef5.current) return;
-
-    inputRef5.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef6.current?.focus();
-      }
-    }
-  }, [inputRef5, inputRef6])
-
-  React.useEffect(() => {
-    if (!inputRef6.current) return;
-
-    inputRef6.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef7.current?.focus();
-      }
-    }
-  }, [inputRef6, inputRef7])
-
-  React.useEffect(() => {
-    if (!inputRef7.current) return;
-
-    inputRef7.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef8.current?.focus();
-      }
-    }
-  }, [inputRef7, inputRef8])
-
-  React.useEffect(() => {
-    if (!inputRef8.current) return;
-
-    inputRef8.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef9.current?.focus();
-      }
-    }
-  }, [inputRef8, inputRef9])
-
-  React.useEffect(() => {
-    if (!inputRef9.current) return;
-
-    inputRef9.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef10.current?.focus();
-      }
-    }
-  }, [inputRef9, inputRef10])
-
-  React.useEffect(() => {
-    if (!inputRef10.current) return;
-
-    inputRef10.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef11.current?.focus();
-      }
-    }
-  }, [inputRef10, inputRef11])
-
-  React.useEffect(() => {
-    if (!inputRef11.current) return;
-
-    inputRef11.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef12.current?.focus();
-      }
-    }
-  }, [inputRef11, inputRef12])
-
-  React.useEffect(() => {
-    if (!inputRef12.current) return;
-
-    inputRef12.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef13.current?.focus();
-      }
-    }
-  }, [inputRef12, inputRef13])
-
-  React.useEffect(() => {
-    if (!inputRef13.current) return;
-
-    inputRef13.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef14.current?.focus();
-      }
-    }
-  }, [inputRef13, inputRef14])
-
-  React.useEffect(() => {
-    if (!inputRef14.current) return;
-
-    inputRef14.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef15.current?.focus();
-      }
-    }
-  }, [inputRef14, inputRef15])
-
-  React.useEffect(() => {
-    if (!inputRef15.current) return;
-
-    inputRef15.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef16.current?.focus();
-      }
-    }
-  }, [inputRef15, inputRef16])
-
-  React.useEffect(() => {
-    if (!inputRef16.current) return;
-
-    inputRef16.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef17.current?.focus();
-      }
-    }
-  }, [inputRef16, inputRef17])
-
-  React.useEffect(() => {
-    if (!inputRef17.current) return;
-
-    inputRef17.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef18.current?.focus();
-      }
-    }
-  }, [inputRef17, inputRef18])
-
-  React.useEffect(() => {
-    if (!inputRef18.current) return;
-
-    inputRef18.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef19.current?.focus();
-      }
-    }
-  }, [inputRef18, inputRef19])
-
-  React.useEffect(() => {
-    if (!inputRef19.current) return;
-
-    inputRef19.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef20.current?.focus();
-      }
-    }
-  }, [inputRef19, inputRef20])
-  React.useEffect(() => {
-    if (!inputRef20.current) return;
-
-    inputRef20.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef21.current?.focus();
-      }
-    }
-  }, [inputRef20, inputRef21])
-  React.useEffect(() => {
-    if (!inputRef21.current) return;
-
-    inputRef21.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef22.current?.focus();
-      }
-    }
-  }, [inputRef21, inputRef22])
-  React.useEffect(() => {
-    if (!inputRef22.current) return;
-
-    inputRef22.current.onkeyup = (ev) => {
-      if (ev.key === "Enter") {
-        inputRef23.current?.focus();
-      }
-    }
-  }, [inputRef22, inputRef23])
-
 
   const { name,
     nameHandler,
@@ -325,6 +83,8 @@ const AddPeople = () => {
   const { data: dataPositions } = useAxios('positions')
 
   const { data: dataGroups } = useAxios('groups')
+  console.log(group)
+  console.log('cat' + category)
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -356,7 +116,7 @@ const AddPeople = () => {
                         type='text'
                         value={name}
                         onChange={nameHandler}
-                        ref={inputRef1}
+
                         onKeyDown={e => {
                           if (e.key === 'Enter') e.preventDefault();
                         }}
@@ -371,7 +131,7 @@ const AddPeople = () => {
                         type='text'
                         value={password}
                         onChange={passwordHandler}
-                        ref={inputRef2}
+
                         onKeyDown={e => {
                           if (e.key === 'Enter') e.preventDefault();
                         }}
@@ -388,7 +148,7 @@ const AddPeople = () => {
                       value={birth}
                       onChange={birthHandler}
                       type='date'
-                      ref={inputRef3}
+
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
                       }}
@@ -458,7 +218,7 @@ const AddPeople = () => {
                     value={document1}
                     onChange={document1Handler}
                     type='number'
-                    ref={inputRef7}
+
                     onKeyDown={e => {
                       if (e.key === 'Enter') e.preventDefault();
                     }}
@@ -472,7 +232,7 @@ const AddPeople = () => {
                     value={document2}
                     onChange={document2Handler}
                     type='text'
-                    ref={inputRef8}
+
                     onKeyDown={e => {
                       if (e.key === 'Enter') e.preventDefault();
                     }}
@@ -487,45 +247,42 @@ const AddPeople = () => {
               <DataContent>
                 <Block>
                   <label htmlFor="group">Grupo</label>
-                  <select id='group' value={group} onChange={groupHandler}>
-                    <option value=''></option>
+                  <Flex>
                     {dataGroups?.groups.map((groups: any, index: any) => {
                       return (
-                        //<Flex>
-                        //<input id={groups.name} type='checkbox' value={groups.name} />
-                        //<label htmlFor={groups.name} >{groups.name}</label>
-                        //</Flex>
-                        <option key={index} value={groups.name}>{groups.name}</option>
+                        <Flex>
+                          <Input key={index} name={groups.name} id={groups.name} type='checkbox' value={groups.name} onChange={groupHandler} />
+                          <label htmlFor={groups.name} >{groups.name}</label>
+                        </Flex>
                       )
                     })}
-                  </select>
+                  </Flex>
                 </Block>
                 <Block>
                   <label htmlFor="category">Categoria</label>
-                  <select id='category' value={category} onChange={categoryHandler}>
-                    <option value=''></option>
+                  <Flex>
                     {dataCategory?.category.map((category: any, index: any) => {
                       return (
-                        //<Flex>
-                        //<input id={category.categoryName} type='checkbox' value={category.categoryName} />
-                        //<label htmlFor={category.categoryName}>{category.categoryName}</label>
-                        //</Flex>
-                        <option key={index} value={category.categoryName}>{category.categoryName}</option>
+                        <Flex>
+                          <Input key={index} name={category.name} id={category.name} type='checkbox' value={category.name} onChange={categoryHandler} />
+                          <label htmlFor={category.name}>{category.name}</label>
+                        </Flex>
                       )
                     })}
-                  </select>
-
+                  </Flex>
                 </Block>
                 <Block>
                   <label htmlFor="office">Cargo</label>
-                  <select title='select' id='positions' onChange={officeHandler} value={office}>
-                    <option value='' ></option>
+                  <Flex>
                     {dataPositions?.positions.map((positions: any, index: any) => {
                       return (
-                        <option key={index} value={positions.name} >{positions.name}</option>
+                        <Flex>
+                          <Input key={index} id={positions.name} onChange={officeHandler} type='checkbox' />
+                          <label htmlFor={positions.name}>{positions.name}</label>
+                        </Flex>
                       )
                     })}
-                  </select>
+                  </Flex>
                 </Block>
                 <Block>
                   <label htmlFor="conversion">Data da conversão</label>
@@ -535,7 +292,7 @@ const AddPeople = () => {
                     value={conversion}
                     onChange={conversionHandler}
                     type='date'
-                    ref={inputRef12}
+
                     onKeyDown={e => {
                       if (e.key === 'Enter') e.preventDefault();
                     }}
@@ -575,7 +332,7 @@ const AddPeople = () => {
                       value={phone1}
                       onChange={phone1Handler}
                       type='number'
-                      ref={inputRef14}
+
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
                       }}
@@ -589,7 +346,7 @@ const AddPeople = () => {
                       value={phone2}
                       onChange={phone2Handler}
                       type='number'
-                      ref={inputRef15}
+
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
                       }}
@@ -603,7 +360,7 @@ const AddPeople = () => {
                     type='email'
                     value={email}
                     onChange={emailHandler}
-                    ref={inputRef16}
+
                     onKeyDown={e => {
                       if (e.key === 'Enter') e.preventDefault();
                     }}
@@ -624,7 +381,7 @@ const AddPeople = () => {
                     value={address}
                     onChange={addressHandler}
                     type='text'
-                    ref={inputRef17}
+
                     onKeyDown={e => {
                       if (e.key === 'Enter') e.preventDefault();
                     }}
@@ -638,7 +395,7 @@ const AddPeople = () => {
                     value={number}
                     onChange={numberHandler}
                     type='number'
-                    ref={inputRef18}
+
                     onKeyDown={e => {
                       if (e.key === 'Enter') e.preventDefault();
                     }}
@@ -653,7 +410,7 @@ const AddPeople = () => {
                       value={district}
                       onChange={districtHandler}
                       type='text'
-                      ref={inputRef19}
+
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
                       }}
@@ -667,7 +424,7 @@ const AddPeople = () => {
                       value={zipcode}
                       onChange={zipcodeHandler}
                       type='number'
-                      ref={inputRef20}
+
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
                       }}
@@ -683,7 +440,7 @@ const AddPeople = () => {
                       value={country}
                       onChange={countryHandler}
                       type='text'
-                      ref={inputRef21}
+
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
                       }}
@@ -697,7 +454,7 @@ const AddPeople = () => {
                       value={state}
                       onChange={stateHandler}
                       type='text'
-                      ref={inputRef22}
+
                       onKeyDown={e => {
                         if (e.key === 'Enter') e.preventDefault();
                       }}
@@ -712,7 +469,7 @@ const AddPeople = () => {
                     value={city}
                     onChange={cityHandler}
                     type='text'
-                    ref={inputRef23}
+
 
                   />
                 </Block>
@@ -828,11 +585,11 @@ const AddPeople = () => {
         </Data>
         <Block>
           <Input name='accepted' type='checkbox' required />
-          <p>Sou consciente das minhas responsabilidades com os dados cadastrados, em conformidade com a LGPD e GDPR. <a href="/">Termos de uso, Políticas de privacidade</a> </p>
+          <p>Sou consciente das minhas responsabilidades com os dados cadastrados, em conformidade com a LGPD e GDPR. <a href='/'>Políticas de privacidade</a> </p>
         </Block>
         <Button type='submit' onClick={() => getDate()}>Salvar dados</Button>
       </Form>
-    </Container>
+    </Container >
   )
 }
 
