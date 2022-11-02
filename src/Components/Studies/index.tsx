@@ -12,57 +12,77 @@ import TopTableOptions from "../TopTableOptions"
 import Tr from "../Tr"
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import PageSelector from "../PageSelector"
-import EditRemove from "../EditRemove"
+import { Link } from "react-router-dom"
+import { useAxios } from "../../hooks/useAxios"
+import Flex from "../Flex"
+import React from "react"
+import { StudiesContext } from "../../contexts/studiesContext"
 
 
 const Studies = () => {
+  const { data } = useAxios('studies');
+  const { handleDelete, handleEdit, handleClear } = React.useContext(StudiesContext);
   return (
     <Container>
       <h3>Estudos</h3>
-      <Box>
+      <Box width='100%'>
         <BoxHeader title={`Resultados: 0`}>
-          
-          <Button>+ Adicionar estudos</Button>
-        </BoxHeader>  
+          <Link to='/addstudies'><Button onClick={() => handleClear()}>+ Adicionar estudos</Button></Link>
+        </BoxHeader>
         <BoxContent>
           <TopTableOptions />
           <Table>
             <Thead>
               <Tr>
                 <Th>
-                  <Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button>
+                  <Flex>Nome <p><BsArrowUp /><BsArrowDown /></p></Flex>
                 </Th>
                 <Th>
-                  <Button>Categoria <p><BsArrowUp /><BsArrowDown /></p></Button>
+                  <Flex>Categoria <p><BsArrowUp /><BsArrowDown /></p></Flex>
                 </Th>
                 <Th>
-                  <Button>Criado em  <p><BsArrowUp /><BsArrowDown /></p></Button>
+                  <Flex>Criado em  <p><BsArrowUp /><BsArrowDown /></p></Flex>
                 </Th>
                 <Th>
-                  <Button>Ações <p><BsArrowUp /><BsArrowDown /></p></Button>
+                  <Flex>Ações <p><BsArrowUp /><BsArrowDown /></p></Flex>
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>
-                  NAme
-                </Td>
-                <Td>
-                  Categorie
-                </Td>
-                <Td>
-                  Data
-                </Td>
-                <Td>
-                  <EditRemove />
-                </Td>
-              </Tr>
+              {data?.studies.map((estudo: any, index: number) => {
+                return (
+                  <Tr key={index}>
+                    <Td>
+                      {estudo.name}
+                    </Td>
+                    <Td>
+                      {estudo.category}
+                    </Td>
+                    <Td>
+                      {estudo.date?.split('T')[0]}
+                    </Td>
+                    <Td>
+                      <Flex>
+                        <Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
+                          estudo._id,
+                          estudo.name,
+                          estudo.category,
+                          estudo.content,
+                          estudo.image,
+                          estudo.file,
+                          estudo.notification
+                        )}>Editar</Button></Link>
+                        <Button type='button' onClick={() => handleDelete(estudo._id)}>Deletar</Button>
+                      </Flex>
+                    </Td>
+                  </Tr>
+                )
+              })}
             </Tbody>
           </Table>
           <PageSelector />
         </BoxContent>
-      </Box>  
+      </Box>
     </Container>
   )
 }
