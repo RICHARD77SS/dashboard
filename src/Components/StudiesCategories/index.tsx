@@ -1,3 +1,6 @@
+import React from 'react';
+import { StudiesCategoryContext } from '../../contexts/studiesCategoryContext';
+import { useAxios } from '../../hooks/useAxios';
 import Aside from '../Aside';
 import Box from '../Box';
 import BoxContent from '../BoxContent';
@@ -5,6 +8,7 @@ import BoxHeader from '../BoxHeader';
 import Button from '../Button';
 import Container from '../Container';
 import EditRemove from '../EditRemove';
+import Flex from '../Flex';
 import Input from '../Input';
 import Table from '../Table';
 import Tbody from '../Tbody';
@@ -12,9 +16,11 @@ import Td from '../Td';
 import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
-import { Content, InputBox } from './styles';
+import { Content, InputBox, Form } from './styles';
 
 const StudiesCategories = () => {
+  const { name, description, nameHandler, descriptionHandler, handleSubmit, handleDelete, handleEdit } = React.useContext(StudiesCategoryContext)
+  const { data } = useAxios('studiescategory')
   return (
     <Container>
       <h3>Categorias de estudo</h3>
@@ -33,28 +39,45 @@ const StudiesCategories = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>NameHere</Td>
-                  <Td><EditRemove /></Td>
-                </Tr>
+                {data?.studiesCategory.map((category: any, index: number) => {
+                  return (
+                    <Tr key={index}>
+                      <Td>{category.name}</Td>
+                      <Td>
+                        <Flex>
+                          <Button
+                            type='button'
+                            onClick={() => handleEdit(
+                              category._id,
+                              category.name,
+                              category.description
+                            )}>Edit</Button>
+                          <Button
+                            type='button'
+                            onClick={() => handleDelete(category._id)}>Delete</Button>
+                        </Flex>
+                      </Td>
+                    </Tr>
+                  )
+                })}
               </Tbody>
             </Table>
           </BoxContent>
         </Box>
-        <Aside>
-          <BoxHeader title='+ Criar Categoria' />
+        <Form onSubmit={handleSubmit}>
           <BoxContent>
+            <BoxHeader title='+ Criar Categoria' />
             <InputBox>
               <label htmlFor='categorieName'>Nome da categoria</label>
-              <Input type='text' id='categorieName' />
+              <Input type='text' id='categorieName' value={name} onChange={nameHandler} />
             </InputBox>
             <InputBox>
               <label htmlFor="description">Descrição</label>
-              <textarea title='textarea' name="" id="description" cols={30} rows={10}></textarea>
+              <textarea title='textarea' name="" id="description" cols={30} rows={10} value={description} onChange={descriptionHandler}></textarea>
             </InputBox>
-            <Button>Criar</Button>
+            <Button type='submit'>Criar</Button>
           </BoxContent>
-        </Aside>
+        </Form>
       </Content>
     </Container>
   )
