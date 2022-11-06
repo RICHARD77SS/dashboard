@@ -6,6 +6,7 @@ import Input from '../Input';
 import { Container, Form, Content, Fieldset, Data, Header, DataContent, Flex, Block, Foto, InputBlock } from './styles';
 import { GroupsContext } from '../../contexts/groupsContext';
 import { Link } from 'react-router-dom';
+import { NowDate } from '../../utils/getDate';
 
 const AddGroup = () => {
 
@@ -19,12 +20,7 @@ const AddGroup = () => {
     weekDay,
     sex,
     time,
-    category,
     originGroup,
-    lider1,
-    lider2,
-    lider3,
-    lider4,
     address,
     district,
     number,
@@ -51,9 +47,14 @@ const AddGroup = () => {
     stateHandler,
     cityHandler,
     anotationsHandler,
-    handleSubmit
+    handleSubmit,
+    setCreationDate,
+    bg,
+    bgHandler
   } = React.useContext(GroupsContext)
-
+  React.useEffect(() => {
+    setCreationDate(NowDate)
+  }, [setCreationDate])
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -73,6 +74,13 @@ const AddGroup = () => {
                       <input type='text' placeholder='Adicione um link de imagem' value={image} onChange={imageHandler} />
                     </Foto>
                   </Block>
+                  <Block>
+                    <label htmlFor="foto">Fundo do grupo</label>
+                    <Foto>
+                      <img src={bg} alt="" />
+                      <input type='text' placeholder='Adicione um link de imagem' value={bg} onChange={bgHandler} />
+                    </Foto>
+                  </Block>
                   <InputBlock>
                     <Block>
                       <label htmlFor="groupnome">Nome do grupo</label>
@@ -85,7 +93,7 @@ const AddGroup = () => {
                 <Flex>
                   <Block>
                     <label htmlFor="creationdate">Data de Criação</label>
-                    <Input type='date' value={creationDate} onChange={creationDateHandler} />
+                    <Input type='date' value={creationDate?.split('T')[0]} onChange={creationDateHandler} />
                   </Block>
                   <Block>
                     <label htmlFor="weekday">Dia da semana</label>
@@ -121,19 +129,14 @@ const AddGroup = () => {
                 <Flex>
                   <Block>
                     <label htmlFor="category">Categoria</label>
-                    <select title='category' value={category} onChange={categoryHandler}>
-                      <option value='Familias'>Familias</option>
-                      <option value='Casais'>Casais</option>
-                      <option value='Adultos'>Adultos</option>
-                      <option value='Jovens'>Jovens</option>
-                      <option value='Adolescentes'>Adolescentes</option>
-                      <option value='Crianças'>Crianças</option>
-                      {groupCategory?.groupCategory.map((category: any, index: any) => {
-                        return (
-                          <option value={category.name}>{category.name}</option>
-                        )
-                      })}
-                    </select>
+                    {groupCategory?.groupCategory.map((category: any, index: any) => {
+                      return (
+                        <Flex>
+                          <Input key={index} name={category.name} id={category.name} type='checkbox' value={category.name} onChange={categoryHandler} />
+                          <label htmlFor={category.name}>{category.name}</label>
+                        </Flex>
+                      )
+                    })}
                   </Block>
                 </Flex>
               </DataContent>
@@ -156,7 +159,7 @@ const AddGroup = () => {
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider1">Lider 1:&nbsp;{lider1?.name}</label>
+                  <label htmlFor="lider1">Lider 1</label>
                   <select title='firstlider' id='firstliders' onChange={lider1Handler} >
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
@@ -168,7 +171,7 @@ const AddGroup = () => {
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider2">Lider 2&nbsp;{lider2?.name}</label>
+                  <label htmlFor="lider2">Lider 2</label>
                   <select title='secondLeader' id='secondLeader' onChange={lider2Handler}>
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
@@ -180,7 +183,7 @@ const AddGroup = () => {
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider3">Lider 3&nbsp;{lider3?.name}</label>
+                  <label htmlFor="lider3">Lider 3</label>
                   <select title='tirdLeader' id='tirdLeader' onChange={lider3Handler}>
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
@@ -192,7 +195,7 @@ const AddGroup = () => {
                   </select>
                 </Block>
                 <Block>
-                  <label htmlFor="lider4">Lider 4&nbsp;{lider4?.name}</label>
+                  <label htmlFor="lider4">Lider 4</label>
                   <select title='fourLeader' id='fourLeader' onChange={lider4Handler}>
                     <option value=''></option>
                     {dataPerson?.person.map((person: any, index: any) => {
