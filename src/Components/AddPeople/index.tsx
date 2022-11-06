@@ -30,9 +30,6 @@ const AddPeople = () => {
     country,
     state,
     city,
-    group,
-    category,
-    office,
     conversion,
     notes,
     passwordHandler,
@@ -83,8 +80,6 @@ const AddPeople = () => {
   const { data: dataPositions } = useAxios('positions')
 
   const { data: dataGroups } = useAxios('groups')
-  console.log(group)
-  console.log('cat' + category)
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -277,7 +272,7 @@ const AddPeople = () => {
                     {dataPositions?.positions.map((positions: any, index: any) => {
                       return (
                         <Flex>
-                          <Input key={index} id={positions.name} onChange={officeHandler} type='checkbox' />
+                          <Input key={index} id={positions.name} value={positions.name} onChange={officeHandler} type='checkbox' />
                           <label htmlFor={positions.name}>{positions.name}</label>
                         </Flex>
                       )
