@@ -1,35 +1,63 @@
 import React from 'react'
 import Container from '../Container';
 import Input from '../Input';
-import {Content, Box, Top, Flex,Aside,MiniBox } from './styles';
+import { Content, Box, Top, Flex, Aside, MiniBox } from './styles';
 import BoxHeader from '../BoxHeader';
 import BoxContent from '../BoxContent';
 import Button from '../Button';
 import TextEditor from '../TextEditor';
 import TextArea from '../TextArea';
+import { StudiesContext } from '../../contexts/studiesContext';
+import { Link } from 'react-router-dom';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const AddStudies = () => {
   const [value, setValue] = React.useState('');
+  const {
+    name,
+    category,
+    content,
+    image,
+    file,
+    nameHandler,
+    categoryHandler,
+    contentHandler,
+    imageHandler,
+    fileHandler,
+    notificationHandler,
+    handleSubmit,
+    setContent,
+    handleClear,
+    handleDelete,
+    id
+  } = React.useContext(StudiesContext)
+  const { data } = useAxios('studiescategory')
   return (
     <Container>
       <h3>Crie um estudo</h3>
-      <Content>
+      <Content onSubmit={handleSubmit}>
         <Box>
           <Top>
             <Flex>
-              <Input type='text' placeholder=' Título do estudo' />
-              <Input type='text' list='categories' placeholder=' Categoria' />
-              <datalist id='categories'>
-                <option value='Group name' />
-                <option value='Group here' />
-              </datalist>
-              <Button>Salvar</Button>
-              <Button>Cancelar</Button>
+              <Input type='text' placeholder=' Título do estudo' value={name} onChange={nameHandler} required />
+              <select placeholder=' Categoria' title='category' id='categories' value={category} onChange={categoryHandler}>
+                <option value='' ></option>
+                {data?.studiesCategory.map((category: any, index: number) => {
+                  return (
+                    <option key={index} value={category.name} >{category.name}</option>
+
+                  )
+                })}
+              </select>
+              <Button type='submit'>Salvar</Button>
+
+              <Link to='/studies'><Button type='button' onClick={() => handleClear()}>Cancelar</Button></Link>
+              {id ? <Link to='/studies'><Button type='button' onClick={() => handleDelete(id)}>Apagar</Button></Link> : null}
             </Flex>
           </Top>
           <TextArea>
-            <TextEditor value={value} setValue={setValue} />
+            <TextEditor value={content} setValue={setContent} />
           </TextArea>
         </Box>
         <Aside>
@@ -38,8 +66,8 @@ const AddStudies = () => {
 
             </BoxHeader>
             <BoxContent>
-              <Button>Selecione uma imagem</Button>
-              <Button>Carregar uma imagem</Button>
+              <Button type='button'>Selecione uma imagem</Button>
+              <Button type='button'>Carregar uma imagem</Button>
             </BoxContent>
           </MiniBox>
           <MiniBox>
@@ -47,7 +75,7 @@ const AddStudies = () => {
 
             </BoxHeader>
             <BoxContent>
-              <Button>Selecione um arquivo</Button>
+              <Button type='button'>Selecione um arquivo</Button>
             </BoxContent>
           </MiniBox>
           <MiniBox>
@@ -55,7 +83,7 @@ const AddStudies = () => {
 
             </BoxHeader>
             <BoxContent>
-              <Input type='checkbox' />
+              <Input name='notification' type='checkbox' value='val' onChange={notificationHandler} />
               <p>Enviar notificação push</p>
             </BoxContent>
           </MiniBox>
