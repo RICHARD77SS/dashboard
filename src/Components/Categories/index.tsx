@@ -12,10 +12,10 @@ import Tbody from '../Tbody';
 import Td from '../Td';
 import Flex from '../Flex';
 const Categories = () => {
-  const { categoryName,
-    categoryNameHandler,
-    categoryDescription,
-    categoryDescriptionHandler,
+  const { name,
+    nameHandler,
+    description,
+    descriptionHandler,
     handleSubmit,
     handleEdit,
     handleDelete
@@ -23,7 +23,6 @@ const Categories = () => {
   const { data } = useAxios('category')
   let length = data?.category?.length
 
-  console.log()
   return (
     <Container>
       <Content>
@@ -46,12 +45,12 @@ const Categories = () => {
 
                   return (
                     <Tr key={index}>
-                      <Td>{category.categoryName}</Td>
-                      <Td>{category.categoryDescription}</Td>
+                      <Td>{category.name}</Td>
+                      <Td>{category.description}</Td>
                       <Td></Td>
                       <Td>
                         <Flex>
-                          <Button onClick={() => handleEdit(category._id, category.categoryName, category.categoryDescription)}>Editar</Button>
+                          <Button onClick={() => handleEdit(category._id, category.name, category.description)}>Editar</Button>
                           <Button onClick={() => handleDelete(category._id)}>Remover</Button>
 
                         </Flex>
@@ -71,11 +70,11 @@ const Categories = () => {
           <Form onSubmit={handleSubmit}>
             <InputGroup>
               <label htmlFor="name">Nome da Categoria</label>
-              <Input id='name' type='text' value={categoryName} onChange={categoryNameHandler} />
+              <Input id='name' type='text' value={name} onChange={nameHandler} />
             </InputGroup>
             <InputGroup>
               <label htmlFor="description">Descrição</label>
-              <Input id='description' type='text' value={categoryDescription} onChange={categoryDescriptionHandler} />
+              <Input id='description' type='text' value={description} onChange={descriptionHandler} />
             </InputGroup>
             <Button type='submit'>Criar</Button>
           </Form>
