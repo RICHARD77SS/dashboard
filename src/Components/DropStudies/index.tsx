@@ -2,10 +2,11 @@ import React from 'react';
 import Button from '../Button';
 import { Wrapper, Droped } from './styles'
 import { NavLink } from 'react-router-dom';
+import { StudiesContext } from '../../contexts/studiesContext';
 
 const DropStudies = () => {
   const [dropedOpen, setDropedOpen] = React.useState(false);
-
+  const { handleClear } = React.useContext(StudiesContext)
   return (
     <Wrapper>
       <Button
@@ -20,7 +21,7 @@ const DropStudies = () => {
               <Button>Estudos</Button>
             </NavLink>
             <NavLink className='navlink' to='/addstudies'>
-              <Button>Adicionar Estudos</Button>
+              <Button onClick={() => handleClear()}>Adicionar Estudos</Button>
             </NavLink>
             <NavLink className='navlink' to='/studiecategories'>
               <Button>Categorias</Button>
