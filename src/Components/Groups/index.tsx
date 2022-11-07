@@ -11,7 +11,7 @@ import { useAxios } from '../../hooks/useAxios';
 
 const Group = () => {
   const { data: dataGroups } = useAxios('groups')
-
+  const { data: dataPerson } = useAxios('person')
   return (
     <Container>
       <h3>Grupos</h3>
@@ -25,7 +25,7 @@ const Group = () => {
               {dataGroups?.groups?.map((groups: any, index: any) => {
                 return (
                   <CardGroup key={index}
-                    bg={groups.image}
+                    bg={groups.bg}
                     image={groups.image}
                     name={groups.name}
                     lider1={groups.lider1.name}
@@ -33,7 +33,9 @@ const Group = () => {
                     lider3={groups.lider3.name}
                     lider1Image={groups.lider1.image}
                     lider2Image={groups.lider2.image}
-                    lider3Image={groups.lider3.image}>
+                    lider3Image={groups.lider3.image}
+
+                  >
                     <Link to={`/groups/viewgroup/${index}`}><Button>Visualizar</Button></Link>
                   </CardGroup>
                 )
