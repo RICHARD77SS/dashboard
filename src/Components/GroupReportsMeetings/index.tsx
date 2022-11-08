@@ -1,4 +1,4 @@
-
+import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
 import ReportsHeader from '../ReportsHeader';
@@ -13,57 +13,85 @@ import { Container, Content, Top, Block, Flex } from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
+import { useAxios } from '../../hooks/useAxios';
+import { formatter } from '../../utils/formatMoneyBr';
+import { GroupsContext } from '../../contexts/groupsContext';
 
 
 const GroupReportsMeetings = () => {
+  const { data: dataMeetings } = useAxios('meetings')
+  const { data: dataGroups } = useAxios('groups')
+
+  const { filterGroup, filterGroupHandler } = React.useContext(GroupsContext)
+  console.log(dataMeetings?.meetings.map((meetings: any, index: number) => {
+    return meetings.group
+  }).includes(filterGroup))
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Frequências Reuniões' />
       <Content>
         <Top>
           <Block>
-              <Input type='date' />
-              <Button>Ativar Filtro de hierarquia</Button>
+            <Input type='date' />
+            <Button>Ativar Filtro de hierarquia</Button>
           </Block>
           <Flex>
             <Block>
               <label htmlFor="leader1">Líder 1</label>
-              <Input placeholder='  Selecione' id='leader1' type='text' list='firstLeader' />
-              <datalist id='firstLeader'>
-                <option value="Lider name here"></option>
-              </datalist>
+              <select id='leader1' title='leader' >
+                <option value=""></option>
+                {dataGroups?.groups?.map((groups: any, index: number) => {
+                  return (
+                    <option key={index} value={groups.lider1.name}>{groups.lider1.name}</option>
+                  )
+                })}
+              </select>
             </Block>
             <Block>
               <label htmlFor="leader2">Líder 2</label>
-              <Input placeholder='  Selecione' id='leader2' type='text' list='secondLeader' />
-              <datalist id='secondLeader'>
-                <option value="Lider name here"></option>
-              </datalist>
+              <select title='leader' id='leader2'>
+                <option value=""></option>
+                {dataGroups?.groups?.map((groups: any, index: number) => {
+                  return (
+                    <option key={index} value={groups.lider1.name}>{groups.lider1.name}</option>
+                  )
+                })}
+              </select>
             </Block>
             <Block>
               <label htmlFor="leader3">Líder 3</label>
-              <Input placeholder='  Selecione' id='leader' type='text' list='thirdLeader' />
-              <datalist id='thirdLeader'>
-                <option value="Lider name here" ></option>
-                <option value="Lider name here" ></option>
-              </datalist>
+              <select title='leader' id='leader3'>
+                <option value=""></option>
+                {dataGroups?.groups?.map((groups: any, index: number) => {
+                  return (
+                    <option key={index} value={groups.lider1.name}>{groups.lider1.name}</option>
+                  )
+                })}
+              </select>
             </Block>
             <Block>
               <label htmlFor="leader4">Líder 4</label>
-              <Input placeholder='  Selecione' id='leader4' type='text' list='fourthNumber' />
-              <datalist id='fourthNumber'>
-                <option value="Lider name here"></option>
-              </datalist>
+              <select title='leader' id='leader4'>
+                <option value=""> </option>
+                {dataGroups?.groups?.map((groups: any, index: number) => {
+                  return (
+                    <option key={index} value={groups.lider1.name}>{groups.lider1.name}</option>
+                  )
+                })}
+              </select>
             </Block>
           </Flex>
           <hr />
           <Flex>
             <p>Filtrar por grupo de origem</p>
-            <Input id='originGroup' type='text' list='groups' />
-            <datalist id='groups'>
-              <option value="Group name"></option>
-
-            </datalist>
+            <select title='groups' id='groups' value={filterGroup} onChange={filterGroupHandler}>
+              <option value=""></option>
+              {dataGroups?.groups?.map((groups: any, index: number) => {
+                return (
+                  <option key={index} value={groups.name}>{groups.name}</option>
+                )
+              })}
+            </select>
           </Flex>
         </Top>
         <TopTableOptions />
@@ -79,13 +107,30 @@ const GroupReportsMeetings = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>Data here</Td>
-              <Td>Grupo here</Td>
-              <Td>Pessoas here</Td>
-              <Td>Visitantes here</Td>
-              <Td>Valor total here</Td>
-            </Tr>
+            {filterGroup ?
+              dataMeetings?.meetings.map((meetings: any, index: number) => {
+
+                return meetings.group.includes(filterGroup) ?
+                  <Tr key={index}>
+                    <Td>{meetings.date.split('T')[0]}</Td>
+                    <Td>{meetings.group}</Td>
+                    <Td>{meetings.participants.length}</Td>
+                    <Td>{meetings.visitors.length}</Td>
+                    <Td>{formatter.format(meetings.value)}</Td>
+                  </Tr>
+                  : null
+              })
+              : dataMeetings?.meetings.map((meetings: any, index: number) => {
+                return (
+                  <Tr key={index}>
+                    <Td>{meetings.date.split('T')[0]}</Td>
+                    <Td>{meetings.group}</Td>
+                    <Td>{meetings.participants.length}</Td>
+                    <Td>{meetings.visitors.length}</Td>
+                    <Td>{formatter.format(meetings.value)}</Td>
+                  </Tr>
+                )
+              })}
           </Tbody>
         </Table>
         <PageSelector />
