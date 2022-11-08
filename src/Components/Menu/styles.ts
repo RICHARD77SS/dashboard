@@ -8,7 +8,7 @@ export const Content = styled.div`
   z-index: 100;
   position: absolute; 
 
-  @media (max-width:750px){
+  @media (max-width:769px){
     display: flex;
     button {
       display: flex;
