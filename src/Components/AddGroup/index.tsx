@@ -128,7 +128,9 @@ const AddGroup = () => {
                 </Flex>
                 <Flex>
                   <Block>
-                    <label htmlFor="category">Categoria</label>
+                    <br />
+                    <h4>Categorias</h4>
+                    <br />
                     {groupCategory?.groupCategory.map((category: any, index: any) => {
                       return (
                         <Flex>
