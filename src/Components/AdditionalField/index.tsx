@@ -62,14 +62,13 @@ const AdditionalField = () => {
               </Thead>
               <Tbody>
                 {data?.extraFields?.map((fields: any, index: any) => {
-  
+                  console.log(Object.keys(fields?.inputOption).map((keyName: any, i: number) => fields?.inputOption[keyName]))
                   return (
                     <Tr key={index}>
                       <Td>{fields?.inputName}</Td>
                       <Td>{fields?.inputType}</Td>
-                      <Td>{fields?.inputOption?.option1},<br />
-                        {fields?.inputOption?.option2},<br />
-                        {fields?.inputOption?.option3}
+                      <Td>
+                        {fields?.inputType !== 'text' && fields?.inputType !== 'textarea' ? Object.keys(fields?.inputOption).map((option: string, index: number) => fields?.inputOption[option] + '; ') : null}
                       </Td>
                       <Td>
                         <Flex>
