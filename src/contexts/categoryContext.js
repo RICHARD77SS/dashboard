@@ -31,13 +31,13 @@ export function CategoryContextProvider({ children }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    window.alert('category adicionada')
     const category = {
       name,
       description
     }
     if (id) {
       api.put(`category/${id}`, category)
+      window.alert('category Editada')
       const updatedCategory = {
         category: data.category?.map((category) => {
           if (category._id === id) {
@@ -53,6 +53,7 @@ export function CategoryContextProvider({ children }) {
       mutate(updatedCategory, false)
     } else {
       api.post('category', category);
+      window.alert('category adicionada')
       const updatedCategory = {
         category: [...data.category, category]
       }
