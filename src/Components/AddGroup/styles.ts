@@ -80,7 +80,7 @@ export const Flex = styled.div`
   height: auto;
   display: flex;
   align-items:center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1rem;
 `
 
@@ -98,6 +98,9 @@ export const Block = styled.div`
   }
   input{
     width: 100%;
+  }
+  input[type=checkbox]{
+    width: auto;
   }
   p{
     width: 50%;
