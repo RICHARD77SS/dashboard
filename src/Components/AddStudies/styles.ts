@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Content = styled.div`
+export const Content = styled.form`
   width: 100%;
   max-width: 1300px;
   height: auto;
