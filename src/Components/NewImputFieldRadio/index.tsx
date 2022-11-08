@@ -21,7 +21,19 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
   React.useEffect(() => {
     setInputType("radio")
   }, [setInputType])
-
+  function Add() {
+    let campo = document.getElementById('options')
+    let input = document.createElement('input')
+    campo?.append(input)
+    let options = campo?.children
+    let size = options!.length
+    for (let i = 0; i < size; i++) {
+      options![i].setAttribute('type', 'text')
+      options![i].setAttribute('name', `option${i}`)
+      options![i].setAttribute('placeholder', 'Escreva aqui (o campo vazio será removido)')
+      options![i].addEventListener('change', inputOptionHandle)
+    }
+  }
   return (
     <Container>
       <Content>
@@ -44,30 +56,11 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
               />
             </InputBlock>
             <InputBlock >
-              <label htmlFor=" ">Opções</label>
-              <Input
-                
-                type='text'
-                placeholder='Escreva aqui (o campo vazio será removido)'
-                onChange={inputOptionHandle}
-                name='option1'
-              />
-              <Input
-                
-                type='text'
-                placeholder='Escreva aqui (o campo vazio será removido)'
-                onChange={inputOptionHandle}
-                name='option2'
-              />
-              <Input
-                
-                type='text'
-                placeholder='Escreva aqui (o campo vazio será removido)'
-                onChange={inputOptionHandle}
-                name='option3'
-              />
+              <div id="options">
+
+              </div>
             </InputBlock>
-            <Button type='button'>+ Adicionar nova opção</Button>
+            <Button type='button' onClick={() => Add()}>+ Adicionar nova opção</Button>
           </BoxContent>
           <BoxFooter>
             <Button type='submit'>Salvar</Button>
