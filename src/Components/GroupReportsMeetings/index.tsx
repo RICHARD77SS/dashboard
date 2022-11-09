@@ -22,10 +22,13 @@ const GroupReportsMeetings = () => {
   const { data: dataMeetings } = useAxios('meetings')
   const { data: dataGroups } = useAxios('groups')
 
-  const { filterGroup, filterGroupHandler } = React.useContext(GroupsContext)
-  console.log(dataMeetings?.meetings.map((meetings: any, index: number) => {
-    return meetings.group
-  }).includes(filterGroup))
+  const {
+    filterGroup,
+    filterGroupHandler,
+    filterLider1,
+    filterLider1Handler
+  } = React.useContext(GroupsContext)
+
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Frequências Reuniões' />
@@ -38,7 +41,7 @@ const GroupReportsMeetings = () => {
           <Flex>
             <Block>
               <label htmlFor="leader1">Líder 1</label>
-              <select id='leader1' title='leader' >
+              <select id='leader1' title='leader' value={filterLider1} onChange={filterLider1Handler}>
                 <option value=""></option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
@@ -53,7 +56,7 @@ const GroupReportsMeetings = () => {
                 <option value=""></option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
-                    <option key={index} value={groups.lider1.name}>{groups.lider1.name}</option>
+                    <option key={index} value={groups.lider2.name}>{groups.lider2.name}</option>
                   )
                 })}
               </select>
@@ -64,7 +67,7 @@ const GroupReportsMeetings = () => {
                 <option value=""></option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
-                    <option key={index} value={groups.lider1.name}>{groups.lider1.name}</option>
+                    <option key={index} value={groups.lider3.name}>{groups.lider3.name}</option>
                   )
                 })}
               </select>
@@ -75,7 +78,7 @@ const GroupReportsMeetings = () => {
                 <option value=""> </option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
-                    <option key={index} value={groups.lider1.name}>{groups.lider1.name}</option>
+                    <option key={index} value={groups.lider4.name}>{groups.lider4.name}</option>
                   )
                 })}
               </select>
@@ -120,8 +123,12 @@ const GroupReportsMeetings = () => {
                   </Tr>
                   : null
               })
-              : dataMeetings?.meetings.map((meetings: any, index: number) => {
-                return (
+              : filterLider1 ? dataMeetings?.meetings.map((meetings: any, index: number) => {
+
+                return dataGroups?.groups.map((groups: any, index: number) => {
+                  return groups.lider1.name === filterLider1 ? groups.name : -1
+                })
+                  .filter((gpName: any) => gpName !== -1).includes(meetings.group) ?
                   <Tr key={index}>
                     <Td>{meetings.date.split('T')[0]}</Td>
                     <Td>{meetings.group}</Td>
@@ -129,8 +136,20 @@ const GroupReportsMeetings = () => {
                     <Td>{meetings.visitors.length}</Td>
                     <Td>{formatter.format(meetings.value)}</Td>
                   </Tr>
-                )
-              })}
+                  : null
+              })
+                : dataMeetings?.meetings.map((meetings: any, index: number) => {
+
+                  return (
+                    <Tr key={index}>
+                      <Td>{meetings.date.split('T')[0]}</Td>
+                      <Td>{meetings.group}</Td>
+                      <Td>{meetings.participants.length}</Td>
+                      <Td>{meetings.visitors.length}</Td>
+                      <Td>{formatter.format(meetings.value)}</Td>
+                    </Tr>
+                  )
+                })}
           </Tbody>
         </Table>
         <PageSelector />
