@@ -22,24 +22,16 @@ const PersonDetailsAditionalFields = (Props: Props) => {
                   <BoxHeader title={fields?.inputName}></BoxHeader>
 
                   <BoxContent>
-                    <Flex>
-                      <Input type={fields.inputType} name='' />
-                      <label htmlFor="">
-                        {fields?.inputOption?.option1}
-                      </label>
-                    </Flex>
-                    <Flex>
-                      <Input type={fields.inputType} name='' />
-                      <label htmlFor="">
-                        {fields?.inputOption?.option2}
-                      </label>
-                    </Flex>
-                    <Flex>
-                      <Input type={fields.inputType} name='' />
-                      <label htmlFor="">
-                        {fields?.inputOption?.option3}
-                      </label>
-                    </Flex>
+                    {Object.keys(fields?.inputOption).map((option: string, index: number) => {
+                      return (
+                        <Flex>
+                          <Input type={fields.inputType} name='' />
+                          <label htmlFor="">
+                            {fields?.inputOption[option]}
+                          </label>
+                        </Flex>
+                      )
+                    })}
                   </BoxContent>
                 </Box>)
             }
@@ -49,24 +41,16 @@ const PersonDetailsAditionalFields = (Props: Props) => {
                   <BoxHeader title={fields?.inputName}></BoxHeader>
 
                   <BoxContent>
-                    <Flex>
-                      <Input type={fields.inputType} name='' />
-                      <label htmlFor="">
-                        {fields?.inputOption?.option1}
-                      </label>
-                    </Flex>
-                    <Flex>
-                      <Input type={fields.inputType} name='' />
-                      <label htmlFor="">
-                        {fields?.inputOption?.option2}
-                      </label>
-                    </Flex>
-                    <Flex>
-                      <Input type={fields.inputType} name='' />
-                      <label htmlFor="">
-                        {fields?.inputOption?.option3}
-                      </label>
-                    </Flex>
+                    {Object.keys(fields?.inputOption).map((option: string, index: number) => {
+                      return (
+                        <Flex>
+                          <Input type={fields.inputType} name='' />
+                          <label htmlFor="">
+                            {fields?.inputOption[option]}
+                          </label>
+                        </Flex>
+                      )
+                    })}
                   </BoxContent>
                 </Box>)
             }
