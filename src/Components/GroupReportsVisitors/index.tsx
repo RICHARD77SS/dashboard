@@ -1,6 +1,6 @@
-
+import React from 'react';
+import { MeetingsContext } from '../../contexts/meetingsContext';
 import { useAxios } from '../../hooks/useAxios';
-import Button from '../Button';
 import GraphLineArea from '../GraphLineArea';
 import Input from '../Input';
 import ReportsHeader from '../ReportsHeader';
@@ -11,6 +11,7 @@ import { Container, Content, Graph, Block, Flex } from './styles';
 
 const GroupReportsVisitors = () => {
   const { data: dataMeetings } = useAxios('meetings')
+  const { period, periodHandler } = React.useContext(MeetingsContext)
 
   let participantsAndDate = dataMeetings?.meetings.reduce((acc: any, item: any) => {
     if (!acc[item.date.split('T')[0]]) {
@@ -20,6 +21,7 @@ const GroupReportsVisitors = () => {
     }
     return acc
   }, {})
+
   let visitorsAndDate = dataMeetings?.meetings.reduce((acc: any, item: any) => {
     if (!acc[item.date.split('T')[0]]) {
       acc[item.date.split('T')[0]] = item.visitors.length
@@ -28,17 +30,18 @@ const GroupReportsVisitors = () => {
     }
     return acc
   }, {})
+
   let participantsValues: any = participantsAndDate ? Object.values(participantsAndDate) : 0
 
   let visitorsValues: any = visitorsAndDate ? Object.values(visitorsAndDate) : 0
 
   let sum: number[] = [];
-  
-  for (var i = 0; i < participantsValues.length; i++){
+
+  for (var i = 0; i < participantsValues.length; i++) {
     sum.push((participantsValues[i] + visitorsValues[i]));
   }
 
-  const labels = participantsAndDate ? Object.keys(participantsAndDate) : 0;
+  const labels = participantsAndDate ? Object.keys(participantsAndDate).map((gdate: any) => new Date(gdate).getMonth() + 1 === new Date(period).getMonth() + 1 ? gdate : -1).filter((date: any) => date !== -1) : 0;
 
   const data = {
     labels,
@@ -66,14 +69,15 @@ const GroupReportsVisitors = () => {
       },
     ],
   };
+
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Frequências de Participantes e Visitantes' />
       <Content>
         <Block>
+          <h3>Resultados referentes ao mês</h3>
           <Flex>
-            <Input type='date' />
-            <Button>D</Button>
+            <Input type='date' value={period} onChange={periodHandler} />
           </Flex>
         </Block>
         <Graph>
