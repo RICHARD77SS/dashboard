@@ -26,8 +26,17 @@ const GroupReportsMeetings = () => {
     filterGroup,
     filterGroupHandler,
     filterLider1,
-    filterLider1Handler
+    filterLider1Handler,
+    filterLider2,
+    filterLider2Handler,
+    filterLider3,
+    filterLider3Handler,
+    filterLider4,
+    filterLider4Handler,
+    period,
+    filterPeriodHandler
   } = React.useContext(GroupsContext)
+
 
   return (
     <Container>
@@ -35,13 +44,22 @@ const GroupReportsMeetings = () => {
       <Content>
         <Top>
           <Block>
-            <Input type='date' />
+            <Input
+              type='date'
+              value={period}
+              onChange={filterPeriodHandler}
+            />
             <Button>Ativar Filtro de hierarquia</Button>
           </Block>
           <Flex>
             <Block>
               <label htmlFor="leader1">Líder 1</label>
-              <select id='leader1' title='leader' value={filterLider1} onChange={filterLider1Handler}>
+              <select
+                id='leader1'
+                title='leader'
+                value={filterLider1}
+                onChange={filterLider1Handler}
+              >
                 <option value=""></option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
@@ -52,7 +70,12 @@ const GroupReportsMeetings = () => {
             </Block>
             <Block>
               <label htmlFor="leader2">Líder 2</label>
-              <select title='leader' id='leader2'>
+              <select
+                title='leader'
+                id='leader2'
+                value={filterLider2}
+                onChange={filterLider2Handler}
+              >
                 <option value=""></option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
@@ -63,7 +86,12 @@ const GroupReportsMeetings = () => {
             </Block>
             <Block>
               <label htmlFor="leader3">Líder 3</label>
-              <select title='leader' id='leader3'>
+              <select
+                title='leader'
+                id='leader3'
+                value={filterLider3}
+                onChange={filterLider3Handler}
+              >
                 <option value=""></option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
@@ -74,7 +102,12 @@ const GroupReportsMeetings = () => {
             </Block>
             <Block>
               <label htmlFor="leader4">Líder 4</label>
-              <select title='leader' id='leader4'>
+              <select
+                title='leader'
+                id='leader4'
+                value={filterLider4}
+                onChange={filterLider4Handler}
+              >
                 <option value=""> </option>
                 {dataGroups?.groups?.map((groups: any, index: number) => {
                   return (
@@ -123,10 +156,45 @@ const GroupReportsMeetings = () => {
                   </Tr>
                   : null
               })
-              : filterLider1 ? dataMeetings?.meetings.map((meetings: any, index: number) => {
+              : filterLider1 || filterLider2 || filterLider3 || filterLider4 ? dataMeetings?.meetings.map((meetings: any, index: number) => {
 
                 return dataGroups?.groups.map((groups: any, index: number) => {
-                  return groups.lider1.name === filterLider1 ? groups.name : -1
+                  return filterLider1 && !filterLider2 && !filterLider3 ? groups.lider1.name === filterLider1 ? groups.name : -1
+
+                    : filterLider1 && filterLider2 && !filterLider3 && !filterLider4 ? groups.lider1.name === filterLider1 && groups.lider2.name === filterLider2 ? groups.name : -1
+
+                      : !filterLider1 && filterLider2 && !filterLider3 && !filterLider4 ? groups.lider2.name === filterLider2 ? groups.name : -1
+
+                        : !filterLider1 && filterLider2 && filterLider3 && !filterLider4 ? groups.lider2.name === filterLider2 && groups.lider3.name === filterLider3 ? groups.name : -1
+
+                          : !filterLider1 && !filterLider2 && filterLider3 && !filterLider4 ? groups.lider3.name === filterLider3 ? groups.name : -1
+
+                            : !filterLider1 && !filterLider2 && filterLider3 && filterLider4 ? groups.lider3.name === filterLider3 && groups.lider4.name === filterLider4 ? groups.name : -1
+
+                              : !filterLider1 && !filterLider2 && filterLider4 && !filterLider3 ? groups.lider4.name === filterLider4 ? groups.name : -1
+
+                                : filterLider1 && filterLider2 && filterLider3 && !filterLider4 ?
+                                  groups.lider1.name === filterLider1 && groups.lider2.name === filterLider2 && groups.lider3.name === filterLider3 ? groups.name : -1
+
+                                  : filterLider1 && filterLider2 && filterLider3 && filterLider4 ?
+                                    groups.lider1.name === filterLider1 && groups.lider2.name === filterLider2 && groups.lider3.name === filterLider3 && groups.lider4.name === filterLider4 ? groups.name : -1
+
+                                    : filterLider1 && !filterLider2 && filterLider3 && filterLider4 ?
+                                      groups.lider1.name === filterLider1 && groups.lider3.name === filterLider3 && groups.lider4.name === filterLider4 ? groups.name : -1
+
+                                      : filterLider1 && !filterLider2 && !filterLider3 && filterLider4 ?
+                                        groups.lider1.name === filterLider1 && groups.lider4.name === filterLider4 ? groups.name : -1
+
+                                        : !filterLider1 && filterLider2 && !filterLider3 && filterLider4 ?
+                                          groups.lider2.name === filterLider2 && groups.lider4.name === filterLider4 ? groups.name : -1
+
+                                          : filterLider1 && !filterLider2 && filterLider3 && !filterLider4 ?
+                                            groups.lider1.name === filterLider1 && groups.lider3.name === filterLider3 ? groups.name : -1
+
+                                            : filterLider1 && filterLider2 && !filterLider3 && filterLider4 ?
+                                              groups.lider1.name === filterLider1 && groups.lider2.name === filterLider2 && groups.lider4.name === filterLider4 ? groups.name : -1
+                                              
+                                              : null
                 })
                   .filter((gpName: any) => gpName !== -1).includes(meetings.group) ?
                   <Tr key={index}>
