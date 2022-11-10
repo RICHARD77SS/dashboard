@@ -3,22 +3,23 @@ import React from 'react'
 import api from '../services/api'
 
 import { useAxios } from '../hooks/useAxios';
+import { NowDate } from '../utils/getDate';
 export const GroupsContext = React.createContext();
 
 export function GroupsContextProvider({ children }) {
 
   const { data: dataPerson } = useAxios('person')
   const { data, mutate } = useAxios('groups');
-  const [id, setId] = React.useState()
-  const [name, setName] = React.useState()
-  const [image, setImage] = React.useState()
-  const [bg, setBg] = React.useState()
-  const [creationDate, setCreationDate] = React.useState()
+  const [id, setId] = React.useState('')
+  const [name, setName] = React.useState('')
+  const [image, setImage] = React.useState('')
+  const [bg, setBg] = React.useState('')
+  const [creationDate, setCreationDate] = React.useState('')
   const [weekDay, setWeekDay] = React.useState('Domingo')
   const [sex, setSex] = React.useState('Ambos')
   const [time, setTime] = React.useState('Manhã')
-  const [category, setCategory] = React.useState('Familias')
-  const [originGroup, setOriginGroup] = React.useState()
+  const [category, setCategory] = React.useState([])
+  const [originGroup, setOriginGroup] = React.useState('')
   const [lider1, setLider1] = React.useState({
     image: '',
     name: '',
@@ -39,13 +40,13 @@ export function GroupsContextProvider({ children }) {
     name: '',
     index: -1
   })
-  const [address, setAddress] = React.useState()
-  const [district, setDistrict] = React.useState()
-  const [number, setNumber] = React.useState()
-  const [country, setCountry] = React.useState()
-  const [state, setState] = React.useState()
-  const [city, setCity] = React.useState()
-  const [anotations, setAnotations] = React.useState()
+  const [address, setAddress] = React.useState('')
+  const [district, setDistrict] = React.useState('')
+  const [number, setNumber] = React.useState('')
+  const [country, setCountry] = React.useState('')
+  const [state, setState] = React.useState('')
+  const [city, setCity] = React.useState('')
+  const [anotations, setAnotations] = React.useState('')
   const [participants, setParticipants] = React.useState([
     {
       image: '',
@@ -75,9 +76,16 @@ export function GroupsContextProvider({ children }) {
   function timeHandler(event) {
     setTime(event.target.value)
   }
+
   function categoryHandler(event) {
-    setCategory(event.target.value)
+    let name = event.target.value
+    if (category.indexOf(name) > -1) {
+      setCategory(prev => prev.filter(cat => cat !== name))
+    } else {
+      setCategory(oldArr => [...oldArr, event.target.value])
+    }
   }
+
   function originGroupHandler(event) {
     setOriginGroup(event.target.value)
   }
@@ -132,6 +140,53 @@ export function GroupsContextProvider({ children }) {
   }
   function participantsHandler(event) {
     setAnotations(event.target.value)
+  }
+
+  function Clear() {
+    setId('')
+    setName('')
+    setImage('')
+    setBg('')
+    setCreationDate('')
+    setWeekDay('Domingo')
+    setSex('Ambos')
+    setTime('Manhã')
+    setCategory([])
+    setOriginGroup('')
+    setLider1({
+      image: '',
+      name: '',
+      index: -1
+    })
+    setLider2({
+      image: '',
+      name: '',
+      index: -1
+    })
+    setLider3({
+      image: '',
+      name: '',
+      index: -1
+    })
+    setLider4({
+      image: '',
+      name: '',
+      index: -1
+    })
+    setAddress('')
+    setDistrict('')
+    setNumber('')
+    setCountry('')
+    setState('')
+    setCity('')
+    setAnotations('')
+    setParticipants([
+      {
+        image: '',
+        name: '',
+        index: 0
+      }
+    ])
   }
 
   function handleSubmit(event) {
@@ -197,6 +252,7 @@ export function GroupsContextProvider({ children }) {
     } else {
       api.post('groups', groups);
       window.alert('Grupo adicionado');
+      Clear()
       const updatedGroups = {
         groups: [...data.groups, groups]
       }
@@ -258,6 +314,53 @@ export function GroupsContextProvider({ children }) {
     setAnotations(ganotations)
     setParticipants(gparticipants)
   }
+
+  const [filterGroup, setFilterGroup] = React.useState()
+  const [filterLider1, setFilterLider1] = React.useState()
+  const [filterLider2, setFilterLider2] = React.useState()
+  const [filterLider3, setFilterLider3] = React.useState()
+  const [filterLider4, setFilterLider4] = React.useState()
+
+  const [period, setPeriod] = React.useState(NowDate)
+
+  function filterPeriodHandler(event) {
+    setPeriod(event.target.value)
+  }
+
+  function filterGroupHandler(event) {
+    setFilterGroup(event.target.value)
+    if (filterLider1 || filterLider2 || filterLider3 || filterLider4) {
+      setFilterLider1('')
+      setFilterLider2('')
+      setFilterLider3('')
+      setFilterLider4('')
+    }
+  }
+  function filterLider1Handler(event) {
+    setFilterLider1(event.target.value)
+    if (filterGroup) {
+      setFilterGroup('')
+    }
+  }
+  function filterLider2Handler(event) {
+    setFilterLider2(event.target.value)
+    if (filterGroup) {
+      setFilterGroup('')
+    }
+  }
+  function filterLider3Handler(event) {
+    setFilterLider3(event.target.value)
+    if (filterGroup) {
+      setFilterGroup('')
+    }
+  }
+  function filterLider4Handler(event) {
+    setFilterLider4(event.target.value)
+    if (filterGroup) {
+      setFilterGroup('')
+    }
+  }
+
   return <GroupsContext.Provider value={{
     name,
     image,
@@ -302,10 +405,24 @@ export function GroupsContextProvider({ children }) {
     anotationsHandler,
     participantsHandler,
     setId,
+    setCreationDate,
+    setAnotations,
     id,
     handleDelete,
     handleSubmit,
     handleEdit,
+    filterGroup,
+    filterGroupHandler,
+    filterLider1,
+    filterLider1Handler,
+    filterLider2,
+    filterLider2Handler,
+    filterLider3,
+    filterLider3Handler,
+    filterLider4,
+    filterLider4Handler,
+    period,
+    filterPeriodHandler
   }}>
     {children}
   </GroupsContext.Provider>
