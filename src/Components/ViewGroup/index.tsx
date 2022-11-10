@@ -18,26 +18,6 @@ import AddMeetings from "../AddMeetings";
 import { BiTrash } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-const LineData = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'Ano atual',
-      data: [122, 212, 313, 414, 166, 778, 2919],
-      borderColor: 'rgb(255, 162, 235)',
-      backgroundColor: 'rgba(255, 162, 235, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'Ano anterior',
-      data: [1222, 212, 313, 414, 166, 778, 919],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
 const ViewGroup = () => {
   const { id } = useParams()
   const { data: dataGroup } = useAxios('groups');
@@ -46,6 +26,57 @@ const ViewGroup = () => {
   const { modalOpen, OpenModal, setGroup: addGroup, handleEdit: editMeetings } = React.useContext(MeetingsContext)
   const { handleDelete, handleEdit, anotationsHandle, anotations } = React.useContext(GroupsContext);
   const { handleEdit: editPeople, setGroup, indexHandler, index: ind, setIndex, modalAddPeople, setModalAddPeople, modalDeletePeople, setModalDeletePeople } = React.useContext(PersonContext);
+
+  let participantsAndDate = meetings?.meetings.reduce((acc: any, item: any) => {
+    if (item.group === dataGroup?.groups[`${id}`].name) {
+      if (!acc[item.date.split('T')[0]]) {
+        acc[item.date.split('T')[0]] = item.participants.length
+      } else {
+        acc[item.date.split('T')[0]].push(item.participants)
+      }
+    } return acc
+  }, {})
+
+  let visitorsAndDate = meetings?.meetings.reduce((acc: any, item: any) => {
+    if (item.group === dataGroup?.groups[`${id}`].name) {
+      if (!acc[item.date.split('T')[0]]) {
+        acc[item.date.split('T')[0]] = item.visitors.length
+      } else {
+        acc[item.date.split('T')[0]].push(item.visitors)
+      }
+    } return acc
+  }, {})
+
+  let participantsValues: any = participantsAndDate ? Object.values(participantsAndDate)?.reduce((sum: any, item: any,) => { return sum + item }, 0) : 0
+  let visitorsValues: any = visitorsAndDate ? Object.values(visitorsAndDate)?.reduce((sum: any, item: any) => { return sum + item }, 0) : 0
+
+  const labels = participantsAndDate ? Object.keys(participantsAndDate) : 0;
+  const LineData = {
+    labels,
+    datasets: [
+      {
+        fill: true,
+        label: 'Participantes',
+        data: participantsAndDate ? Object.values(participantsAndDate) : 0,
+        borderColor: 'rgb(255, 162, 235)',
+        backgroundColor: 'rgba(255, 162, 235, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'Visitantes',
+        data: visitorsAndDate ? Object.values(visitorsAndDate) : 0,
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'Total',
+        data: participantsValues + visitorsValues,
+        borderColor: 'rgb(53, 235, 159)',
+        backgroundColor: 'rgba(93, 235, 53, 0.5)',
+      },
+    ],
+  };
   React.useEffect(() => {
     setGroup(dataGroup?.groups[`${id}`].name)
     addGroup(dataGroup?.groups[`${id}`].name)
@@ -59,9 +90,13 @@ const ViewGroup = () => {
     }
   }
   let lider1 = dataPerson?.person.map((person: any, index: number) => person.name === dataGroup?.groups[`${id}`].lider1?.name ? index : -1)?.filter((i: any) => i !== -1)
+
   let lider2 = dataPerson?.person.map((person: any, index: number) => person.name === dataGroup?.groups[`${id}`].lider2?.name ? index : -1)?.filter((i: any) => i !== -1)
+
   let lider3 = dataPerson?.person.map((person: any, index: number) => person.name === dataGroup?.groups[`${id}`].lider3?.name ? index : -1)?.filter((i: any) => i !== -1)
+
   let lider4 = dataPerson?.person.map((person: any, index: number) => person.name === dataGroup?.groups[`${id}`].lider4?.name ? index : -1)?.filter((i: any) => i !== -1)
+
   return (
     <Container>
       <Content>
@@ -74,7 +109,11 @@ const ViewGroup = () => {
             <img src={dataGroup?.groups[`${id}`].image} alt="" />
           </CardImg>cd das
           <h4>{dataGroup?.groups[`${id}`].name}</h4>
-          <p> Pessoas</p>
+          <p>{dataPerson?.person.map((person: any, index: number) => {
+            return person.group.includes(dataGroup?.groups[`${id}`].name) ?
+              person.name
+              : -1
+          }).filter((persons: any) => persons !== -1).length} Pessoas</p>
           <p>Liderança</p>
           <Liders>
             <SubLiderImg>
@@ -248,7 +287,7 @@ const ViewGroup = () => {
             <Flex><h4>Data</h4><h4>Participantes</h4><h4>Visitantes</h4></Flex>
             {meetings?.meetings.map((meetings: any,
               index: number) => {
-              return (
+              return meetings.group === dataGroup?.groups[`${id}`].name ?
                 <User key={index}>
                   <Button onClick={() => editMeetings(meetings._id,
                     meetings.name,
@@ -258,18 +297,19 @@ const ViewGroup = () => {
                     meetings.value,
                     meetings.participants,
                     meetings.visitors,
-                    meetings.notes
+                    meetings.notes,
+                    index
                   )}>
                     <p>{meetings.date?.split('T')[0]}</p>&nbsp;
                     <p>{meetings.participants?.length}</p>&nbsp;
                     <p>{meetings.visitors?.length}</p>
                   </Button>
                 </User>
-              )
+                : null
             })}
           </BoxContent>
         </Box>
-        <Box>
+        <Box width='400px'>
           <BoxHeader title='Presentes nas últimas reuniões'>
 
           </BoxHeader>
