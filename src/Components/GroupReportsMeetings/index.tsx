@@ -37,6 +37,11 @@ const GroupReportsMeetings = () => {
     filterPeriodHandler
   } = React.useContext(GroupsContext)
 
+  let periodo = new Date(period)
+  let PeriodoDayMin = periodo.getDate() + 1
+  let PeriodoMonthMin = periodo.getMonth() + 1
+  let PeriodoMonthMax = periodo.getMonth() + 1
+  let PeriodoYearMin = periodo.getFullYear()
 
   return (
     <Container>
@@ -44,13 +49,15 @@ const GroupReportsMeetings = () => {
       <Content>
         <Top>
           <Block>
+            <label htmlFor="periodo">Escolha o mês da reunião</label>
             <Input
+              id='periodo'
               type='date'
               value={period}
               onChange={filterPeriodHandler}
             />
-            <Button>Ativar Filtro de hierarquia</Button>
           </Block>
+          <h3>Filtrar por liderança</h3>
           <Flex>
             <Block>
               <label htmlFor="leader1">Líder 1</label>
@@ -193,7 +200,7 @@ const GroupReportsMeetings = () => {
 
                                             : filterLider1 && filterLider2 && !filterLider3 && filterLider4 ?
                                               groups.lider1.name === filterLider1 && groups.lider2.name === filterLider2 && groups.lider4.name === filterLider4 ? groups.name : -1
-                                              
+
                                               : null
                 })
                   .filter((gpName: any) => gpName !== -1).includes(meetings.group) ?
@@ -207,8 +214,8 @@ const GroupReportsMeetings = () => {
                   : null
               })
                 : dataMeetings?.meetings.map((meetings: any, index: number) => {
-
-                  return (
+                  console.log(new Date(meetings.date.split('T')[0]).getMonth() + 1)
+                  return new Date(meetings.date.split('T')[0]).getMonth() + 1 >= PeriodoMonthMin && new Date(meetings.date.split('T')[0]).getMonth() + 1 <= PeriodoMonthMax ?
                     <Tr key={index}>
                       <Td>{meetings.date.split('T')[0]}</Td>
                       <Td>{meetings.group}</Td>
@@ -216,7 +223,7 @@ const GroupReportsMeetings = () => {
                       <Td>{meetings.visitors.length}</Td>
                       <Td>{formatter.format(meetings.value)}</Td>
                     </Tr>
-                  )
+                    : null
                 })}
           </Tbody>
         </Table>
