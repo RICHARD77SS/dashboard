@@ -12,20 +12,26 @@ import { Container, Content, Top, Block } from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const GroupReportsPresent = () => {
+  const { data: dataMeetings } = useAxios('meetings')
+  const { data: dataPerson } = useAxios('person')
+
+  let pessoameeting = dataMeetings?.meetings.map((meeting: any) => meeting.participants).flat(1)
+  let personPresents = pessoameeting.filter((elem: any, index: any) => pessoameeting.indexOf(elem) === index)
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Frequências Pessoas presentes' />
       <Content>
         <Top>
           <Block>
-              <Input type='date' />
+            <Input type='date' />
           </Block>
           <h3>Resultados: 1</h3>
           <p>Estes dados são abastecidos de acordo com o envio de reunião dos líderes de grupos.</p>
-          </Top>
+        </Top>
         <Table>
           <Thead>
             <Tr>
@@ -36,11 +42,18 @@ const GroupReportsPresent = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td><img src="" alt="" /></Td>
-              <Td>Nome here</Td>
-              <Td>Grupo here</Td>
-            </Tr>
+            {personPresents.map((person: any, index: number) => {
+
+              return dataPerson.person.map((pess: any) => {
+                return pess.name === person ?
+                  <Tr key={index}>
+                    <Td><img src={pess.image} alt="" /></Td>
+                    <Td>{pess.name}</Td>
+                    <Td>{pess.group}</Td>
+                  </Tr>
+                  : null
+              })
+            })}
           </Tbody>
         </Table>
         <PageSelector />
