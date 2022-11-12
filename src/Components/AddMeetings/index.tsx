@@ -29,10 +29,14 @@ const AddMeetings = () => {
     handleSubmit,
     handleDelete,
     setModalOpen,
-    id
+    id,
+    index,
+    AddVisitor,
+    RemoveVisitor
   } = React.useContext(MeetingsContext)
   const { data } = useAxios('person')
   const { data: datameetings } = useAxios('meetings')
+  console.log(visitors)
   return (
     <Container>
       <ModalContent>
@@ -67,8 +71,8 @@ const AddMeetings = () => {
                 {id ?
                   <InputBlock>
                     <h3>Remover</h3>
-                    {datameetings?.meetings[0].participants.map((meeting: any, index: number) => {
-                      console.log(meeting)
+                    {datameetings?.meetings[index].participants.map((meeting: any, index: number) => {
+
                       return (
                         <Flex key={index}>
                           <Input type='checkbox' value={meeting} onChange={participantsHandler} />
@@ -79,12 +83,18 @@ const AddMeetings = () => {
                     <h3>Adicionar</h3>
                     {data?.person.map((person: any, index: number) => {
 
-                      return (
+                      return datameetings?.meetings[index]?.participants.includes(person.name) ?
                         <Flex key={index}>
                           <Input id={person.name} type='checkbox' value={person.name} onChange={participantsHandler} />
                           <label htmlFor={person.name}>{person.name}</label>
                         </Flex>
-                      )
+                        :
+                        <Flex key={index}>
+                          <Input id={person.name} type='checkbox' value={person.name} onChange={participantsHandler} />
+                          <label htmlFor={person.name}>{person.name}</label>
+                        </Flex>
+
+
                     })}
                   </InputBlock>
 
@@ -105,8 +115,23 @@ const AddMeetings = () => {
             </List>
             <List>
               <label htmlFor=''>Visitantes(0)</label>
-              <Input id='' type='text' value={visitors} onChange={visitorsHandler} />
-              <Button>+Adicionar visitantes</Button>
+              <List id='visitors'>
+                {visitors?.map((visitor: any, index: number) => {
+                  return (
+                    <InputBlock key={index}>
+                      <Input
+                        name='visitor'
+                        type='text'
+                        onChange={(event) => visitorsHandler(event, index)}
+                        value={visitor.visitor}
+                      />
+                      <Button type='button' onClick={() => RemoveVisitor(index)}>Apagar</Button>
+                    </InputBlock>
+                  )
+                })}
+              </List>
+              <h5>Adicione um nome antes de<br /> adicionar um novo campo</h5>
+              <Button type='button' onClick={() => AddVisitor()}>+Adicionar visitantes</Button>
             </List>
           </Flex>
           <br />
@@ -116,7 +141,7 @@ const AddMeetings = () => {
 
             </textarea>
           </InputBlock>
-          <Button type='submit'>Adicionar</Button>
+          <Button type='submit'>{id ? 'Salvar' : 'Adicionar'}</Button>
         </Form>
       </ModalContent>
       <CloseModal onClick={() => setModalOpen(false)}>
