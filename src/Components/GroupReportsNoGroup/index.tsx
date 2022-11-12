@@ -37,8 +37,8 @@ const GroupReportsNoGroups = () => {
           </Thead>
           <Tbody>
             {data?.person.map((person: any) => {
-
-              return person.group === '' ?
+              console.log(person.group.length)
+              return person.group.length === 0 ?
                 <Tr>
                   <Td><img src={person.image} alt="" /></Td>
                   <Td>{person.name}</Td>
