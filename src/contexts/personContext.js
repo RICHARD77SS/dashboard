@@ -9,7 +9,6 @@ export const PersonContext = React.createContext();
 
 export function PersonContextProvider({ children }) {
   const { data, mutate } = useAxios('person')
-  const [modal, setModal] = React.useState(false);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [image, setImage] = React.useState('');
@@ -29,9 +28,9 @@ export function PersonContextProvider({ children }) {
   const [country, setCountry] = React.useState('')
   const [state, setState] = React.useState('')
   const [city, setCity] = React.useState('')
-  const [group, setGroup] = React.useState('')
-  const [category, setCategory] = React.useState('')
-  const [office, setOffice] = React.useState('')
+  const [group, setGroup] = React.useState([])
+  const [category, setCategory] = React.useState([])
+  const [office, setOffice] = React.useState([])
   const [conversion, setConversion] = React.useState('')
   const [notes, setNotes] = React.useState('')
   const [baptized, setBaptized] = React.useState(false)
@@ -40,7 +39,15 @@ export function PersonContextProvider({ children }) {
   const [baptismDate, setBaptismDate] = React.useState('')
   const [registerDate, setRegisterDate] = React.useState('')
   const [id, setId] = React.useState('');
+  const [index, setIndex] = React.useState(-1);
 
+  const [modal, setModal] = React.useState(false);
+  const [modalAddPeople, setModalAddPeople] = React.useState(false)
+  const [modalDeletePeople, setModalDeletePeople] = React.useState(false)
+
+  function indexHandler(event) {
+    setIndex(event.target.value);
+  }
   function nameHandler(event) {
     setName(event.target.value);
   }
@@ -99,14 +106,31 @@ export function PersonContextProvider({ children }) {
     setCity(event.target.value);
   }
   function groupHandler(event) {
-    setGroup(event.target.value);
+    let name = event.target.value
+    if (group.indexOf(name) > -1) {
+      setGroup(prev => prev.filter(gr => gr !== name))
+    } else {
+      setGroup(oldArr => [...oldArr, event.target.value]);
+    }
   }
+
   function categoryHandler(event) {
-    setCategory(event.target.value);
+    let name = event.target.value
+    if (category.indexOf(name) > -1) {
+      setCategory(prev => prev.filter(cat => cat !== name))
+    } else {
+      setCategory(oldArr => [...oldArr, event.target.value]);
+    }
   }
   function officeHandler(event) {
-    setOffice(event.target.value);
+    let name = event.target.value
+    if (office.indexOf(name) > -1) {
+      setOffice(prev => prev.filter(of => of !== name))
+    } else {
+      setOffice(oldArr => [...oldArr, event.target.value]);
+    };
   }
+
   function conversionHandler(event) {
     setConversion(event.target.value);
   }
@@ -203,6 +227,9 @@ export function PersonContextProvider({ children }) {
       baptismDate
     }
     api.put(`person/${pid}`, person)
+    window.alert('Atualizado')
+    setModalDeletePeople(false)
+    setModalAddPeople(false)
     const updatedPerson = {
       person: data.person?.map((persons) => {
         if (persons._id === pid) {
@@ -346,7 +373,12 @@ export function PersonContextProvider({ children }) {
     setNotes,
     setBaptized,
     setImage,
-    setModal
+    setModal,
+    indexHandler,
+    index,
+    setIndex,
+    modalAddPeople, setModalAddPeople,
+    modalDeletePeople, setModalDeletePeople
   }}>
     {children}
   </PersonContext.Provider>
