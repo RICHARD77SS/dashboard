@@ -14,11 +14,7 @@ export function ExtraFieldsContextProvider({ children }) {
 
   const [inputName, setInputName] = React.useState('')
   const [inputType, setInputType] = React.useState('')
-  const [inputOption, setInputOption] = React.useState({
-    option1: '',
-    option2: '',
-    option3: ''
-  })
+  const [inputOption, setInputOption] = React.useState([])
   const [openModalEdit1, setOpenModal1] = React.useState()
   const [index, setIndex] = React.useState()
 
@@ -33,16 +29,26 @@ export function ExtraFieldsContextProvider({ children }) {
   function inputTypeHandle(event) {
     setInputType(event.target.value);
   }
-  function inputOptionHandle(event) {
-    setInputOption({ ...inputOption, [event.target.name]: event.target.value });
 
-  }
-  function inputOptionFocusOut(event) {
-    if (event.target.value !== "") {
-      setInputOption(inputOption.concat(event.target.value).splice(0, 3));
+  function AddOption() {
+    let obj = {
+      option:""
     }
-
+    setInputOption([...inputOption,obj])
   }
+
+  function RemoveOption(index) {
+    let data = [...inputOption];
+    data.splice(index, 1)
+    setInputOption(data)
+  }
+
+  function inputOptionHandle(event,index) {
+    let data = [...inputOption];
+    data[index][event.target.name] = event.target.value;
+    setInputOption(data);
+  }
+
 
   function openModalCheck() {
     setInputName('')
@@ -143,7 +149,6 @@ export function ExtraFieldsContextProvider({ children }) {
     handleDelete,
     handleEdit,
     setId,
-    inputOptionFocusOut,
     openModalEdit1,
     OpenModal1,
     closeModall,
@@ -161,6 +166,8 @@ export function ExtraFieldsContextProvider({ children }) {
     setOpenText,
     openTextArea,
     setOpenTextArea,
+    RemoveOption,
+    AddOption
   }}>
     {children}
     {openModalEdit1 && <AdditionalFieldEdit />}
