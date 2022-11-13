@@ -11,8 +11,9 @@ interface Props {
   marital?: string;
   document1?: string;
   document2?: string;
-  category?: string;
-  office?: string;
+  category?: string[];
+  office?: string[];
+  group?: string[];
   conversion?: string;
   batizm?: string;
   dataCreation?: string;
@@ -27,7 +28,6 @@ interface Props {
   state?: string;
   country?: string;
   notes?: string;
-  group?: string;
 }
 const PersonDetailsInfos = (Props: Props) => {
   return (
@@ -50,9 +50,9 @@ const PersonDetailsInfos = (Props: Props) => {
           <Box>
             <BoxHeader title='Outras informações'></BoxHeader>
             <BoxContent>
-              <p><b>Categorias: &nbsp;</b>{Props.category}</p>
-              <p><b>Cargos: &nbsp;</b>{Props.office}</p>
-              <p><b>Grupos: &nbsp;</b>{Props.group}</p>
+              <p><b>Categorias: &nbsp;</b>{Props.category?.map((categories: string) => categories + ';  ')}</p>
+              <p><b>Cargos: &nbsp;</b>{Props.office?.map((position: string) => position + ';  ')}</p>
+              <p><b>Grupos: &nbsp;</b>{Props.group?.map((groups: string) => groups + ';  ')}</p>
               <p><b>Data de conversão: &nbsp;</b>{Props.conversion}</p>
               <p><b>Batizado: &nbsp;</b>{Props.batizm ? 'Sim' : 'Não'}</p>
               <p><b>Perfil criado em: &nbsp;</b>{Props.dataCreation?.split('T')[0]}</p>
