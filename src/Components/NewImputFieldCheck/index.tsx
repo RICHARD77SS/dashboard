@@ -16,28 +16,15 @@ const NewImputFieldCheck = ({ children, onClick }: Props) => {
     inputName,
     inputNameHandle,
     inputOptionHandle,
+    inputOption,
     setInputType,
-    inputOptionFocusOut
+    RemoveOption,
+    AddOption
   } = React.useContext(ExtraFieldsContext)
 
   React.useEffect(() => {
     setInputType("checkbox")
   }, [setInputType])
-
-  function add() {
-
-    let campo = document.getElementById('options')
-    let input = document.createElement('input')
-    campo?.append(input)
-    let options = campo?.children
-    let size = options!.length
-    for (let i = 0; i < size; i++) {
-      options![i].setAttribute('type', `text`)
-      options![i].setAttribute('placeholder', `Escreva aqui (o campo vazio será removido)`)
-      options![i].addEventListener('change', () => inputOptionHandle)
-      options![i].addEventListener('blur', () => inputOptionFocusOut)
-    }
-  }
 
   return (
     <Container>
@@ -62,30 +49,21 @@ const NewImputFieldCheck = ({ children, onClick }: Props) => {
               />
             </InputBlock>
             <InputBlock >
-              <label htmlFor=" ">Opções</label>
-              <Input
-                type='text'
-                placeholder='Escreva aqui (o campo vazio será removido)'
-                onChange={inputOptionHandle}
-                name='option1'
-              />
-              <Input
-                type='text'
-                placeholder='Escreva aqui (o campo vazio será removido)'
-                onChange={inputOptionHandle}
-                name='option2'
-              />
-              <Input
-                type='text'
-                placeholder='Escreva aqui (o campo vazio será removido)'
-                onChange={inputOptionHandle}
-                name='option3'
-              />
-              <div id="options">
-
-              </div>
+              {inputOption?.map((option: any, index: any) => {
+                return (
+                  <InputBlock key={index}>
+                    <Input
+                      name='visitor'
+                      type='text'
+                      onChange={(event) => inputOptionHandle(event, index)}
+                      value={option.visitor}
+                    />
+                    <Button type='button' onClick={() => RemoveOption(index)}>Apagar</Button>
+                  </InputBlock>
+                )
+              })}
             </InputBlock>
-            <Button type='button' onClick={() => { add() }}>bt</Button>
+            <Button type='button' onClick={() => { AddOption() }}>+ Adicionar nova opção</Button>
           </BoxContent>
           <BoxFooter>
             <Button type='submit'>Salvar</Button>
