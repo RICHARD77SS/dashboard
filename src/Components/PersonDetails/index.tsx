@@ -19,6 +19,7 @@ import PersonDetailsFinancial from '../PersonDetailsFinancial';
 
 const PersonDetails = () => {
   const { data } = useAxios('person')
+  const { data: dataGroups } = useAxios('groups')
   const { id } = useParams();
   const { handleDelete } = React.useContext(PersonContext);
   var date = new Date()
@@ -93,20 +94,18 @@ const PersonDetails = () => {
 
             </BoxHeader>
             <BoxContent>
-              <Group>
-                <img src="" alt="group " />
-                <Block>
-                  <p>Group name</p>
-                  <p><span>Lider 1</span></p>
-                </Block>
-              </Group>
-              <Group>
-                <img src="" alt="" />
-                <Block>
-                  <p>Group name</p>
-                  <p><span>Participante</span></p>
-                </Block>
-              </Group>
+              {dataGroups?.groups.map((group: any) => {
+                return data?.person[`${id}`].group.map((gp: any) => gp === group.name ?
+                  <Group>
+                    <img src={group.image} alt="group " />
+                    <Block>
+                      <p><b>{group.name}</b></p>
+                      <p><span>{group.lider1.name}</span></p>
+                    </Block>
+                  </Group>
+                  : null)
+              })}
+
             </BoxContent>
           </Box>
           <Box>
