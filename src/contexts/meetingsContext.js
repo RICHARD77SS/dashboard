@@ -1,27 +1,31 @@
 import React from 'react';
+import AddMeetings from '../Components/AddMeetings';
 import { useAxios } from '../hooks/useAxios'
 
 import api from '../services/api';
+import { NowDate } from '../utils/getDate';
 
 export const MeetingsContext = React.createContext();
 
 export function MeetingsContextProvider({ children }) {
   const { data, mutate } = useAxios('meetings');
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState()
-  const [group, setGroup] = React.useState()
-  const [date, setDate] = React.useState()
-  const [subject, setSubject] = React.useState()
-  const [value, setValue] = React.useState()
-  const [participants, setParticipants] = React.useState()
-  const [visitors, setVisitors] = React.useState()
-  const [notes, setNotes] = React.useState()
+  const [id, setId] = React.useState('');
+  const [name, setName] = React.useState('named')
+  const [group, setGroup] = React.useState('')
+  const [date, setDate] = React.useState('')
+  const [subject, setSubject] = React.useState('')
+  const [value, setValue] = React.useState(0)
+  const [participants, setParticipants] = React.useState([])
+  const [visitors, setVisitors] = React.useState([])
+  const [notes, setNotes] = React.useState('')
+
+  const [period, setPeriod] = React.useState(NowDate)
+
+  const [modalOpen, setModalOpen] = React.useState(false)
+  const [index, setIndex] = React.useState()
 
   function nameHandler(event) {
     setName(event.target.value)
-  }
-  function groupHandler(event) {
-    setGroup(event.target.value)
   }
   function dateHandler(event) {
     setDate(event.target.value)
@@ -32,24 +36,57 @@ export function MeetingsContextProvider({ children }) {
   function valueHandler(event) {
     setValue(event.target.value)
   }
-  function participantsHandler(event) {
-    setParticipants(event.target.value)
+
+  function periodHandler(event) {
+    setPeriod(event.target.value)
   }
-  function visitorsHandler(event) {
-    setVisitors(event.target.value)
+
+  function participantsHandler(event) {
+    let name = event.target.value
+    if (participants.indexOf(name) > -1) {
+      setParticipants(prev => prev.filter(part => part !== name));
+    } else {
+      setParticipants(oldArr => [...oldArr, event.target.value]);
+    }
+  }
+  
+  function visitorsHandler(event, index) {
+    let data = [...visitors];
+    data[index][event.target.name] = event.target.value;
+    setVisitors(data);
+  }
+  function AddVisitor() {
+    let obj = {
+      visitor: ""
+    }
+    setVisitors([...visitors, obj])
+  }
+  function RemoveVisitor(index) {
+    let data = [...visitors];
+    data.splice(index, 1)
+    setVisitors(data)
   }
   function notesHandler(event) {
     setNotes(event.target.value)
   }
   function Clear() {
-    setName()
-    setGroup()
-    setDate()
-    setSubject()
+    setDate('')
+    setSubject('')
     setValue()
-    setParticipants()
-    setVisitors()
-    setNotes()
+    setParticipants([])
+    setVisitors([])
+    setNotes('')
+    setId('')
+    setIndex()
+  }
+
+  function CloseModal() {
+    setModalOpen(false)
+    Clear()
+  }
+  function OpenModal() {
+    setModalOpen(true)
+    Clear()
   }
   function handleSubmit(event) {
     event.preventDefault()
@@ -88,7 +125,7 @@ export function MeetingsContextProvider({ children }) {
     } else {
       api.post('meetings', meetings);
       window.alert('Reuniao adicionada com sucesso')
-      Clear()
+      CloseModal()
       const updatedMeetings = {
         meetings: data.meetings?.filter((meetings) => meetings._id === id)
       };
@@ -97,6 +134,7 @@ export function MeetingsContextProvider({ children }) {
   }
   function handleDelete(id) {
     api.delete(`meetings/${id}`);
+    CloseModal()
     window.alert('Reuniao removida')
     const updatedMeetings = {
       meetings: data.meetings?.filter((meetings) => meetings._id !== id)
@@ -112,6 +150,7 @@ export function MeetingsContextProvider({ children }) {
     meetingsparticipants,
     meetingsvisitors,
     meetingsnotes,
+    meetingsindex
   ) {
     setId(meetingsid)
     setName(meetingsname)
@@ -122,7 +161,10 @@ export function MeetingsContextProvider({ children }) {
     setParticipants(meetingsparticipants)
     setVisitors(meetingsvisitors)
     setNotes(meetingsnotes)
+    setIndex(meetingsindex)
+    setModalOpen(true)
   }
+
   return <MeetingsContext.Provider value={{
     name,
     group,
@@ -133,7 +175,7 @@ export function MeetingsContextProvider({ children }) {
     visitors,
     notes,
     nameHandler,
-    groupHandler,
+    setGroup,
     dateHandler,
     subjectHandler,
     valueHandler,
@@ -143,8 +185,18 @@ export function MeetingsContextProvider({ children }) {
     handleSubmit,
     handleDelete,
     handleEdit,
+    OpenModal,
+    setModalOpen,
+    modalOpen,
+    id,
+    index,
+    period,
+    periodHandler,
+    AddVisitor,
+    RemoveVisitor
   }}>
     {children}
+    {modalOpen && <AddMeetings />}
   </MeetingsContext.Provider>
 
 }
