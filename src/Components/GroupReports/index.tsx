@@ -40,7 +40,7 @@ const GroupReports = () => {
                 Grupos ativos
               </NavLink>
               <NavLink className='navlink' to='/groupreports/inactivegroups'>
-                Pessoas presentes
+                Grupos inativos
               </NavLink>
             </Box>
             <Box>

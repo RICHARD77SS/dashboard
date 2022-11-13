@@ -13,6 +13,7 @@ import { useAxios } from '../../hooks/useAxios';
 
 import { Box, Top, TableContainer } from './styles'
 import { FinancialContext } from '../../contexts/financialContext';
+import { formatter } from '../../utils/formatMoneyBr';
 interface Props {
   name?: String;
 }
@@ -45,8 +46,6 @@ const PersonDetailsFinancial = ({ name }: Props) => {
             {data?.financial.map((financial: any, index: number) => {
               const datef = new Date(financial.date)
               const formatedDate = datef.toLocaleDateString()
-
-              const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'brl', })
               if (name === financial.receivedFrom) {
                 return (
                   <Tr key={index}>

@@ -10,7 +10,7 @@ import Td from '../Td';
 import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
-import { Container} from './styles';
+import { Container } from './styles';
 
 
 const ReportsSex = () => {

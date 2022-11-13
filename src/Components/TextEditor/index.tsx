@@ -3,13 +3,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 
-
 interface Props {
   value: any;
   setValue: any;
 }
 function TextEditor({value, setValue}:Props) {
-  
   const modules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -31,7 +29,6 @@ function TextEditor({value, setValue}:Props) {
       ['clean'] 
     ],
   }
-
   const formats = [
     'header',
     'font',
@@ -48,6 +45,7 @@ function TextEditor({value, setValue}:Props) {
     'image',
     'color',
   ]
+  
   return (
     <>
       <ReactQuill theme="snow" modules={modules} formats={formats} value={value} onChange={setValue} />

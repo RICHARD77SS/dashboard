@@ -38,10 +38,9 @@ const GroupReportsMeetings = () => {
   } = React.useContext(GroupsContext)
 
   let periodo = new Date(period)
-  let PeriodoDayMin = periodo.getDate() + 1
   let PeriodoMonthMin = periodo.getMonth() + 1
   let PeriodoMonthMax = periodo.getMonth() + 1
-  let PeriodoYearMin = periodo.getFullYear()
+
 
   return (
     <Container>

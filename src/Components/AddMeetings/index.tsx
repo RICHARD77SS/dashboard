@@ -67,36 +67,38 @@ const AddMeetings = () => {
             <List>
               <label htmlFor=''>Lista de presença</label>
               <br />
-              <InputBlock>
+              <Flex>
                 {id ?
-                  <InputBlock>
-                    <h3>Remover</h3>
-                    {datameetings?.meetings[index].participants.map((meeting: any, index: number) => {
+                  <Flex>
+                    <List>
+                      <h3>Remover</h3>
+                      {datameetings?.meetings[index].participants.map((meeting: any, index: number) => {
 
-                      return (
-                        <Flex key={index}>
-                          <Input type='checkbox' value={meeting} onChange={participantsHandler} />
-                          <label >{meeting}</label>
-                        </Flex>
-                      )
-                    })}
-                    <h3>Adicionar</h3>
-                    {data?.person.map((person: any, index: number) => {
+                        return (
+                          <Flex key={index}>
+                            <Input type='checkbox' value={meeting} onChange={participantsHandler} />
+                            <label >{meeting}</label>
+                          </Flex>
+                        )
+                      })}
+                    </List>
+                    <List>
 
-                      return datameetings?.meetings[index]?.participants.includes(person.name) ?
-                        <Flex key={index}>
-                          <Input id={person.name} type='checkbox' value={person.name} onChange={participantsHandler} />
-                          <label htmlFor={person.name}>{person.name}</label>
-                        </Flex>
-                        :
-                        <Flex key={index}>
-                          <Input id={person.name} type='checkbox' value={person.name} onChange={participantsHandler} />
-                          <label htmlFor={person.name}>{person.name}</label>
-                        </Flex>
+                      <h3>Adicionar</h3>
+                      {data?.person.map((person: any, index: number) => {
+
+                        return datameetings?.meetings[index]?.participants.includes(person.name) ?
+                          null
+                          :
+                          <Flex key={index}>
+                            <Input id={person.name} type='checkbox' value={person.name} onChange={participantsHandler} />
+                            <label htmlFor={person.name}>{person.name}</label>
+                          </Flex>
 
 
-                    })}
-                  </InputBlock>
+                      })}
+                    </List>
+                  </Flex>
 
                   :
                   <InputBlock>
@@ -111,7 +113,7 @@ const AddMeetings = () => {
                     })}
                   </InputBlock>
                 }
-              </InputBlock>
+              </Flex>
             </List>
             <List>
               <label htmlFor=''>Visitantes(0)</label>

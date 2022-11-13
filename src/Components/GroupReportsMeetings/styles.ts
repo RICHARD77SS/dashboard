@@ -54,7 +54,7 @@ export const Flex = styled.div`
   align-items:Center;
   justify-content: center;
   gap: .5rem;
-  input {
+  input,select {
     height: 30px;
   }
   @media (max-width: 1000px){

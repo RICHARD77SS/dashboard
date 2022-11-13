@@ -29,6 +29,9 @@ export const ModalContent = styled.div`
     border-radius: 10px;
     color: #fff;
   }
+  .red {
+    color:#900;
+  }
 `
 export const Form = styled.form`
   width: 100%;
@@ -39,6 +42,8 @@ export const Form = styled.form`
 export const List = styled.form`
   width: auto;
   min-height: 200px;
+  max-height: 400px;
+  overflow-Y: scroll;
   padding: .5rem;
   border: 1px solid ${Props => Props.theme.colors.sec};
   border-radius: 20px;

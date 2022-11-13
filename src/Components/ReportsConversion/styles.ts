@@ -12,34 +12,15 @@ export const Content = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem;
+  img{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+  }
 `
 export const Graph = styled.div`
   width: 100%;
   min-height: 400px;
   height: auto;
   padding: 1rem;
-`
-
-export const Table = styled.table`
-  width: 100%;
-  height: auto;
-`
-export const Tbody = styled.tbody`
-`
-export const Thead = styled.thead`
-
-`
-export const Tr = styled.tr`
-  :nth-child(odd){
-    background: #eee;
-  }
-`
-export const Th = styled.th` 
-  border: 1px solid ${Props => Props.theme.colors.sec};
-  height: 40px;
-`
-export const Td = styled.td`
-  border: 1px solid ${Props => Props.theme.colors.sec};
-  height: 40px;
-  
 `

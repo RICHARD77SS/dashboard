@@ -62,7 +62,6 @@ const AdditionalField = () => {
               </Thead>
               <Tbody>
                 {data?.extraFields?.map((fields: any, index: any) => {
-                  console.log(Object.keys(fields?.inputOption).map((keyName: any, i: number) => fields?.inputOption[keyName]))
                   return (
                     <Tr key={index}>
                       <Td>{fields?.inputName}</Td>

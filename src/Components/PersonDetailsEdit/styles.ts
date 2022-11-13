@@ -31,6 +31,16 @@ export const Block = styled.div`
     width: 100%;
     min-height: 100px;
   }
+  input[type=checkbox]{
+    max-width: 20px;
+    height: 20px;
+  }
+  .green {
+    color: green;
+  }
+  .red{
+    color: red;
+  }
 `
 export const Box = styled.div`
   width: 100%;
@@ -71,7 +81,7 @@ export const BoxContent = styled.div`
     border-color: #ddd;
   }
   input {
-    min-width: 200px;
+    width: 200px;
     height: 30px;
     background: #eee;
     border-radius: 5px;

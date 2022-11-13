@@ -12,20 +12,28 @@ import { Container, Content, Top, Block } from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const GroupReportsAbsent = () => {
+  const { data: dataMeetings } = useAxios('meetings')
+  const { data: dataPerson } = useAxios('person')
+
+  let pessoameeting = dataMeetings?.meetings.map((meeting: any) => meeting.participants).flat(1)
+  let personPresents = pessoameeting.filter((elem: any, index: any) => pessoameeting.indexOf(elem) === index)
+  console.log()
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Frequências Pessoas ausentes' />
       <Content>
         <Top>
           <Block>
-              <Input type='date' />
           </Block>
-          <h3>Resultados: 1</h3>
-          <p>Estes dados são abastecidos de acordo com o envio de reunião dos líderes de grupos.</p>
-          </Top>
+          <h3>Resultados: {dataPerson?.person.map((person: any, index: number) => {
+            return personPresents.includes(person.name) ? -1 :
+              person.name
+          }).filter((personLen: any) => personLen !== -1).length}</h3>
+        </Top>
         <Table>
           <Thead>
             <Tr>
@@ -36,11 +44,15 @@ const GroupReportsAbsent = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td><img src="" alt="" /></Td>
-              <Td>Nome here</Td>
-              <Td>Grupo here</Td>
-            </Tr>
+            {dataPerson?.person.map((person: any, index: number) => {
+              return personPresents.includes(person.name) ? <></> :
+                <Tr key={index}>
+                  <Td><img src={person.image} alt="" /></Td>
+                  <Td>{person.name}</Td>
+                  <Td>{person.group.map((group: string) => group)}</Td>
+                </Tr>
+            })}
+
           </Tbody>
         </Table>
         <PageSelector />

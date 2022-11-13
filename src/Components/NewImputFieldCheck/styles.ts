@@ -43,7 +43,7 @@ export const BoxHeader = styled.div`
     }
 `
 
-export const BoxContent = styled.div`
+export const BoxContent = styled.div`  
   width: 100%;
   height: auto;
   display: flex;
@@ -58,6 +58,17 @@ export const BoxContent = styled.div`
     min-width: 350px;
     max-width: 350px;
     max-height: 300px;
+  }
+  #options{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    input{
+      width: 100%;
+      height: 30px;
+      border-radius: 5px;
+    }
   }
 `
 

@@ -7,7 +7,7 @@ import { Container, Form, Block, Box, BoxContent, ModalContainer, Modal, Imagem 
 import { PersonContext } from './../../contexts/personContext';
 import React from "react";
 import { useAxios } from "../../hooks/useAxios";
-
+import Flex from "../Flex";
 interface Props {
   name?: string;
   image?: string;
@@ -135,7 +135,6 @@ const PersonDetailsEdit = (Props: Props) => {
   let formatConversionDate = conversionDate?.split('T')[0]
 
   let creationDate = registerDate?.split('T')[0]
-  console.log(creationDate)
   React.useEffect(() => {
     setId(Props.id)
     setName(Props.name)
@@ -201,10 +200,12 @@ const PersonDetailsEdit = (Props: Props) => {
           <Box>
             <BoxHeader title='Dados pessoais'></BoxHeader>
             <BoxContent>
-              <Imagem>
-                <img src={image} alt="" />
-                <Input type='text' value={image} onChange={imageHandler} />
-              </Imagem>
+              <InputBlock>
+                <Imagem>
+                  <img src={image} alt="" />
+                </Imagem>
+                <Input type='text' placeholder='Nova imagem' value={image} onChange={imageHandler} />
+              </InputBlock>
               <InputBlock>
                 <p><b>Nome: &nbsp;</b></p>
                 <Input title='a' type='text' value={name} onChange={nameHandler} />
@@ -264,48 +265,66 @@ const PersonDetailsEdit = (Props: Props) => {
           <Box>
             <BoxHeader title='Outras informações'></BoxHeader>
             <BoxContent>
-              <InputBlock>
-                <p><b>Categorias: &nbsp;</b></p>
-                <select title='category' id='category' value={category} onChange={categoryHandler}>
-                  <option value=''></option>
-                  {dataCategory?.category.map((category: any, index: any) => {
-                    return (
-                      //<Flex>
-                      //<input id={category.categoryName} type='checkbox' value={category.categoryName} />
-                      //<label htmlFor={category.categoryName}>{category.categoryName}</label>
-                      //</Flex>
-                      <option key={index} value={category.categoryName}>{category.categoryName}</option>
-                    )
-                  })}
-                </select>
-              </InputBlock>
-              <InputBlock>
-
-                <p><b>Grupo: &nbsp;</b></p>
-                <select title='group' id='group' value={group} onChange={groupHandler}>
-                  <option value=''></option>
+              <Block>
+                <p><b>Grupos: &nbsp;</b></p>
+                <p>Selecione para remover</p>
+                <Flex>
                   {dataGroups?.groups.map((groups: any, index: any) => {
                     return (
-                      //<Flex>
-                      //<input id={groups.name} type='checkbox' value={groups.name} />
-                      //<label htmlFor={groups.name} >{groups.name}</label>
-                      //</Flex>
-                      <option key={index} value={groups.name}>{groups.name}</option>
+                      <Flex>
+                        <Input key={index}
+                          type='checkbox'
+                          name={groups.name}
+                          id={groups.name}
+                          value={groups.name}
+                          onChange={groupHandler}
+                        />
+                        <label htmlFor={groups.name} >{groups.name}</label>
+                      </Flex>
                     )
                   })}
-                </select>
-              </InputBlock>
-              <InputBlock>
+                </Flex>
+              </Block>
+              <Block>
+                <p><b>Categorias: &nbsp;</b></p>
+                <p>Selecione para remover</p>
+                <Flex>
+                  {dataCategory?.category.map((categories: any, index: any) => {
+                    return (
+                      <Flex>
+                        <Input key={index}
+                          name={categories.name}
+                          id={categories.name}
+                          type='checkbox'
+                          value={categories.name}
+                          onChange={categoryHandler}
+
+                        />
+                        <label className={category?.map((cat: string) => cat === categories.name ? 'green' : 'red')} htmlFor={categories.name}>{categories.name}</label>
+                      </Flex>
+                    )
+                  })}
+                </Flex>
+              </Block>
+              <Block>
                 <p><b>Cargos: &nbsp;</b></p>
-                <select title='select' id='positions' onChange={officeHandler} value={office}>
-                  <option value='' ></option>
+                <Flex>
                   {dataPositions?.positions.map((positions: any, index: any) => {
                     return (
-                      <option key={index} value={positions.name} >{positions.name}</option>
+                      <Flex>
+                        <Input key={index}
+                          id={positions.name}
+                          name={positions.name}
+                          value={positions.name}
+                          onChange={officeHandler}
+                          type='checkbox'
+                        />
+                        <label htmlFor={positions.name}>{positions.name}</label>
+                      </Flex>
                     )
                   })}
-                </select>
-              </InputBlock>
+                </Flex>
+              </Block>
               <InputBlock>
                 <p><b>Data de conversão: &nbsp;</b></p>
                 <Input type='date' value={conversion} onChange={conversionHandler} />

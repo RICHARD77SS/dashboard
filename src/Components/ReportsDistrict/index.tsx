@@ -8,7 +8,7 @@ import Td from '../Td';
 import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
-import {  Container} from './styles';
+import { Container } from './styles';
 
 const localName = 2
 const localName2 = 10
@@ -45,38 +45,38 @@ const ReportsDistrict = () => {
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Bairro' />
-        <GraphContainer>
-          <GraphPieArea data={PieData} />
-        </GraphContainer>
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>Bairro</Th>
-              <Th>Pessoas</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              <Td>Bairro 1</Td>
-              <Td>{localName}</Td>
-            </Tr>
-            <Tr>
-              <Td>Bairro 2</Td>
-              <Td>{localName2}</Td>
-            </Tr>
-            <Tr>
-              <Td>Bairro 2</Td>
-              <Td>{localName3}</Td>
-            </Tr>
-            <Tr>
-              <Td>Bairro 2</Td>
-              <Td>{localName4}</Td>
-            </Tr>
-            <Tr>
-              <Td>Bairro 2</Td>
-              <Td>{localName5}</Td>
-            </Tr>
-          </Tbody>
+      <GraphContainer>
+        <GraphPieArea data={PieData} />
+      </GraphContainer>
+      <Table>
+        <Thead>
+          <Tr>
+            <Th>Bairro</Th>
+            <Th>Pessoas</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr>
+            <Td>Bairro 1</Td>
+            <Td>{localName}</Td>
+          </Tr>
+          <Tr>
+            <Td>Bairro 2</Td>
+            <Td>{localName2}</Td>
+          </Tr>
+          <Tr>
+            <Td>Bairro 2</Td>
+            <Td>{localName3}</Td>
+          </Tr>
+          <Tr>
+            <Td>Bairro 2</Td>
+            <Td>{localName4}</Td>
+          </Tr>
+          <Tr>
+            <Td>Bairro 2</Td>
+            <Td>{localName5}</Td>
+          </Tr>
+        </Tbody>
       </Table>
       <br />
       <br />

@@ -18,7 +18,6 @@ const GroupCategorie = () => {
   const { data } = useAxios('groupCategory')
   const { data: dataGroup } = useAxios('groups')
   const { handleSubmit, handleEdit, handleDelete, nameHandler, descriptionHandler, name, description } = React.useContext(GroupCategoryContext)
-  console.log(dataGroup?.groups.map((group: any) => group.category))
   return (
     <Container>
       <Content>
@@ -38,10 +37,11 @@ const GroupCategorie = () => {
               </Thead>
               <Tbody>
                 {data?.groupCategory.map((category: any, index: number) => {
+                 
                   return (
                     <Tr key={index}>
                       <Td>{category.name}</Td>
-                      <Td><Link to='/groups'><pre>Visualizar {dataGroup?.groups.map((group: any) => group.category).filter((categoria: any) => categoria === category.name).length} grupos</pre></Link></Td>
+                      <Td><Link to='/groups'><pre>Visualizar {dataGroup?.groups.map((group: any) => group.category).flat(1).filter((categoria: any) => categoria === category.name).length} grupos</pre></Link></Td>
                       <Td>
                         {category.description !== 'fixed' ?
                           <Flex>

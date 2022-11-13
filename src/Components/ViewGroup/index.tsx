@@ -289,7 +289,7 @@ const ViewGroup = () => {
               index: number) => {
               return meetings.group === dataGroup?.groups[`${id}`].name ?
                 <User key={index}>
-                  <Button onClick={() => editMeetings(meetings._id,
+                  <Button className='meeting' onClick={() => editMeetings(meetings._id,
                     meetings.name,
                     meetings.group,
                     meetings.date.split('T')[0],
@@ -317,7 +317,7 @@ const ViewGroup = () => {
             <GraphLineArea data={LineData} />
           </BoxContent>
         </Box>
-        {modalOpen ? <AddMeetings /> : null}
+
       </Content>
       <Content>
         <Box width='300px'>

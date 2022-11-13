@@ -30,7 +30,6 @@ const CardGroup = (Props: Props) => {
         <img src={Props.image} alt="" />
       </CardImg>
       <h4>{Props.name}</h4>
-      <p>0 pessoas</p>
       <p>Liderança:</p>
       <Liders>
         <SubLiderImg>

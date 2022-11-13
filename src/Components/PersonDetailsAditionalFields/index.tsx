@@ -24,7 +24,7 @@ const PersonDetailsAditionalFields = (Props: Props) => {
                   <BoxContent>
                     {Object.keys(fields?.inputOption).map((option: string, index: number) => {
                       return (
-                        <Flex>
+                        <Flex key={index}>
                           <Input type={fields.inputType} name='' />
                           <label htmlFor="">
                             {fields?.inputOption[option]}

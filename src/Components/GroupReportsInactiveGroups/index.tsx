@@ -15,15 +15,15 @@ import Table from '../Table';
 import PageSelector from '../PageSelector';
 
 
-const GroupReportsActiveGroups = () => {
+const GroupReportsInactiveGroups = () => {
   return (
     <Container>
-      <ReportsHeader logo='' corporation='Inc name' reportsName='Grupos ativos' />
+      <ReportsHeader logo='' corporation='Inc name' reportsName='Grupos inativos' />
       <Content>
         <Top>
           <Block>
             <h3>Resultados: 1 Grupo</h3>
-            <p>Grupos que enviaram frequência de reunião nos últimos 30 dias</p>
+            <p>Grupos que NÃO enviaram frequência de reunião nos últimos 30 dias</p>
           </Block>          
         </Top>
         <TopTableOptions />
@@ -50,4 +50,4 @@ const GroupReportsActiveGroups = () => {
   )
 }
 
-export default GroupReportsActiveGroups;
+export default GroupReportsInactiveGroups;

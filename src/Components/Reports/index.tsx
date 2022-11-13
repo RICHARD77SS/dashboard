@@ -4,7 +4,6 @@ import { Container, Content, Sidebar, Header, SideContent, GraphContainer, Box }
 
 const Reports = () => {
   const { data } = useAxios('extrafields')
-  console.log(data)
   return (
     <Container>
       <Content>

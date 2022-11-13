@@ -13,18 +13,21 @@ import { Container, Content, Top, Block } from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
+import { useAxios } from '../../hooks/useAxios';
 
 
-const GroupReportsInactiveGroups = () => {
+const GroupReportsActiveGroups = () => {
+  const { data: dataGroups } = useAxios('groups')
+  const { data: dataMeetings } = useAxios('meetings')
   return (
     <Container>
-      <ReportsHeader logo='' corporation='Inc name' reportsName='Grupos inativos' />
+      <ReportsHeader logo='' corporation='Inc name' reportsName='Grupos ativos' />
       <Content>
         <Top>
           <Block>
             <h3>Resultados: 1 Grupo</h3>
-            <p>Grupos que NÃO enviaram frequência de reunião nos últimos 30 dias</p>
-          </Block>          
+            <p>Grupos que enviaram frequência de reunião nos últimos 30 dias</p>
+          </Block>
         </Top>
         <TopTableOptions />
         <Input placeholder=' Buscar' type='search' />
@@ -37,11 +40,17 @@ const GroupReportsInactiveGroups = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td><img src="" alt="" /></Td>
-              <Td>Grupo here</Td>
-              <Td>Valor total here</Td>
-            </Tr>
+
+            {dataGroups?.groups.map((groups: any) => {
+              return (
+                <Tr>
+                  <Td><img src={groups.image} alt="" /></Td>
+                  <Td>{groups.name}</Td>
+                  <Td>Valor total here</Td>
+                </Tr>
+             )
+            })
+              }
           </Tbody>
         </Table>
         <PageSelector />
@@ -50,4 +59,4 @@ const GroupReportsInactiveGroups = () => {
   )
 }
 
-export default GroupReportsInactiveGroups;
+export default GroupReportsActiveGroups;

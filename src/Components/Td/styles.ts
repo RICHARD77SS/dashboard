@@ -8,4 +8,9 @@ export const TdSt = styled.td`
   a {
     color: #000;
   }
+  img{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+  }
 `

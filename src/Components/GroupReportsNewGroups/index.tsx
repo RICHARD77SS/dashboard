@@ -42,7 +42,7 @@ const GroupReportsNewGroups = () => {
           </Thead>
           <Tbody>
             {data?.groups.map((group: any, index: number) => {
-              let personsInGroup = dataPerson?.person.map((person: any) => person.group)?.filter((groupName: any) => groupName === group.name).length
+              let personsInGroup = dataPerson?.person.map((person: any) => person.group).flat(1)?.filter((groupName: any) => groupName === group.name).length
               return (
                 <Tr key={index}>
                   <Td><img src={group.image} alt="" /></Td>
