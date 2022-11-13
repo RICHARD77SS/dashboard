@@ -33,7 +33,7 @@ export function StudiesCategoryContextProvider({ children }) {
     }
     if (id) {
       api.put(`studiescategory/${id}`, studiesCategory)
-      window.alert('Categoria de estudo editada com successo')
+      window.alert('Categoria de estudo editada com sucesso')
       const updatedStudiesCategory = {
         studiesCategory: data.studiesCategory?.map((studiesCategory) => {
           if (studiesCategory._id === id) {
