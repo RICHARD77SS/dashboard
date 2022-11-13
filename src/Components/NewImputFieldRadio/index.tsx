@@ -15,25 +15,15 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
     inputName,
     inputNameHandle,
     inputOptionHandle,
-    setInputType
+    inputOption,
+    setInputType,
+    RemoveOption,
+    AddOption
   } = React.useContext(ExtraFieldsContext)
 
   React.useEffect(() => {
     setInputType("radio")
   }, [setInputType])
-  function Add() {
-    let campo = document.getElementById('options')
-    let input = document.createElement('input')
-    campo?.append(input)
-    let options = campo?.children
-    let size = options!.length
-    for (let i = 0; i < size; i++) {
-      options![i].setAttribute('type', 'text')
-      options![i].setAttribute('name', `option${i}`)
-      options![i].setAttribute('placeholder', 'Escreva aqui (o campo vazio será removido)')
-      options![i].addEventListener('change', inputOptionHandle)
-    }
-  }
   return (
     <Container>
       <Content>
@@ -56,11 +46,21 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
               />
             </InputBlock>
             <InputBlock >
-              <div id="options">
-
-              </div>
+              {inputOption?.map((option: any, index: any) => {
+                return (
+                  <InputBlock key={index}>
+                    <Input
+                      name='visitor'
+                      type='text'
+                      onChange={(event) => inputOptionHandle(event, index)}
+                      value={option.visitor}
+                    />
+                    <Button type='button' onClick={() => RemoveOption(index)}>Apagar</Button>
+                  </InputBlock>
+                )
+              })}
             </InputBlock>
-            <Button type='button' onClick={() => Add()}>+ Adicionar nova opção</Button>
+            <Button type='button' onClick={() => AddOption()}>+ Adicionar nova opção</Button>
           </BoxContent>
           <BoxFooter>
             <Button type='submit'>Salvar</Button>
