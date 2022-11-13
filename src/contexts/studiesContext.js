@@ -84,7 +84,7 @@ export function StudiesContextProvider({ children }) {
   }
   function handleDelete(id) {
     api.delete(`studies/${id}`);
-    window.alert('Studo deletado')
+    window.alert('Estudo deletado')
     const updatedStudies = {
       studies: data.studies?.filter((studies) => studies._id !== id)
     };
@@ -126,7 +126,8 @@ export function StudiesContextProvider({ children }) {
     handleEdit,
     handleDelete,
     setContent,
-    handleClear
+    handleClear,
+    id
   }}>
     {children}
   </StudiesContext.Provider>
