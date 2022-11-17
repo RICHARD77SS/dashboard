@@ -19,6 +19,9 @@ import { useAxios } from '../../hooks/useAxios';
 const GroupReportsActiveGroups = () => {
   const { data: dataGroups } = useAxios('groups')
   const { data: dataMeetings } = useAxios('meetings')
+  const { data: dataPerson } = useAxios('person')
+
+  let meetingGroup = dataMeetings?.meetings.map((meetings: any) => new Date(meetings.date.split('T')).getMonth() + 1 === new Date().getMonth() + 1 ? meetings.group : false)
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Grupos ativos' />
@@ -39,18 +42,21 @@ const GroupReportsActiveGroups = () => {
               <Th><Button>Total Pessoas <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
             </Tr>
           </Thead>
-          <Tbody>
+          <Tbody >
 
-            {dataGroups?.groups.map((groups: any) => {
-              return (
-                <Tr>
-                  <Td><img src={groups.image} alt="" /></Td>
-                  <Td>{groups.name}</Td>
-                  <Td>Valor total here</Td>
+            {dataGroups?.groups.map((group: any, index: number) => {
+
+              return meetingGroup?.map((meeting: any) => meeting).filter((met: any) => met === group.name).length !== 0 ?
+
+                <Tr key={index}>
+                  <Td><img src={group.image} alt="" /></Td>
+                  <Td>{group.name}</Td>
+                  <Td>{dataPerson?.person.map((person: any) => person.group).flat(1).filter((num: any) => num === group.name).length}</Td>
                 </Tr>
-             )
-            })
-              }
+
+                : null
+
+            })}
           </Tbody>
         </Table>
         <PageSelector />
