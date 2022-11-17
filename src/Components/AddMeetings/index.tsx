@@ -36,7 +36,7 @@ const AddMeetings = () => {
   } = React.useContext(MeetingsContext)
   const { data } = useAxios('person')
   const { data: datameetings } = useAxios('meetings')
-  console.log(visitors)
+
   return (
     <Container>
       <ModalContent>
@@ -71,30 +71,16 @@ const AddMeetings = () => {
                 {id ?
                   <Flex>
                     <List>
-                      <h3>Remover</h3>
-                      {datameetings?.meetings[index].participants.map((meeting: any, index: number) => {
-
-                        return (
-                          <Flex key={index}>
-                            <Input type='checkbox' value={meeting} onChange={participantsHandler} />
-                            <label >{meeting}</label>
-                          </Flex>
-                        )
-                      })}
-                    </List>
-                    <List>
 
                       <h3>Adicionar</h3>
                       {data?.person.map((person: any, index: number) => {
 
-                        return datameetings?.meetings[index]?.participants.includes(person.name) ?
-                          null
-                          :
+                        return (
                           <Flex key={index}>
-                            <Input id={person.name} type='checkbox' value={person.name} onChange={participantsHandler} />
+                            <Input id={person.name} type='checkbox' value={person.name} checked={participants.includes(person.name) ? true : false} onChange={participantsHandler} />
                             <label htmlFor={person.name}>{person.name}</label>
                           </Flex>
-
+                        )
 
                       })}
                     </List>
