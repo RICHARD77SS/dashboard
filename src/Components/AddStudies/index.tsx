@@ -66,7 +66,8 @@ const AddStudies = () => {
 
             </BoxHeader>
             <BoxContent>
-              <Button type='button'>Selecione uma imagem</Button>
+              <Input type='file' value='' onChange={imageHandler} accept=".jpg, .jpeg, .png" />
+              <img src={image} width='100px' height='100px' alt='based'  />
               <Button type='button'>Carregar uma imagem</Button>
             </BoxContent>
           </MiniBox>
