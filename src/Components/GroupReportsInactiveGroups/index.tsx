@@ -13,9 +13,15 @@ import { Container, Content, Top, Block } from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const GroupReportsInactiveGroups = () => {
+  const { data: dataGroups } = useAxios('groups')
+  const { data: dataMeetings } = useAxios('meetings')
+  const { data: dataPerson } = useAxios('person')
+
+  let meetingGroup = dataMeetings?.meetings.map((meetings: any) => new Date(meetings.date.split('T')).getMonth() + 1 === new Date().getMonth() + 1 ? meetings.group : false)
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Grupos inativos' />
@@ -24,7 +30,7 @@ const GroupReportsInactiveGroups = () => {
           <Block>
             <h3>Resultados: 1 Grupo</h3>
             <p>Grupos que NÃO enviaram frequência de reunião nos últimos 30 dias</p>
-          </Block>          
+          </Block>
         </Top>
         <TopTableOptions />
         <Input placeholder=' Buscar' type='search' />
@@ -37,11 +43,19 @@ const GroupReportsInactiveGroups = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td><img src="" alt="" /></Td>
-              <Td>Grupo here</Td>
-              <Td>Valor total here</Td>
-            </Tr>
+            {dataGroups?.groups.map((group: any,index:number) => {
+
+              return meetingGroup?.map((meeting: any) => meeting).filter((met: any) => met === group.name).length === 0 ?
+
+                <Tr key={index}>
+                  <Td><img src={group.image} alt="" /></Td>
+                  <Td>{group.name}</Td>
+                  <Td>{dataPerson?.person.map((person: any) => person.group).flat(1).filter((num: any) => num === group.name).length}</Td>
+                </Tr>
+
+                : null
+
+            })}
           </Tbody>
         </Table>
         <PageSelector />
