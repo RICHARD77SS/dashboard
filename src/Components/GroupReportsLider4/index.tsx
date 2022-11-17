@@ -7,13 +7,16 @@ import Th from '../Th';
 import Tbody from '../Tbody';
 import Td from '../Td';
 
-import { Container, Content} from './styles';
+import { Container, Content } from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const GroupReportsLider4 = () => {
+  const { data: dataGroups } = useAxios('groups')
+  let groups = dataGroups?.groups.map((group: any) => group.lider4.name)
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Liderança lider 4' />
@@ -27,10 +30,14 @@ const GroupReportsLider4 = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td><img src="" alt="" /></Td>
-              <Td>Nome here</Td>
-            </Tr>
+            {groups?.filter((l1: any, i: number) => groups.indexOf(l1) === i).map((group: any) => {
+              return (
+                <Tr>
+                  <Td><img src={group} alt="" /></Td>
+                  <Td>{group}</Td>
+                </Tr>
+              )
+            })}
           </Tbody>
         </Table>
         <PageSelector />
