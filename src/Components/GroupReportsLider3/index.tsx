@@ -11,9 +11,12 @@ import { Container, Content} from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import PageSelector from '../PageSelector';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const GroupReportsLider3 = () => {
+  const { data: dataGroups } = useAxios('groups')
+  let groups = dataGroups?.groups.map((group: any) => group.lider3.name)
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Liderança lider 3' />
@@ -27,10 +30,14 @@ const GroupReportsLider3 = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td><img src="" alt="" /></Td>
-              <Td>Nome here</Td>
-            </Tr>
+            {groups?.filter((l1: any, i: number) => groups.indexOf(l1) === i).map((group: any) => {
+              return (
+                <Tr>
+                  <Td><img src={group} alt="" /></Td>
+                  <Td>{group}</Td>
+                </Tr>
+              )
+            })}
           </Tbody>
         </Table>
         <PageSelector />
