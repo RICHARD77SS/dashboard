@@ -29,9 +29,30 @@ export function StudiesContextProvider({ children }) {
   function contentHandler(event) {
     setContent(event.target.value);
   }
-  function imageHandler(event) {
-    setImage(event.target.value);
+  const imageHandler = async (event) => {
+    if (event.target.files[0].size > 15000) {
+      window.alert('imagem muito grande tamanho maximo 15kb')
+    } else {
+      const file = event.target.files[0];
+      const base64 = await convertBase64(file)
+      setImage(base64)
+    }
   }
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
+
+
   function fileHandler(event) {
     setFile(event.target.value);
   }
