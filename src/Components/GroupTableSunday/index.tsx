@@ -6,9 +6,13 @@ import Tr from "../Tr";
 import { BsArrowUp, BsArrowDown } from 'react-icons/bs';
 import Tbody from "../Tbody";
 import Td from "../Td";
+import { useAxios } from "../../hooks/useAxios";
 
 
 const GroupTableSunday = () => {
+  const { data: dataGroups } = useAxios('groups')
+  const { data: dataPerson } = useAxios('person')
+  
   return (
     <Table>
       <Thead>
@@ -20,12 +24,16 @@ const GroupTableSunday = () => {
         </Tr>
       </Thead>
       <Tbody>
-        <Tr>
-          <Td><img src="" alt="" /></Td>
-          <Td>Group Nome here</Td>
-          <Td>12:00</Td>
-          <Td>Total here</Td>
-        </Tr>
+        {dataGroups?.groups.map((group: any) => {
+          return group.weekDay === 'Domingo' ?
+            <Tr>
+              <Td><img src="" alt="" /></Td>
+              <Td>{group.name}</Td>
+              <Td>{group.time}</Td>
+              <Td>{dataPerson?.person.map((person: any) => person.group).flat(1).filter((num: any) => num === group.name).length}</Td>
+            </Tr>
+            : null
+        })}
       </Tbody>
     </Table>
   )
