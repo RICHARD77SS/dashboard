@@ -10,13 +10,15 @@ import InputBlock from '../InputBlock'
 import Tab from '../Tab'
 import TabsViewClass from '../TabsViewClass'
 
-import { Form, Box, Modal, ModalContent, CloseModal, User } from './styles'
+import { Form, Box, Modal, ModalContent, CloseModal, User, Disciplina } from './styles'
 import { Link, useParams } from 'react-router-dom';
+import { SubjectsContext } from '../../contexts/subjectsContext'
 
 const ViewClass = () => {
   const { data: dataSchools } = useAxios('schools')
   const { data: dataPerson } = useAxios('person')
   const { data: dataClass } = useAxios('claass')
+  const { data: dataSubjects } = useAxios('subjects')
   const {
     name,
     school,
@@ -41,6 +43,17 @@ const ViewClass = () => {
     setParticipants,
     setId
   } = React.useContext(ClaassContext)
+  const {
+    teacher,
+    classIndex,
+    teacherHandler,
+    classIndexHandler,
+    handleEdit,
+    handleDelete,
+    CloseModal,
+    setOpenModal: setOpenModalSubjects,
+    setClassIndex
+  } = React.useContext(SubjectsContext)
   let { id } = useParams()
 
 
@@ -52,8 +65,9 @@ const ViewClass = () => {
     setStatus(dataClass?.claass[`${id}`].status)
     setParticipants(dataClass?.claass[`${id}`].participants)
     setId(dataClass?.claass[`${id}`]._id)
+    setClassIndex(id)
 
-  }, [dataClass?.claass, id, setDescription, setName, setParticipants, setSchool, setStatus, setTime, setId])
+  }, [dataClass?.claass, id, setDescription, setName, setParticipants, setSchool, setStatus, setTime, setId, setClassIndex])
   return (
     <Container>
       <Content>
@@ -143,7 +157,25 @@ const ViewClass = () => {
             </Tab>
             <Tab title='Disciplinas'>
               <Box>
-                <Button className='buttonadd' type='button'>+ Adicionar Disciplina</Button>
+                <Button className='buttonadd' type='button' onClick={() => setOpenModalSubjects(true)}>+ Adicionar Disciplina</Button>
+                <br />
+                <br />
+                {dataSubjects?.subjects.map((subjects: any, index: number) => {
+                  return `${subjects.classIndex}` === id ?
+                    <Disciplina key={index}>
+                      
+                      <InputBlock>
+                        <p>{subjects.teacher}</p>
+                        <h3>{subjects.name}</h3>
+                        <Flex>
+                          <Button type='button' onClick={() => handleDelete(subjects._id)}>Deletar</Button>
+                          <Button type='button' onClick={() => handleEdit(subjects._id, subjects.name, subjects.teacher, subjects.classInddex)}>Editar</Button>
+
+                        </Flex>
+                      </InputBlock>
+                    </Disciplina>
+                    : null
+                })}
               </Box>
             </Tab>
             <Tab title='Aulas'>
