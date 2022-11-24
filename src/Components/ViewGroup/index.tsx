@@ -107,7 +107,7 @@ const ViewGroup = () => {
           </CardBg>
           <CardImg>
             <img src={dataGroup?.groups[`${id}`].image} alt="" />
-          </CardImg>cd das
+          </CardImg>
           <h4>{dataGroup?.groups[`${id}`].name}</h4>
           <p>{dataPerson?.person.map((person: any, index: number) => {
             return person.group.includes(dataGroup?.groups[`${id}`].name) ?
@@ -175,7 +175,7 @@ const ViewGroup = () => {
                       <img src={person.image} alt="" />
                     </Image>
                   </Link>
-                  <p ><Link to={`/persons/details/${index}`}><pre>{person.name}</pre></Link></p>
+                  <p><Link to={`/persons/details/${index}`}><pre>{person.name}</pre></Link></p>
                   <Button type='button' onClick={() => DelGroup(index)}><BiTrash /></Button>
                 </User>
                 : null

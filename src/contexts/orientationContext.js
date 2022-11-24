@@ -5,6 +5,9 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios'
 import ModalEditClassRoom from '../Components/ModalEditClassRoom';
+import ModalCreateOrientation from '../Components/ModalCreateOrientation';
+import ModalAddPeopleOrientationMeeting from '../Components/ModalAddPeopleOrientationMeeting';
+import ModalEditOrientationMeetings from '../Components/ModalEditOrientationMeetings';
 
 export const OrientationContext = React.createContext();
 export function OrientationContextProvider({ children }) {
@@ -16,12 +19,12 @@ export function OrientationContextProvider({ children }) {
   const [anotations, setAnotations] = React.useState('')
   const [lideres, setLideres] = React.useState([])
   const [people, setPeople] = React.useState([])
-
-  const [openModalPeople, setOpenModalPeople] = React.useState(false)
   const [openModal, setOpenModal] = React.useState(false)
-  const [index, setIndex] = React.useState()
-
+  const [openModalPeople, setOpenModalPeople] = React.useState(false)
   const [openModalMeeting, setOpenModalMeeting] = React.useState(false)
+  const [openModalCreateOrientation, setOpenModalCreateOrientation] = React.useState(false)
+
+  const [index, setIndex] = React.useState()
   const [meetings, setMeetings] = React.useState([])
   const [meetingIndex, setMeetingIndex] = React.useState()
 
@@ -45,18 +48,12 @@ export function OrientationContextProvider({ children }) {
     data[meetingIndex][event.target.name] = event.target.value;
     setMeetings(data)
   }
-  function CloseModalMeetings() {
-    setOpenModalMeeting(false)
-    let data = [...meetings];
-    data.splice(meetingIndex, 1)
-    setMeetings(data)
-  }
   function DeleteMeeting(event, indx) {
     setOpenModalMeeting(false)
     let data = [...meetings];
     data.splice(indx, 1)
     setMeetings(data)
-    handleSubmit(event)
+    setTimeout(2000, handleSubmit(event))
   }
   function classNameHandler(event) {
     setClassName(event.target.value);
@@ -84,7 +81,24 @@ export function OrientationContextProvider({ children }) {
       setPeople(oldArr => [...oldArr, event.target.value]);
     }
   }
+  function CloseModalMeetings() {
+    setOpenModalMeeting(false)
+    let data = [...meetings];
+    data.splice(meetingIndex, 1)
+    setMeetings(data)
+  }
 
+  function OpenModalPeople() {
+    setOpenModalPeople(true)
+  }
+  function CloseModalPeople() {
+    setOpenModalPeople(false)
+  }
+
+  function OpenModal(index) {
+    setIndex(index)
+    setOpenModal(true)
+  }
   function CloseModal() {
     setId('')
     setClassName('')
@@ -94,10 +108,15 @@ export function OrientationContextProvider({ children }) {
     setOpenModal(false)
     setIndex('')
   }
-  function OpenModal(index) {
-    setIndex(index)
-    setOpenModal(true)
+
+  function OpenModalCreateOrientation() {
+    setOpenModalCreateOrientation(true)
   }
+  function CloseModalCreateOrientation() {
+    setOpenModalCreateOrientation(false)
+  }
+
+
   function handleSubmit(event) {
     event.preventDefault()
     const orientation = {
@@ -111,7 +130,7 @@ export function OrientationContextProvider({ children }) {
     if (id) {
       api.put(`orientation/${id}`, orientation)
       window.alert('turma Editada')
-
+      setOpenModalMeeting(false)
       const updatedOrientation = {
         orientation: data.orientation?.map((orientation) => {
           if (orientation._id === id) {
@@ -132,6 +151,7 @@ export function OrientationContextProvider({ children }) {
     } else {
       api.post('orientation', orientation);
       window.alert('Turma adicionada')
+      CloseModalCreateOrientation()
       const updatedOrientation = {
         orientation: [...data.orientation, orientation]
       }
@@ -190,21 +210,25 @@ export function OrientationContextProvider({ children }) {
     id,
     CloseModal,
     index,
-    openModalPeople,
-    setOpenModalPeople,
+    OpenModalPeople,
+    CloseModalPeople,
     AddMeeting,
     meetings,
     meetingsHandler,
     openModalMeeting,
-    setOpenModalMeeting,
-    CloseModalMeetings,
     setMeetings,
     meetingIndex,
     handleEditMeeting,
-    DeleteMeeting
+    DeleteMeeting,
+    setOpenModalMeeting,
+    CloseModalMeetings,
+    CloseModalCreateOrientation,
+    OpenModalCreateOrientation
   }}>
     {children}
     {openModal && <ModalEditClassRoom />}
+    {openModalCreateOrientation && <ModalCreateOrientation />}
+    {openModalPeople && <ModalAddPeopleOrientationMeeting />}
+    {openModalMeeting && <ModalEditOrientationMeetings />}
   </OrientationContext.Provider>
-
 }

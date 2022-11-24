@@ -50,7 +50,7 @@ const MediasCreateAlbum = () => {
       <h2>Álbum</h2>
       {edit ?
         <>
-          <ModalEdit onClick={() => { setEdit(false) }}>
+          <ModalEdit onClick={() => setEdit(false)}>
             <Button onClick={() => { setEdit(false) }}>Close</Button>
           </ModalEdit>
         </> : null}

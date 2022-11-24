@@ -49,4 +49,14 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 1rem;
   z-index:30;
+    select,input {
+    width: 260px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: #eee;
+  }
+  textarea{
+    max-width: 290px;
+    max-height: 300px;
+  }
 `

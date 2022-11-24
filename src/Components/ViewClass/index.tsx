@@ -13,6 +13,7 @@ import TabsViewClass from '../TabsViewClass'
 import { Form, Box, Modal, ModalContent, CloseModal, User, Disciplina } from './styles'
 import { Link, useParams } from 'react-router-dom';
 import { SubjectsContext } from '../../contexts/subjectsContext'
+import { ClassRoomContext } from '../../contexts/classRoomContext'
 
 const ViewClass = () => {
   const { data: dataSchools } = useAxios('schools')
@@ -44,18 +45,13 @@ const ViewClass = () => {
     setId
   } = React.useContext(ClaassContext)
   const {
-    teacher,
-    classIndex,
-    teacherHandler,
-    classIndexHandler,
     handleEdit,
     handleDelete,
-    CloseModal,
     setOpenModal: setOpenModalSubjects,
     setClassIndex
   } = React.useContext(SubjectsContext)
+  const { OpenModal } = React.useContext(ClassRoomContext)
   let { id } = useParams()
-
 
   React.useEffect(() => {
     setName(dataClass?.claass[`${id}`].name)
@@ -163,16 +159,13 @@ const ViewClass = () => {
                 {dataSubjects?.subjects.map((subjects: any, index: number) => {
                   return `${subjects.classIndex}` === id ?
                     <Disciplina key={index}>
-                      
-                      <InputBlock>
-                        <p>{subjects.teacher}</p>
-                        <h3>{subjects.name}</h3>
-                        <Flex>
-                          <Button type='button' onClick={() => handleDelete(subjects._id)}>Deletar</Button>
-                          <Button type='button' onClick={() => handleEdit(subjects._id, subjects.name, subjects.teacher, subjects.classInddex)}>Editar</Button>
-
-                        </Flex>
-                      </InputBlock>
+                      <h2>{subjects.name}</h2>
+                      <h4>Professor(a):</h4>
+                      <p>{subjects.teacher}</p>
+                      <Flex>
+                        <Button type='button' onClick={() => handleDelete(subjects._id)}>Deletar</Button>
+                        <Button type='button' onClick={() => handleEdit(subjects._id, subjects.name, subjects.teacher, subjects.classInddex)}>Editar</Button>
+                      </Flex>
                     </Disciplina>
                     : null
                 })}
@@ -180,7 +173,7 @@ const ViewClass = () => {
             </Tab>
             <Tab title='Aulas'>
               <Box>
-                <Button className='buttonadd' type='button'>+ Adicionar Aula</Button>
+                <Button className='buttonadd' type='button' onClick={() => OpenModal(id)}>+ Adicionar Aula</Button>
               </Box>
             </Tab>
             <Tab title='Arquivos'>

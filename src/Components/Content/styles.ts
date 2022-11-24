@@ -6,7 +6,7 @@ export const Flexstart = styled.div`
   height: auto;
   display: flex;
   gap: 1rem;
-  align-items:center;
+  align-items:start;
   justify-content: center;
   @media (max-width: 1100px){
     flex-wrap:wrap;

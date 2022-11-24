@@ -3,20 +3,20 @@ import React from 'react'
 import { useAxios } from '../../hooks/useAxios'
 import Button from '../Button'
 import Container from '../Container'
-import Content from '../Content'
 import Flex from '../Flex'
 import Input from '../Input'
 import InputBlock from '../InputBlock'
 
-import { Form, Box, Modal, ModalContent, ModalClose, User, Disciplina, List } from './styles'
+import { Content, Form, Box, Modal, ModalContent, ModalClose, User, Meeting, List } from './styles'
 import { Link, useParams } from 'react-router-dom';
 import { OrientationContext } from '../../contexts/orientationContext'
 import ModalEditOrientationMeetings from './../ModalEditOrientationMeetings/index';
+import BoxHeader from '../BoxHeader'
+import ModalAddPeopleOrientationMeeting from '../ModalAddPeopleOrientationMeeting'
 
 const ViewOrientation = () => {
   const { data: dataPerson } = useAxios('person')
   const { data: dataOrientation } = useAxios('orientation')
-  const { data: dataSubjects } = useAxios('subjects')
   const {
     setId,
     setClassName,
@@ -24,30 +24,21 @@ const ViewOrientation = () => {
     setLideres,
     setAnotations,
     classNameHandler,
-    peopleHandler,
     statusHandler,
     lideresHandler,
     anotationsHandler,
     className,
-    people,
     status,
     anotations,
     lideres,
     handleSubmit,
-    handleEdit,
-    handleDelete,
-    openModalPeople,
-    setOpenModalPeople,
     setPeople,
-    CloseModal,
-    index,
     AddMeeting,
     meetings,
-    openModalMeeting,
-    setOpenModalMeeting,
     setMeetings,
     handleEditMeeting,
-    DeleteMeeting
+    DeleteMeeting,
+    OpenModalPeople,
   } = React.useContext(OrientationContext)
   console.log(meetings)
   let { id } = useParams()
@@ -97,28 +88,10 @@ const ViewOrientation = () => {
           </InputBlock>
           <Button type='submit'>Salvar</Button>
         </Form>
-        {openModalPeople ?
-          <Modal>
-            <ModalContent onSubmit={handleSubmit}>
-              <Button onClick={() => setOpenModalPeople(false)} type='button'>Close</Button>
-              <InputBlock>
-                <label>Pessoas</label>
-                {dataPerson?.person.map((person: any, index: number) => {
-                  return (
-                    <Flex key={index}>
-                      <Input type='checkbox' id={person.name + index} name={person.name} value={person.name} checked={people?.includes(person.name) ? true : false} onChange={peopleHandler} />
-                      <label htmlFor={person.name + index}>{person.name}</label>
-                    </Flex>
-                  )
-                })}
-              </InputBlock>
-              <Button type='submit'>Salvar</Button>
-            </ModalContent>
-            <ModalClose onClick={() => setOpenModalPeople(false)}></ModalClose>
-          </Modal>
-          : null}
         <Box>
-          <Button type='button' onClick={() => setOpenModalPeople(true)}>Add/remove</Button>
+          <BoxHeader title='Pessoas'>
+            <Button type='button' onClick={() => OpenModalPeople()}>Add/remove</Button>
+          </BoxHeader>
           {dataOrientation?.orientation[`${id}`].people.map((people: any, index: number) => {
             return (
               <User key={index}>
@@ -128,21 +101,19 @@ const ViewOrientation = () => {
           })}
         </Box>
         <Box>
-          <Button type='button' onClick={() => AddMeeting(meetings.length)}>Add</Button>
-
+          <BoxHeader title='Reuniões'>
+            <Button type='button' onClick={() => AddMeeting(meetings.length)}>Add</Button>
+          </BoxHeader>
           {dataOrientation?.orientation[`${id}`].meetings.map((meetings: any, index: number) => {
             return (
-              <User key={index}>
+              <Meeting key={index}>
                 <Button type='button' onClick={() => handleEditMeeting(index)}>Edit</Button>
                 <h4>{meetings.subject}</h4>
                 <Button type='button' onClick={(event) => DeleteMeeting(event, index)}>Delete</Button>
-              </User>
+              </Meeting>
             )
           })}
         </Box>
-        {openModalMeeting ?
-          <ModalEditOrientationMeetings />
-          : null}
       </Content>
     </Container>
   )

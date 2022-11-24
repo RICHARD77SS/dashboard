@@ -23,6 +23,7 @@ export const Content = styled.div`
   justify-content: center;
   flex-direction: column;
   z-index: 20;
+  padding: 1rem;
   button {
     border-radius: 20px;
     background: ${Props => Props.theme.colors.pri};
@@ -48,7 +49,7 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 1rem;
   z-index:30;
-  select,input {
+  select{
     width: 200px;
     height: 30px;
     border-radius: 5px;

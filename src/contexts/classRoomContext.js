@@ -18,6 +18,7 @@ export function ClassRoomContextProvider({ children }) {
   const [date, setDate] = React.useState('')
 
   const [openModal, setOpenModal] = React.useState(false)
+  const [index, setIndex] = React.useState()
 
   const [participants, setParticipants] = React.useState([])
 
@@ -52,6 +53,11 @@ export function ClassRoomContextProvider({ children }) {
     setRemarks('')
     setNotes('')
     setOpenModal(false)
+    setIndex('')
+  }
+  function OpenModal(index) {
+    setIndex(index)
+    setOpenModal(true)
   }
   function handleSubmit(event) {
     event.preventDefault()
@@ -128,12 +134,13 @@ export function ClassRoomContextProvider({ children }) {
     handleEdit,
     handleDelete,
     openModal,
-    setOpenModal,
+    OpenModal,
     setParticipants,
     id,
     CloseModal,
     date,
-    dateHandler
+    dateHandler,
+    index
   }}>
     {children}
     {openModal && <ModalEditClassRoom />}

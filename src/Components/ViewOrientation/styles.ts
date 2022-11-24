@@ -1,5 +1,17 @@
 import styled from 'styled-components'
 
+export const Content = styled.div`
+  width: 100%;
+  max-width: 1300px;
+  height: auto;
+  display: flex;
+  gap: 1rem;
+  align-items:start;
+  justify-content: center;
+  @media (max-width: 768px){
+    flex-direction: column;
+  }
+`
 export const Form = styled.form`
   width: 300px;
   height: auto;
@@ -37,9 +49,10 @@ export const Box = styled.div`
   background: #fff;
   display: flex;
   align-items:center;
-  justify-content:center;
+  justify-content:start;
   flex-direction: column;
   gap: 1rem;
+  border-radius: 10px;
   .navlink {
     flex:1;
     padding: 0 .5rem ;
@@ -67,7 +80,7 @@ export const Box = styled.div`
     justify-content:center;
   }
 `
-export const Modal = styled.form`
+export const Modal = styled.div`
   width: 400px;
   height: 300px;
   display: flex;
@@ -109,7 +122,27 @@ export const ModalClose = styled.button`
   z-index: 10;
 `
 export const User = styled.div`
-  width: 300px;
+  width: 250px;
+  height: 60px;
+  display: flex;
+  align-items:center;
+  justify-content:start;
+  gap: .5rem;
+  background: #eee;
+  border-radius: 10px;
+  padding: .5rem;
+  border: none;
+  img{
+    width: 60px;
+    height: 50px;
+    border-radius: 5px;
+  }
+  a{
+    color:#000;
+  }
+`
+export const Meeting = styled.div`
+  width: 250px;
   height: 60px;
   display: flex;
   align-items:center;
@@ -143,7 +176,7 @@ export const List = styled.div`
   border: none;
 `
 export const Disciplina = styled.button`
-  width: 300px;
+  width: 250px;
   height: auto;
   display: flex;
   align-items:center;

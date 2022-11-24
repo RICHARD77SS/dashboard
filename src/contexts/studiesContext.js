@@ -31,7 +31,7 @@ export function StudiesContextProvider({ children }) {
   }
   const imageHandler = async (event) => {
     if (event.target.files[0].size > 15000) {
-      window.alert('imagem muito grande tamanho maximo 15kb')
+      window.alert('imagem muito grande, tamanho maximo 15kb')
     } else {
       const file = event.target.files[0];
       const base64 = await convertBase64(file)

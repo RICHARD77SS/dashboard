@@ -24,3 +24,22 @@ export const InputBox = styled.div`
   align-items: center;
   flex-direction: column;
 `
+export const Form = styled.form`
+  width: 30%;
+  min-width: 300px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  select,input {
+    width: 260px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: #eee;
+  }
+  textarea{
+    max-width: 290px;
+    max-height: 300px;
+  }
+`

@@ -1,12 +1,13 @@
-import { TdSt} from './styles';
+import { TdSt } from './styles';
 
 
 interface Props {
   children?: React.ReactNode;
+  className?: string;
 }
-const Td = ({children}:Props) => {
+const Td = ({ children, className }: Props) => {
   return (
-      <TdSt>{children}</TdSt>
+    <TdSt className={className}>{children}</TdSt>
   )
 }
 

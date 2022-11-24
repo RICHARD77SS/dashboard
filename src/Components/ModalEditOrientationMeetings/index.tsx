@@ -19,12 +19,11 @@ const ModalEditOrientationMeetings = () => {
     CloseModalMeetings,
     meetingIndex,
     handleSubmit,
-    setOpenModalMeeting,
-    ids
+    setOpenModalMeeting
   } = React.useContext(OrientationContext)
   let { id } = useParams()
 
-  let meetingsLength = dataOrientation?.orientation[`${id}`].meetings.length
+  let meetingsLength = dataOrientation?.orientation[`${id}`]?.meetings.length
   return (
     <Container>
       <Content>
@@ -62,7 +61,7 @@ const ModalEditOrientationMeetings = () => {
           </Flex>
           <Flex>
             <InputBlock>
-              <label htmlFor='statTime'>Horário inicial</label>
+              <label htmlFor='statTime'>Local</label>
               <Input type='text' id='statTime' name='place' value={meetings[`${meetingIndex}`]?.place} onChange={(event) => meetingsHandler(event)} />
             </InputBlock>
             <InputBlock>

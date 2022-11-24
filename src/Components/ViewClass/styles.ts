@@ -10,7 +10,7 @@ export const Form = styled.form`
   background: #fff;
   gap: 1rem;
   padding: 1rem;
-  select,input {
+  select{
     width: 260px;
     height: 30px;
     border-radius: 5px;
@@ -115,5 +115,39 @@ export const User = styled.button`
   }
   a{
     color:#000;
+  }
+`
+export const Disciplina = styled.button`
+  width: 300px;
+  height: auto;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction: column;
+  gap: .5rem;
+  background: #eee;
+  border-radius: 10px;
+  padding: .5rem;
+  border: none;
+  img{
+    width: 60px;
+    height: 50px;
+    border-radius: 5px;
+  }
+  a{
+    color:#000;
+  }
+  p{
+    color: #444;
+    font-size: 1.2rem;
+  }
+  button {
+    padding: .5rem;
+    background: ${Props => Props.theme.colors.sec};
+    color: #fff;
+    border-radius: 5px;
+    :first-child{
+      background: #d00;
+    }
   }
 `

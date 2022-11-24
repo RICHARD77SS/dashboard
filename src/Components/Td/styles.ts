@@ -13,4 +13,5 @@ export const TdSt = styled.td`
     height: 40px;
     border-radius: 40px;
   }
+
 `

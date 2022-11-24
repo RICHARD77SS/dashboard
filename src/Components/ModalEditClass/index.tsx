@@ -5,7 +5,6 @@ import { Container, Content, Form } from './styles'
 import Button from '../Button';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useAxios } from '../../hooks/useAxios';
-import Flex from '../Flex';
 import InputBlock from '../InputBlock';
 import { ClaassContext } from '../../contexts/claassContext';
 
@@ -36,7 +35,7 @@ const ModalEditClass = () => {
           </InputBlock>
           <InputBlock>
             <label>Escola</label>
-            <select id='schools' value={school} onChange={schoolHandler}>
+            <select title='schools' value={school} onChange={schoolHandler}>
               <option value=""></option>
               {dataSchools?.schools.map((schools: any, index: number) => {
                 return (
@@ -47,7 +46,7 @@ const ModalEditClass = () => {
           </InputBlock>
           <InputBlock>
             <label>Horário</label>
-            <select id='hours' value={time} onChange={timeHandler}>
+            <select title='hours' value={time} onChange={timeHandler}>
               <option value="" ></option>
               <option value="Não definido" >Não definido</option>
               <option value="Manhã" >Manhã</option>
@@ -57,7 +56,7 @@ const ModalEditClass = () => {
           </InputBlock>
           <InputBlock>
             <label>Status</label>
-            <select id='status' value={status} onChange={statusHandler}>
+            <select title='status' value={status} onChange={statusHandler}>
               <option value=""></option>
               <option value="Preparando turma">Preparando turma</option>
               <option value="Em andamento" >Em andamento</option>

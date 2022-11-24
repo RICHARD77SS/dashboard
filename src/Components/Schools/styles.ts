@@ -24,3 +24,25 @@ export const InputBox = styled.div`
   align-items: center;
   flex-direction: column;
 `
+export const List = styled.div`
+  width: auto;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
+`
+
+export const Aside = styled.form`
+  width: 30%;
+  min-width: 300px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  textarea {
+    max-width:300px;
+    max-height: 300px;
+  }
+`
