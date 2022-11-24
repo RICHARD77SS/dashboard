@@ -16,6 +16,7 @@ import { Content, InputBox, Form } from './styles';
 import { ClaassContext } from '../../contexts/claassContext';
 import Flex from '../Flex';
 import { useAxios } from '../../hooks/useAxios';
+import { Link } from 'react-router-dom';
 
 const Classes = () => {
   const {
@@ -32,10 +33,10 @@ const Classes = () => {
     handleSubmit,
     handleEdit,
     handleDelete,
+
   } = React.useContext(ClaassContext)
   const { data: dataClaass } = useAxios('claass')
   const { data: dataSchools } = useAxios('schools')
-  console.log(school)
   return (
     <Container>
       <h3>Turmas</h3>
@@ -60,13 +61,12 @@ const Classes = () => {
                   return (
 
                     <Tr key={index}>
-                      <Td>{claass.name}</Td>
+                      <Td><Link to={`/class/viewclass/${index}`}><Button type='button' onClick={() => handleEdit(claass._id, claass.name, claass.school, claass.time, claass.status, claass.description, claass.participants)}>{claass.name}</Button></Link></Td>
                       <Td>{claass.time}</Td>
                       <Td>{claass.school}</Td>
                       <Td>{claass.status}</Td>
                       <Td>
                         <Flex>
-                          <Button type='button' onClick={() => handleEdit(claass._id, claass.name, claass.school, claass.time, claass.status, claass.description)}>Edit</Button>
                           <Button type='button' onClick={() => handleDelete(claass._id)}>Remove</Button>
                         </Flex>
                       </Td>
@@ -86,7 +86,7 @@ const Classes = () => {
             </InputBox>
             <InputBox>
               <label>Escola</label>
-              <select id='schools' value={school} onChange={schoolHandler}>
+              <select title='schools' value={school} onChange={schoolHandler}>
                 <option value=""></option>
                 {dataSchools?.schools.map((schools: any, index: number) => {
                   return (
@@ -97,7 +97,7 @@ const Classes = () => {
             </InputBox>
             <InputBox>
               <label>Horário</label>
-              <select id='hours' value={time} onChange={timeHandler}>
+              <select title='hours' value={time} onChange={timeHandler}>
                 <option value="" ></option>
                 <option value="Não definido" >Não definido</option>
                 <option value="Manhã" >Manhã</option>
@@ -107,7 +107,7 @@ const Classes = () => {
             </InputBox>
             <InputBox>
               <label>Status</label>
-              <select id='status' value={status} onChange={statusHandler}>
+              <select title='status' value={status} onChange={statusHandler}>
                 <option value=""></option>
                 <option value="Preparando turma">Preparando turma</option>
                 <option value="Em andamento" >Em andamento</option>
@@ -123,9 +123,8 @@ const Classes = () => {
           </BoxContent>
         </Form>
       </Content>
-    </Container>
+    </Container >
   )
 }
 
 export default Classes;
-<h3>Turmas</h3>
