@@ -1,3 +1,4 @@
+import React from 'react'
 import Box from "../Box"
 import BoxContent from "../BoxContent"
 import BoxHeader from "../BoxHeader"
@@ -12,19 +13,29 @@ import TopTableOptions from "../TopTableOptions"
 import Tr from "../Tr"
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import PageSelector from "../PageSelector"
-import EditRemove from "../EditRemove"
 import Input from "../Input"
-import { InputBox } from './styles'
+import { InputBox, Progress, ProgressContent } from './styles'
+import { useAxios } from "../../hooks/useAxios"
+import Flex from "../Flex"
+import { Link } from "react-router-dom"
+import { OrientationContext } from "../../contexts/orientationContext"
 
 const PersonalAccompaniment = () => {
+  const { data: dataOrientation } = useAxios('orientation')
+  const {
+
+    handleEdit,
+    handleDelete,
+    OpenModalCreateOrientation
+  } = React.useContext(OrientationContext)
   return (
     <Container>
       <h3>Acompanhamento Pessoal</h3>
       <Box>
         <BoxHeader title={`Resultados: 0`}>
-          
-          <Button>+ Criar Turma</Button>
-        </BoxHeader>  
+
+          <Button type='button' onClick={() => OpenModalCreateOrientation()}>+ Criar Turma</Button>
+        </BoxHeader>
         <BoxContent>
           <TopTableOptions />
           <InputBox>
@@ -55,32 +66,45 @@ const PersonalAccompaniment = () => {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>
-                  Nome
-                </Td>
-                <Td>
-                  Lideres
-                </Td>
-                <Td>
-                  Pessoas
-                </Td>
-                <Td>
-                  Progresso
-                </Td>
-                <Td>
-                  status
-                </Td>
-                <Td>
-                  <EditRemove />
-                </Td>
-              </Tr>
+              {dataOrientation?.orientation.map((orientation: any, index: number) => {
+                return (
+                  <Tr>
+                    <Td>
+                      {orientation.className}
+                    </Td>
+                    <Td>
+                      {orientation.lideres}
+                    </Td>
+                    <Td>
+                      {orientation.people}
+                    </Td>
+                    <Td>
+                      <Progress><ProgressContent></ProgressContent></Progress>
+                    </Td>
+                    <Td className={orientation.status === 'Concluido' ? 'green' : 'red'}>
+                      <pre>
+                        {orientation.status}
+                      </pre>
+                    </Td>
+                    <Td>
+                      <Flex>
+                        <Link to={`/personalaccompaniment/vieworientation/${index}`}>
+                          <Button onClick={() => handleEdit(orientation._id, orientation.className, orientation.people, orientation.status, orientation.lideres, orientation.anotations, orientation.meetings)}>Editar</Button>
+                        </Link>
+
+                        <Button onClick={() => handleDelete(orientation._id)}>Remove</Button>
+                      </Flex>
+                    </Td>
+                  </Tr>
+
+                )
+              })}
             </Tbody>
           </Table>
           <PageSelector />
         </BoxContent>
-      </Box>  
-    </Container>
+      </Box>
+    </Container >
   )
 }
 
