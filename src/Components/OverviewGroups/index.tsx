@@ -16,9 +16,8 @@ const OverviewGroups = () => {
   let label = groupCategory?.groupCategory.map((name: any) => name.name)
 
   let groupCategoryValues = label?.map((labels: any) => {
-    return dataGroups?.groups.map((groups: any) => groups.category).filter((category: any) => category === labels).length
+    return dataGroups?.groups.map((groups: any) => groups.category).flat(1).filter((category: any) => category === labels).length
   })
-
   const PieData = {
 
     labels: label,
