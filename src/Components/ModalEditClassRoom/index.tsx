@@ -10,7 +10,6 @@ import { ClassRoomContext } from '../../contexts/classRoomContext';
 import Flex from '../Flex';
 
 const ModalEditClassRoom = () => {
-  const { data: dataSchools } = useAxios('schools')
   const {
     disciplineHandler,
     participantsHandler,
@@ -18,23 +17,18 @@ const ModalEditClassRoom = () => {
     notesHandler,
     remarksHandler,
     discipline,
-    participants,
     topic,
     notes,
     remarks,
     handleSubmit,
-    handleEdit,
-    handleDelete,
-    openModal,
-    setOpenModal,
-    setParticipants,
-    id,
     CloseModal,
     date,
-    dateHandler
+    dateHandler,
+    index: idx
   } = React.useContext(ClassRoomContext)
   const { data: dataPerson } = useAxios('person')
   const { data: dataSubjects } = useAxios('subjects')
+
   return (
     <Container>
       <Content>
@@ -50,10 +44,10 @@ const ModalEditClassRoom = () => {
               <select title='text' id='discipline' value={discipline} onChange={disciplineHandler} >
                 <option value=''></option>
                 {dataSubjects?.subjects.map((subjects: any, index: number) => {
-                  return (
-                    <option value=''></option>
-                    
-                  )
+                  return idx === `${subjects.classIndex}` ?
+                    <option key={index} value={subjects.name}>{subjects.name}</option>
+
+                    : null
                 })}
               </select>
             </InputBlock>
@@ -70,10 +64,10 @@ const ModalEditClassRoom = () => {
             <label htmlFor="remarkers">Participantes</label>
             {dataPerson?.person.map((person: any, index: number) => {
               return (
-                <InputBlock>
-                  <label htmlFor={person.name}>{person.name}</label>
+                <Flex key={index}>
                   <Input type='checkbox' id={person.name} name={person.name} value={person.name} onClick={participantsHandler} />
-                </InputBlock>
+                  <label htmlFor={person.name}>{person.name}</label>
+                </Flex>
               )
             })}
           </InputBlock>
