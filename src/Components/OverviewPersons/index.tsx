@@ -220,16 +220,12 @@ const OverviewPersons = () => {
 
 
   let cat = dataCategory?.category.map((category: any, index: number) => {
-
-    return category.categoryName
+    return category.name
   })
 
   let valueCategory = cat?.map((categ: any) => {
-    return dataPerson?.person.map((person: any) => person.category).filter((category: any) => category === categ).length
+    return dataPerson?.person.map((person: any) => person.category).flat(1).filter((category: any) => category === categ).length
   })
-
-
-
 
   const PieData = {
     labels: ['Crianças', 'Adolescentes', 'Jovens', 'Adultos', 'Idosos'],
@@ -323,7 +319,7 @@ const OverviewPersons = () => {
             <p>Total de Mulheres </p>
           </Div>
         </Grid1>
-        <Box width='620px'>
+        <Box width='90%'>
           <BoxHeader title='Novos Convertidos'>
             <Datalist>
               <select title='period' placeholder='  Selecione o periodo' value={periodo} onChange={periodoHandler} >
@@ -340,12 +336,12 @@ const OverviewPersons = () => {
           </BoxContent>
         </Box>
         <Content>
-          <Box width='300px'>
+          <Box width='320px' height='400px'>
             <BoxHeader title='Cadastros recentes'>
 
               <Button><Link to='/people' >Ver Todos</Link></Button>
             </BoxHeader>
-            <BoxContent>
+            <BoxContent width='320px'>
               {dataPerson?.person.map((person: any, index: number) => {
 
                 return (
@@ -359,11 +355,11 @@ const OverviewPersons = () => {
               })}
             </BoxContent>
           </Box>
-          <Box width='300px'>
+          <Box width='320px'>
             <BoxHeader title='Aniversariantes do mês'>
             </BoxHeader>
-            <BoxContent>
-              {birthdayMonth?.map((person: any, index: number) => {
+            <BoxContent height='400px'>
+              {birthdayMonth ? birthdayMonth?.map((person: any, index: number) => {
                 if (person?.name || person?.image)
                   return (
                     <User key={index}>
@@ -375,7 +371,8 @@ const OverviewPersons = () => {
 
                   )
                 return <></>
-              })}
+              })
+                : <h2>Nenhum aniversariante esse mês</h2>}
             </BoxContent>
           </Box>
         </Content>
