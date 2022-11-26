@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from "../Button";
-import MakeRevenues from '../MakeRevenues';
 import PageSelector from "../PageSelector";
 import Table from "../Table";
 import Tbody from "../Tbody";
@@ -18,16 +17,15 @@ interface Props {
   name?: String;
 }
 const PersonDetailsFinancial = ({ name }: Props) => {
-  const { modal, handleEdit, OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
+  const { handleEdit, OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
 
   const { data } = useAxios('financial')
   return (
     <Box>
       <Top>
         <Button onClick={() => OpenRevenues()}>+ Adicionar receita</Button>
-        {modal ?
-          <MakeRevenues />
-          : null}
+
+        
         <Button onClick={() => OpenExpenses()}>+ Adicionar Despesa</Button>
       </Top>
       <TopTableOptions />

@@ -3,6 +3,7 @@ import React from 'react';
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import MakeRevenues from '../Components/MakeRevenues';
 
 export const FinancialContext = React.createContext()
 export function FinancialContextProvider({
@@ -24,6 +25,7 @@ export function FinancialContextProvider({
   const [notes, setNotes] = React.useState()
   const [file, setFile] = React.useState()
   const [revenuesExpenses, setRevenuesExpenses] = React.useState(true)
+
   const [modal, setModal] = React.useState(false)
 
 
@@ -94,6 +96,7 @@ export function FinancialContextProvider({
   function fileHandler(event) {
     setFile(event.target.value);
   }
+
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -235,5 +238,6 @@ export function FinancialContextProvider({
 
   }}>
     {children}
+    {modal && <MakeRevenues />}
   </FinancialContext.Provider>
 }

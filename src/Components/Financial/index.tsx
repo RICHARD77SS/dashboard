@@ -1,3 +1,4 @@
+import React from 'react'
 import { FiAlertOctagon } from 'react-icons/fi';
 import { GiConfirmed } from 'react-icons/gi';
 import { CgSandClock } from 'react-icons/cg';
@@ -9,14 +10,16 @@ import Input from '../Input';
 import { FaCreditCard } from 'react-icons/fa';
 import { MdContacts } from 'react-icons/md';
 import { BsGraphUp } from 'react-icons/bs';
-import { Content, Flex, MiniBox, HeaderMiniBox, ContentMiniBox, ButtonContainer, Block, MidBox, MidHeader, MidContent, Pagamentos} from './styles'
+import { Content, Flex, MiniBox, HeaderMiniBox, ContentMiniBox, ButtonContainer, Block, MidBox, MidHeader, MidContent, Pagamentos } from './styles'
 import FinancialGraphs from '../FinancialGraphs';
+import { FinancialContext } from '../../contexts/financialContext';
 
 
 
 
 
 const Financial = () => {
+  const { handleEdit, OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
   return (
     <Container>
       <h3>Financias</h3>
