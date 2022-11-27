@@ -1,3 +1,5 @@
+import React from 'react'
+import { useAxios } from '../../hooks/useAxios';
 import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
@@ -7,88 +9,138 @@ import Input from "../Input";
 
 import { Graph } from './styles';
 
-const LineData = {
-  labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-  datasets: [
-    {
-      fill: true,
-      label: 'Receitas',
-      data: [1222, 212, 313, 414, 166, 778, 919, 0, 100, 200, 400, 500],
-      borderColor: 'rgb(65, 176, 37)',
-      backgroundColor: 'rgba(32, 248, 3, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'Despesas',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(255, 15, 15)',
-      backgroundColor: 'rgba(255, 0, 0, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'A receber',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(53, 174, 235)',
-      backgroundColor: 'rgba(53, 181, 235, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'A pagar',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(235, 93, 53)',
-      backgroundColor: 'rgba(235, 99, 53, 0.5)',
-    },
-  ],
-};
 
-const LineData2 = {
-  labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-  datasets: [
-    {
-      fill: true,
-      label: 'Receitas',
-      data: [1222, 212, 313, 414, 166, 778, 919, 0, 100, 200, 400, 500],
-      borderColor: 'rgb(65, 176, 37)',
-      backgroundColor: 'rgba(32, 248, 3, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'Despesas',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(255, 15, 15)',
-      backgroundColor: 'rgba(255, 0, 0, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'A receber',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(53, 174, 235)',
-      backgroundColor: 'rgba(53, 181, 235, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'A pagar',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(235, 93, 53)',
-      backgroundColor: 'rgba(235, 99, 53, 0.5)',
-    },
-  ],
-};
 
 const FinancialGraphs = () => {
+  const { data: dataFinancial } = useAxios('financial')
+
+  let dateNow = new Date()
+  var day = dateNow.getDate()
+  var month = dateNow.getMonth() + 1
+  var year = dateNow.getFullYear()
+  const [financialMonth, setFinancialMonth] = React.useState('1')
+  const [financialYear, setFinancialYear] = React.useState(year)
+
+  let date = new Date(`${financialYear}-${financialMonth}-01`)
+  function getAllDays(years: any, months: any) {
+    const date = new Date(years, months, 1);
+    const dates = []
+
+    while (date.getMonth() === months) {
+      dates.push(new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
+    return dates
+  }
+
+
+
+  const monthDays: number[] = getAllDays(date.getFullYear(), date.getMonth()).map((date: any) => new Date(date).getDate())
+
+  let days = dataFinancial?.financial.map((financial: any) => {
+    return { "data": new Date(financial.date.split('T')[0]).getDate() + 1, "valor": financial.value }
+  })
+
+  let daysValues = monthDays?.map((dayy: any) => {
+    let vals = days?.map((dateDay: any) => dateDay.data === dayy ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+
+
+  function monthValueHandler(event: any) {
+    setFinancialMonth(event.target.value)
+  }
+  function yearValueHandler(event: any) {
+    setFinancialYear(event.target.value)
+  }
+
+  console.log(daysValues)
+
+  const LineData = {
+
+    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    datasets: [
+      {
+        fill: true,
+        label: 'Receitas',
+        data: [1222, 212, 313, 414, 166, 778, 919, 0, 100, 200, 400, 500],
+        borderColor: 'rgb(65, 176, 37)',
+        backgroundColor: 'rgba(32, 248, 3, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'Despesas',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        borderColor: 'rgb(255, 15, 15)',
+        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'A receber',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        borderColor: 'rgb(53, 174, 235)',
+        backgroundColor: 'rgba(53, 181, 235, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'A pagar',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        borderColor: 'rgb(235, 93, 53)',
+        backgroundColor: 'rgba(235, 99, 53, 0.5)',
+      },
+    ],
+  };
+
+  const LineData2 = {
+    labels: monthDays,
+    datasets: [
+      {
+        fill: true,
+        label: 'Receitas',
+        data: daysValues,
+        borderColor: 'rgb(65, 176, 37)',
+        backgroundColor: 'rgba(32, 248, 3, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'Despesas',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        borderColor: 'rgb(255, 15, 15)',
+        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'A receber',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        borderColor: 'rgb(53, 174, 235)',
+        backgroundColor: 'rgba(53, 181, 235, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'A pagar',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        borderColor: 'rgb(235, 93, 53)',
+        backgroundColor: 'rgba(235, 99, 53, 0.5)',
+      },
+    ],
+  };
   return (
     <Content>
       <Box>
         <BoxHeader>
           <h3>Resumo anual</h3>
           <Input type='text' list='year' placeholder='  Periodo' />
-          <datalist id='year'>
-            <option value='2022' />
-            <option value='2021' />
-            <option value='2020' />
-            <option value='2019' />
-            <option value='2018' />
-          </datalist>
+          <select title='year' onChange={(event) => yearValueHandler(event)}>
+            <option value={year} >{year}</option>
+            <option value={year - 1} >{year - 1}</option>
+            <option value={year - 2} >{year - 2}</option>
+            <option value={year - 3} >{year - 3}</option>
+            <option value={year - 4} >{year - 4}</option>
+            <option value={year - 5} >{year - 5}</option>
+          </select>
         </BoxHeader>
         <BoxContent>
           <Graph>
@@ -99,18 +151,20 @@ const FinancialGraphs = () => {
       <Box>
         <BoxHeader>
           <h3>Resumo mensal</h3>
-          <Input type='text' list='month' placeholder='  Periodo' />
-          <datalist id='month'>
-            <option value='setembro - 2022' />
-            <option value='agosto - 2022' />
-            <option value='julho - 2022' />
-            <option value='junho - 2022' />
-            <option value='maio - 2022' />
-            <option value='abril - 2022' />
-            <option value='março - 2022' />
-            <option value='fevereiro - 2022' />
-            <option value='janeiro - 2022' />
-          </datalist>
+          <select title='month' onChange={(event) => monthValueHandler(event)}>
+            <option value='1' >Janeiro</option>
+            <option value='2' >Fevereiro</option>
+            <option value='3' >Março</option>
+            <option value='4' >Abril</option>
+            <option value='5' >Maio</option>
+            <option value='6' >Junho</option>
+            <option value='7' >Julho</option>
+            <option value='8' >Agosto</option>
+            <option value='9' >Setembro</option>
+            <option value='10' >Outubro</option>
+            <option value='11' >Novembro</option>
+            <option value='12' >Dezembro</option>
+          </select>
         </BoxHeader>
         <BoxContent>
           <Graph>
