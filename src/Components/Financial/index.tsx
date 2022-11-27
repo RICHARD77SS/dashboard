@@ -13,13 +13,16 @@ import { BsGraphUp } from 'react-icons/bs';
 import { Content, Flex, MiniBox, HeaderMiniBox, ContentMiniBox, ButtonContainer, Block, MidBox, MidHeader, MidContent, Pagamentos } from './styles'
 import FinancialGraphs from '../FinancialGraphs';
 import { FinancialContext } from '../../contexts/financialContext';
+import { useAxios } from '../../hooks/useAxios';
 
 
 
 
 
 const Financial = () => {
-  const { handleEdit, OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
+  const { OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
+  
+  console.log()
   return (
     <Container>
       <h3>Financias</h3>
@@ -144,8 +147,8 @@ const Financial = () => {
           <MidBox>
             <MidHeader>
               <h3>Saldo atual <p>(Todas as contas)</p></h3>
-              <Button>+ Receitas</Button>
-              <Button>+ Dispesa</Button>
+              <Button type='button' onClick={() => OpenRevenues()}>+ Receitas</Button>
+              <Button type='button' onClick={() => OpenExpenses()}>+ Despesas</Button>
             </MidHeader>
             <MidContent>
               <h3>R$ 0,00</h3>
