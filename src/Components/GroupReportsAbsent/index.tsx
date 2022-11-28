@@ -21,7 +21,6 @@ const GroupReportsAbsent = () => {
 
   let pessoameeting = dataMeetings?.meetings.map((meeting: any) => meeting.participants).flat(1)
   let personPresents = pessoameeting.filter((elem: any, index: any) => pessoameeting.indexOf(elem) === index)
-  console.log()
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Frequências Pessoas ausentes' />

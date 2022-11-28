@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Graph = styled.div`
-  width: 100%;
+  width: 500px;
   max-width: 600px;
   @media (max-width: 1320px) {
     max-width: 500px;

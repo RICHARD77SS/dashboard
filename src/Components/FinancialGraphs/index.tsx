@@ -34,6 +34,8 @@ const FinancialGraphs = () => {
   }
 
 
+  let months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
 
   const monthDays: number[] = getAllDays(date.getFullYear(), date.getMonth()).map((date: any) => new Date(date).getDate())
 
@@ -48,8 +50,9 @@ const FinancialGraphs = () => {
       return soma + i;
     });
   })
-  let monthValues = monthDays?.map((dayy: any) => {
-    let vals = days?.map((dateDay: any) => dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+  let monthValues = months?.map((monthss: any) => {
+    let vals = days?.map((dateDay: any) => monthss && dateDay.data.getFullYear() === 2022 ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
 
     return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
       return soma + i;
@@ -64,7 +67,7 @@ const FinancialGraphs = () => {
     setFinancialYear(event.target.value)
   }
 
-  console.log(daysValues)
+  console.log(monthValues)
   const LineData = {
 
     labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
