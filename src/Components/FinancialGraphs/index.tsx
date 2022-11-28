@@ -38,11 +38,18 @@ const FinancialGraphs = () => {
   const monthDays: number[] = getAllDays(date.getFullYear(), date.getMonth()).map((date: any) => new Date(date).getDate())
 
   let days = dataFinancial?.financial.map((financial: any) => {
-    return { "data": new Date(financial.date.split('T')[0]).getDate() + 1, "valor": financial.value }
+    return { "data": new Date(financial.date.split('T')[0]), "valor": financial.value }
   })
 
   let daysValues = monthDays?.map((dayy: any) => {
-    let vals = days?.map((dateDay: any) => dateDay.data === dayy ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+    let vals = days?.map((dateDay: any) => dateDay.data.getDate() + 1 === dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+  let monthValues = monthDays?.map((dayy: any) => {
+    let vals = days?.map((dateDay: any) => dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
 
     return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
       return soma + i;
@@ -58,7 +65,6 @@ const FinancialGraphs = () => {
   }
 
   console.log(daysValues)
-
   const LineData = {
 
     labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
