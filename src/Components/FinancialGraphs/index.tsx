@@ -19,7 +19,7 @@ const FinancialGraphs = () => {
   var month = dateNow.getMonth() + 1
   var year = dateNow.getFullYear()
   const [financialMonth, setFinancialMonth] = React.useState('1')
-  const [financialYear, setFinancialYear] = React.useState(year)
+  const [financialYear, setFinancialYear] = React.useState(year.toString())
 
   let date = new Date(`${financialYear}-${financialMonth}-01`)
   function getAllDays(years: any, months: any) {
@@ -40,19 +40,65 @@ const FinancialGraphs = () => {
   const monthDays: number[] = getAllDays(date.getFullYear(), date.getMonth()).map((date: any) => new Date(date).getDate())
 
   let days = dataFinancial?.financial.map((financial: any) => {
-    return { "data": new Date(financial.date.split('T')[0]), "valor": financial.value }
+    return { "data": new Date(financial.date.split('T')[0]), "valor": financial.value, "despesas": financial.revenuesExpenses, "status": financial.paidOut }
   })
 
-  let daysValues = monthDays?.map((dayy: any) => {
-    let vals = days?.map((dateDay: any) => dateDay.data.getDate() + 1 === dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+  let daysValuesRevenues = monthDays?.map((dayy: any) => {
+    let vals = days?.map((dateDay: any) => dateDay.data.getDate() + 1 === dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) && dateDay.despesas === true && dateDay.status === 'Pago' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+  let daysValuesExpenses = monthDays?.map((dayy: any) => {
+    let vals = days?.map((dateDay: any) => dateDay.data.getDate() + 1 === dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) && dateDay.despesas === false && dateDay.status === 'Pago' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+  let daysValuesRevenuesPending = monthDays?.map((dayy: any) => {
+    let vals = days?.map((dateDay: any) => dateDay.data.getDate() + 1 === dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) && dateDay.despesas === true && dateDay.status === 'Pendente' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+  let daysValuesExpensesPending = monthDays?.map((dayy: any) => {
+    let vals = days?.map((dateDay: any) => dateDay.data.getDate() + 1 === dayy && dateDay.data.getMonth() + 1 === parseInt(financialMonth) && dateDay.despesas === false && dateDay.status === 'Pendente' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
 
     return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
       return soma + i;
     });
   })
 
-  let monthValues = months?.map((monthss: any) => {
-    let vals = days?.map((dateDay: any) => monthss && dateDay.data.getFullYear() === 2022 ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+  let monthValuesRevenues = months?.map((monthss: any) => {
+    let vals = days?.map((dateDay: any) => monthss === dateDay.data.getMonth() + 1 && dateDay.data.getFullYear() === parseInt(financialYear) && dateDay.despesas === true && dateDay.status === 'Pago' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+  let monthValuesExpenses = months?.map((monthss: any) => {
+    let vals = days?.map((dateDay: any) => monthss === dateDay.data.getMonth() + 1 && dateDay.data.getFullYear() === parseInt(financialYear) && dateDay.despesas === false && dateDay.status === 'Pago' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+
+
+  let monthValuesRevenuesPending = months?.map((monthss: any) => {
+    let vals = days?.map((dateDay: any) => monthss === dateDay.data.getMonth() + 1 && dateDay.data.getFullYear() === parseInt(financialYear) && dateDay.despesas === true && dateDay.status === 'Pendente' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
+
+    return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
+      return soma + i;
+    });
+  })
+  let monthValuesExpensesPending = months?.map((monthss: any) => {
+    let vals = days?.map((dateDay: any) => monthss === dateDay.data.getMonth() + 1 && dateDay.data.getFullYear() === parseInt(financialYear) && dateDay.despesas === false && dateDay.status === 'Pendente' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
 
     return vals?.length === 0 ? 0 : vals?.reduce(function (soma: any, i: any) {
       return soma + i;
@@ -67,7 +113,7 @@ const FinancialGraphs = () => {
     setFinancialYear(event.target.value)
   }
 
-  console.log(monthValues)
+  console.log(monthValuesRevenues)
   const LineData = {
 
     labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
@@ -75,28 +121,28 @@ const FinancialGraphs = () => {
       {
         fill: true,
         label: 'Receitas',
-        data: [1222, 212, 313, 414, 166, 778, 919, 0, 100, 200, 400, 500],
+        data: monthValuesRevenues,
         borderColor: 'rgb(65, 176, 37)',
         backgroundColor: 'rgba(32, 248, 3, 0.5)',
       },
       {
         fill: true,
         label: 'Despesas',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data: monthValuesExpenses,
         borderColor: 'rgb(255, 15, 15)',
         backgroundColor: 'rgba(255, 0, 0, 0.5)',
       },
       {
         fill: true,
         label: 'A receber',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data: monthValuesRevenuesPending,
         borderColor: 'rgb(53, 174, 235)',
         backgroundColor: 'rgba(53, 181, 235, 0.5)',
       },
       {
         fill: true,
         label: 'A pagar',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data: monthValuesExpensesPending,
         borderColor: 'rgb(235, 93, 53)',
         backgroundColor: 'rgba(235, 99, 53, 0.5)',
       },
@@ -109,28 +155,28 @@ const FinancialGraphs = () => {
       {
         fill: true,
         label: 'Receitas',
-        data: daysValues,
+        data: daysValuesRevenues,
         borderColor: 'rgb(65, 176, 37)',
         backgroundColor: 'rgba(32, 248, 3, 0.5)',
       },
       {
         fill: true,
         label: 'Despesas',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data: daysValuesExpenses,
         borderColor: 'rgb(255, 15, 15)',
         backgroundColor: 'rgba(255, 0, 0, 0.5)',
       },
       {
         fill: true,
         label: 'A receber',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data: daysValuesRevenuesPending,
         borderColor: 'rgb(53, 174, 235)',
         backgroundColor: 'rgba(53, 181, 235, 0.5)',
       },
       {
         fill: true,
         label: 'A pagar',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data: daysValuesExpensesPending,
         borderColor: 'rgb(235, 93, 53)',
         backgroundColor: 'rgba(235, 99, 53, 0.5)',
       },
