@@ -25,6 +25,8 @@ export function FinancialContextProvider({
   const [notes, setNotes] = React.useState()
   const [file, setFile] = React.useState()
   const [revenuesExpenses, setRevenuesExpenses] = React.useState(true)
+  const [frequenci, setFrequenci] = React.useState()
+  const [repetition, setRepetition] = React.useState()
 
   const [modal, setModal] = React.useState(false)
 
@@ -96,6 +98,12 @@ export function FinancialContextProvider({
   function fileHandler(event) {
     setFile(event.target.value);
   }
+  function frequenciHandler(event) {
+    setFrequenci(event.target.value);
+  }
+  function repetitionHandler(event) {
+    setRepetition(event.target.value);
+  }
 
 
   function handleSubmit(event) {
@@ -114,7 +122,9 @@ export function FinancialContextProvider({
       competence,
       notes,
       file,
-      revenuesExpenses
+      revenuesExpenses,
+      frequenci,
+      repetition
     }
     if (id) {
       api.put(`financial/${id}`, financial)
@@ -138,7 +148,9 @@ export function FinancialContextProvider({
               competence,
               notes,
               file,
-              revenuesExpenses
+              revenuesExpenses,
+              frequenci,
+              repetition
             }
           }
           return financial
@@ -180,7 +192,9 @@ export function FinancialContextProvider({
     fdocumentNumber,
     fcompetence,
     fnotes,
-    ffile,) {
+    ffile,
+    ffrequenci,
+    frepetition) {
     setModal(true)
     setId(fid)
     setDate(fdate)
@@ -196,6 +210,8 @@ export function FinancialContextProvider({
     setCompetence(fcompetence)
     setNotes(fnotes)
     setFile(ffile)
+    setFrequenci(ffrequenci)
+    setRepetition(frepetition)
   }
   return <FinancialContext.Provider value={{
     date,
@@ -210,6 +226,10 @@ export function FinancialContextProvider({
     competence,
     notes,
     file,
+    frequenci,
+    repetition,
+    frequenciHandler,
+    repetitionHandler,
     setPaidOut,
     dateHandler,
     descriptionHandler,
