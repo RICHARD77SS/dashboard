@@ -58,7 +58,11 @@ const MakeRevenues = () => {
     setModal,
     revenuesExpenses,
     handleDelete,
-    id
+    id,
+    frequenci,
+    repetition,
+    frequenciHandler,
+    repetitionHandler
   } = React.useContext(FinancialContext)
   return (
     <Container>
@@ -73,7 +77,7 @@ const MakeRevenues = () => {
           <Flex>
             <InputBlock>
               <label htmlFor="data">Data</label>
-              <Input type='date' value={date} onChange={dateHandler} />
+              <Input type='date' value={date.split('T')[0]} onChange={dateHandler} />
             </InputBlock>
             <InputBlock>
               <label htmlFor="description">Descrição</label>
@@ -118,7 +122,7 @@ const MakeRevenues = () => {
                   index: number) => {
                   return (
 
-                    <option key={index} value={category.categoryName} >{category.categoryName}</option>
+                    <option key={index} value={category.name} >{category.name}</option>
                   )
                 })}
               </select>
@@ -145,6 +149,49 @@ const MakeRevenues = () => {
                     <option value='Unico' >Único</option>
                     <option value='Parcela' >Parcela</option>
                   </select>
+                  {typeOfPayment === 'Parcela' ?
+                    <Flex>
+                      <InputBlock>
+                        <label htmlFor="recibo">Frequência</label>
+                        <select title='recibo' value={frequenci} onChange={frequenciHandler}>
+                          <option value='Semanal' >Semanal</option>
+                          <option value='Mensal' >Mensal</option>
+                          <option value='Trimestral' >Trimestral</option>
+                          <option value='Semestral' >Semestral</option>
+                          <option value='Anual' >Anual</option>
+                        </select>
+                      </InputBlock>
+                      <InputBlock>
+                        <label htmlFor="recibo">Repetições</label>
+                        <select title='recibo' value={repetition} onChange={repetitionHandler}>
+                          <option value='1x' >1x</option>
+                          <option value='2x' >2x</option>
+                          <option value='3x' >3x</option>
+                          <option value='4x' >4x</option>
+                          <option value='5x' >5x</option>
+                          <option value='6x' >6x</option>
+                          <option value='7x' >7x</option>
+                          <option value='8x' >8x</option>
+                          <option value='9x' >9x</option>
+                          <option value='10x' >10x</option>
+                          <option value='11x' >11x</option>
+                          <option value='12x' >12x</option>
+                          <option value='13x' >13x</option>
+                          <option value='14x' >14x</option>
+                          <option value='15x' >15x</option>
+                          <option value='16x' >16x</option>
+                          <option value='17x' >17x</option>
+                          <option value='18x' >18x</option>
+                          <option value='19x' >19x</option>
+                          <option value='20x' >20x</option>
+                          <option value='21x' >21x</option>
+                          <option value='22x' >22x</option>
+                          <option value='23x' >23x</option>
+                          <option value='24x' >24x</option>
+                        </select>
+                      </InputBlock>
+                    </Flex>
+                    : null}
                 </InputBlock>
                 <InputBlock>
                   <label htmlFor="description">Doc nº</label>
@@ -154,7 +201,7 @@ const MakeRevenues = () => {
               <Flex>
                 <InputBlock>
                   <label htmlFor="competence">Competencia</label>
-                  <Input type='date' value={competence} onChange={competenceHandler} />
+                  <Input type='date' value={competence.split('T')[0]} onChange={competenceHandler} />
                 </InputBlock>
                 <InputBlock>
                   <label htmlFor="file">Anexar Arquivo</label>
