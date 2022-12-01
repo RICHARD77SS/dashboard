@@ -16,9 +16,14 @@ import Td from '../Td';
 import { FaPrint } from 'react-icons/fa';
 import { AiFillCopy } from 'react-icons/ai';
 import PageSelector from '../PageSelector';
-import { Content, Flex, Box,Graph,Aside, AsideHeader,AsideContent, Flex2, Block } from './styles';
+import { Content, Flex, Box, Graph, Aside, AsideHeader, AsideContent, Flex2, Block } from './styles';
 import ButtonContainer from '../ButtonContainer';
 import GraphLineArea from '../GraphLineArea';
+import TableContainer from '../TableContainer';
+import { useAxios } from '../../hooks/useAxios';
+import { formatter } from '../../utils/formatMoneyBr';
+import React from 'react';
+import { FinancialContext } from '../../contexts/financialContext';
 
 
 const LineData = {
@@ -79,13 +84,16 @@ const LineData = {
     {
       fill: true,
       label: 'A pagar',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       borderColor: 'rgb(235, 93, 53)',
       backgroundColor: 'rgba(235, 99, 53, 0.5)',
     },
   ],
 };
 const FinancialTransactions = () => {
+  const { handleEdit, handleDelete, OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
+  const { data: dataFinancial } = useAxios('financial')
+
   return (
     <Container>
       <h3>Registros de transações</h3>
@@ -125,49 +133,71 @@ const FinancialTransactions = () => {
         <Block>
           <BoxHeader title={`Resultados: 1 transações`}>
             <Button className='button1'>Transferência</Button>
-            <Button className='button2'>Adicionar receita</Button>
-            <Button className='button3'>Adicionar despesa</Button>
+            <Button className='button2' type='button' onClick={() => OpenRevenues()} >Adicionar receita</Button>
+            <Button className='button3' type='button' onClick={() => OpenExpenses()}>Adicionar despesa</Button>
           </BoxHeader>
           <BoxContent>
             <TopTableOptions>
               <ButtonContainer>
                 <label htmlFor="search">Pesquisar</label>
-                <Input type='search' placeholder='buscar'/>
+                <Input type='search' placeholder='buscar' />
               </ButtonContainer>
             </TopTableOptions>
-            <Table>
-              <Thead>
-                <Tr>
-                  <Th><Input type='checkbox' /></Th>
-                  <Th>Data<p><BsArrowUp /><BsArrowDown /></p></Th>
-                  <Th>Deacrição<p><BsArrowUp /><BsArrowDown /></p></Th>
-                  <Th>Total<p><BsArrowUp /><BsArrowDown /></p></Th>
-                  <Th>Contato<p><BsArrowUp /><BsArrowDown /></p></Th>
-                  <Th>Categoria<p><BsArrowUp /><BsArrowDown /></p></Th>
-                  <Th>Conta<p><BsArrowUp /><BsArrowDown /></p></Th>
-                  <Th>Ações<p><BsArrowUp /><BsArrowDown /></p></Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td><Input type='checkbox' /></Td>
-                  <Td>20/03/2010</Td>
-                  <Td>Description 1</Td>
-                  <Td>R$ 1.000,00</Td>
-                  <Td>Richard silva santos </Td>
-                  <Td>Categorie</Td>
-                  <Td>Count</Td>
-                  <Td>
-                    <ButtonContainer>
-                      <Button><FaPrint /></Button>
-                      <Button><BsFillPencilFill /></Button>
-                      <Button><AiFillCopy /></Button>
-                      <Button><BsFillTrashFill /></Button>
-                    </ButtonContainer>
-                  </Td>
-                </Tr>
-              </Tbody>
-            </Table>
+            <TableContainer>
+
+              <Table>
+                <Thead>
+                  <Tr>
+                    <Th><Input type='checkbox' /></Th>
+                    <Th>Data<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Deacrição<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Total<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Contato<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Categoria<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Conta<p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th>Ações<p><BsArrowUp /><BsArrowDown /></p></Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {dataFinancial?.financial.map((financial: any, index: number) => {
+                    return (
+                      <Tr key={index}>
+                        <Td><Input type='checkbox' /></Td>
+                        <Td>{financial.date.split('T')[0]}</Td>
+                        <Td>{financial.description}</Td>
+                        <Td>{formatter.format(financial.value)}</Td>
+                        <Td>{financial.receivedFrom}</Td>
+                        <Td>{financial.category}</Td>
+                        <Td>{financial.account}</Td>
+                        <Td>
+                          <ButtonContainer>
+                            <Button><FaPrint /></Button>
+                            <Button type='button' onClick={() => handleEdit(financial._id,
+                              financial.date,
+                              financial.description,
+                              financial.value,
+                              financial.paidOut,
+                              financial.receivedFrom,
+                              financial.category,
+                              financial.account,
+                              financial.costCenter,
+                              financial.typeOfPayment,
+                              financial.documentNumber,
+                              financial.competence,
+                              financial.notes,
+                              financial.file,
+                              financial.frequenci,
+                              financial.repetition)}><BsFillPencilFill /></Button>
+                            <Button><AiFillCopy /></Button>
+                            <Button type='button' onClick={() => handleDelete(financial._id)}><BsFillTrashFill /></Button>
+                          </ButtonContainer>
+                        </Td>
+                      </Tr>
+                    )
+                  })}
+                </Tbody>
+              </Table>
+            </TableContainer>
             <PageSelector />
           </BoxContent>
         </Block>
