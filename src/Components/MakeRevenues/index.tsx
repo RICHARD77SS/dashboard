@@ -62,22 +62,28 @@ const MakeRevenues = () => {
     frequenci,
     repetition,
     frequenciHandler,
-    repetitionHandler
+    repetitionHandler,
+    revenuesExpensesHandler
   } = React.useContext(FinancialContext)
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
         <BoxHeader title={revenuesExpenses ? 'Criar Receita' : 'Criar Despesa'}>
+          <select title='ops' onChange={revenuesExpensesHandler}>
+            <option value='true'>Receita</option>
+            <option value='false'>Despesa</option>
+          </select>
           <Button type='button' onClick={() => setModal(false)}><AiOutlineCloseCircle size={30} /></Button>
           {id ?
             <Button onClick={() => handleDelete(id)}>Apagar</Button>
             : null}
+
         </BoxHeader>
         <BoxContent>
           <Flex>
             <InputBlock>
               <label htmlFor="data">Data</label>
-              <Input type='date' value={date.split('T')[0]} onChange={dateHandler} />
+              <Input type='date' value={date?.split('T')[0]} onChange={dateHandler} />
             </InputBlock>
             <InputBlock>
               <label htmlFor="description">Descrição</label>
@@ -87,19 +93,21 @@ const MakeRevenues = () => {
               <label htmlFor="value">Valor</label>
               <Input type='number' placeholder='0.00' min='0' value={value} onChange={valueHandler} />
             </InputBlock>
-            <InputBlock>
-              <label htmlFor="pay">Pago?</label>
-              {paid ?
+            {paid ?
+              <InputBlock>
+                <label htmlFor="pay">Pendente</label>
                 <Button type='button' onClick={() => paidToggle()}>
                   <AiOutlineExclamationCircle size={30} color='#f00' />
                 </Button>
-
-                :
+              </InputBlock>
+              :
+              <InputBlock>
+                <label htmlFor="pay">Pago</label>
                 <Button type='button' onClick={() => paidToggle()}>
                   <GiConfirmed size={30} color='#0f0' />
                 </Button>
-              }
-            </InputBlock>
+              </InputBlock>
+            }
           </Flex>
           <Flex>
             <InputBlock>
@@ -201,7 +209,7 @@ const MakeRevenues = () => {
               <Flex>
                 <InputBlock>
                   <label htmlFor="competence">Competencia</label>
-                  <Input type='date' value={competence.split('T')[0]} onChange={competenceHandler} />
+                  <Input type='date' value={competence?.split('T')[0]} onChange={competenceHandler} />
                 </InputBlock>
                 <InputBlock>
                   <label htmlFor="file">Anexar Arquivo</label>
