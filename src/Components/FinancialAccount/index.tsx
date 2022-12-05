@@ -1,4 +1,4 @@
-import Aside from "../Aside";
+
 import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
@@ -14,10 +14,23 @@ import Td from "../Td";
 import Th from "../Th";
 import Thead from "../Thead";
 import Tr from "../Tr";
+import React from 'react'
 
-import { AsideContent } from './styles';
+import { AsideContent, Aside } from './styles';
+import { AccountContext } from "../../contexts/accountContext";
+import { useAxios } from "../../hooks/useAxios";
+import Flex from "../Flex";
 
 const FinancialAccount = () => {
+  const {
+    name,
+    description,
+    nameHandler,
+    descriptionHandler,
+    handleSubmit,
+    handleEdit,
+    handleDelete } = React.useContext(AccountContext)
+  const { data } = useAxios('account')
   return (
     <Container>
       <h3>Contas</h3>
@@ -36,28 +49,38 @@ const FinancialAccount = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  <Tr>
-                    <Td>Name categorie</Td>
-                    <Td>Descrição</Td>
-                    <Td><EditRemove /></Td>
-                  </Tr>
+                  {data?.account.map((account: any, index: number) => {
+                    return (
+
+                      <Tr key={index}>
+                        <Td>{account.name}</Td>
+                        <Td>{account.description}</Td>
+                        <Td>
+                          <Flex>
+                            <Button type='button' onClick={() => handleEdit(account._id, account.name, account.description)}>Editar</Button>
+                            <Button type='button' onClick={() => handleDelete(account._id)}>Deletar</Button>
+                          </Flex>
+                        </Td>
+                      </Tr>
+                    )
+                  })}
                 </Tbody>
               </Table>
             </Content>
           </BoxContent>
         </Box>
-        <Aside>
-          <BoxHeader title="+ Criar conta"/>
+        <Aside onSubmit={handleSubmit}>
+          <BoxHeader title="+ Criar conta" />
           <AsideContent>
             <InputBlock>
               <label htmlFor="name">Nome da conta</label>
-              <Input type='text' />
+              <Input type='text' value={name} onChange={nameHandler} />
             </InputBlock>
             <InputBlock>
               <label htmlFor="description">Descrição</label>
-              <textarea title='area' name="" id="" ></textarea>
+              <textarea title='area' name="" id="" value={description} onChange={descriptionHandler}></textarea>
             </InputBlock>
-            <Button>Criar</Button>
+            <Button type='submit'>Criar</Button>
           </AsideContent>
         </Aside>
       </Content>
