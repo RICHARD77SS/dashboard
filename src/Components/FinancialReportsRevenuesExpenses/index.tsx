@@ -1,3 +1,4 @@
+import { useAxios } from "../../hooks/useAxios";
 import Container from "../Container";
 import Flex from "../Flex";
 import Input from "../Input";
@@ -13,12 +14,49 @@ import Thead from "../Thead";
 import TopTableOptions from "../TopTableOptions";
 import Tr from "../Tr";
 import { Hr, ResumeBox, ResumeFlex, ResumeBlock, ResumeContent } from "./styles";
+import React from 'react'
+import { formatter } from "../../utils/formatMoneyBr";
 
 const FinancialReportsRevenuesExpenses = () => {
+  const { data: dataFinancial } = useAxios('financial')
+  let dateNow = new Date()
+  var day = dateNow.getDate()
+  var month = dateNow.getMonth() + 1
+  var year = dateNow.getFullYear()
+  const [financialMonth, setFinancialMonth] = React.useState(month.toString())
+  const [financialYear, setFinancialYear] = React.useState(year.toString())
+  function monthValueHandler(event: any) {
+    setFinancialMonth(event.target.value)
+  }
+  function yearValueHandler(event: any) {
+    setFinancialYear(event.target.value)
+  }
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Fluxo de caixa - Receitas / Despesas' />
       <Hr />
+      <select title='year' onChange={(event) => yearValueHandler(event)}>
+        <option value={year} >{year}</option>
+        <option value={year - 1} >{year - 1}</option>
+        <option value={year - 2} >{year - 2}</option>
+        <option value={year - 3} >{year - 3}</option>
+        <option value={year - 4} >{year - 4}</option>
+        <option value={year - 5} >{year - 5}</option>
+      </select>
+      <select title='month' value={financialMonth} onChange={(event) => monthValueHandler(event)}>
+        <option value='1' >Janeiro</option>
+        <option value='2' >Fevereiro</option>
+        <option value='3' >Março</option>
+        <option value='4' >Abril</option>
+        <option value='5' >Maio</option>
+        <option value='6' >Junho</option>
+        <option value='7' >Julho</option>
+        <option value='8' >Agosto</option>
+        <option value='9' >Setembro</option>
+        <option value='10' >Outubro</option>
+        <option value='11' >Novembro</option>
+        <option value='12' >Dezembro</option>
+      </select>
       <h3>Receitas</h3>
       <TopTableOptions>
       </TopTableOptions>
@@ -37,12 +75,18 @@ const FinancialReportsRevenuesExpenses = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>21/02/2020</Td>
-              <Td>descriptions</Td>
-              <Td>R$ 1.000,00</Td>
-              <Td>categories</Td>
-            </Tr>
+            {dataFinancial?.financial.map((financial: any, index: number) => {
+              let monthTable = new Date(financial.date).getMonth() + 1
+              let yearTable = new Date(financial.date).getFullYear()
+              return monthTable.toString() === financialMonth && yearTable.toString() === financialYear && financial.revenuesExpenses === true ?
+                <Tr key={index}>
+                  <Td>{financial.date.split('T')[0]}</Td>
+                  <Td>{financial.description}</Td>
+                  <Td>{formatter.format(financial.value)}</Td>
+                  <Td>{financial.category}</Td>
+                </Tr>
+                : null
+            })}
           </Tbody>
         </Table>
       </TableContainer>
@@ -66,12 +110,18 @@ const FinancialReportsRevenuesExpenses = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>21/02/2020</Td>
-              <Td>descriptions</Td>
-              <Td>R$ 1.000,00</Td>
-              <Td>categories</Td>
-            </Tr>
+            {dataFinancial?.financial.map((financial: any, index: number) => {
+              let monthTable = new Date(financial.date).getMonth() + 1
+              let yearTable = new Date(financial.date).getFullYear()
+              return monthTable.toString() === financialMonth && yearTable.toString() === financialYear && financial.revenuesExpenses === false ?
+                <Tr key={index}>
+                  <Td>{financial.date.split('T')[0]}</Td>
+                  <Td>{financial.description}</Td>
+                  <Td>{formatter.format(financial.value)}</Td>
+                  <Td>{financial.category}</Td>
+                </Tr>
+                : null
+            })}
           </Tbody>
         </Table>
       </TableContainer>
