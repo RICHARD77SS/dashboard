@@ -19,6 +19,8 @@ import { formatter } from "../../utils/formatMoneyBr";
 
 const FinancialReportsRevenuesExpenses = () => {
   const { data: dataFinancial } = useAxios('financial')
+  const { data: dataTransfer } = useAxios('transfer')
+
   let dateNow = new Date()
   var day = dateNow.getDate()
   var month = dateNow.getMonth() + 1
@@ -31,6 +33,75 @@ const FinancialReportsRevenuesExpenses = () => {
   function yearValueHandler(event: any) {
     setFinancialYear(event.target.value)
   }
+
+
+
+  let revenues = dataFinancial?.financial.map((financial: any) => {
+    let monthTable = new Date(financial.date).getMonth() + 1
+    let yearTable = new Date(financial.date).getFullYear()
+    return monthTable.toString() === financialMonth && yearTable.toString() === financialYear && financial.revenuesExpenses === true && financial.paidOut === 'Pago' ?
+      financial.value
+      : null
+  }).reduce((acc: number, item: number) => acc + item)
+
+  let expenses = dataFinancial?.financial.map((financial: any) => {
+    let monthTable = new Date(financial.date).getMonth() + 1
+    let yearTable = new Date(financial.date).getFullYear()
+    return monthTable.toString() === financialMonth && yearTable.toString() === financialYear && financial.revenuesExpenses === false && financial.paidOut === 'Pago' ?
+      financial.value
+      : null
+  }).reduce((acc: number, item: number) => acc + item)
+
+  let beforeRevenues = dataFinancial?.financial.map((financial: any) => {
+    let monthTable = new Date(financial.date).getMonth() + 1
+    let yearTable = new Date(financial.date).getFullYear()
+
+    return monthTable < parseInt(financialMonth) && yearTable <= parseInt(financialYear) && financial.revenuesExpenses === true && financial.paidOut === 'Pago' ?
+      financial.value
+      : 0
+  }).reduce((acc: number, item: number) => acc + item)
+
+  let beforeExpenses = dataFinancial?.financial.map((financial: any) => {
+    let monthTable = new Date(financial.date).getMonth() + 1
+    let yearTable = new Date(financial.date).getFullYear()
+    return monthTable < parseInt(financialMonth) && yearTable <= parseInt(financialYear) && financial.revenuesExpenses === false && financial.paidOut === 'Pago' ?
+      financial.value
+      : 0
+  }).reduce((acc: number, item: number) => acc + item)
+
+
+
+
+  let pendingRevenues = dataFinancial?.financial.map((financial: any) => {
+    let monthTable = new Date(financial.date).getMonth() + 1
+    let yearTable = new Date(financial.date).getFullYear()
+    return monthTable.toString() === financialMonth && yearTable.toString() === financialYear && financial.revenuesExpenses === true && financial.paidOut === 'Pendente' ?
+      financial.value
+      : null
+  }).reduce((acc: number, item: number) => acc + item)
+
+  let pendingExpenses = dataFinancial?.financial.map((financial: any) => {
+    let monthTable = new Date(financial.date).getMonth() + 1
+    let yearTable = new Date(financial.date).getFullYear()
+    return monthTable.toString() === financialMonth && yearTable.toString() === financialYear && financial.revenuesExpenses === false && financial.paidOut === 'Pendente' ?
+      financial.value
+      : null
+  }).reduce((acc: number, item: number) => acc + item)
+
+
+  let transferencia = dataTransfer?.transfer.map((transfer: any) => {
+    let monthTable = new Date(transfer.date).getMonth() + 1
+    let yearTable = new Date(transfer.date).getFullYear()
+    return monthTable.toString() === financialMonth && yearTable.toString() === financialYear ? transfer.value : 0
+  }
+  ).reduce((acc: number, item: number) => acc + item)
+
+
+  let total1 = revenues - expenses
+  let totalPending = pendingRevenues - pendingExpenses
+
+  let beforeTotal = beforeRevenues - beforeExpenses
+  console.log(beforeTotal)
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Fluxo de caixa - Receitas / Despesas' />
@@ -135,7 +206,7 @@ const FinancialReportsRevenuesExpenses = () => {
           <ResumeBlock>
             <ResumeContent>
               <h4>Saldo anterior</h4>
-              <p>Em 31/08/2022</p>
+              <p> 01/{financialMonth}/{financialYear}</p>
             </ResumeContent>
             <ResumeContent>
               <h4>Total de receitas no período</h4>
@@ -157,55 +228,65 @@ const FinancialReportsRevenuesExpenses = () => {
             </ResumeContent>
             <ResumeContent>
               <h3>Saldo final</h3>
-              <p>em 30/12/2022</p>
+              <p>em {day}/{financialMonth}/{financialYear}</p>
             </ResumeContent>
           </ResumeBlock>
           <ResumeBlock>
             <ResumeContent>
-              <h4><span>R$ 1.000,00</span></h4>
+              <h4><b>{formatter.format(beforeTotal)}</b></h4>
               <br />
             </ResumeContent>
             <ResumeFlex>
               <ResumeBlock>
                 <ResumeContent>
-                  <pre><h4><span>R$ 1.000,00</span></h4></pre>
+                  <pre><h4><b>{formatter.format(revenues)}</b></h4></pre>
                 </ResumeContent>
                 <ResumeContent>
-                  <h4><span>- R$ 0,00</span></h4>
+                  <h4><span><pre>- {formatter.format(expenses)}</pre></span></h4>
                 </ResumeContent>
               </ResumeBlock>
               <ResumeContent>
-                <h4><span>= R$ 1.000,00</span></h4>
+                {total1 < 0 ?
+                  <h4><span>{formatter.format(total1)}</span></h4>
+
+                  : <h4><b>{formatter.format(total1)}</b></h4>
+
+                }
               </ResumeContent>
             </ResumeFlex>
             <ResumeFlex>
               <ResumeBlock>
                 <ResumeContent>
-                  <pre><h4><span>R$ 1.000,00</span></h4></pre>
+                  <pre><h4><b>{formatter.format(pendingRevenues)}</b></h4></pre>
                 </ResumeContent>
                 <ResumeContent>
-                  <h4><span>- R$ 0,00</span></h4>
+                  <h4><b>{formatter.format(pendingExpenses)}</b></h4>
                 </ResumeContent>
               </ResumeBlock>
               <ResumeContent>
-                <h4><span>= R$ 1.000,00</span></h4>
+                {totalPending < 0 ?
+                  <h4><span>{formatter.format(totalPending)}</span></h4>
+                  :
+                  <h4><b>{formatter.format(totalPending)}</b></h4>
+                }
               </ResumeContent>
             </ResumeFlex>
             <ResumeFlex>
               <ResumeBlock>
                 <ResumeContent>
-                  <pre><h4><span>R$ 2.000,00</span></h4></pre>
+                  <pre><h4><b>{formatter.format(transferencia)}</b></h4></pre>
                 </ResumeContent>
                 <ResumeContent>
-                  <h4><span>- R$ 0,00</span></h4>
+                  <h4><span>- {formatter.format(transferencia)}</span></h4>
                 </ResumeContent>
               </ResumeBlock>
               <ResumeContent>
-                <h4><span>= R$ 2.000,00</span></h4>
+                <h4><b>= {formatter.format(transferencia)}</b></h4>
               </ResumeContent>
             </ResumeFlex>
             <ResumeContent>
-              <h3>R$ 1.000,00</h3>
+              <h3>{formatter.format(total1 + beforeTotal)}</h3>
+
               <br />
             </ResumeContent>
           </ResumeBlock>
