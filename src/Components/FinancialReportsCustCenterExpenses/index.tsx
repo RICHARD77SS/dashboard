@@ -1,4 +1,6 @@
 
+import { useAxios } from '../../hooks/useAxios';
+import { formatter } from '../../utils/formatMoneyBr';
 import Container from '../Container';
 import Flex from '../Flex';
 import GraphLineArea from '../GraphLineArea';
@@ -16,75 +18,88 @@ import TopTableOptions from '../TopTableOptions';
 import Tr from '../Tr';
 import {Graph, ResumeBox, ResumeFlex, ResumeBlock, ResumeContent } from './styles';
 
-const LineData = {
-  labels: [
-    '01/01/2022',
-    '02/01/2022',
-    '03/01/2022',
-    '04/01/2022',
-    '05/01/2022',
-    '06/01/2022',
-    '07/01/2022',
-    '08/01/2022',
-    '09/01/2022',
-    '10/01/2022',
-    '11/01/2022',
-    '12/01/2022',
-    '13/01/2022',
-    '14/01/2022',
-    '15/01/2022',
-    '16/01/2022',
-    '17/01/2022',
-    '18/01/2022',
-    '19/01/2022',
-    '20/01/2022',
-    '21/01/2022',
-    '22/01/2022',
-    '23/01/2022',
-    '24/01/2022',
-    '25/01/2022',
-    '26/01/2022',
-    '27/01/2022',
-    '28/01/2022',
-    '29/01/2022',
-    '30/01/2022'
-  ],
-  datasets: [
-    {
-      fill: true,
-      label: 'Receitas',
-      data: [222, 212, 313, 414, 166, 778, 119, 0, 100, 200, 400, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100],
-      borderColor: 'rgb(65, 176, 37)',
-      backgroundColor: 'rgba(32, 248, 3, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'Despesas',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(255, 15, 15)',
-      backgroundColor: 'rgba(255, 0, 0, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'A receber',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(53, 174, 235)',
-      backgroundColor: 'rgba(53, 181, 235, 0.5)',
-    },
-    {
-      fill: true,
-      label: 'A pagar',
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      borderColor: 'rgb(235, 93, 53)',
-      backgroundColor: 'rgba(235, 99, 53, 0.5)',
-    },
-  ],
-};
+
 const FinancialReportsCustCenterExpenses = () => {
+  const { data: dataFinancial } = useAxios('financial')
+  let dateNow = new Date()
+  var day = dateNow.getDate()
+  var month = dateNow.getMonth() + 1
+  var year = dateNow.getFullYear()
+
+  let date = new Date(`${year}-${month}-01`)
+
+
+  function getAllDays(years: any, months: any) {
+    let date = new Date(years, months + 1, 1);
+    let dates = []
+
+    while (date.getMonth() === months + 1) {
+      dates.push(new Date(date));
+      date.setDate(date.getDate() + 1)
+    }
+    return dates
+  }
+
+  let daysInMonth = getAllDays(date.getFullYear(), date.getMonth())
+  console.log(daysInMonth[0].getDate())
+  function padTo2Digits(nume: any) {
+    return nume.toString().padStart(2, '0')
+  }
+  function formatDate(date: any) {
+    return [
+      padTo2Digits(date.getDate()),
+      padTo2Digits(date.getMonth() + 1),
+      date.getFullYear(),
+    ].join('/')
+  }
+
+
+  let datasRevenues = daysInMonth?.map((dates: any) => dataFinancial?.financial.map((financial: any) => dates?.toISOString().split('T')[0] === financial.date.split('T')[0] && financial.revenuesExpenses === true ? financial.value : 0).reduce((acc: any, item: any) => acc + item))
+
+  let datasExpenses = daysInMonth?.map((dates: any) => dataFinancial?.financial.map((financial: any) => dates?.toISOString().split('T')[0] === financial.date.split('T')[0] && financial.revenuesExpenses === false ? financial.value : 0).reduce((acc: any, item: any) => acc + item))
+
+  let datasRevenuesPending = daysInMonth?.map((dates: any) => dataFinancial?.financial.map((financial: any) => dates?.toISOString().split('T')[0] === financial.date.split('T')[0] && financial.revenuesExpenses === true && financial.paidOut === 'Pendente' ? financial.value : 0).reduce((acc: any, item: any) => acc + item))
+
+  let datasExpensesPending = daysInMonth?.map((dates: any) => dataFinancial?.financial.map((financial: any) => dates?.toISOString().split('T')[0] === financial.date.split('T')[0] && financial.revenuesExpenses === false && financial.paidOut === 'Pendente' ? financial.value : 0).reduce((acc: any, item: any) => acc + item))
+
+
+  const LineData = {
+    labels: daysInMonth?.map((dates: any) => formatDate(dates)),
+    datasets: [
+      {
+        fill: true,
+        label: 'Receitas',
+        data: datasRevenues,
+        borderColor: 'rgb(65, 176, 37)',
+        backgroundColor: 'rgba(32, 248, 3, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'Despesas',
+        data: datasExpenses,
+        borderColor: 'rgb(255, 15, 15)',
+        backgroundColor: 'rgba(255, 0, 0, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'A receber',
+        data: datasRevenuesPending,
+        borderColor: 'rgb(53, 174, 235)',
+        backgroundColor: 'rgba(53, 181, 235, 0.5)',
+      },
+      {
+        fill: true,
+        label: 'A pagar',
+        data: datasExpensesPending,
+        borderColor: 'rgb(235, 93, 53)',
+        backgroundColor: 'rgba(235, 99, 53, 0.5)',
+      },
+    ],
+  };
   return (
     <Container>
       <ReportsHeader logo='' corporation='Inc name' reportsName='Fluxo de caixa - Despesas Centros de custos ' />
-      <h4>Período: 01/09/2022 á 30/12/2022</h4>
+      <h4>Período: {daysInMonth[0].getDate()}/{month}/{year} á {daysInMonth[daysInMonth.length - 1].getDate()}/{month}/{year}</h4>
       <Graph>
         <GraphLineArea data={LineData} />
       </Graph>
@@ -105,12 +120,17 @@ const FinancialReportsCustCenterExpenses = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>21/02/2020</Td>
-              <Td>descriptions</Td>
-              <Td>R$ 1.000,00</Td>
-              <Td>categories</Td>
-            </Tr>
+            {dataFinancial?.financial.map((financial: any, index: number) => {
+              return new Date(financial.date.split('T'[0])).getMonth() + 1 === month && new Date(financial.date.split('T'[0])).getFullYear() === year && financial.revenuesExpenses === false && financial.costCenter === 'centro1' ?
+                <Tr key={index}>
+                  <Td><Input type='checkbox' /></Td>
+                  <Td>{financial.date.split('T')[0]}</Td>
+                  <Td>{financial.description}</Td>
+                  <Td className={financial.revenuesExpenses ? 'green' : 'red'}>{formatter.format(financial.value)}</Td>
+                  <Td>{financial.category}</Td>
+                </Tr>
+                : null
+            })}
           </Tbody>
         </Table>
       </TableContainer>
