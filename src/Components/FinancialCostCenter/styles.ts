@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Aside = styled.div`
+export const Aside = styled.form`
   width: 20%;
   min-width: 200px;
   height: auto;

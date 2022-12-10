@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const Aside = styled.div`
-  width: 40%;
+export const Aside = styled.form`
+  width: 45%;
   button {
     padding: 0 1rem;
     height: 30px;
@@ -15,5 +15,11 @@ export const Aside = styled.div`
     height: 100px;
     border-radius: 5px;
     border-color: ${Props => Props.theme.colors.pri};
-  } 
-`
+  }
+  select {
+    width: 160px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: #ddd;
+  }
+  `

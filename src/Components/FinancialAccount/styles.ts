@@ -1,13 +1,5 @@
 import styled from 'styled-components'
 
-export const Aside = styled.div`
-  width: 20%;
-  min-width: 200px;
-  height: auto;
-  border-radius: 10px;
-  background: ${Props => Props.theme.colors.bac};
-  margin-right: 1rem;
-`
 export const AsideHeader = styled.div`
   width: 100%;
   height: 60px;
@@ -38,4 +30,14 @@ export const AsideContent = styled.div`
     color: #fff;
     font-size: 1rem;
   }
+`
+export const Aside = styled.form`
+  width: 30%;
+  min-width: 300px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background: ${Props => Props.theme.colors.bac};
 `

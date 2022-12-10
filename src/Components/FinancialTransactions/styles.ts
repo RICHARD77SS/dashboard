@@ -14,13 +14,14 @@ export const Flex = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  align-items:start;
+  align-items:center;
+  justify-content: center;
   gap: 1rem;
-  
 `
 
 export const Box = styled.div`
   width: 80%;
+  max-width: 800px;
   height: auto;
   border-radius: 10px;
   background: ${Props => Props.theme.colors.bac};

@@ -25,12 +25,14 @@ export function CustCenterContextProvider({ children }) {
 
   function CloseModal() {
     setOpenModal(false)
+    setId('')
     setName('')
     setDescription('')
   }
 
   function handleSubmit(event) {
     event.preventDefault()
+    CloseModal()
     const custCenter = {
       name,
       description

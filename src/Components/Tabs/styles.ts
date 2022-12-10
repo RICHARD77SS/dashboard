@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TabContainer = styled.div`
-  width: 70%;
+  width: 75%;
   height: auto;
   display: flex;
   align-items:Center;
@@ -10,6 +10,9 @@ export const TabContainer = styled.div`
   padding: 1rem;
   gap: 1rem;
   border-radius: 10px;
+  @media (max-width:1100px){
+    width: 100%;
+  }
 `
 export const TabsButtons = styled.div`
   width: 100%;

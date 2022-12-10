@@ -14,15 +14,12 @@ const Tabs = (Props: Props) => {
     document.querySelector('.Todos')?.classList.remove('active')
   }
   if (selectedTab === 1) {
-    document.querySelector('.Clientes')?.classList.add('active')
+    document.querySelector('.Criar')?.classList.add('active')
   } else {
-    document.querySelector('.Clientes')?.classList.remove('active')
+    document.querySelector('.Criar')?.classList.remove('active')
   }
-  if (selectedTab === 2) {
-    document.querySelector('.Amigos')?.classList.add('active')
-  } else {
-    document.querySelector('.Amigos')?.classList.remove('active')
-  }
+
+  console.log(Props.children)
   return (
     <TabContainer>
       <TabsButtons>

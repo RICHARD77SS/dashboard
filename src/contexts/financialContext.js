@@ -104,7 +104,13 @@ export function FinancialContextProvider({
   function repetitionHandler(event) {
     setRepetition(event.target.value);
   }
-
+  function revenuesExpensesHandler(event) {
+    if (event.target.value === 'true') {
+      setRevenuesExpenses(true)
+    } else {
+      setRevenuesExpenses(false)
+    }
+  }
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -128,7 +134,7 @@ export function FinancialContextProvider({
     }
     if (id) {
       api.put(`financial/${id}`, financial)
-      window.alert('Financia adicionada')
+      window.alert('Financia Editada')
       AddNew()
       const updatedFinancial = {
         financial: data.financial?.map((financial) => {
@@ -194,7 +200,8 @@ export function FinancialContextProvider({
     fnotes,
     ffile,
     ffrequenci,
-    frepetition) {
+    frepetition,
+    frevenuesExpenses) {
     setModal(true)
     setId(fid)
     setDate(fdate)
@@ -212,6 +219,7 @@ export function FinancialContextProvider({
     setFile(ffile)
     setFrequenci(ffrequenci)
     setRepetition(frepetition)
+    setRevenuesExpenses(frevenuesExpenses)
   }
   return <FinancialContext.Provider value={{
     date,
@@ -255,6 +263,7 @@ export function FinancialContextProvider({
     revenuesExpenses,
     OpenExpenses,
     OpenRevenues,
+    revenuesExpensesHandler
 
   }}>
     {children}

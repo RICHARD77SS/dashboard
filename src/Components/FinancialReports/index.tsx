@@ -66,7 +66,7 @@ const FinancialReports = () => {
           </SideContent>
         </SideNavigator>
         <Box>
-          <TopOptions>
+          {/* <TopOptions>
             <InputBlock>
               <label htmlFor="">Tipo</label>
               <InputBox>
@@ -117,7 +117,7 @@ const FinancialReports = () => {
               <label htmlFor="date">Categorias despesas</label>
               <Input id='date' type='text' list='expense' />
             </InputBox>
-          </TopOptions>
+          </TopOptions> */}
           <Outlet />
         </Box>
       </Content>

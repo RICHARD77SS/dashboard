@@ -7,7 +7,7 @@ import ModalFinancialCategoryEdit from '../Components/ModalFinancialCategoryEdit
 
 export const FinancialCategoryContext = React.createContext();
 
-export function AccountContextProvider({ children }) {
+export function FinancialCategoryContextProvider({ children }) {
   const { data, mutate } = useAxios('financialcategory');
 
   const [id, setId] = React.useState();
@@ -36,6 +36,7 @@ export function AccountContextProvider({ children }) {
 
   function handleSubmit(event) {
     event.preventDefault()
+    CloseModal()
     const financialCategory = {
       name,
       description,
@@ -43,7 +44,8 @@ export function AccountContextProvider({ children }) {
     }
     if (id) {
       api.put(`financialcategory/${id}`, financialCategory)
-      window.alert('financialcategory Editada')
+      window.alert('Categoria Editada')
+      
       const updatedFinancialCategory = {
         financialCategory: data.financialCategory?.map((financialCategory) => {
           if (financialCategory._id === id) {

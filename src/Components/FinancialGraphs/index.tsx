@@ -5,7 +5,7 @@ import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
 import Content from "../Content"
 import GraphLineArea from "../GraphLineArea";
-import Input from "../Input";
+
 
 import { Graph } from './styles';
 
@@ -22,6 +22,7 @@ const FinancialGraphs = () => {
   const [financialYear, setFinancialYear] = React.useState(year.toString())
 
   let date = new Date(`${financialYear}-${financialMonth}-01`)
+
   function getAllDays(years: any, months: any) {
     const date = new Date(years, months, 1);
     const dates = []
@@ -97,6 +98,7 @@ const FinancialGraphs = () => {
       return soma + i;
     });
   })
+
   let monthValuesExpensesPending = months?.map((monthss: any) => {
     let vals = days?.map((dateDay: any) => monthss === dateDay.data.getMonth() + 1 && dateDay.data.getFullYear() === parseInt(financialYear) && dateDay.despesas === false && dateDay.status === 'Pendente' ? dateDay.valor : 0).filter((dd: any) => dd !== 0)
 
@@ -113,7 +115,7 @@ const FinancialGraphs = () => {
     setFinancialYear(event.target.value)
   }
 
-  console.log(monthValuesRevenues)
+
   const LineData = {
 
     labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
@@ -187,7 +189,6 @@ const FinancialGraphs = () => {
       <Box>
         <BoxHeader>
           <h3>Resumo anual</h3>
-          <Input type='text' list='year' placeholder='  Periodo' />
           <select title='year' onChange={(event) => yearValueHandler(event)}>
             <option value={year} >{year}</option>
             <option value={year - 1} >{year - 1}</option>

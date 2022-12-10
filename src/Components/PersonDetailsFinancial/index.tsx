@@ -25,7 +25,7 @@ const PersonDetailsFinancial = ({ name }: Props) => {
       <Top>
         <Button onClick={() => OpenRevenues()}>+ Adicionar receita</Button>
 
-        
+
         <Button onClick={() => OpenExpenses()}>+ Adicionar Despesa</Button>
       </Top>
       <TopTableOptions />
@@ -60,7 +60,9 @@ const PersonDetailsFinancial = ({ name }: Props) => {
                       financial.documentNumber,
                       financial.competence,
                       financial.notes,
-                      financial.file)}>{formatedDate}</Button></Td>
+                      financial.file,
+                      financial.frequenci,
+                      financial.repetition)}>{formatedDate}</Button></Td>
                     <Td><Button >{financial.description}</Button></Td>
                     <Td><Button>{financial.category}</Button></Td>
                     <Td><Button>{financial.file}</Button></Td>

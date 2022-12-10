@@ -6,6 +6,7 @@ import { Container, Content, Form } from './styles'
 import { ContactContext } from '../../contexts/contactContext';
 import Button from '../Button';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { useAxios } from '../../hooks/useAxios';
 
 const ModalContactEdit = () => {
   const { name,
@@ -24,6 +25,7 @@ const ModalContactEdit = () => {
     CloseModal,
     type,
     typeHandler } = React.useContext(ContactContext)
+  const { data } = useAxios('contactcategory')
   return (
     <Container>
       <Content>
@@ -31,7 +33,15 @@ const ModalContactEdit = () => {
           <Button type='button' onClick={() => CloseModal()}><AiOutlineCloseCircle size='30' /></Button>
           <Input type='text' value={name} onChange={nameHandler} />
           <Input type='text' value={email} onChange={emailHandler} />
-          <Input type='text' value={category} onChange={categoryHandler} />
+          <select title='text' value={category} onChange={categoryHandler} >
+            <option value=''></option>
+            {data?.contactCategory.map((category: any, index: number) => {
+              return (
+                <option key={index} value={category.name}>{category.name}</option>
+              )
+            })}
+          </select>
+
           <Input type='text' value={type} onChange={typeHandler} />
           <Input type='number' value={phone1} onChange={phone1Handler} />
           <Input type='number' value={phone2} onChange={phone2Handler} />

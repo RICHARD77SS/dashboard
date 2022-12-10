@@ -11,8 +11,8 @@ export function AccountContextProvider({ children }) {
   const { data, mutate } = useAxios('account');
 
   const [id, setId] = React.useState();
-  const [name, setName] = React.useState()
-  const [description, setDescription] = React.useState()
+  const [name, setName] = React.useState('')
+  const [description, setDescription] = React.useState('')
 
   const [openModal, setOpenModal] = React.useState(false)
 
@@ -31,6 +31,7 @@ export function AccountContextProvider({ children }) {
 
   function handleSubmit(event) {
     event.preventDefault()
+    CloseModal()
     const account = {
       name,
       description

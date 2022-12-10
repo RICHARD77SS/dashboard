@@ -14,7 +14,7 @@ export function ContactContextProvider({ children }) {
   const [name, setName] = React.useState()
   const [email, setEmail] = React.useState()
   const [category, setCategory] = React.useState()
-  const [type, setType] = React.useState()
+  const [type, setType] = React.useState('Pessoa fisica')
   const [phone1, setPhone1] = React.useState()
   const [phone2, setPhone2] = React.useState()
   const [anotations, setAnotations] = React.useState()

@@ -13,5 +13,10 @@ export const TdSt = styled.td`
     height: 40px;
     border-radius: 40px;
   }
-
+  button{
+    padding: .2rem .5rem;
+    border-radius: 5px;
+    background:${Props => Props.theme.colors.pri};
+    color: #fff;
+  }
 `

@@ -35,4 +35,7 @@ export const ResumeContent = styled.div`
   pre {
     padding: 0 1rem;
   }
+  span {
+    color:#f00;
+  }
 `

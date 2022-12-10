@@ -36,14 +36,14 @@ const FinancialCategories = () => {
     <Container>
       <h3>Categorias</h3>
       <Content>
-        <Box>
+        <Box width='100%'>
           <BoxHeader title="Resultados: 2" />
           <BoxContent>
             <p>Gerencie todas as categorias de transações financeiras.</p>
             <Content>
               <Block>
                 <BlockHeader>
-                  <h3>Receitas (1)</h3>
+                  <h3>Receitas ({data?.financialCategory.map((category:any)=>category.type==='Receita'?category.name : null).length})</h3>
                 </BlockHeader>
                 <BlockContent>
                   <Table>
@@ -76,7 +76,7 @@ const FinancialCategories = () => {
               </Block>
               <Block>
                 <BlockHeader className='red'>
-                  <h3>Despesas (1)</h3>
+                  <h3>Despesas ({data?.financialCategory.map((category: any) => category.type === 'Despesa' ? category.name : null).length})</h3>
                 </BlockHeader>
                 <BlockContent>
                   <Table>
@@ -116,8 +116,8 @@ const FinancialCategories = () => {
           </AsideHeader>
           <AsideContent>
             <InputBlock>
-              <label htmlFor="name">Nomde da categoria</label>
-              <Input type='text' value={name} onChange={nameHandler} />
+              <label htmlFor="name">Nome da categoria</label>
+              <Input type='text' value={name} onChange={nameHandler} required/>
             </InputBlock>
             <InputBlock>
               <label htmlFor="description">Descrição</label>

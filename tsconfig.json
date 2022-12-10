@@ -22,6 +22,7 @@
   },
   "include": [
     "src",
-    "../index.tsx"
+    "../index.tsx",
+    "src/Components/FinancialReportsExpensesDailyStatement"
   ]
 }

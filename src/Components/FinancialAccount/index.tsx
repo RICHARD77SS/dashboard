@@ -74,7 +74,7 @@ const FinancialAccount = () => {
           <AsideContent>
             <InputBlock>
               <label htmlFor="name">Nome da conta</label>
-              <Input type='text' value={name} onChange={nameHandler} />
+              <Input type='text' value={name} onChange={nameHandler} required />
             </InputBlock>
             <InputBlock>
               <label htmlFor="description">Descrição</label>
