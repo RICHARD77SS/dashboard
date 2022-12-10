@@ -15,6 +15,7 @@ import FinancialGraphs from '../FinancialGraphs';
 import { FinancialContext } from '../../contexts/financialContext';
 import { useAxios } from '../../hooks/useAxios';
 import { formatter } from '../../utils/formatMoneyBr';
+import { Link } from 'react-router-dom';
 
 
 
@@ -249,12 +250,12 @@ const Financial = () => {
           </MidBox>
           <MidBox>
             <ButtonContainer>
-              <Button><RiMoneyDollarCircleLine /> Transações</Button>
-              <Button><AiFillTags />Categorias</Button>
-              <Button><FaCreditCard />Contas</Button>
-              <Button><MdContacts />Contatos</Button>
-              <Button><AiOutlineFolderOpen />Centros de custos</Button>
-              <Button><BsGraphUp />Relatórios</Button>
+              <Link to='/financialtransactions' ><Button><RiMoneyDollarCircleLine /> Transações</Button></Link>
+              <Link to='/financialcategories' ><Button><AiFillTags />Categorias</Button></Link>
+              <Link to='/financialaccounts' ><Button><FaCreditCard />Contas</Button></Link>
+              <Link to='/financialcontacts' ><Button><MdContacts />Contatos</Button></Link>
+              <Link to='/financialcostcenter' ><Button><AiOutlineFolderOpen />Centros de custos</Button></Link>
+              <Link to='/financialreports' ><Button><BsGraphUp />Relatórios</Button></Link>
             </ButtonContainer>
           </MidBox>
           <MidBox>
