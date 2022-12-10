@@ -24,12 +24,17 @@ import { useAxios } from '../../hooks/useAxios';
 import { formatter } from '../../utils/formatMoneyBr';
 import React from 'react';
 import { FinancialContext } from '../../contexts/financialContext';
+import { TransferContext } from '../../contexts/transferContext';
+import { Link } from 'react-router-dom';
 
 
 
 const FinancialTransactions = () => {
   const { handleEdit, handleDelete, OpenRevenues, OpenExpenses } = React.useContext(FinancialContext)
+  const { handleEdit: editTrasfer, handleDelete: deleteTransfer, setOpenModal } = React.useContext(TransferContext)
+
   const { data: dataFinancial } = useAxios('financial')
+  const { data: dataTransfer } = useAxios('transfer')
 
   const dateNow = new Date()
   var day = dateNow.getDate()
@@ -55,7 +60,6 @@ const FinancialTransactions = () => {
 
   let daysInMonth = getAllDays(date.getFullYear(), date.getMonth())
 
-  console.log(daysInMonth)
   function padTo2Digits(nume: any) {
     return nume.toString().padStart(2, '0')
   }
@@ -66,7 +70,6 @@ const FinancialTransactions = () => {
       date.getFullYear(),
     ].join('/')
   }
-
 
   function monthValueHandler(event: any) {
     setFinancialMonth(event.target.value)
@@ -118,7 +121,7 @@ const FinancialTransactions = () => {
       },
     ],
   };
-
+  console.log(dataTransfer)
   return (
     <Container>
       <h3>Registros de transações</h3>
@@ -172,18 +175,18 @@ const FinancialTransactions = () => {
               <p><b>Total recebido:</b></p>
               <p>{formatter.format(datasRevenues.reduce((acc: number, item: number) => acc + item))}</p>
               <p><b>Total pago:</b></p>
-              <span>-{formatter.format(datasExpenses.reduce((acc: number, item: number) => acc + item))}</span>
+              <span>- {formatter.format(datasExpenses.reduce((acc: number, item: number) => acc + item))}</span>
               <hr />
               <p><b>A receber:</b></p><p>{formatter.format(datasRevenuesPending.reduce((acc: number, item: number) => acc + item))}</p>
               <p><b>A pagar:</b></p><span>-{formatter.format(datasExpensesPending.reduce((acc: number, item: number) => acc + item))}</span>
               <hr />
-              <Button>Mais relatórios</Button>
+              <Link to='/financialreports'><Button>Mais relatórios</Button></Link>
             </AsideContent>
           </Aside>
         </Flex>
         <Block>
           <BoxHeader title={`Resultados: 1 transações`}>
-            <Button className='button1'>Transferência</Button>
+            <Button className='button1' type='button' onClick={() => setOpenModal(true)}>Transferência</Button>
             <Button className='button2' type='button' onClick={() => OpenRevenues()} >Adicionar receita</Button>
             <Button className='button3' type='button' onClick={() => OpenExpenses()}>Adicionar despesa</Button>
           </BoxHeader>
@@ -195,7 +198,6 @@ const FinancialTransactions = () => {
               </ButtonContainer>
             </TopTableOptions>
             <TableContainer>
-
               <Table>
                 <Thead>
                   <Tr>
@@ -212,7 +214,6 @@ const FinancialTransactions = () => {
                 <Tbody>
                   {dataFinancial?.financial.map((financial: any, index: number) => {
                     return new Date(financial.date.split('T'[0])).getMonth() + 1 === parseInt(financialMonth) && new Date(financial.date.split('T'[0])).getFullYear() === parseInt(financialYear) ?
-
                       <Tr key={index}>
                         <Td><Input type='checkbox' /></Td>
                         <Td>{financial.date.split('T')[0]}</Td>
@@ -246,6 +247,59 @@ const FinancialTransactions = () => {
                           </ButtonContainer>
                         </Td>
                       </Tr>
+                      : null
+                  })}
+                  {dataTransfer?.transfer.map((transfer: any, index: number) => {
+
+                    return new Date(transfer.date.split('T'[0])).getMonth() + 1 === parseInt(financialMonth) && new Date(transfer.date.split('T'[0])).getFullYear() === parseInt(financialYear) ?
+                      <>
+                        <Tr>
+                          <Td></Td>
+                          <Td>{transfer.date.split('T')[0]}</Td>
+                          <Td>{transfer.anotation}</Td>
+                          <Td>{transfer.value}</Td>
+                          <Td></Td>
+                          <Td>{transfer.origin}</Td>
+                          <Td></Td>
+                          <Td>
+                            <ButtonContainer>
+                              <Button><FaPrint /></Button>
+                              <Button type='button' onClick={() => editTrasfer(transfer._id,
+                                transfer.date,
+                                transfer.value,
+                                transfer.origin,
+                                transfer.destination,
+                                transfer.anotation,
+                              )}><BsFillPencilFill /></Button>
+                              <Button><AiFillCopy /></Button>
+                              <Button type='button' onClick={() => deleteTransfer(transfer._id)}><BsFillTrashFill /></Button>
+                            </ButtonContainer>
+                          </Td>
+                        </Tr>
+                        <Tr>
+                          <Td></Td>
+                          <Td>{transfer.date.split('T')[0]}</Td>
+                          <Td>{transfer.anotation}</Td>
+                          <Td>{transfer.value}</Td>
+                          <Td></Td>
+                          <Td>{transfer.destination}</Td>
+                          <Td></Td>
+                          <Td>
+                            <ButtonContainer>
+                              <Button><FaPrint /></Button>
+                              <Button type='button' onClick={() => editTrasfer(transfer._id,
+                                transfer.date,
+                                transfer.value,
+                                transfer.origin,
+                                transfer.destination,
+                                transfer.anotation,
+                              )}><BsFillPencilFill /></Button>
+                              <Button><AiFillCopy /></Button>
+                              <Button type='button' onClick={() => deleteTransfer(transfer._id)}><BsFillTrashFill /></Button>
+                            </ButtonContainer>
+                          </Td>
+                        </Tr>
+                      </>
                       : null
                   })}
                 </Tbody>
