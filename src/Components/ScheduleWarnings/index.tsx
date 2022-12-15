@@ -1,39 +1,80 @@
 import React from 'react'
+import { MuralsImageContext } from '../../contexts/muralsImageContext';
+import { MuralsTextContext } from '../../contexts/muralsTextContext';
+import { useAxios } from '../../hooks/useAxios';
 import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
 import Button from '../Button';
 import Container from "../Container";
 import Flex from '../Flex';
-import MuralsAddImage from '../MuralsAddImage';
-import MuralsAddText from '../MuralsAddText';
-import { Buttons } from './styles';
+import { Buttons, Mural, MuralContent } from './styles';
+
 const ScheduleWarnings = () => {
-  const [addText, setAddText] = React.useState(false)
-  const [addImage, setAddImage] = React.useState(false)
+  const { data } = useAxios('muralstext')
+  const { data: dataImage } = useAxios('muralsimage')
+  const { OpenModal: OpenTextModal, handleDelete, handleEdit } = React.useContext(MuralsTextContext)
+  const { OpenModal: OpenImageModal, handleDelete: handleDeleteImage, handleEdit: handleEditImage } = React.useContext(MuralsImageContext)
   return (
     <Container>
       <Box>
-        <BoxHeader title='Resultados: 0' />
-        <BoxContent>
+        <BoxHeader title='Resultados: 0' >
           <Flex>
-            <Buttons onClick={()=>{setAddImage(true)}}>+ Adicionar imagem</Buttons>
-            <Buttons onClick={() => { setAddText(true) }}>+ Adicionar texto</Buttons>
+            <Buttons onClick={() => { OpenImageModal() }}>+ Adicionar imagem</Buttons>
+            <Buttons onClick={() => { OpenTextModal() }}>+ Adicionar texto</Buttons>
           </Flex>
+        </BoxHeader>
+        <BoxContent>
+          {data?.muralsText.map((text: any, index: number) => {
+            return (
+              <Mural key={index}>
+                <MuralContent backColor={text.backColor} textColor={text.textColor}>
+                  <h3>{text.name}</h3>
+                  <h3>{text.description}</h3>
+                </MuralContent>
+                <Flex>
+                  <Button type='button' onClick={() => {
+                    handleEdit(
+                      text._id,
+                      text.name,
+                      text.description,
+                      text.textColor,
+                      text.backColor,
+                      text.background,
+                      text.status,
+                      text.unpublish,
+                      text.link,
+                      text.notification)
+                  }}>Editar</Button>
+                  <Button type='button' onClick={() => { handleDelete(text._id) }}>Remover</Button>
+                </Flex>
+              </Mural>
+            )
+          })}
+          {dataImage?.muralsImage.map((image: any, index: number) => {
+            return (
+              <Mural key={index}>
+                <MuralContent >
+                  <img src={image.image} alt="" />
+                </MuralContent>
+                <Flex>
+                  <Button type='button' onClick={() => {
+                    handleEditImage(
+                      image._id,
+                      image.image,
+                      image.status,
+                      image.unpublish,
+                      image.link,
+                      image.notification)
+                  }}>Editar</Button>
+                  <Button type='button' onClick={() => { handleDeleteImage(image._id) }}>Remover</Button>
+                </Flex>
+              </Mural>
+            )
+          })}
         </BoxContent>
       </Box>
-      {addText ?
-        <>
-          <MuralsAddText onClick={() => { setAddText(false) }}>
-            <Button onClick={() => { setAddText(false) }}>Close</Button>
-          </MuralsAddText>
-        </> : null}
-      {addImage ? 
-        <>
-          <MuralsAddImage onClick={() => { setAddImage(false) }}>
-            <Button onClick={()=>{setAddImage(false)}}>Close</Button>
-          </MuralsAddImage>
-        </>: null}
+
     </Container>
   )
 }
