@@ -15,16 +15,16 @@ export function EventsContextProvider({ children }) {
   const [subName, setSubName] = React.useState('')
   const [startDate, setStartDate] = React.useState('')
   const [endDate, setEndDate] = React.useState('')
-  const [notification, setNotification] = React.useState('')
+  const [notification, setNotification] = React.useState(false)
   const [payment, setPayment] = React.useState('')
   const [value, setValue] = React.useState('')
   const [numberOfVacancies, setNumberOfVacancies] = React.useState('')
   const [formOfPayment, setFormOfPayment] = React.useState('')
-  const [schedule, setSchedule] = React.useState('')
+  const [schedule, setSchedule] = React.useState([])
   const [aboutTheEvent, setAboutTheEvent] = React.useState('')
   const [place, setPlace] = React.useState('')
   const [image, setImage] = React.useState('')
-  const [speakers, setSpeakers] = React.useState('')
+  const [speakers, setSpeakers] = React.useState([])
 
   const [openModal, setOpenModal] = React.useState(false)
 
@@ -41,7 +41,7 @@ export function EventsContextProvider({ children }) {
     setEndDate(event.target.value)
   }
   function notificationHandler(event) {
-    setNotification(event.target.value)
+    setNotification(event.target.checked)
   }
   function paymentHandler(event) {
     setPayment(event.target.value)
@@ -55,20 +55,56 @@ export function EventsContextProvider({ children }) {
   function formOfPaymentHandler(event) {
     setFormOfPayment(event.target.value)
   }
-  function scheduleHandler(event) {
-    setSchedule(event.target.value)
+
+  function AddSchedule() {
+    let obj = {
+      title: "",
+      date: "",
+      hours: ""
+    }
+    setSchedule([...schedule, obj])
   }
+  function scheduleHandler(event, index) {
+    let data = [...schedule];
+    data[index][event.target.name] = event.target.value;
+    setSchedule(data)
+  }
+  function RemoveSchedule(index) {
+    let data = [...schedule];
+    data.splice(index, 1)
+    setSchedule(data)
+  }
+
+
   function aboutTheEventHandler(event) {
     setAboutTheEvent(event.target.value)
   }
+
   function placeHandler(event) {
     setPlace(event.target.value)
   }
+
   function imageHandler(event) {
     setImage(event.target.value)
   }
-  function speakersHandler(event) {
-    setSpeakers(event.target.value)
+
+  function AddSpeakers() {
+    let obj = {
+      image: "",
+      name: "",
+      description: ""
+    }
+    setSpeakers([...speakers, obj])
+  }
+  function RemoveSpeakers(index) {
+    let data = [...speakers]
+    data.splice(index, 1)
+    setSpeakers(data)
+  }
+  function speakersHandler(event, index) {
+    let data = [...speakers]
+    data[index][event.target.name] = event.target.value
+    setSpeakers(data)
   }
 
   function CloseModal() {
@@ -77,16 +113,16 @@ export function EventsContextProvider({ children }) {
     setSubName('')
     setStartDate('')
     setEndDate('')
-    setNotification('')
+    setNotification(false)
     setPayment('')
     setValue('')
     setNumberOfVacancies('')
     setFormOfPayment('')
-    setSchedule('')
+    setSchedule([])
     setAboutTheEvent('')
     setPlace('')
     setImage('')
-    setSpeakers('')
+    setSpeakers([])
   }
 
   function handleSubmit(event) {
@@ -223,7 +259,26 @@ export function EventsContextProvider({ children }) {
     openModal,
     handleEdit,
     setOpenModal,
-    CloseModal
+    CloseModal,
+    RemoveSchedule,
+    RemoveSpeakers,
+    AddSchedule,
+    AddSpeakers,
+    setName,
+    setSubName,
+    setStartDate,
+    setEndDate,
+    setNotification,
+    setPayment,
+    setValue,
+    setNumberOfVacancies,
+    setFormOfPayment,
+    setSchedule,
+    setAboutTheEvent,
+    setPlace,
+    setImage,
+    setSpeakers,
+    setId
   }}>
     {children}
     {openModal && <ModalAccountEdit />}
