@@ -3,21 +3,22 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
-import CategoriesPatrimoniesEdit from '../Components/CategoriesPatrimoniesEdit';
+import ModalEditScheduleCalendar from '../Components/ModalEditScheduleCalendar';
 
-export const CategoryPatrimoniesContext = React.createContext();
+export const ScheduleCalendarContext = React.createContext();
 
-export function CategoryPatrimoniesContextProvider({ children }) {
+export function ScheduleCalendarContextProvider({ children }) {
   const { data, mutate } = useAxios('scheduleCalendar');
 
   const [id, setId] = React.useState();
   const [name, setName] = React.useState()
-  const [visibility, setVisibility] = React.useState()
+  const [visibility, setVisibility] = React.useState('Privado')
+  const [color, setColor] = React.useState('blue')
   const [startDate, setStartDate] = React.useState()
   const [startHour, setStartHour] = React.useState()
   const [endDate, setEndDate] = React.useState()
   const [endHour, setEndHour] = React.useState()
-  const [repeat, setRepeat] = React.useState()
+  const [repeat, setRepeat] = React.useState('Não Repetir')
   const [category, setCategory] = React.useState()
   const [place, setPlace] = React.useState()
   const [anotations, setAnotations] = React.useState()
@@ -29,6 +30,9 @@ export function CategoryPatrimoniesContextProvider({ children }) {
   }
   function visibilityHandler(event) {
     setVisibility(event.target.value);
+  }
+  function colorHandler(event) {
+    setColor(event.target.value);
   }
   function startDateHandler(event) {
     setStartDate(event.target.value)
@@ -62,6 +66,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     setOpenModal(false)
     setName('')
     setVisibility('')
+    setColor('')
     setStartDate('')
     setStartHour('')
     setEndDate('')
@@ -78,6 +83,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     const scheduleCalendar = {
       name,
       visibility,
+      color,
       startDate,
       startHour,
       endDate,
@@ -97,6 +103,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
               ...scheduleCalendar,
               name,
               visibility,
+              color,
               startDate,
               startHour,
               endDate,
@@ -132,6 +139,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
   function handleEdit(categoryId,
     categoryName,
     scheduleVisibility,
+    scheduleColor,
     scheduleStartDate,
     scheduleStartHour,
     scheduleEndDate,
@@ -143,6 +151,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
   ) {
     setName(categoryName);
     setVisibility(scheduleVisibility);
+    setColor(scheduleColor);
     setStartDate(scheduleStartDate)
     setStartHour(scheduleStartHour)
     setEndDate(scheduleEndDate)
@@ -154,9 +163,10 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     setId(categoryId);
     setOpenModal(true);
   }
-  return <CategoryPatrimoniesContext.Provider value={{
+  return <ScheduleCalendarContext.Provider value={{
     name,
     visibility,
+    color,
     startDate,
     startHour,
     endDate,
@@ -167,6 +177,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     anotations,
     nameHandler,
     visibilityHandler,
+    colorHandler,
     startDateHandler,
     startHourHandler,
     endDateHandler,
@@ -179,6 +190,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     handleDelete,
     setId,
     id,
+    setAnotations,
     openModal,
     handleEdit,
     setOpenModal,
@@ -186,6 +198,6 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     CloseModal
   }}>
     {children}
-    {openModal && <CategoriesPatrimoniesEdit />}
-  </CategoryPatrimoniesContext.Provider>
+    {openModal && <ModalEditScheduleCalendar />}
+  </ScheduleCalendarContext.Provider>
 }

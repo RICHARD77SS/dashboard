@@ -52,7 +52,6 @@ export function ExtraFieldsContextProvider({ children }) {
 
   function openModalCheck() {
     setInputName('')
-
     setOpenCheck(true)
   }
   function openModalRadio() {

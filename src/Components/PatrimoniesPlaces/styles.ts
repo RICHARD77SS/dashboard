@@ -21,3 +21,12 @@ export const AsideContent = styled.div`
     font-size: 1rem;
   }
 `
+export const Aside = styled.form`
+  width: 30%;
+  min-width: 300px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+`

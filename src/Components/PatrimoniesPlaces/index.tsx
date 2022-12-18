@@ -1,4 +1,4 @@
-import Aside from "../Aside";
+
 import Box from "../Box";
 import BoxContent from "../BoxContent";
 import BoxHeader from "../BoxHeader";
@@ -14,10 +14,15 @@ import Td from "../Td";
 import Th from "../Th";
 import Thead from "../Thead";
 import Tr from "../Tr";
-
-import {AsideContent } from './styles';
+import React from 'react'
+import { AsideContent, Aside } from './styles';
+import { PlacesPatrimoniesContext } from "../../contexts/placesPatrimoniesContext";
+import Flex from "../Flex";
+import { useAxios } from "../../hooks/useAxios";
 
 const PatrimoniesPlaces = () => {
+  const { name, description, nameHandler, descriptionHandler, handleSubmit, handleEdit, handleDelete } = React.useContext(PlacesPatrimoniesContext)
+  const { data } = useAxios('placespatrimonies')
   return (
     <Container>
       <h3>Locais</h3>
@@ -35,40 +40,41 @@ const PatrimoniesPlaces = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  <Tr>
-                    <Td>Indefinido</Td>
-                    <Td><EditRemove /></Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Almoxerifado</Td>
-                    <Td><EditRemove /></Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Templo principal</Td>
-                    <Td><EditRemove /></Td>
-                  </Tr>
-                  <Tr>
-                    <Td>Estacionamento</Td>
-                    <Td><EditRemove /></Td>
-                  </Tr>
+                  {data?.placesPatrimonies.map((palces: any, index: number) => {
+                    return (
+                      <Tr key={index}>
+                        <Td>{palces.name}</Td>
+                        <Td>
+                          {palces.description !== 'fixed' ?
+                            <Flex>
+                              <Button type='button' onClick={() => handleEdit(palces._id, palces.name, palces.description)}>Editar</Button>
+                              <Button type='button' onClick={() => handleDelete(palces._id)}>Apagar</Button>
+                            </Flex>
+                            : null}
+
+                        </Td>
+                      </Tr>
+                    )
+                  })}
+                  
                 </Tbody>
               </Table>
             </Content>
           </BoxContent>
         </Box>
-        <Aside>
-          <BoxHeader title="+ Criar Local" />
-          <BoxContent>
+        <Aside onSubmit={handleSubmit}>
+          <BoxHeader title="+ Criar Categoria" />
+          <BoxContent width="100%">
             <AsideContent>
               <InputBlock>
-                <label htmlFor="name">Nome do local</label>
-                <Input type='text' />
+                <label htmlFor="name">Nome da Categoria</label>
+                <Input type='text' value={name} onChange={nameHandler} />
               </InputBlock>
               <InputBlock>
                 <label htmlFor="description">Descrição</label>
-                <textarea title='area' name="" id="" ></textarea>
+                <textarea title='area' name="" id="" value={description} onChange={descriptionHandler}></textarea>
               </InputBlock>
-              <Button>Criar</Button>
+              <Button type='submit'>Criar</Button>
             </AsideContent>
           </BoxContent>
         </Aside>

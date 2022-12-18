@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { PatrimoniesContext } from '../../contexts/patrimoniesContext';
+import { useAxios } from '../../hooks/useAxios';
 
 import BoxContent from '../BoxContent';
 import BoxHeader from '../BoxHeader';
@@ -11,7 +12,8 @@ import InputBlock from '../InputBlock';
 
 import { Container, Form, Close } from './styles';
 const ModalEditPatrimonies = () => {
-
+  const { data } = useAxios('categorypatrimonies')
+  const { data: dataPlaces } = useAxios('placespatrimonies')
   const {
     name,
     code,
@@ -65,16 +67,22 @@ const ModalEditPatrimonies = () => {
               <label htmlFor="categoria">Categoria</label>
               <select title='text' value={category} onChange={categoryHandler} >
                 <option value=''></option>
-                <option value=''></option>
+                {data?.categoryPatrimonies.map((category: any, index: number) => {
+                  <option value=''></option>
+                  return (
+                    <option key={index} value={category.name}>{category.name}</option>
+                  )
+                })}
               </select>
             </InputBlock>
             <InputBlock>
               <label htmlFor="local">Local</label>
               <select title='text' value={place} onChange={placeHandler} >
-                <option value='indefinido'>Indefinido</option>
-                <option value='almoxerifado'>Almoxerifado</option>
-                <option value='templo'>Templo</option>
-                <option value='estacionamento'>Estacionamento</option>
+                {dataPlaces?.placesPatrimonies.map((palces: any, index: number) => {
+                  return (
+                    <option key={index} value={palces.name}>{palces.name}</option>
+                  )
+                })}
               </select>
             </InputBlock>
             <InputBlock>

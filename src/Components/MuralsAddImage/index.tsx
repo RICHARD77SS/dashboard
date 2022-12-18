@@ -24,6 +24,7 @@ const MuralsAddImage = () => {
     notificationHandler,
     handleSubmit,
     CloseModal: CloseImageModal } = React.useContext(MuralsImageContext)
+
   console.log(image)
   return (
     <Container >
@@ -43,7 +44,7 @@ const MuralsAddImage = () => {
             {image ?
               <>
                 <CutImage>
-                  <img alt="not fount" src={URL.createObjectURL(image)} />
+                  <img alt="not fount" src={image} />
                 </CutImage>
                 <FlexBetween>
                   <InputBlock>

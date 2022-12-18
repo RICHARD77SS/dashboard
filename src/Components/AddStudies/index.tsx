@@ -13,7 +13,6 @@ import { useAxios } from '../../hooks/useAxios';
 
 
 const AddStudies = () => {
-  const [value, setValue] = React.useState('');
   const {
     name,
     category,
