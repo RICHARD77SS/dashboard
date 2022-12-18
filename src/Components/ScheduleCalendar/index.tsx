@@ -8,14 +8,16 @@ import Input from "../Input";
 import InputBlock from "../InputBlock";
 import { Box } from '../StudiesImportsExports/styles';
 import { AsideContent } from './styles';
-
+import React from 'react'
+import { ScheduleCalendarContext } from "../../contexts/scheduleCalendarContext";
 const ScheduleCalendar = () => {
+  const { OpenModal } = React.useContext(ScheduleCalendarContext)
   return (
     <Container>
       <h3>Calendario</h3>
       <Content>
         <Box>
-
+          <Button type='button' onClick={() => OpenModal()}>Add</Button>
           <BoxContent>
 
           </BoxContent>
