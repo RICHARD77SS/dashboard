@@ -20,65 +20,108 @@ import GraphBars from '../GraphBars';
 
 const EventPage = () => {
   const { data } = useAxios('events')
+  const { data: dataRegister } = useAxios('eventsregister')
   const { id } = useParams()
-  console.log(id)
 
 
+  let eventPage = dataRegister?.eventsRegister.map((events: any) => {
+    return (
+      events.evento === data?.events[`${id}`]._id ? events : false
+    )
+  }).filter((i: any) => i !== false)
+
+  let dateNow = new Date()
+  var month = dateNow.getMonth() + 1
+  var year = dateNow.getFullYear()
+
+  let date = new Date(`${year}-${month}-01`)
+
+  function getAllDays(years: any, months: any) {
+    let date = new Date(years, months + 1, 1);
+    let dates = []
+
+    while (date.getMonth() === months + 1) {
+      dates.push(new Date(date));
+      date.setDate(date.getDate() + 1)
+    }
+    return dates
+  }
+  function getAllPastDays(years: any, months: any) {
+    let date = new Date(years, months, 1);
+    let dates = []
+
+    while (date.getMonth() === months) {
+      dates.push(new Date(date));
+      date.setDate(date.getDate() + 1)
+    }
+    return dates
+  }
+
+  let daysInMonth = getAllDays(date.getFullYear(), date.getMonth())
+  let daysInPastMonth = getAllPastDays(date.getFullYear(), date.getMonth())
+
+  let registersInDays = daysInMonth?.map((days: any) => eventPage?.map((event: any) => days?.toISOString().split('T')[0] === event.date.split('T')[0] ? 1 : 0).reduce((acc: number, item: number) => acc + item))
+
+  let registersInPastDays = daysInPastMonth?.map((days: any) => eventPage?.map((event: any) => days?.toISOString().split('T')[0] === event.date.split('T')[0] ? 1 : 0).reduce((acc: number, item: number) => acc + item))
 
 
   const labels = ['L1'];
-
   const dataBar = {
     labels,
     datasets: [
       {
         label: 'Total de vagas',
-        data: [1],
+        data: [data?.events[`${id}`].numberOfVacancies],
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
         label: 'Pendentes',
-        data: [1],
+        data: [eventPage?.length],
         backgroundColor: 'rgba(235, 174, 53, 0.5)',
       },
       {
         label: 'Confirmados',
-        data: [1],
+        data: [0],
         backgroundColor: 'rgba(86, 53, 235, 0.5)',
       },
       {
         label: 'Disponivel',
-        data: [1],
+        data: [data?.events[`${id}`].numberOfVacancies - eventPage?.length],
         backgroundColor: 'rgba(19, 252, 81, 0.5)',
       },
     ],
   };
   const LineData = {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8],
+    labels: daysInMonth?.map((days: any) => days.getDate()),
     datasets: [
       {
         fill: true,
         label: 'Mês atual',
-        data: [1],
+        data: registersInDays,
         borderColor: 'rgb(255, 162, 235)',
         backgroundColor: 'rgba(255, 162, 235, 0.5)',
       },
       {
         fill: true,
         label: 'Mês anterior',
-        data: [1],
+        data: registersInPastDays,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],
   };
+  let copy = `http://localhost:3000/schedule/event/eventregister/${id}`
   return (
     <Container>
       <Box width='100%'>
         <BoxHeader title='Informações'>
-          <Button type='button'>Voltar</Button>
-          <Button type='button'>Pagina</Button>
-          <Button type='button'>Link</Button>
+          <Link to={`/scheduleevents`}>
+            <Button type='button'>Voltar</Button>
+          </Link>
+          <Link to={`/schedule/event/eventregister/${id}`}>
+            <Button type='button'>Pagina</Button>
+          </Link>
+          <Button onClick={() => navigator.clipboard.writeText(copy)} type='button'>Link</Button>
           <Link to={`/schedule/event/addevent/${id}`}>
             <Button type='button'>Editar</Button>
           </Link>
@@ -113,7 +156,7 @@ const EventPage = () => {
           </Block>
           <Flex>
             <Block>
-              <h2>0</h2>
+              <h2>{eventPage?.length}</h2>
               <p>Pendentes</p>
 
             </Block>
@@ -123,7 +166,7 @@ const EventPage = () => {
 
             </Block>
             <Block>
-              <h2>0</h2>
+              <h2>{data?.events[`${id}`].numberOfVacancies - eventPage?.length}</h2>
               <p>Disponiveis</p>
             </Block>
           </Flex>
@@ -165,13 +208,18 @@ const EventPage = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td></Td>
-                  <Td></Td>
-                  <Td></Td>
-                  <Td></Td>
-                  <Td></Td>
-                </Tr>
+                {eventPage?.map((events: any, index: number) => {
+                  return (
+                    <Tr key={index}>
+                      <Td>{events.name}</Td>
+                      <Td>{events.status}</Td>
+                      <Td>{events.email}</Td>
+                      <Td>{events.phone}</Td>
+                      <Td>{events.date.split('T')[0]}</Td>
+                    </Tr>
+
+                  )
+                })}
               </Tbody>
             </Table>
           </TableContainer>
