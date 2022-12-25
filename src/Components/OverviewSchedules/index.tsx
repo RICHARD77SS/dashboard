@@ -5,9 +5,14 @@ import BoxHeader from "../BoxHeader";
 import Button from "../Button";
 import Content from "../Content";
 
-import { Buttonb, Anotation } from './styles';
+import { Buttonb, Anotation, Mural, MuralContent, Scroll } from './styles';
+import { useAxios } from "../../hooks/useAxios";
+import Flex from "../Flex";
 
 const OverviewSchedules = () => {
+  const { data: dataText } = useAxios('muralstext')
+  const { data: dataImage } = useAxios('muralsimage')
+  const { data: dataAnotation } = useAxios('anotations')
   return (
     <Content>
       <Box>
@@ -16,8 +21,36 @@ const OverviewSchedules = () => {
 
         </BoxHeader>
         <BoxContent>
-          <h4>Não há dados disponiveis</h4>
-          <Buttonb><Link to='/schedulewarnings' >+Adicionar items</Link></Buttonb>
+          {dataText?.muralsText.length + dataImage?.muralsImage.length !== 0 ?
+            <Scroll>
+
+              {dataText?.muralsText.map((text: any, index: number) => {
+                return (
+                  <Mural key={index}>
+                    <MuralContent backColor={text.backColor} textColor={text.textColor}>
+                      <h3>{text.name}</h3>
+                      <h3>{text.description}</h3>
+                    </MuralContent>
+                  </Mural>
+                )
+              })}
+              {dataImage?.muralsImage.map((image: any, index: number) => {
+                return (
+                  <Mural key={index}>
+                    <MuralContent >
+                      <img src={image.image} alt="" />
+                    </MuralContent>
+                  </Mural>
+                )
+              })}
+            </Scroll>
+            :
+            <>
+              <h4>Não há dados disponiveis</h4>
+              <Buttonb><Link to='/schedulewarnings' >+Adicionar items</Link></Buttonb>
+            </>
+          }
+
         </BoxContent>
       </Box>
       <Box>
@@ -34,10 +67,18 @@ const OverviewSchedules = () => {
           <Button><Link to='/scheduleanotation'>Ver mais</Link></Button>
         </BoxHeader>
         <BoxContent>
-          <Anotation>
-            <p>Anotation</p>
-          </Anotation>
-          <Buttonb><Link to='/scheduleanotation' >+Adicionar items</Link></Buttonb>
+          {dataAnotation?.anotations.length !== 0 ? dataAnotation?.anotations.map((anotations: any, index: number) => {
+            return (
+              <>
+                <Anotation key={index} >
+                  <h3>{anotations.name}</h3>
+                </Anotation>
+              </>
+            )
+          })
+            :
+            <Buttonb><Link to='/scheduleanotation' >+Adicionar items</Link></Buttonb>
+          }
         </BoxContent>
       </Box>
     </Content>
