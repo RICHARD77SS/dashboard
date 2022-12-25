@@ -13,12 +13,32 @@ import InputBlock from "../InputBlock";
 
 
 import { Description, Divf, Studie, Image } from "./styles"
-
+import { useAxios } from "../../hooks/useAxios";
+import { StudiesContext } from "../../contexts/studiesContext";
+import React from 'react'
 
 
 const OverviewStudies = () => {
-  const inProgress = "23%"
-  const completed = "60%"
+
+  const { data: dataStudies } = useAxios('studies');
+  const { data: dataSchools } = useAxios('schools');
+  const { data: dataClaass } = useAxios('claass');
+  const { data: dataOrientation } = useAxios('orientation')
+  const { handleEdit } = React.useContext(StudiesContext);
+
+  let schools = dataSchools?.schools.length
+  let claass = dataClaass?.claass.length
+  let students = dataClaass?.claass.map((clas: any) => clas.participants).flat(1).length
+
+  let allOrientation = dataOrientation?.orientation.length
+  let orientationInProgress = dataOrientation?.orientation.map((orientation: any) => orientation.status === "Em andamento" ? 1 : 0).reduce((acc: number, item: number) => acc + item)
+  let orientationFinish = dataOrientation?.orientation.map((orientation: any) => orientation.status === 'Concluido' ? 1 : 0).reduce((acc: number, item: number) => acc + item)
+  let orientationLate = dataOrientation?.orientation.map((orientation: any) => orientation.meetings)
+  let progress = allOrientation / orientationInProgress * 100
+  let finish = allOrientation / orientationFinish * 10
+
+  const inProgress = progress.toString()
+  const completed = finish.toString()
   const late = "17%"
   return (
     <Content>
@@ -28,15 +48,42 @@ const OverviewStudies = () => {
           <Button><Link to='/studies'>Ver todos</Link></Button>
         </BoxHeader>
         <BoxContent>
-          <Studie>
-            <Image>
-              <img src="" alt="" />
-            </Image>
-            <InputBlock>
-              <h4>Estudie name</h4>
-              <p>5 de outubro de 2022</p>
-            </InputBlock>
-          </Studie>
+          {dataStudies?.studies.map((studies: any, index: number) => {
+            return (
+
+              <Studie key={index}>
+                <Image><Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
+                  studies._id,
+                  studies.name,
+                  studies.category,
+                  studies.content,
+                  studies.image,
+                  studies.file,
+                  studies.notification
+                )}>
+                  <img src={studies.image} alt="" />
+                </Button>
+                </Link>
+                </Image>
+                <InputBlock>
+                  <Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
+                    studies._id,
+                    studies.name,
+                    studies.category,
+                    studies.content,
+                    studies.image,
+                    studies.file,
+                    studies.notification
+                  )}>
+                    <h4>{studies.name}</h4>
+                    <p>{studies.date?.split('T')[0]}</p>
+                  </Button>
+                  </Link>
+                </InputBlock>
+              </Studie>
+            )
+          })}
+
         </BoxContent>
       </Box>
       <Box width='350px'>
@@ -48,17 +95,17 @@ const OverviewStudies = () => {
           <Description>
 
             <span><span><GiGreekTemple /></span>Total de escolas</span>
-            <span>0</span>
+            <span>{schools}</span>
           </Description>
           <Description>
 
             <span><span><FaGraduationCap /></span>Total de turmas</span>
-            <span>0</span>
+            <span>{claass}</span>
           </Description>
           <Description>
 
             <span><span><BiGroup /></span>Total de alunos</span>
-            <span>0</span>
+            <span>{students}</span>
           </Description>
         </BoxContent>
       </Box>
