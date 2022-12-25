@@ -1,43 +1,52 @@
 
+import { VideoAlbumContext } from "../../contexts/videoAlbumContext";
 import Button from "../Button";
 
 import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
-
+import React from 'react'
 import { Container, Content, Box, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
 
-interface Props {
-  children?: React.ReactNode;
-  onClick?: any;
-}
-const ModalAddVideo = ({ children, onClick }: Props) => {
+
+const ModalAddVideo = () => {
+  const { name,
+    description,
+    media,
+    title,
+    nameHandler,
+    descriptionHandler,
+    mediaHandler,
+    titleHandler,
+    handleSubmit,
+
+    CloseModal } = React.useContext(VideoAlbumContext)
   return (
     <Container >
       <Content>
-        <Box>
-          <BoxHeader>
-            <FlexBetween>
-              <h3>Adicionar vídeo</h3>
-              {children}
-            </FlexBetween>
-          </BoxHeader>
-          <BoxContent>
-            <InputBlock>
-              <label htmlFor="title">Título</label>
-              <Input placeholder='título' type='text' />
-            </InputBlock>
-            <InputBlock>
-              <label htmlFor="link">Link/URL do Vídeo (Youtube)</label>
-              <Input id="link" type='text' placeholder='Video link' />
-            </InputBlock>
-          </BoxContent>
-          <BoxFooter>
-            <Button>Salvar</Button>
-          </BoxFooter>
+        <Button onClick={() => CloseModal()}>Close</Button>
+        <Box onSubmit={handleSubmit}>
+          <h3>Adicionar vídeo</h3>
+          <InputBlock>
+            <label htmlFor="name">Titulo album</label>
+            <Input type='text' value={name} onChange={nameHandler} />
+          </InputBlock>
+          <InputBlock>
+            <label htmlFor="description">Descrição</label>
+            <textarea title='area' name="" id="" value={description} onChange={descriptionHandler}></textarea>
+          </InputBlock>
+          <InputBlock>
+            <label htmlFor="name">Titulo do video</label>
+            <Input type='text' value={title} onChange={titleHandler} />
+          </InputBlock>
+          <InputBlock>
+            <label htmlFor="name">Video</label>
+            <Input type='text' value={media} onChange={mediaHandler} />
+          </InputBlock>
+          <Button type='submit'>Criar</Button>
         </Box>
       </Content>
-      <Closed onClick={onClick}></Closed>
+      <Closed onClick={() => CloseModal()}></Closed>
     </Container>
   )
 }
