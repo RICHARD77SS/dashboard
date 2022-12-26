@@ -10,10 +10,16 @@ import Td from "../Td"
 import Th from "../Th"
 import Thead from "../Thead"
 import Tr from "../Tr"
-
+import React from 'react'
 import { Content, FlexBetween } from './styles'
+import { useAxios } from "../../hooks/useAxios"
+import { DocumentsContext } from "../../contexts/documentsContext"
 
 const MediaDocuments = () => {
+  
+  const { data } = useAxios('documents')
+  const { handleEdit } = React.useContext(DocumentsContext)
+
   return (
     <Container>
       <br />
@@ -27,7 +33,7 @@ const MediaDocuments = () => {
           <BoxContent>
             <FlexBetween>
               <p>Aqui ficam seus modelos de documentos personalizados.</p>
-              <Link to='/documenteditor'><Button>Criar novo</Button></Link>
+              <Link to='/documenteditor/o'><Button>Criar novo</Button></Link>
             </FlexBetween>
             <br />
             <br />
@@ -39,10 +45,15 @@ const MediaDocuments = () => {
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>Document name</Td>
-                  <Td>Document</Td>
-                </Tr>
+                {data?.documents.map((documents: any, index: number) => {
+                  return (
+                    <Tr key={index}>
+                      <Td>{documents.name}</Td>
+                      <Td><Button type='button' onClick={() => handleEdit(documents._id, documents.name, documents.description)}><Link to={`/documenteditor/${index}`}>Ver</Link></Button></Td>
+                    </Tr>
+
+                  )
+                })}
               </Tbody>
             </Table>
           </BoxContent>
@@ -51,7 +62,7 @@ const MediaDocuments = () => {
         <br />
         <br />
         <Box>
-          <BoxHeader title='Meus modelos' />
+          <BoxHeader title='Modelos Prontos' />
           <BoxContent>
             <p>Utilize nossos modelos prontos para gerar documentos ou copie e personalize como você desejar.</p>
             <br />
