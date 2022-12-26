@@ -25,6 +25,7 @@ import TopTableOptions from '../TopTableOptions';
 import Tr from '../Tr';
 
 import { AsideContent, FormContainer, Span } from './styles';
+import { useAxios } from '../../hooks/useAxios';
 
 
 const PieDataForms = {
@@ -53,60 +54,14 @@ const PieDataForms = {
 };
 
 const MediaForms = () => {
-  const [form, setForm] = React.useState(false)
+  const { data } = useAxios('forms')
 
   return (
     <Container>
       <h3>Formulários</h3>
-      <Content>
-        <Box>
-          <BoxHeader title='Resumo'>
-            <Flex>
-              <Button><BiLeftArrow /></Button>
-              <Button><BsPencilSquare /> Editar</Button>
-              <Button><MdFormatAlignCenter />Ver Formulario</Button>
-              <Button><BiCopyAlt />Copiar link</Button>
-            </Flex>
-          </BoxHeader>
-          <BoxContent>
-            <FlexBetween>
-              <InputBlock>
-                <p>Título</p>
-                <p><b>Form Title</b></p>
-              </InputBlock>
-              <InputBlock>
-                <p>Título</p>
-                <Span>Published</Span>
-              </InputBlock>
-              <InputBlock>
-                <p>Criado em</p>
-                <p><b>02/10/2022</b></p>
-              </InputBlock>
-            </FlexBetween>
-            <br />
-          </BoxContent>
-        </Box>
-        <Aside>
-          <AsideContent>
-            <h2>0</h2>
-            <p>Enviados</p>
-          </AsideContent>
-        </Aside>
-      </Content>
-      <Box>
-        <BoxHeader title='Formulario de teste 1'>
-
-        </BoxHeader>
-        <BoxContent>
-          <p>Respostas</p>
-          <FormContainer>
-            <GraphPieArea data={PieDataForms} />
-          </FormContainer>
-        </BoxContent>
-      </Box>
       <Box>
         <BoxHeader title="Seus formulários" >
-          <Link to='/forms/add'><Button>+ adicionar</Button></Link>
+          <Link to='/forms/add/o'><Button>+ adicionar</Button></Link>
         </BoxHeader>
         <BoxContent>
           <Content>
@@ -122,19 +77,20 @@ const MediaForms = () => {
               <Tr>
                 <Th>Data </Th>
                 <Th>
-                  <Input type='text' list='formsearch' />
-                  <datalist id='formsearch'>
-                    <option value='Form name' />
-                    <option value='option name' />
-                  </datalist>
+                  Nome
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>21/08/2015 - 21:43</Td>
-                <Td>form name</Td>
-              </Tr>
+              {data?.forms.map((forms: any, index: number) => {
+                return (
+                  <Tr key={index}>
+                    <Td><Link to={`/forms/add/${index}`}>{forms.date}</Link></Td>
+                    <Td><Link to={`/forms/add/${index}`}>{forms.title}</Link></Td>
+                  </Tr>
+
+                )
+              })}
             </Tbody>
           </Table>
           <PageSelector />
