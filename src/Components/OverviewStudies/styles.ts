@@ -41,11 +41,25 @@ export const Studie = styled.div`
   :hover {
     filter: brightness(.8);
   }
+  button{
+    width: auto;
+    height:auto;
+    background:transparent;
+    img {
+     width: 100px;
+     height: 100px;
+   }
+  }
+  p{
+    color:#000;
+  }
+  h4{
+    color:#000;
+  }
 `
 export const Image = styled.div`
   width: 100px;
   height: 100px;
-  background: #ccc;
   img {
     width: 100%;
     height: 100%;

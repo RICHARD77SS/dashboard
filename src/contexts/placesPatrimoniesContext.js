@@ -30,6 +30,7 @@ export function PlacesPatrimoniesContextProvider({ children }) {
     setOpenModal(false)
     setName('')
     setDescription('')
+    setId('')
   }
 
   function handleSubmit(event) {

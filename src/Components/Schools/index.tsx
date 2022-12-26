@@ -29,12 +29,13 @@ const Schools = () => {
     handleDelete,
     handleEdit,
   } = React.useContext(SchoolsContext)
+  let schools = dataSchools?.schools.length
   return (
     <Container>
       <h3>Escolas</h3>
       <Content>
         <Box>
-          <BoxHeader title={`Resultados: 0`}>
+          <BoxHeader title={`Resultados: ${schools}`}>
 
           </BoxHeader>
           <BoxContent width='100%'>

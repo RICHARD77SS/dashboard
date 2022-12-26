@@ -51,15 +51,16 @@ const Studies = () => {
             <Tbody>
               {data?.studies.map((estudo: any, index: number) => {
                 return (
+
                   <Tr key={index}>
                     <Td>
-                      {estudo.name}
+                      <Link to={`/addstudies/${index}`}>{estudo.name}</Link>
                     </Td>
                     <Td>
-                      {estudo.category}
+                      <Link to={`/addstudies/${index}`}> {estudo.category}</Link>
                     </Td>
                     <Td>
-                      {estudo.date?.split('T')[0]}
+                      <Link to={`/addstudies/${index}`}> {estudo.date?.split('T')[0]}</Link>
                     </Td>
                     <Td>
                       <Flex>

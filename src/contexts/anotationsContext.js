@@ -3,7 +3,6 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
-import ModalAnotationsEdit from '../Components/ModalAnotationsEdit';
 
 export const AnotationsContext = React.createContext();
 
@@ -15,8 +14,6 @@ export function AnotationsContextProvider({ children }) {
   const [description, setDescription] = React.useState('')
   const [category, setCategory] = React.useState('')
 
-  const [openModal, setOpenModal] = React.useState(false)
-
   function nameHandler(event) {
     setName(event.target.value);
   }
@@ -27,8 +24,8 @@ export function AnotationsContextProvider({ children }) {
     setCategory(event.target.value);
   }
 
-  function CloseModal() {
-    setOpenModal(false)
+  function Clear() {
+    setId('')
     setName('')
     setDescription('')
     setCategory('')
@@ -36,7 +33,7 @@ export function AnotationsContextProvider({ children }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    CloseModal()
+    Clear()
     const anotations = {
       name,
       description,
@@ -82,7 +79,6 @@ export function AnotationsContextProvider({ children }) {
     setName(anotationsName);
     setDescription(anotationsDescription);
     setCategory(anotationsCategory);
-    setOpenModal(true);
   }
   return <AnotationsContext.Provider value={{
     name,
@@ -96,12 +92,9 @@ export function AnotationsContextProvider({ children }) {
     handleDelete,
     setId,
     id,
-    openModal,
     handleEdit,
-    setOpenModal,
-    CloseModal
+    Clear
   }}>
     {children}
-    {openModal && <ModalAnotationsEdit />}
   </AnotationsContext.Provider>
 }

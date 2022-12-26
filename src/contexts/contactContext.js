@@ -45,6 +45,7 @@ export function ContactContextProvider({ children }) {
 
   function CloseModal() {
     setOpenModal(false)
+    setId('')
     setName('')
     setEmail('')
     setCategory('')

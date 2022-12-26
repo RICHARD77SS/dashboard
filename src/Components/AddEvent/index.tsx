@@ -35,7 +35,6 @@ const AddEvent = () => {
     numberOfVacanciesHandler,
     formOfPaymentHandler,
     scheduleHandler,
-    aboutTheEventHandler,
     placeHandler,
     imageHandler,
     speakersHandler,

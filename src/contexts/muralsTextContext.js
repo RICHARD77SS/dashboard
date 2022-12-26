@@ -65,6 +65,7 @@ export function MuralsTextContextProvider({ children }) {
     setUnpublish('')
     setLink('')
     setNotification('')
+    setId('')
   }
 
   function handleSubmit(event) {

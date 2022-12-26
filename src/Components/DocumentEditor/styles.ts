@@ -23,3 +23,8 @@ export const Flexs = styled.div`
     width: 300px;
   }
 `
+export const Box = styled.form`
+  width: auto;
+  max-width: 1200px;
+  height: auto;
+`

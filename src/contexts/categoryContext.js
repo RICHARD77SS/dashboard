@@ -24,6 +24,7 @@ export function CategoryContextProvider({ children }) {
   }
 
   function CloseModal() {
+    setId('')
     setOpenModal(false)
     setName('')
     setDescription('')

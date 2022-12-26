@@ -43,6 +43,7 @@ export function TransferContextProvider({ children }) {
     setValue('')
     setOrigin('')
     setAnotation('')
+    setId('')
   }
 
   function handleSubmit(event) {

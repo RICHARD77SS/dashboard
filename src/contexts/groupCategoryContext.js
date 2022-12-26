@@ -21,6 +21,7 @@ export function GroupCategoryContextProvider({ children }) {
     setDescription(event.target.value);
   }
   function CloseModal() {
+    setId('')
     setOpenModal(false)
     setName('')
     setDescription('')

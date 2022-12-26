@@ -202,7 +202,7 @@ export const Scribe = styled.div`
   flex-direction: column;
   background: #eb0;
 `
-export const Form = styled.div`
+export const Form = styled.form`
   width: auto;
   height: auto;
   display: flex;
@@ -210,25 +210,46 @@ export const Form = styled.div`
   flex-direction: column;
   border-radius: 10px;
   gap: 1rem;
+  button{
+    background: #ccc;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
 `
 export const Place = styled.div`
-  width: ;
-  height: ;
+  width: 100%;
+  height: 500px;
   display: flex;
   align-items: center;
   flex-direction: column;
-`
-export const MapContainer = styled.div`
-  width: ;
-  height: ;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  background:#ddd;
 `
 export const Payment = styled.div`
-  width: ;
-  height: ;
+  width: auto;
+  height: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.4);
+  box-shadow: inset -5px -5px 5px rgba(0,0,0,0.4);
+  `
+
+export const MapContainer = styled.div`
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background:#eee;
+`
+export const Footer = styled.div`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background:#000;
 `

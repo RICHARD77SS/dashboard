@@ -75,6 +75,7 @@ export function ScheduleCalendarContextProvider({ children }) {
     setCategory('')
     setPlace('')
     setAnotations('')
+    setId('')
   }
 
   function handleSubmit(event) {

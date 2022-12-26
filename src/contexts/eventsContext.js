@@ -108,6 +108,7 @@ export function EventsContextProvider({ children }) {
   }
 
   function CloseModal() {
+    setId('')
     setOpenModal(false)
     setName('')
     setSubName('')
@@ -147,7 +148,7 @@ export function EventsContextProvider({ children }) {
     if (id) {
       api.put(`events/${id}`, events)
       window.alert('events Editada')
-      const updatedAccount = {
+      const updatedEvents = {
         events: data.events?.map((events) => {
           if (events._id === id) {
             return {
@@ -171,23 +172,23 @@ export function EventsContextProvider({ children }) {
           return events
         }),
       };
-      mutate(updatedAccount, false)
+      mutate(updatedEvents, false)
     } else {
       api.post('events', events);
       window.alert('events adicionada')
-      const updatedAccount = {
+      const updatedEvents = {
         events: [...data.events, events]
       }
-      mutate(updatedAccount, false)
+      mutate(updatedEvents, false)
     }
   }
   function handleDelete(id) {
     api.delete(`events/${id}`);
     window.alert('events removido')
-    const updatedAccount = {
+    const updatedEvents = {
       events: data.events?.filter((events) => events._id !== id)
     };
-    mutate(updatedAccount, false)
+    mutate(updatedEvents, false)
   }
 
   function handleEdit(eventsId,
@@ -255,8 +256,8 @@ export function EventsContextProvider({ children }) {
     handleSubmit,
     handleDelete,
     setId,
-    id,
     openModal,
+    id,
     handleEdit,
     setOpenModal,
     CloseModal,
@@ -278,7 +279,6 @@ export function EventsContextProvider({ children }) {
     setPlace,
     setImage,
     setSpeakers,
-    setId
   }}>
     {children}
     {openModal && <ModalAccountEdit />}

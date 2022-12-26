@@ -34,6 +34,7 @@ export function SubjectsContextProvider({ children }) {
     setName('')
     setTeacher('')
     setClassIndex('')
+    setId('')
   }
   function handleSubmit(event) {
     event.preventDefault()

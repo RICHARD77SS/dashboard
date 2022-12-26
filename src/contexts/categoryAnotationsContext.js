@@ -3,7 +3,6 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
-import CategoriesAnotationsEdit from '../Components/CategoriesAnotationsEdit';
 
 export const CategoryAnotationsContext = React.createContext();
 
@@ -14,8 +13,6 @@ export function CategoryAnotationsContextProvider({ children }) {
   const [name, setName] = React.useState()
   const [description, setDescription] = React.useState()
 
-  const [openModal, setOpenModal] = React.useState(false)
-
   function nameHandler(event) {
     setName(event.target.value);
   }
@@ -24,13 +21,14 @@ export function CategoryAnotationsContextProvider({ children }) {
   }
 
   function CloseModal() {
-    setOpenModal(false)
+    setId('')
     setName('')
     setDescription('')
   }
 
   function handleSubmit(event) {
     event.preventDefault()
+    CloseModal() 
     const categoryAnotations = {
       name,
       description
@@ -73,7 +71,6 @@ export function CategoryAnotationsContextProvider({ children }) {
     setName(categoryName);
     setDescription(categoryDescription);
     setId(categoryId);
-    setOpenModal(true);
   }
   return <CategoryAnotationsContext.Provider value={{
     name,
@@ -84,12 +81,8 @@ export function CategoryAnotationsContextProvider({ children }) {
     handleDelete,
     setId,
     id,
-    openModal,
     handleEdit,
-    setOpenModal,
-    CloseModal
   }}>
     {children}
-    {openModal && <CategoriesAnotationsEdit />}
   </CategoryAnotationsContext.Provider>
 }

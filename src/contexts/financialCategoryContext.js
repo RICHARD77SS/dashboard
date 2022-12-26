@@ -28,6 +28,7 @@ export function FinancialCategoryContextProvider({ children }) {
   }
 
   function CloseModal() {
+    setId('')
     setOpenModal(false)
     setName('')
     setDescription('')

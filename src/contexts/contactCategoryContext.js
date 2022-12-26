@@ -25,6 +25,7 @@ export function ContactCategoryContextProvider({ children }) {
 
   function CloseModal() {
     setOpenModal(false)
+    setId('')
     setName('')
     setDescription('')
   }

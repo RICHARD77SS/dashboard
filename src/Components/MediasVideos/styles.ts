@@ -21,3 +21,30 @@ export const AsideContent = styled.div`
     font-size: 1rem;
   }
 `
+export const Aside = styled.form`
+  width: 30%;
+  min-width: 300px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+`
+export const Video = styled.div`
+  width: 150px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background:#eee;
+`
+export const MediaVideo = styled.form`
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+    background:#ddd;
+`

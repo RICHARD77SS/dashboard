@@ -28,7 +28,65 @@ export const TopNotes = styled.div`
     color: #fff;
   }
 `
-export const Box = styled.div`
+export const NotesContent = styled.div`
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items:center;
+  justify-content: start;
+  flex-direction:column;
+  gap: .5rem;
+  padding: 1rem;
+  background: #ddd;
+  border-radius: 0 0 10px 10px;
+`
+export const Anotation = styled.button`
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items:Center;
+  justify-content: center;
+  padding: .5rem;
+  background: #eee;
+  border-radius: 10px;
+  :hover {
+    background: #ddd;
+  }
+  .green {
+    color: #090;
+  }
+`
+export const CategoryAdd = styled.form`
+  width: 90%;
+  height: 100px;
+  display: flex;
+  align-items:Center;
+  justify-content: center;
+  padding: .5rem;
+  background: #eee;
+  border-radius: 10px;
+  button {
+    padding: .5rem;
+    background:${Props => Props.theme.colors.pri};
+    border-radius: 5px;
+    color: #fff;
+  }
+`
+export const CategoryItem = styled.button`
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items:Center;
+  justify-content: center;
+  padding: .5rem;
+  background: #eee;
+  border-radius: 10px;
+  :hover {
+    background: #ddd;
+  }
+`
+
+export const Box = styled.form`
   width: 80%;
   height: auto;
   display: flex;

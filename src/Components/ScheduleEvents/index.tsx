@@ -41,7 +41,7 @@ const SchedduleEvents = () => {
                     <p>Valor {formatter.format(event.value)}</p>
                     <Flex>
                       <Button>Pagina do evento</Button>
-                      <Button>Copiar Link</Button>
+                      <Button onClick={() => navigator.clipboard.writeText(`http://localhost:3000/schedule/event/eventregister/${index}`)} type='button'>Link</Button>
                     </Flex>
                   </EventBlock>
                 </EventBox>

@@ -25,6 +25,7 @@ export function CategoryScheduleContextProvider({ children }) {
 
   function CloseModal() {
     setOpenModal(false)
+    setId('')
     setName('')
     setDescription('')
   }

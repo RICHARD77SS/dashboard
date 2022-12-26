@@ -20,6 +20,7 @@ export function PositionsContextProvider({ children }) {
   function CloseModal() {
     setOpenModal(false)
     setName('')
+    setId('')
   }
   function handleSubmit(event) {
     event.preventDefault()

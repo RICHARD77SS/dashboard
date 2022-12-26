@@ -12,25 +12,28 @@ export function EventsRegisterContextProvider({ children }) {
   const [id, setId] = React.useState();
 
   const [name, setName] = React.useState('')
-  const [event, setEvent] = React.useState('')
-  const [phone, setPhone] = React.useState('')
+  const [evento, setEvento] = React.useState('')
+  const [phone, setPhone] = React.useState()
   const [email, setEmail] = React.useState('')
   const [address, setAddress] = React.useState('')
-  const [number, setNumber] = React.useState('')
+  const [number, setNumber] = React.useState()
   const [district, setDistrict] = React.useState('')
-  const [zipCode, setZipCode] = React.useState('')
+  const [zipCode, setZipCode] = React.useState()
   const [country, setCountry] = React.useState('')
   const [state, setState] = React.useState('')
   const [city, setCity] = React.useState('')
   const [payment, setPayment] = React.useState('')
+  const [date, setDate] = React.useState('')
 
-  const [openModal, setOpenModal] = React.useState(false)
+  React.useEffect(() => {
+    setDate(new Date().toISOString())
+  }, [setDate])
 
   function nameHandler(event) {
     setName(event.target.value);
   }
-  function eventHandler(event) {
-    setEvent(event.target.value);
+  function eventoHandler(event) {
+    setEvento(event.target.value);
   }
   function phoneHandler(event) {
     setPhone(event.target.value)
@@ -39,7 +42,7 @@ export function EventsRegisterContextProvider({ children }) {
     setEmail(event.target.value)
   }
   function addressHandler(event) {
-    setAddress(event.target.checked)
+    setAddress(event.target.value)
   }
   function numberHandler(event) {
     setNumber(event.target.value)
@@ -67,30 +70,11 @@ export function EventsRegisterContextProvider({ children }) {
     setPayment(event.target.value)
   }
 
-
-  function CloseModal() {
-    setOpenModal(false)
-    setName('')
-    setEvent('')
-    setPhone('')
-    setEmail('')
-    setAddress('')
-    setNumber('')
-    setDistrict('')
-    setZipCode('')
-    setCountry('')
-    setState('')
-    setCity('')
-    setPayment('')
-
-  }
-
   function handleSubmit(event) {
     event.preventDefault()
-    CloseModal()
     const eventsRegister = {
       name,
-      event,
+      evento,
       phone,
       email,
       address,
@@ -101,6 +85,7 @@ export function EventsRegisterContextProvider({ children }) {
       state,
       city,
       payment,
+      date
     }
     if (id) {
       api.put(`eventsregister/${id}`, eventsRegister)
@@ -111,7 +96,7 @@ export function EventsRegisterContextProvider({ children }) {
             return {
               ...eventsRegister,
               name,
-              event,
+              evento,
               phone,
               email,
               address,
@@ -121,7 +106,8 @@ export function EventsRegisterContextProvider({ children }) {
               country,
               state,
               city,
-              payment
+              payment,
+              date
             };
           }
           return eventsRegister
@@ -137,6 +123,7 @@ export function EventsRegisterContextProvider({ children }) {
       mutate(updatedEventsRegister, false)
     }
   }
+
   function handleDelete(id) {
     api.delete(`eventsregister/${id}`);
     window.alert('eventsRegister removido')
@@ -148,38 +135,35 @@ export function EventsRegisterContextProvider({ children }) {
 
   function handleEdit(eventsId,
     eventsName,
-    eventsSubName,
-    eventsStartDate,
-    eventsEndDate,
-    eventsNotification,
+    eventsEvento,
+    eventsPhone,
+    eventsEmail,
+    eventsAddress,
+    eventsNumber,
+    eventsDistrict,
+    eventsZipCode,
+    eventsCountry,
+    eventsState,
+    eventsCity,
     eventsPayment,
-    eventsValue,
-    eventsNumberOfVacancies,
-    eventsFormOfPayment,
-    eventsSchedule,
-    eventsAboutTheEvent,
-    eventsPlace,
-    eventsImage,
-    eventsSpeakers
   ) {
     setId(eventsId)
     setName(eventsName)
-    setEvent(eventsSubName)
-    setPhone(eventsStartDate)
-    setEmail(eventsEndDate)
-    setAddress(eventsNotification)
-    setNumber(eventsPayment)
-    setDistrict(eventsNumberOfVacancies)
-    setZipCode(eventsFormOfPayment)
-    setCountry(eventsSchedule)
-    setState(eventsAboutTheEvent)
-    setCity(eventsPlace)
-    setPayment(eventsImage)
-    setOpenModal(true);
+    setEvento(eventsEvento)
+    setPhone(eventsPhone)
+    setEmail(eventsEmail)
+    setAddress(eventsAddress)
+    setNumber(eventsNumber)
+    setDistrict(eventsDistrict)
+    setZipCode(eventsZipCode)
+    setCountry(eventsCountry)
+    setState(eventsState)
+    setCity(eventsCity)
+    setPayment(eventsPayment)
   }
   return <EventsRegisterContext.Provider value={{
     name,
-    event,
+    evento,
     phone,
     email,
     address,
@@ -191,7 +175,7 @@ export function EventsRegisterContextProvider({ children }) {
     city,
     payment,
     nameHandler,
-    eventHandler,
+    eventoHandler,
     phoneHandler,
     emailHandler,
     addressHandler,
@@ -206,12 +190,9 @@ export function EventsRegisterContextProvider({ children }) {
     handleDelete,
     setId,
     id,
-    openModal,
     handleEdit,
-    setOpenModal,
-    CloseModal,
     setName,
-    setEvent,
+    setEvento,
     setPhone,
     setEmail,
     setAddress,

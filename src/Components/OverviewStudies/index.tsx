@@ -26,6 +26,11 @@ const OverviewStudies = () => {
   const { data: dataOrientation } = useAxios('orientation')
   const { handleEdit } = React.useContext(StudiesContext);
 
+  let dateNow = new Date()
+  let dayNow = dateNow.getDate()
+  let monthNow = dateNow.getMonth() + 1
+  let yearNow = dateNow.getFullYear()
+
   let schools = dataSchools?.schools.length
   let claass = dataClaass?.claass.length
   let students = dataClaass?.claass.map((clas: any) => clas.participants).flat(1).length
@@ -33,13 +38,15 @@ const OverviewStudies = () => {
   let allOrientation = dataOrientation?.orientation.length
   let orientationInProgress = dataOrientation?.orientation.map((orientation: any) => orientation.status === "Em andamento" ? 1 : 0).reduce((acc: number, item: number) => acc + item)
   let orientationFinish = dataOrientation?.orientation.map((orientation: any) => orientation.status === 'Concluido' ? 1 : 0).reduce((acc: number, item: number) => acc + item)
-  let orientationLate = dataOrientation?.orientation.map((orientation: any) => orientation.meetings)
-  let progress = allOrientation / orientationInProgress * 100
-  let finish = allOrientation / orientationFinish * 10
+  let orientationLate = dataOrientation?.orientation.map((orientation: any) => orientation.meetings?.map((met: any) => parseInt(met.date?.split('T')[0]?.split('-')[1]) < monthNow || parseInt(met.date?.split('T')[0]?.split('-')[2]) < dayNow ? 1 : 0).indexOf(1)).filter((i: any) => i === 0).length
 
-  const inProgress = progress.toString()
-  const completed = finish.toString()
-  const late = "17%"
+  let progress = 100 * orientationInProgress / 100
+  let finish = 100 * orientationFinish / 100
+  let later = 100 * orientationLate / 100
+
+  const inProgress = `${progress}%`
+  const completed = `${finish}%`
+  const late = `${later}%`
   return (
     <Content>
       <Box width='350px'>

@@ -54,7 +54,6 @@ const ScheduleWarnings = () => {
               )
             })}
             {dataImage?.muralsImage.map((image: any, index: number) => {
-              console.log(image.image)
               return (
                 <Mural key={index}>
                   <MuralContent >

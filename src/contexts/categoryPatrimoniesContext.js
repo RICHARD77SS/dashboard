@@ -27,6 +27,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     setOpenModal(true)
   }
   function CloseModal() {
+    setId('')
     setOpenModal(false)
     setName('')
     setDescription('')

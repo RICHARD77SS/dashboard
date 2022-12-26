@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface Props {
+  backColor?: string;
+  textColor?: string;
+}
 export const Buttonb = styled.div`
   padding: 0 1rem;
   height: 40px;
@@ -29,7 +33,43 @@ export const Anotation = styled.div`
   :hover {
     filter: brightness(.8);
   }
-  p{
+  h3{
     text-decoration: underline;
   }
+`
+export const Mural = styled.div`
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+ 
+`
+export const MuralContent = styled.div<Props>`
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: ${Props => Props.backColor};
+  border-radius: 10px;
+  h3{
+    color: ${Props => Props.textColor};
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius:10px;
+  }
+`
+export const Scroll = styled.div`
+  width: 200px;
+  height: 270px;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  border-radius: 10px;
+  overflow-x:scroll;
 `

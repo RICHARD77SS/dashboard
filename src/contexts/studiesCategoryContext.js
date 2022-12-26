@@ -23,6 +23,7 @@ export function StudiesCategoryContextProvider({ children }) {
     setOpenModal(false)
     setName('')
     setDescription('')
+    setId('')
   }
 
   function handleSubmit(event) {

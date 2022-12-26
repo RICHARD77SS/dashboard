@@ -70,7 +70,7 @@ const ViewClass = () => {
         <br />
         <Form onSubmit={handleSubmit}>
           <InputBlock>
-            <label htmlFor='scoolName'>Nome da turma</label>
+            <label htmlFor='scoolName'>Nome da turma </label>
             <Input type='text' id='scoolName' value={name} onChange={nameHandler} />
           </InputBlock>
           <InputBlock>
@@ -94,6 +94,7 @@ const ViewClass = () => {
               <option value="Noite">Noite</option>
             </select>
           </InputBlock>
+
           <InputBlock>
             <label>Status</label>
             <select title='status' value={status} onChange={statusHandler}>

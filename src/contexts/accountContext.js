@@ -25,6 +25,7 @@ export function AccountContextProvider({ children }) {
 
   function CloseModal() {
     setOpenModal(false)
+    setId('')
     setName('')
     setDescription('')
   }
