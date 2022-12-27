@@ -40,9 +40,9 @@ const OverviewStudies = () => {
   let orientationFinish = dataOrientation?.orientation.map((orientation: any) => orientation.status === 'Concluido' ? 1 : 0).reduce((acc: number, item: number) => acc + item)
   let orientationLate = dataOrientation?.orientation.map((orientation: any) => orientation.meetings?.map((met: any) => parseInt(met.date?.split('T')[0]?.split('-')[1]) < monthNow || parseInt(met.date?.split('T')[0]?.split('-')[2]) < dayNow ? 1 : 0).indexOf(1)).filter((i: any) => i === 0).length
 
-  let progress = 100 * orientationInProgress / 100
-  let finish = 100 * orientationFinish / 100
-  let later = 100 * orientationLate / 100
+  let progress = orientationInProgress / allOrientation * 100
+  let finish = orientationFinish / allOrientation * 100
+  let later = orientationLate / allOrientation * 100
 
   const inProgress = `${progress}%`
   const completed = `${finish}%`
