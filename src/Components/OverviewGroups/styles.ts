@@ -28,3 +28,11 @@ export const Situation = styled.div`
 export const Graph = styled.div`
   width: 100%;
 `
+export const MeetingsContainer = styled.div`
+  width: 100%;
+  height: 60px;
+  border-radius: 10px;
+  border:.5px solid rgba(0,0,0,0.4);
+  padding: 1rem;
+  
+`
