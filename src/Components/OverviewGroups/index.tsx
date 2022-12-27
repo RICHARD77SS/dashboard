@@ -5,13 +5,17 @@ import Button from "../Button";
 import Content from "../Content";
 import GrapPieArea from "../GraphPieArea";
 
-import { Status, Situation, Graph } from "./styles";
+import { Status, Situation, Graph, MeetingsContainer } from "./styles";
 import { Link } from 'react-router-dom';
 import { useAxios } from "../../hooks/useAxios";
 const OverviewGroups = () => {
+  let dateNow = new Date()
+  let monthNow = dateNow.getMonth()
+
 
   const { data: groupCategory } = useAxios('groupCategory')
   const { data: dataGroups } = useAxios('groups')
+  const { data: dataMeetings } = useAxios('meetings')
 
   let label = groupCategory?.groupCategory.map((name: any) => name.name)
 
@@ -47,28 +51,34 @@ const OverviewGroups = () => {
       },
     ],
   };
+  let allGroups = dataGroups?.groups.length
+
+  let active = dataGroups?.groups.map((groups: any) =>
+    dataMeetings?.meetings.map((meetings: any) => groups.name === meetings.group ? parseInt(meetings.date.split('T')[0].split('-')[1]) === monthNow ? 1 : 0 : 0).reduce((acc: number, item: number) => acc + item)).filter((item: any) => item !== 0).length
+
+  let inactive = allGroups - active
 
   return (
     <Content>
       <Box width='500px'>
-        <BoxHeader title='Situação'>
+        <BoxHeader title='Situação de grupos'>
         </BoxHeader>
         <BoxContent>
           <Status>
             <Situation>
               <p>Todos</p>
-              <h2>0</h2>
+              <h2>{allGroups}</h2>
               <p>100%</p>
             </Situation>
             <Situation>
               <p>Ativos</p>
-              <h2>0</h2>
-              <p>NaN%</p>
+              <h2>{active}</h2>
+              <p>{active / allGroups * 100}%</p>
             </Situation>
             <Situation>
               <p>Inativos</p>
-              <h2>0</h2>
-              <p>NaN%</p>
+              <h2>{inactive}</h2>
+              <p>{inactive / allGroups * 100}%</p>
             </Situation>
           </Status>
           <p>Grupos que enviaram frequência de reunião nos últimos 30 dias são automaticamente marcados como ATIVOS.</p>
@@ -89,7 +99,12 @@ const OverviewGroups = () => {
           <Button><Link to='/groupreports/meetings'>Ver todos</Link></Button>
         </BoxHeader>
         <BoxContent>
-
+          {dataMeetings?.meetings.map((meetings: any) => parseInt(meetings.date?.split('T')[0]?.split('-')[1]) === monthNow ?
+            <MeetingsContainer>
+              <h3>{meetings.subject}</h3>
+              <h5>{meetings.date?.split('T')[0]}</h5>
+            </MeetingsContainer>
+            : null)}
         </BoxContent>
       </Box>
     </Content>
