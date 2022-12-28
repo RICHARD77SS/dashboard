@@ -5,7 +5,7 @@ import Button from "../Button";
 import Content from "../Content";
 import GrapPieArea from "../GraphPieArea";
 
-import { Status, Situation, Graph, MeetingsContainer } from "./styles";
+import { Status, Situation, Graph, MeetingsContainer, ScrollContent } from "./styles";
 import { Link } from 'react-router-dom';
 import { useAxios } from "../../hooks/useAxios";
 const OverviewGroups = () => {
@@ -60,7 +60,7 @@ const OverviewGroups = () => {
 
   return (
     <Content>
-      <Box width='500px'>
+      <Box width='650px'>
         <BoxHeader title='Situação de grupos'>
         </BoxHeader>
         <BoxContent>
@@ -84,27 +84,29 @@ const OverviewGroups = () => {
           <p>Grupos que enviaram frequência de reunião nos últimos 30 dias são automaticamente marcados como ATIVOS.</p>
         </BoxContent>
       </Box>
-      <Box width='400px'>
+      <Box>
         <BoxHeader title="Grupos">
           <Button><Link to='/groupcategories' >Ver Todos</Link></Button>
         </BoxHeader>
-        <BoxContent width='400px'>
+        <BoxContent width='600px'>
           <Graph>
             <GrapPieArea data={PieData} />
           </Graph>
         </BoxContent>
       </Box>
-      <Box width='400px'>
+      <Box>
         <BoxHeader title='Reuniões'>
           <Button><Link to='/groupreports/meetings'>Ver todos</Link></Button>
         </BoxHeader>
-        <BoxContent>
-          {dataMeetings?.meetings.map((meetings: any) => parseInt(meetings.date?.split('T')[0]?.split('-')[1]) === monthNow ?
-            <MeetingsContainer>
-              <h3>{meetings.subject}</h3>
-              <h5>{meetings.date?.split('T')[0]}</h5>
-            </MeetingsContainer>
-            : null)}
+        <BoxContent width='500px'>
+          <ScrollContent>
+            {dataMeetings?.meetings.map((meetings: any) => parseInt(meetings.date?.split('T')[0]?.split('-')[1]) === monthNow ?
+              <MeetingsContainer>
+                <h3>{meetings.subject}</h3>
+                <h5>{meetings.date?.split('T')[0]}</h5>
+              </MeetingsContainer>
+              : null)}
+          </ScrollContent>
         </BoxContent>
       </Box>
     </Content>
