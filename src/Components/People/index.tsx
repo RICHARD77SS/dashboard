@@ -2,9 +2,7 @@ import React from 'react';
 import { BsArrowDown, BsArrowUp, BsFilter } from 'react-icons/bs';
 import Input from '../Input';
 import TopTableOptions from '../TopTableOptions';
-import {
-  TableContainer, Buttonb, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex,
-} from './styles';
+import { Buttonb, Filters, FilterHeader, FilterOptions, GroupType } from './styles';
 import Table from '../Table'
 import Thead from '../Thead';
 import Tr from '../Tr';
@@ -21,6 +19,10 @@ import BoxContent from '../BoxContent';
 import Aside from '../Aside';
 
 import { useAxios } from '../../hooks/useAxios'
+import TableContainer from '../TableContainer';
+import InputBlock from '../InputBlock';
+import Button from '../Button';
+import Flex from '../Flex';
 
 
 const People = () => {
@@ -31,7 +33,16 @@ const People = () => {
   var month = date.getMonth() + 1
   var year = date.getFullYear()
 
+  const [order, setOrder] = React.useState(1)
+  const [column, setColumn] = React.useState('')
+
+  const handleOrder = (fName: any) => {
+    setOrder(-order)
+    setColumn(fName)
+  }
+
   var Lenght = data?.person.length
+
   return (
     <Container>
       <br />
@@ -42,56 +53,44 @@ const People = () => {
         <BoxB>
           <BoxHeader title={`Resultados:${Lenght}`}>
           </BoxHeader>
-          <BoxContent>
+          <BoxContent >
             <TopTableOptions />
             <TableContainer>
               <Table>
                 <Thead>
                   <Tr>
-                    <Th>Nome completo <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>E-mail <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Data de nascimento <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Telefones <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Idade <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Sexo <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Endereço <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>CEP <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Cidade <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Documento 1 <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Documento 2 <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Estado civil<p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Escolaridade<p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Nome do cônjuge<p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Data de conversão<p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Batizado<p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Criado em <p><BsArrowUp /><BsArrowDown /></p></Th>
-                    <Th>Categoria <p><BsArrowUp /><BsArrowDown /></p></Th>
+                    <Th><Button onClick={() => handleOrder('name')}> Nome completo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('email')}>E-mail <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('birth')}>Data de nascimento <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('phone1')}>Telefones <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('birth')}>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('birth')}>Idade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('sex')}>Sexo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('address')}>Endereço <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('zipcode')}>CEP <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('city')}>Cidade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('document1')}>Documento 1 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('document2')}>Documento 2 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('marital')}>Estado civil<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('schooling')}>Escolaridade<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('spouse')}>Nome do cônjuge<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('Conversion')}>Data de conversão<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('baptized')}>Batizado<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('baptismDate')}>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('registerDate')}>Criado em <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => handleOrder('category')}>Categoria <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
 
                   {data?.person?.map((persons: any, index: any) => {
-
-
                     var birthday = new Date(persons.birth)
-
                     var age_now = year - birthday.getFullYear()
                     var mont = month - birthday.getMonth()
                     if (mont < 0 || (mont === 0 && day < birthday.getDate())) {
                       age_now--;
                     }
-
-                    var baptizeds = persons.baptized
-                    if (baptizeds === true) {
-                      baptizeds = "Sim"
-                    } else {
-                      baptizeds = "Não"
-                    }
-
                     var age_group = ''
-
                     if (age_now >= 0 && age_now <= 12) {
                       age_group = "Criança"
                     }
@@ -107,10 +106,10 @@ const People = () => {
                     if (age_now >= 55 && age_now <= 145) {
                       age_group = "Idoso"
                     }
-
                     let Birth = birthday.toLocaleDateString()
                     let ConversionDate = new Date(persons.conversion)
                     let Conversion = ConversionDate.toLocaleDateString()
+
                     return (
                       <Tr key={persons._id}>
                         <Td><Link to={`/persons/details/${index}`}><pre>{persons.name}</pre></Link></Td>
@@ -129,13 +128,13 @@ const People = () => {
                         <Td><pre>{persons.schooling}</pre></Td>
                         <Td>{persons.spouse}</Td>
                         <Td>{Conversion}</Td>
-                        <Td>{baptizeds}</Td>
-                        <Td>{persons.baptismDate}</Td>
-                        <Td><pre>{persons.registerDate}</pre></Td>
+                        <Td>{persons.baptized}</Td>
+                        <Td>{persons.baptismDate?.split('T')[0]}</Td>
+                        <Td><pre>{persons.registerDate?.split('T')[0]}</pre></Td>
                         <Td><pre>{persons.category}</pre></Td>
                       </Tr>
                     )
-                  })}
+                  }).sort((a: any, b: any) => a[column] < b[column] ? -order : order)}
                 </Tbody>
               </Table>
             </TableContainer>
@@ -153,16 +152,16 @@ const People = () => {
               <Input placeholder='Buscar' type='search' />
               <GroupType>
                 <h4>Categorias</h4>
-                <InputGroup>
+                <InputBlock>
                   <Flex>
                     <Input id='name' type='checkbox' />
                     <label htmlFor="name">name</label>
                   </Flex>
-                </InputGroup>
+                </InputBlock>
               </GroupType>
               <GroupType>
                 <h4>Sexo</h4>
-                <InputGroup>
+                <InputBlock>
                   <Flex>
                     <Input id='masculino' type='checkbox' />
                     <label htmlFor="masculino">Masculino</label>
@@ -171,11 +170,11 @@ const People = () => {
                     <Input id='feminino' type='checkbox' />
                     <label htmlFor="feminino">Feminino</label>
                   </Flex>
-                </InputGroup>
+                </InputBlock>
               </GroupType>
               <GroupType>
                 <h4>Estado civil</h4>
-                <InputGroup>
+                <InputBlock>
                   <Flex>
                     <Input id='solteiro' type='checkbox' />
                     <label htmlFor="solteiro">Solteiro(a)</label>
@@ -196,11 +195,11 @@ const People = () => {
                     <Input id='outro' type='checkbox' />
                     <label htmlFor="outro">Outro</label>
                   </Flex>
-                </InputGroup>
+                </InputBlock>
               </GroupType>
               <GroupType>
                 <h4>Escolaridade</h4>
-                <InputGroup>
+                <InputBlock>
                   <Flex>
                     <Input id='maternal' type='checkbox' />
                     <label htmlFor="maternal">Maternal</label>
@@ -245,11 +244,11 @@ const People = () => {
                     <Input id='nenhum' type='checkbox' />
                     <label htmlFor="nenhum">Nenhum</label>
                   </Flex>
-                </InputGroup>
+                </InputBlock>
               </GroupType>
               <GroupType>
                 <h4>Batizado</h4>
-                <InputGroup>
+                <InputBlock>
                   <Flex>
                     <Input id='sim' type='checkbox' />
                     <label htmlFor="sim">Sim</label>
@@ -258,20 +257,20 @@ const People = () => {
                     <Input id='nao' type='checkbox' />
                     <label htmlFor="nao">Não</label>
                   </Flex>
-                </InputGroup>
+                </InputBlock>
               </GroupType>
               <GroupType>
                 <h4>Cargos</h4>
-                <InputGroup>
+                <InputBlock>
                   <Flex>
                     <Input id='name' type='checkbox' />
                     <label htmlFor="name">name</label>
                   </Flex>
-                </InputGroup>
+                </InputBlock>
               </GroupType>
               <GroupType>
                 <h4>Faixa etária</h4>
-                <InputGroup>
+                <InputBlock>
                   <Flex>
                     <Input id='kid' type='checkbox' />
                     <label htmlFor="kid">Crianças</label>
@@ -292,9 +291,8 @@ const People = () => {
                     <Input id='seniors' type='checkbox' />
                     <label htmlFor="seniors">idosos</label>
                   </Flex>
-                </InputGroup>
+                </InputBlock>
               </GroupType>
-
             </FilterOptions>
           </Filters>
         </Aside>
