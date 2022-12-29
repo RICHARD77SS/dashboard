@@ -8,6 +8,7 @@ import { PersonContext } from './../../contexts/personContext';
 import React from "react";
 import { useAxios } from "../../hooks/useAxios";
 import Flex from "../Flex";
+
 interface Props {
   name?: string;
   image?: string;
@@ -37,6 +38,9 @@ interface Props {
   group?: string;
   notes?: string;
   id?: string;
+  baptismDate?: string;
+  spouse?: string;
+  convertedSpouse?: string;
 }
 const PersonDetailsEdit = (Props: Props) => {
   const {
@@ -66,6 +70,7 @@ const PersonDetailsEdit = (Props: Props) => {
     conversion,
     notes,
     baptized,
+    baptismDate,
     passwordHandler,
     birthHandler,
     sexHandler,
@@ -88,6 +93,7 @@ const PersonDetailsEdit = (Props: Props) => {
     conversionHandler,
     notesHandler,
     baptizedHandler,
+    baptismDateHandler,
     image,
     imageHandler,
     setId,
@@ -121,6 +127,13 @@ const PersonDetailsEdit = (Props: Props) => {
     setNotes,
     setBaptized,
     setImage,
+    setBaptismDate,
+    setSpouse,
+    spouse,
+    spouseHandler,
+    convertedSpouse,
+    setConvertedSpouse,
+    convertedSpouseHandler,
     modal, setModal
   } = React.useContext(PersonContext)
 
@@ -133,7 +146,6 @@ const PersonDetailsEdit = (Props: Props) => {
 
   let conversionDate = Props.conversion
   let formatConversionDate = conversionDate?.split('T')[0]
-
   let creationDate = registerDate?.split('T')[0]
   React.useEffect(() => {
     setId(Props.id)
@@ -163,38 +175,12 @@ const PersonDetailsEdit = (Props: Props) => {
     setBaptized(Props.batizm)
     setImage(Props.image)
     setRegisterDate(Props.dataCreation)
-
-  }, [setId, Props.id,
-    setName, Props.name,
-    setEmail, Props.email,
-    setPassword, Props.password,
-    setBirth, formatBirt,
-    setSex, Props.sex,
-    setSchooling, Props.schooling,
-    setMarital, Props.marital,
-    setDocument1, Props.document1,
-    setDocument2, Props.document2,
-    setPhone1, Props.phone1,
-    setPhone2, Props.phone2,
-    setAddress, Props.addres,
-    setNumber, Props.number,
-    setDistrict, Props.district,
-    setZipcode, Props.zipcode,
-    setCountry, Props.country,
-    setState, Props.state,
-    setCity, Props.city,
-    setGroup, Props.group,
-    setCategory, Props.category,
-    setOffice, Props.office,
-    setConversion, formatConversionDate,
-    setNotes, Props.notes,
-    setBaptized, Props.batizm,
-    setImage, Props.image,
-    setRegisterDate, Props.dataCreation])
-
+    setBaptismDate(Props.baptismDate)
+    setSpouse(Props.spouse)
+    setConvertedSpouse(Props.convertedSpouse)
+  }, [setId, Props.id, setName, Props.name, setEmail, Props.email, setPassword, Props.password, setBirth, formatBirt, setSex, Props.sex, setSchooling, Props.schooling, setMarital, Props.marital, setDocument1, Props.document1, setDocument2, Props.document2, setPhone1, Props.phone1, setPhone2, Props.phone2, setAddress, Props.addres, setNumber, Props.number, setDistrict, Props.district, setZipcode, Props.zipcode, setCountry, Props.country, setState, Props.state, setCity, Props.city, setGroup, Props.group, setCategory, Props.category, setOffice, Props.office, setConversion, formatConversionDate, setNotes, Props.notes, setBaptized, Props.batizm, setImage, Props.image, setRegisterDate, Props.dataCreation, Props.baptismDate, setBaptismDate, Props.spouse, Props.convertedSpouse, setSpouse, setConvertedSpouse])
   return (
     <Container >
-
       <Form >
         <Block>
           <Box>
@@ -212,7 +198,7 @@ const PersonDetailsEdit = (Props: Props) => {
               </InputBlock>
               <InputBlock>
                 <p><b>Senha: &nbsp;</b></p>
-                <Input title='a' type='text' value={password} onChange={passwordHandler} />
+                <Input title='senha' type='text' value={password} onChange={passwordHandler} />
               </InputBlock>
               <InputBlock>
                 <p><b>Data de nascimento: &nbsp;</b><br /></p>
@@ -252,6 +238,21 @@ const PersonDetailsEdit = (Props: Props) => {
                   <option value='Outros' >Outros</option>
                 </select>
               </InputBlock>
+              {marital === 'Casado(a)' ?
+                <Flex>
+                  <Block>
+                    <label htmlFor="conjugue">Nome do Cônjugue</label>
+                    <Input type='text' value={spouse} onChange={spouseHandler} />
+                  </Block>
+                  <Block>
+                    <label htmlFor="convertedspouse">Cônjugue convertido</label>
+                    <select title='selecte' id='convertedSpouse' value={convertedSpouse} onChange={convertedSpouseHandler}>
+                      <option value='Sim' >Sim</option>
+                      <option value='Não' >Não</option>
+                    </select>
+                  </Block>
+                </Flex>
+                : null}
               <InputBlock>
                 <p><b>Documento 1: &nbsp;</b></p>
                 <Input type='text' value={document1} onChange={document1Handler} />
@@ -270,7 +271,18 @@ const PersonDetailsEdit = (Props: Props) => {
                 <p>Selecione para remover</p>
                 <Flex>
                   {dataGroups?.groups.map((groups: any, index: any) => {
-                    return (
+                    return group.includes(groups.name) ?
+                      <Flex>
+                        <Input key={index}
+                          type='checkbox'
+                          name={groups.name}
+                          id={groups.name}
+                          value={groups.name}
+                          onChange={groupHandler}
+                          checked
+                        />
+                        <label htmlFor={groups.name} >{groups.name}</label>
+                      </Flex> :
                       <Flex>
                         <Input key={index}
                           type='checkbox'
@@ -281,7 +293,7 @@ const PersonDetailsEdit = (Props: Props) => {
                         />
                         <label htmlFor={groups.name} >{groups.name}</label>
                       </Flex>
-                    )
+
                   })}
                 </Flex>
               </Block>
@@ -290,7 +302,7 @@ const PersonDetailsEdit = (Props: Props) => {
                 <p>Selecione para remover</p>
                 <Flex>
                   {dataCategory?.category.map((categories: any, index: any) => {
-                    return (
+                    return category.includes(categories.name) ?
                       <Flex>
                         <Input key={index}
                           name={categories.name}
@@ -298,11 +310,22 @@ const PersonDetailsEdit = (Props: Props) => {
                           type='checkbox'
                           value={categories.name}
                           onChange={categoryHandler}
-
+                          checked
                         />
-                        <label className={category?.map((cat: string) => cat === categories.name ? 'green' : 'red')} htmlFor={categories.name}>{categories.name}</label>
+                        <label htmlFor={categories.name}>{categories.name}</label>
+                      </Flex> :
+                      <Flex>
+                        <Input key={index}
+                          name={categories.name}
+                          id={categories.name}
+                          type='checkbox'
+                          value={categories.name}
+                          onChange={categoryHandler}
+                        />
+                        <label htmlFor={categories.name}>{categories.name}</label>
                       </Flex>
-                    )
+
+
                   })}
                 </Flex>
               </Block>
@@ -310,7 +333,18 @@ const PersonDetailsEdit = (Props: Props) => {
                 <p><b>Cargos: &nbsp;</b></p>
                 <Flex>
                   {dataPositions?.positions.map((positions: any, index: any) => {
-                    return (
+                    return office.includes(positions.name) ?
+                      <Flex>
+                        <Input key={index}
+                          id={positions.name}
+                          name={positions.name}
+                          value={positions.name}
+                          onChange={officeHandler}
+                          type='checkbox'
+                          checked
+                        />
+                        <label htmlFor={positions.name}>{positions.name}</label>
+                      </Flex> :
                       <Flex>
                         <Input key={index}
                           id={positions.name}
@@ -321,7 +355,7 @@ const PersonDetailsEdit = (Props: Props) => {
                         />
                         <label htmlFor={positions.name}>{positions.name}</label>
                       </Flex>
-                    )
+
                   })}
                 </Flex>
               </Block>
@@ -330,15 +364,20 @@ const PersonDetailsEdit = (Props: Props) => {
                 <Input type='date' value={conversion} onChange={conversionHandler} />
               </InputBlock>
               <InputBlock>
-
                 <p><b>Batizado: &nbsp;</b></p>
                 <select title='baptizm' id='baptism' value={baptized} onChange={baptizedHandler}>
-                  <option value='true' >Sim</option>
-                  <option value='false' >Não</option>
+                  <option value='Sim' >Sim</option>
+                  <option value='Não' >Não</option>
                 </select>
               </InputBlock>
+              <Block>
+                {baptized === 'Sim' ?
+                  <>
+                    <label htmlFor="baptismdate">Data de batismo</label>
+                    <Input id='baptismdate' type='date' value={baptismDate?.split('T')[0]} onChange={baptismDateHandler} />
+                  </> : null}
+              </Block>
               <InputBlock>
-
                 <p><b>Perfil criado em: &nbsp;</b></p>
                 <Input type='date' onChange={registerDateHandler} value={creationDate} />
               </InputBlock>
@@ -350,17 +389,14 @@ const PersonDetailsEdit = (Props: Props) => {
             <BoxHeader title='Contatos'></BoxHeader>
             <BoxContent>
               <InputBlock>
-
                 <p><b>Telefone 1: &nbsp;</b></p>
                 <Input type='text' value={phone1} onChange={phone1Handler} />
               </InputBlock>
               <InputBlock>
-
                 <p><b>Telefone 2: &nbsp;</b></p>
                 <Input type='text' value={phone2} onChange={phone2Handler} />
               </InputBlock>
               <InputBlock>
-
                 <p><b>E-mail: &nbsp;</b></p>
                 <Input type='email' value={email} onChange={emailHandler} />
               </InputBlock>
@@ -374,7 +410,6 @@ const PersonDetailsEdit = (Props: Props) => {
                 <Input type='text' value={address} onChange={addressHandler} />
               </InputBlock>
               <InputBlock>
-
                 <p><b>Bairro: &nbsp; </b></p>
                 <Input type='text' value={district} onChange={districtHandler} />
               </InputBlock>
