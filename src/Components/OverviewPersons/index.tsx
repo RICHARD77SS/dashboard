@@ -8,7 +8,7 @@ import Button from "../Button";
 
 import GraphLineArea from "../GraphLineArea"
 
-import { Flex, Graph, Grid1, GraphContainer, Datalist, Div, User, Image } from './styles'
+import { Flex, Graph, Grid1, GraphContainer, Datalist, Div, User, Image, ScrollContent } from './styles'
 import Block from "../Block";
 import GraphPieArea from "../GraphPieArea";
 import { Link } from 'react-router-dom';
@@ -320,67 +320,70 @@ const OverviewPersons = () => {
             <p>Total de Mulheres </p>
           </Div>
         </Grid1>
-        <Box width='90%'>
-          <BoxHeader title='Novos Convertidos'>
-            <Datalist>
-              <select title='period' placeholder='  Selecione o periodo' value={periodo} onChange={periodoHandler} >
-                <option value="Mensal" >Mensal</option>
-                <option value="Semanal">Semmanal</option>
-                <option value="Anual">Anual</option>
-              </select>
-            </Datalist>
-          </BoxHeader>
-          <BoxContent>
-            <Graph>
-              <GraphLineArea data={LineData} />
-            </Graph>
-          </BoxContent>
-        </Box>
         <Content>
-          <Box width='320px' height='400px'>
-            <BoxHeader title='Cadastros recentes'>
-
-              <Button><Link to='/people' >Ver Todos</Link></Button>
+          <Box width='auto'>
+            <BoxHeader title='Novos Convertidos'>
+              <Datalist>
+                <select title='period' placeholder='  Selecione o periodo' value={periodo} onChange={periodoHandler} >
+                  <option value="Mensal" >Mensal</option>
+                  <option value="Semanal">Semmanal</option>
+                  <option value="Anual">Anual</option>
+                </select>
+              </Datalist>
             </BoxHeader>
-            <BoxContent width='320px'>
-              {dataPerson?.person.map((person: any, index: number) => {
-
-                return (
-                  <User key={index}>
-                    <Image>
-                      <img src={person.image} alt="" />
-                    </Image>
-                    <p>{person.name}</p>
-                  </User>
-                )
-              })}
+            <BoxContent>
+              <Graph>
+                <GraphLineArea data={LineData} />
+              </Graph>
             </BoxContent>
           </Box>
-          <Box width='320px'>
-            <BoxHeader title='Aniversariantes do mês'>
+          <Box >
+            <BoxHeader title='Cadastros recentes'>
+              <Button><Link to='/people' >Ver Todos</Link></Button>
             </BoxHeader>
-            <BoxContent height='400px'>
-              {birthdayMonth ? birthdayMonth?.map((person: any, index: number) => {
-                if (person?.name || person?.image)
+            <BoxContent>
+              <ScrollContent>
+                {dataPerson?.person.map((person: any, index: number) => {
+
                   return (
                     <User key={index}>
                       <Image>
-                        <img src={person?.image} alt="" />
+                        <img src={person.image} alt="" />
                       </Image>
-                      <p>{person?.name}</p>
+                      <p>{person.name}</p>
                     </User>
-
                   )
-                return <></>
-              })
-                : <h2>Nenhum aniversariante esse mês</h2>}
+                })}
+              </ScrollContent>
+            </BoxContent>
+          </Box>
+          <Box>
+            <BoxHeader title='Aniversariantes do mês'>
+            </BoxHeader>
+            <BoxContent >
+              <ScrollContent>
+                {birthdayMonth ? birthdayMonth?.map((person: any, index: number) => {
+                  if (person?.name || person?.image)
+                    return (
+                      <User key={index}>
+                        <Image>
+                          <img src={person?.image} alt="" />
+                        </Image>
+                        <p>{person?.name}</p>
+                      </User>
+
+                    )
+                  return <></>
+                })
+                  : <h2>Nenhum aniversariante esse mês</h2>}
+              </ScrollContent>
             </BoxContent>
           </Box>
         </Content>
 
       </Block>
       <Flex>
-        <Box width='350px'>
+        <Box>
           <BoxHeader title='Categorias'>
             <Button><Link to='/categories' >Ver Todos</Link></Button>
           </BoxHeader>
@@ -390,7 +393,7 @@ const OverviewPersons = () => {
             </GraphContainer>
           </BoxContent>
         </Box>
-        <Box width='350px'>
+        <Box>
           <BoxHeader title='Faixa etária'>
           </BoxHeader>
           <BoxContent>
