@@ -35,14 +35,26 @@ const People = () => {
 
   const [order, setOrder] = React.useState(1)
   const [column, setColumn] = React.useState('')
+  const [activeColumn, setActiveColum] = React.useState<string[]>([])
+
+
 
   const handleOrder = (fName: any) => {
     setOrder(-order)
     setColumn(fName)
   }
+  const handleColumn = (event: any) => {
 
+    let nameC = event.target.value
+    if (activeColumn.indexOf(nameC) > -1) {
+      setActiveColum(prev => prev.filter((cl: any) => cl !== nameC))
+    } else {
+      setActiveColum((oldArr: string[]) => [...oldArr, event.target.value])
+
+    }
+  }
   var Lenght = data?.person.length
-
+  console.log(activeColumn)
   return (
     <Container>
       <br />
@@ -54,31 +66,157 @@ const People = () => {
           <BoxHeader title={`Resultados:${Lenght}`}>
           </BoxHeader>
           <BoxContent >
-            <TopTableOptions />
+            <TopTableOptions >
+              <>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('name') ? true : false} value='name' />
+                  <label htmlFor=''>Nome completo </label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('email') ? true : false} value='email' />
+                  <label htmlFor=''>E-mail</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('birth') ? true : false} value='birth' />
+                  <label htmlFor=''>Data de nascimento</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('phone1') ? true : false} value='phone1' />
+                  <label htmlFor=''>Telefones</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('faixa') ? true : false} value='faixa' />
+                  <label htmlFor=''>Faixa etária</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('age') ? true : false} value='age' />
+                  <label htmlFor=''>Idade</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('sex') ? true : false} value='sex' />
+                  <label htmlFor=''>Sexo</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('address') ? true : false} value='address' />
+                  <label htmlFor=''>Endereço</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('zipcode') ? true : false} value='zipcode' />
+                  <label htmlFor=''>CEP</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('city') ? true : false} value='city' />
+                  <label htmlFor=''>Cidade</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('document1') ? true : false} value='document1' />
+                  <label htmlFor=''>Documento 1</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('document2') ? true : false} value='document2' />
+                  <label htmlFor=''>Documento 2</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('marital') ? true : false} value='marital' />
+                  <label htmlFor=''>Estado civi</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('schooling') ? true : false} value='schooling' />
+                  <label htmlFor=''>Escolaridad</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('spouse') ? true : false} value='spouse' />
+                  <label htmlFor=''>Nome do cônjug</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('conversion') ? true : false} value='conversion' />
+                  <label htmlFor=''>Data de conversã</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('baptized') ? true : false} value='baptized' />
+                  <label htmlFor=''>Batizad</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('baptismDate') ? true : false} value='baptismDate' />
+                  <label htmlFor=''>Data de batism</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('registerDate') ? true : false} value='registerDate' />
+                  <label htmlFor=''>Criado em</label>
+                </Flex>
+                <Flex>
+                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('category') ? true : false} value='category' />
+                  <label htmlFor=''>Categoria</label>
+                </Flex>
+              </>
+            </TopTableOptions>
             <TableContainer>
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button onClick={() => handleOrder('name')}> Nome completo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('email')}>E-mail <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('birth')}>Data de nascimento <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('phone1')}>Telefones <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('birth')}>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('birth')}>Idade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('sex')}>Sexo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('address')}>Endereço <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('zipcode')}>CEP <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('city')}>Cidade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('document1')}>Documento 1 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('document2')}>Documento 2 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('marital')}>Estado civil<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('schooling')}>Escolaridade<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('spouse')}>Nome do cônjuge<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('Conversion')}>Data de conversão<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('baptized')}>Batizado<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('baptismDate')}>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('registerDate')}>Criado em <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button onClick={() => handleOrder('category')}>Categoria <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    {activeColumn.includes('name') ? null :
+                      <Th>
+                        <Button onClick={() => handleOrder('name')}> Nome completo <p><BsArrowUp /><BsArrowDown /></p>
+                        </Button>
+                      </Th>
+                    }
+                    {activeColumn.includes('email') ? null :
+                      <Th><Button onClick={() => handleOrder('email')}>E-mail <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('birth') ? null :
+                      <Th><Button onClick={() => handleOrder('birth')}>Data de nascimento <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('phone1') ? null :
+                      <Th><Button onClick={() => handleOrder('phone1')}>Telefones <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('faixa') ? null :
+                      <Th><Button onClick={() => handleOrder('faixa')}>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('age') ? null :
+                      <Th><Button onClick={() => handleOrder('age')}>Idade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('sex') ? null :
+                      <Th><Button onClick={() => handleOrder('sex')}>Sexo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('address') ? null :
+                      <Th><Button onClick={() => handleOrder('address')}>Endereço <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('zipcode') ? null :
+                      <Th><Button onClick={() => handleOrder('zipcode')}>CEP <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('city') ? null :
+                      <Th><Button onClick={() => handleOrder('city')}>Cidade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('document1') ? null :
+                      <Th><Button onClick={() => handleOrder('document1')}>Documento 1 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('document2') ? null :
+                      <Th><Button onClick={() => handleOrder('document2')}>Documento 2 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('marital') ? null :
+                      <Th><Button onClick={() => handleOrder('marital')}>Estado civil<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('schooling') ? null :
+                      <Th><Button onClick={() => handleOrder('schooling')}>Escolaridade<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('spouse') ? null :
+                      <Th><Button onClick={() => handleOrder('spouse')}>Nome do cônjuge<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('conversion') ? null :
+                      <Th><Button onClick={() => handleOrder('conversion')}>Data de conversão<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('baptized') ? null :
+                      <Th><Button onClick={() => handleOrder('baptized')}>Batizado<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('baptismDate') ? null :
+                      <Th><Button onClick={() => handleOrder('baptismDate')}>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('registerDate') ? null :
+                      <Th><Button onClick={() => handleOrder('registerDate')}>Criado em <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
+                    {activeColumn.includes('category') ? null :
+                      <Th><Button onClick={() => handleOrder('category')}>Categoria <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    }
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -112,26 +250,66 @@ const People = () => {
 
                     return (
                       <Tr key={persons._id}>
-                        <Td><Link to={`/persons/details/${index}`}><pre>{persons.name}</pre></Link></Td>
-                        <Td>{persons.email}</Td>
-                        <Td>{Birth}</Td>
-                        <Td>{persons.phone1},<br />{persons.phone2}</Td>
-                        <Td>{age_group}</Td>
-                        <Td>{age_now}</Td>
-                        <Td>{persons.sex}</Td>
-                        <Td><pre>{persons.address}</pre></Td>
-                        <Td>{persons.zipcode}</Td>
-                        <Td><pre>{persons.city}</pre></Td>
-                        <Td>{persons.document1}</Td>
-                        <Td>{persons.document2}</Td>
-                        <Td>{persons.marital}</Td>
-                        <Td><pre>{persons.schooling}</pre></Td>
-                        <Td>{persons.spouse}</Td>
-                        <Td>{Conversion}</Td>
-                        <Td>{persons.baptized}</Td>
-                        <Td>{persons.baptismDate?.split('T')[0]}</Td>
-                        <Td><pre>{persons.registerDate?.split('T')[0]}</pre></Td>
-                        <Td><pre>{persons.category}</pre></Td>
+                        {activeColumn.includes('name') ? null :
+                          <Td><Link to={`/persons/details/${index}`}><pre>{persons.name}</pre></Link></Td>
+                        }
+                        {activeColumn.includes('email') ? null :
+                          <Td>{persons.email}</Td>
+                        }
+                        {activeColumn.includes('birth') ? null :
+                          <Td>{Birth}</Td>
+                        }
+                        {activeColumn.includes('phone1') ? null :
+                          <Td>{persons.phone1},<br />{persons.phone2}</Td>
+                        }
+                        {activeColumn.includes('faixa') ? null :
+                          <Td>{age_group}</Td>
+                        }
+                        {activeColumn.includes('age') ? null :
+                          <Td>{age_now}</Td>
+                        }
+                        {activeColumn.includes('sex') ? null :
+                          <Td>{persons.sex}</Td>
+                        }
+                        {activeColumn.includes('address') ? null :
+                          <Td><pre>{persons.address}</pre></Td>
+                        }
+                        {activeColumn.includes('zipcode') ? null :
+                          <Td>{persons.zipcode}</Td>
+                        }
+                        {activeColumn.includes('city') ? null :
+                          <Td><pre>{persons.city}</pre></Td>
+                        }
+                        {activeColumn.includes('document1') ? null :
+                          <Td>{persons.document1}</Td>
+                        }
+                        {activeColumn.includes('document2') ? null :
+                          <Td>{persons.document2}</Td>
+                        }
+                        {activeColumn.includes('marital') ? null :
+                          <Td>{persons.marital}</Td>
+                        }
+                        {activeColumn.includes('schooling') ? null :
+                          <Td><pre>{persons.schooling}</pre></Td>
+                        }
+                        {activeColumn.includes('spouse') ? null :
+                          <Td>{persons.spouse}</Td>
+                        }
+                        {activeColumn.includes('conversion') ? null :
+                          <Td>{Conversion}</Td>
+                        }
+                        {activeColumn.includes('baptized') ? null :
+                          <Td>{persons.baptized}</Td>
+                        }
+                        {activeColumn.includes('baptismDate') ? null :
+                          <Td>{persons.baptismDate?.split('T')[0]}</Td>
+                        }
+                        {activeColumn.includes('registerDate') ? null :
+                          <Td><pre>{persons.registerDate?.split('T')[0]}</pre></Td>
+                        }
+                        {activeColumn.includes('category') ? null :
+                          <Td><pre>{persons.category}</pre></Td>
+                        }
                       </Tr>
                     )
                   }).sort((a: any, b: any) => a[column] < b[column] ? -order : order)}
