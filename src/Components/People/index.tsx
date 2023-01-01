@@ -36,25 +36,33 @@ const People = () => {
   const [order, setOrder] = React.useState(1)
   const [column, setColumn] = React.useState('')
   const [activeColumn, setActiveColum] = React.useState<string[]>([])
-
+  const [filters, setFilters] = React.useState<string[]>([])
 
 
   const handleOrder = (fName: any) => {
     setOrder(-order)
     setColumn(fName)
   }
-  const handleColumn = (event: any) => {
 
-    let nameC = event.target.value
-    if (activeColumn.indexOf(nameC) > -1) {
-      setActiveColum(prev => prev.filter((cl: any) => cl !== nameC))
+  const handleColumn = (event: any) => {
+    let nameColumn = event.target.value
+    if (activeColumn.indexOf(nameColumn) > -1) {
+      setActiveColum(prev => prev.filter((column: any) => column !== nameColumn))
     } else {
       setActiveColum((oldArr: string[]) => [...oldArr, event.target.value])
-
+    }
+  }
+  const handleFilter = (event: any) => {
+    let nameFilter = event.target.value
+    if (filters.indexOf(nameFilter) > -1) {
+      setFilters(prev => prev.filter((filter: any) => filter !== nameFilter))
+    } else {
+      setFilters((oldArr: string[]) => [...oldArr, event.target.value])
     }
   }
   var Lenght = data?.person.length
-  console.log(activeColumn)
+  console.log(filters)
+
   return (
     <Container>
       <br />
@@ -69,84 +77,244 @@ const People = () => {
             <TopTableOptions >
               <>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('name') ? true : false} value='name' />
-                  <label htmlFor=''>Nome completo </label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('name') ? true : false}
+                    value='name'
+                    id='name'
+                  />
+                  <label
+                    htmlFor='name'
+                  >Nome completo </label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('email') ? true : false} value='email' />
-                  <label htmlFor=''>E-mail</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('email') ? true : false}
+                    value='email'
+                    id='email'
+                  />
+                  <label
+                    htmlFor='email'
+                  >E-mail</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('birth') ? true : false} value='birth' />
-                  <label htmlFor=''>Data de nascimento</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('birth') ? true : false}
+                    value='birth'
+                    id='birth'
+                  />
+                  <label
+                    htmlFor='birth'
+                  >Data de nascimento</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('phone1') ? true : false} value='phone1' />
-                  <label htmlFor=''>Telefones</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('phone1') ? true : false}
+                    value='phone1'
+                    id='phone1'
+                  />
+                  <label
+                    htmlFor='phone1'
+                  >Telefones</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('faixa') ? true : false} value='faixa' />
-                  <label htmlFor=''>Faixa etária</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('faixa') ? true : false}
+                    value='faixa'
+                    id='faixa'
+                  />
+                  <label
+                    htmlFor='faixa'
+                  >Faixa etária</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('age') ? true : false} value='age' />
-                  <label htmlFor=''>Idade</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('age') ? true : false}
+                    value='age'
+                    id='age'
+                  />
+                  <label
+                    htmlFor='age'
+                  >Idade</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('sex') ? true : false} value='sex' />
-                  <label htmlFor=''>Sexo</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('sex') ? true : false}
+                    value='sex'
+                    id='sex'
+                  />
+                  <label
+                    htmlFor='sex'
+                  >Sexo</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('address') ? true : false} value='address' />
-                  <label htmlFor=''>Endereço</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('address') ? true : false}
+                    value='address'
+                    id='address'
+                  />
+                  <label
+                    htmlFor='address'
+                  >Endereço</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('zipcode') ? true : false} value='zipcode' />
-                  <label htmlFor=''>CEP</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('zipcode') ? true : false}
+                    value='zipcode'
+                    id='zipcode'
+                  />
+                  <label
+                    htmlFor='zipcode'
+                  >CEP</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('city') ? true : false} value='city' />
-                  <label htmlFor=''>Cidade</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('city') ? true : false}
+                    value='city'
+                    id='city'
+                  />
+                  <label
+                    htmlFor='city'
+                  >Cidade</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('document1') ? true : false} value='document1' />
-                  <label htmlFor=''>Documento 1</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('document1') ? true : false}
+                    value='document1'
+                    id='document1'
+                  />
+                  <label
+                    htmlFor='document1'
+                  >Documento 1</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('document2') ? true : false} value='document2' />
-                  <label htmlFor=''>Documento 2</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('document2') ? true : false}
+                    value='document2'
+                    id='document2'
+                  />
+                  <label
+                    htmlFor='document2'
+                  >Documento 2</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('marital') ? true : false} value='marital' />
-                  <label htmlFor=''>Estado civi</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('marital') ? true : false}
+                    value='marital'
+                    id='marital'
+                  />
+                  <label
+                    htmlFor='marital'
+                  >Estado civil</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('schooling') ? true : false} value='schooling' />
-                  <label htmlFor=''>Escolaridad</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('schooling') ? true : false}
+                    value='schooling'
+                    id='schooling'
+                  />
+                  <label
+                    htmlFor='schooling'
+                  >Escolaridade</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('spouse') ? true : false} value='spouse' />
-                  <label htmlFor=''>Nome do cônjug</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('spouse') ? true : false}
+                    value='spouse'
+                    id='spouse'
+                  />
+                  <label
+                    htmlFor='spouse'
+                  >Nome do cônjugue</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('conversion') ? true : false} value='conversion' />
-                  <label htmlFor=''>Data de conversã</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('conversion') ? true : false}
+                    value='conversion'
+                    id='conversion'
+                  />
+                  <label
+                    htmlFor='conversion'
+                  >Data de conversão</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('baptized') ? true : false} value='baptized' />
-                  <label htmlFor=''>Batizad</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('baptized') ? true : false}
+                    value='baptized'
+                    id='baptized'
+                  />
+                  <label
+                    htmlFor='baptized'
+                  >Batizado</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('baptismDate') ? true : false} value='baptismDate' />
-                  <label htmlFor=''>Data de batism</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('baptismDate') ? true : false}
+                    value='baptismDate'
+                    id='baptismDate'
+                  />
+                  <label
+                    htmlFor='baptismDate'
+                  >Data de batismo</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('registerDate') ? true : false} value='registerDate' />
-                  <label htmlFor=''>Criado em</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('registerDate') ? true : false}
+                    value='registerDate'
+                    id='registerDate'
+                  />
+                  <label
+                    htmlFor='registerDate'
+                  >Criado em</label>
                 </Flex>
                 <Flex>
-                  <Input type='checkbox' onChange={(event) => handleColumn(event)} checked={activeColumn.includes('category') ? true : false} value='category' />
-                  <label htmlFor=''>Categoria</label>
+                  <Input
+                    type='checkbox'
+                    onChange={(event) => handleColumn(event)}
+                    checked={activeColumn.includes('category') ? true : false}
+                    value='category'
+                    id='category'
+                  />
+                  <label
+                    htmlFor='category'
+                  >Categoria</label>
                 </Flex>
               </>
             </TopTableOptions>
@@ -248,7 +416,27 @@ const People = () => {
                     let ConversionDate = new Date(persons.conversion)
                     let Conversion = ConversionDate.toLocaleDateString()
 
-                    return (
+                    return (filters.includes('feminino') && persons.sex === 'feminino')
+                      || (filters.includes('masculino') && persons.sex === 'masculino')
+                      || (filters.includes('solteiro') && persons.marital === 'solteiro')
+                      || (filters.includes('casado') && persons.marital === 'Casado(a)')
+                      || (filters.includes('viuvo') && persons.marital === 'Viúvo(a)')
+                      || (filters.includes('divorciado') && persons.marital === 'Divorciado(a)')
+                      || (filters.includes('outro') && persons.marital === 'Outros')
+                      || (filters.includes('maternal') && persons.schooling === 'Maternal')
+                      || (filters.includes('infantil') && persons.schooling === 'Educação infantil')
+                      || (filters.includes('fundamental') && persons.schooling === 'Ensino fundamental')
+                      || (filters.includes('medio') && persons.schooling === 'Ensino medio')
+                      || (filters.includes('tecnologo') && persons.schooling === 'Ensino superior - Tecnólogo')
+                      || (filters.includes('bacharel') && persons.schooling === 'Ensino superior - Bacharel')
+                      || (filters.includes('mestrado') && persons.schooling === 'Ensino superior - Mestrado')
+                      || (filters.includes('licenciatura') && persons.schooling === 'Ensino superior - Licenciatura')
+                      || (filters.includes('doutorado') && persons.schooling === 'Ensino superior - Doutorado')
+                      || (filters.includes('outro') && persons.schooling === 'Outros')
+                      || (filters.includes('nenhum') && persons.schooling === 'Nenhum')
+                      || (filters.includes('sim') && persons.baptized === 'Sim')
+                      || (filters.includes('nao') && persons.baptized === 'Não')
+                      ? '' :
                       <Tr key={persons._id}>
                         {activeColumn.includes('name') ? null :
                           <Td><Link to={`/persons/details/${index}`}><pre>{persons.name}</pre></Link></Td>
@@ -269,7 +457,10 @@ const People = () => {
                           <Td>{age_now}</Td>
                         }
                         {activeColumn.includes('sex') ? null :
-                          <Td>{persons.sex}</Td>
+                          <Td>
+                            {persons.sex}
+
+                          </Td>
                         }
                         {activeColumn.includes('address') ? null :
                           <Td><pre>{persons.address}</pre></Td>
@@ -311,7 +502,7 @@ const People = () => {
                           <Td><pre>{persons.category}</pre></Td>
                         }
                       </Tr>
-                    )
+
                   }).sort((a: any, b: any) => a[column] < b[column] ? -order : order)}
                 </Tbody>
               </Table>
@@ -327,12 +518,19 @@ const People = () => {
               <h3>Filtros</h3>
             </FilterHeader>
             <FilterOptions>
-              <Input placeholder='Buscar' type='search' />
+              <Input placeholder='Buscar'
+                type='search' />
               <GroupType>
                 <h4>Categorias</h4>
                 <InputBlock>
                   <Flex>
-                    <Input id='name' type='checkbox' />
+                    <Input
+                      id='name'
+                      value='name'
+                      checked={filters.includes('name') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="name">name</label>
                   </Flex>
                 </InputBlock>
@@ -341,11 +539,23 @@ const People = () => {
                 <h4>Sexo</h4>
                 <InputBlock>
                   <Flex>
-                    <Input id='masculino' type='checkbox' />
+                    <Input
+                      id='masculino'
+                      value='masculino'
+                      checked={filters.includes('masculino') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="masculino">Masculino</label>
                   </Flex>
                   <Flex>
-                    <Input id='feminino' type='checkbox' />
+                    <Input
+                      id='feminino'
+                      value='feminino'
+                      checked={filters.includes('feminino') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="feminino">Feminino</label>
                   </Flex>
                 </InputBlock>
@@ -354,23 +564,53 @@ const People = () => {
                 <h4>Estado civil</h4>
                 <InputBlock>
                   <Flex>
-                    <Input id='solteiro' type='checkbox' />
+                    <Input
+                      id='solteiro'
+                      value='solteiro'
+                      checked={filters.includes('solteiro') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="solteiro">Solteiro(a)</label>
                   </Flex>
                   <Flex>
-                    <Input id='casado' type='checkbox' />
+                    <Input
+                      id='casado'
+                      value='casado'
+                      checked={filters.includes('casado') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="casado">Casado(a)</label>
                   </Flex>
                   <Flex>
-                    <Input id='viuvo ' type='checkbox' />
+                    <Input
+                      id='viuvo '
+                      value='viuvo '
+                      checked={filters.includes('viuvo ') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="viuvo">Viúvo(a)</label>
                   </Flex>
                   <Flex>
-                    <Input id='divorciado' type='checkbox' />
+                    <Input
+                      id='divorciado'
+                      value='divorciado'
+                      checked={filters.includes('divorciado') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="divorciado">Divorciado(a)</label>
                   </Flex>
                   <Flex>
-                    <Input id='outro' type='checkbox' />
+                    <Input
+                      id='outro'
+                      value='outro'
+                      checked={filters.includes('outro') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="outro">Outro</label>
                   </Flex>
                 </InputBlock>
@@ -379,47 +619,113 @@ const People = () => {
                 <h4>Escolaridade</h4>
                 <InputBlock>
                   <Flex>
-                    <Input id='maternal' type='checkbox' />
+                    <Input
+                      id='maternal'
+                      value='maternal'
+                      checked={filters.includes('maternal') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="maternal">Maternal</label>
                   </Flex>
                   <Flex>
-                    <Input id='infantil' type='checkbox' />
+                    <Input
+                      id='infantil'
+                      value='infantil'
+                      checked={filters.includes('infantil') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="infantil">Educação infantil</label>
                   </Flex>
                   <Flex>
-                    <Input id='fundamental' type='checkbox' />
+                    <Input
+                      id='fundamental'
+                      value='fundamental'
+                      checked={filters.includes('fundamental') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="fundamental">Ensino fundamental</label>
                   </Flex>
                   <Flex>
-                    <Input id='medio' type='checkbox' />
+                    <Input
+                      id='medio'
+                      value='medio'
+                      checked={filters.includes('medio') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="medio">Ensino Médio</label>
                   </Flex>
                   <Flex>
-                    <Input id='tecnologo' type='checkbox' />
+                    <Input
+                      id='tecnologo'
+                      value='tecnologo'
+                      checked={filters.includes('tecnologo') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="tecnologo">Ensino Superior - Tecnólogo</label>
                   </Flex>
                   <Flex>
-                    <Input id='bacharel' type='checkbox' />
+                    <Input
+                      id='bacharel'
+                      value='bacharel'
+                      checked={filters.includes('bacharel') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="bacharel">Ensino Superior - Bacharel</label>
                   </Flex>
                   <Flex>
-                    <Input id='mestrado' type='checkbox' />
+                    <Input
+                      id='mestrado'
+                      value='mestrado'
+                      checked={filters.includes('mestrado') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="mestrado">Ensino Superior - Mestrado</label>
                   </Flex>
                   <Flex>
-                    <Input id='licenciatura' type='checkbox' />
+                    <Input
+                      id='licenciatura'
+                      value='licenciatura'
+                      checked={filters.includes('licenciatura') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="licenciatura">Ensino Superior - Licenciatura</label>
                   </Flex>
                   <Flex>
-                    <Input id='doutorado' type='checkbox' />
+                    <Input
+                      id='doutorado'
+                      value='doutorado'
+                      checked={filters.includes('doutorado') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="doutorado">Ensino Superior - Doutorado</label>
                   </Flex>
                   <Flex>
-                    <Input id='Outro' type='checkbox' />
-                    <label htmlFor="Outro">Outro</label>
+                    <Input
+                      id='outro'
+                      value='outro'
+                      checked={filters.includes('outro') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
+                    <label htmlFor="outro">Outro</label>
                   </Flex>
                   <Flex>
-                    <Input id='nenhum' type='checkbox' />
+                    <Input
+                      id='nenhum'
+                      value='nenhum'
+                      checked={filters.includes('nenhum') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="nenhum">Nenhum</label>
                   </Flex>
                 </InputBlock>
@@ -428,11 +734,23 @@ const People = () => {
                 <h4>Batizado</h4>
                 <InputBlock>
                   <Flex>
-                    <Input id='sim' type='checkbox' />
+                    <Input
+                      id='sim'
+                      value='sim'
+                      checked={filters.includes('sim') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="sim">Sim</label>
                   </Flex>
                   <Flex>
-                    <Input id='nao' type='checkbox' />
+                    <Input
+                      id='nao'
+                      value='nao'
+                      checked={filters.includes('nao') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="nao">Não</label>
                   </Flex>
                 </InputBlock>
@@ -441,7 +759,13 @@ const People = () => {
                 <h4>Cargos</h4>
                 <InputBlock>
                   <Flex>
-                    <Input id='name' type='checkbox' />
+                    <Input
+                      id='name'
+                      value='name'
+                      checked={filters.includes('name') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="name">name</label>
                   </Flex>
                 </InputBlock>
@@ -450,23 +774,53 @@ const People = () => {
                 <h4>Faixa etária</h4>
                 <InputBlock>
                   <Flex>
-                    <Input id='kid' type='checkbox' />
+                    <Input
+                      id='kid'
+                      value='kid'
+                      checked={filters.includes('kid') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="kid">Crianças</label>
                   </Flex>
                   <Flex>
-                    <Input id='ad' type='checkbox' />
+                    <Input
+                      id='ad'
+                      value='ad'
+                      checked={filters.includes('ad') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="ad">Adolescentes</label>
                   </Flex>
                   <Flex>
-                    <Input id='young' type='checkbox' />
+                    <Input
+                      id='young'
+                      value='young'
+                      checked={filters.includes('young') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="young">Jovem</label>
                   </Flex>
                   <Flex>
-                    <Input id='adult' type='checkbox' />
+                    <Input
+                      id='adult'
+                      value='adult'
+                      checked={filters.includes('adult') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="adult">Adultos</label>
                   </Flex>
                   <Flex>
-                    <Input id='seniors' type='checkbox' />
+                    <Input
+                      id='seniors'
+                      value='seniors'
+                      checked={filters.includes('seniors') ? true : false}
+                      type='checkbox'
+                      onChange={(event => handleFilter(event))}
+                    />
                     <label htmlFor="seniors">idosos</label>
                   </Flex>
                 </InputBlock>
