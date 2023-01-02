@@ -3,6 +3,7 @@ import React from 'react';
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import { dayNow, monthNow, yearNow } from '../utils/getDate';
 
 export const PersonContext = React.createContext();
 
@@ -14,9 +15,9 @@ export function PersonContextProvider({ children }) {
   const [image, setImage] = React.useState('');
   const [password, setPassword] = React.useState('')
   const [birth, setBirth] = React.useState('')
-  const [sex, setSex] = React.useState('')
-  const [schooling, setSchooling] = React.useState('')
-  const [marital, setMarital] = React.useState('')
+  const [sex, setSex] = React.useState('Masculino')
+  const [schooling, setSchooling] = React.useState('Maternal')
+  const [marital, setMarital] = React.useState('Solteiro(a)')
   const [document1, setDocument1] = React.useState()
   const [document2, setDocument2] = React.useState()
   const [phone1, setPhone1] = React.useState()
@@ -33,18 +34,48 @@ export function PersonContextProvider({ children }) {
   const [office, setOffice] = React.useState([])
   const [conversion, setConversion] = React.useState('')
   const [notes, setNotes] = React.useState('')
-  const [baptized, setBaptized] = React.useState(false)
+  const [baptized, setBaptized] = React.useState('Não')
   const [spouse, setSpouse] = React.useState('')
-  const [convertedSpouse, setConvertedSpouse] = React.useState(false)
+  const [convertedSpouse, setConvertedSpouse] = React.useState('Não')
   const [baptismDate, setBaptismDate] = React.useState('')
   const [registerDate, setRegisterDate] = React.useState('')
   const [id, setId] = React.useState('');
   const [index, setIndex] = React.useState(-1);
+  const [ageGroup, setAgeGroup] = React.useState('');
+  const [age, setAge] = React.useState('');
 
   const [modal, setModal] = React.useState(false);
   const [modalAddPeople, setModalAddPeople] = React.useState(false)
   const [modalDeletePeople, setModalDeletePeople] = React.useState(false)
 
+
+  function birthHandler(event) {
+    var birthday = new Date(event.target.value)
+    var age_now = yearNow - birthday.getFullYear()
+    var mont = monthNow - birthday.getMonth()
+    if (mont < 0 || (mont === 0 && dayNow < birthday.getDate())) {
+      age_now--;
+    }
+    var age_group = ''
+    if (age_now >= 0 && age_now <= 12) {
+      age_group = "Criança"
+    }
+    if (age_now >= 12 && age_now <= 18) {
+      age_group = "Adolescente"
+    }
+    if (age_now >= 18 && age_now <= 28) {
+      age_group = "Jovem"
+    }
+    if (age_now >= 28 && age_now <= 55) {
+      age_group = "Adulto"
+    }
+    if (age_now >= 55 && age_now <= 145) {
+      age_group = "Idoso"
+    }
+    setAgeGroup(age_group);
+    setBirth(event.target.value);
+    setAge(age_now)
+  }
   function indexHandler(event) {
     setIndex(event.target.value);
   }
@@ -60,9 +91,7 @@ export function PersonContextProvider({ children }) {
   function passwordHandler(event) {
     setPassword(event.target.value);
   }
-  function birthHandler(event) {
-    setBirth(event.target.value);
-  }
+
   function sexHandler(event) {
     setSex(event.target.value);
   }
@@ -151,11 +180,44 @@ export function PersonContextProvider({ children }) {
   }
   function baptismDateHandler(event) {
     setBaptismDate(event.target.value)
-  }
 
+  }
+  function Clear() {
+    setName('')
+    setEmail('')
+    setImage('')
+    setPassword('')
+    setBirth('')
+    setSex('Masculino')
+    setSchooling('Maternal')
+    setMarital('Solteiro(a)')
+    setDocument1('')
+    setDocument2('')
+    setPhone1('')
+    setPhone2('')
+    setAddress('')
+    setNumber('')
+    setDistrict('')
+    setZipcode('')
+    setCountry('')
+    setState('')
+    setCity('')
+    setGroup([])
+    setCategory([])
+    setOffice([])
+    setConversion('')
+    setNotes('')
+    setBaptized('Não')
+    setRegisterDate('')
+    setSpouse('')
+    setConvertedSpouse('')
+    setBaptismDate('')
+    setAgeGroup('')
+    setAge('')
+  }
   function handleSubmit(event) {
     event.preventDefault()
-
+    
     const person = {
       name,
       email,
@@ -185,10 +247,13 @@ export function PersonContextProvider({ children }) {
       registerDate,
       spouse,
       convertedSpouse,
-      baptismDate
+      baptismDate,
+      ageGroup,
+      age
     }
     api.post('person', person);
     window.alert('Usuario Cadastrado')
+    Clear()
     const updatedPerson = {
       person: [...data.person, person]
     }
@@ -224,7 +289,9 @@ export function PersonContextProvider({ children }) {
       registerDate,
       spouse,
       convertedSpouse,
-      baptismDate
+      baptismDate,
+      ageGroup,
+      age
     }
     api.put(`person/${pid}`, person)
     window.alert('Atualizado')
@@ -263,7 +330,9 @@ export function PersonContextProvider({ children }) {
             registerDate,
             spouse,
             convertedSpouse,
-            baptismDate
+            baptismDate,
+            ageGroup,
+            age
           };
         }
         setModal(false)
@@ -283,15 +352,11 @@ export function PersonContextProvider({ children }) {
     mutate(updatedPerson, false);
   }
   return <PersonContext.Provider value={{
-    registerDate,
-    setRegisterDate,
-    registerDateHandler,
     handleEdit,
     handleDelete,
     name,
-    nameHandler,
     email,
-    emailHandler,
+    image,
     password,
     birth,
     sex,
@@ -314,7 +379,15 @@ export function PersonContextProvider({ children }) {
     conversion,
     notes,
     baptized,
-    image,
+    registerDate,
+    spouse,
+    convertedSpouse,
+    baptismDate,
+    ageGroup,
+    age,
+    registerDateHandler,
+    nameHandler,
+    emailHandler,
     passwordHandler,
     birthHandler,
     sexHandler,
@@ -340,9 +413,6 @@ export function PersonContextProvider({ children }) {
     handleSubmit,
     setId,
     id,
-    spouse,
-    convertedSpouse,
-    baptismDate,
     modal,
     spouseHandler,
     convertedSpouseHandler,
@@ -351,6 +421,7 @@ export function PersonContextProvider({ children }) {
     setName,
     setEmail,
     setPassword,
+    setRegisterDate,
     setBirth,
     setSex,
     setSchooling,
@@ -374,6 +445,11 @@ export function PersonContextProvider({ children }) {
     setBaptized,
     setImage,
     setModal,
+    setBaptismDate,
+    setSpouse,
+    setConvertedSpouse,
+    setAgeGroup,
+    setAge,
     indexHandler,
     index,
     setIndex,
