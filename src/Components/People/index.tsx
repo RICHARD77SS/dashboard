@@ -61,7 +61,7 @@ const People = () => {
     }
   }
   var Lenght = data?.person.length
-  console.log(filters)
+
 
   return (
     <Container>
@@ -128,12 +128,12 @@ const People = () => {
                   <Input
                     type='checkbox'
                     onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('faixa') ? true : false}
-                    value='faixa'
-                    id='faixa'
+                    checked={activeColumn.includes('ageGroup') ? true : false}
+                    value='ageGroup'
+                    id='ageGroup'
                   />
                   <label
-                    htmlFor='faixa'
+                    htmlFor='ageGroup'
                   >Faixa etária</label>
                 </Flex>
                 <Flex>
@@ -337,8 +337,8 @@ const People = () => {
                     {activeColumn.includes('phone1') ? null :
                       <Th><Button onClick={() => handleOrder('phone1')}>Telefones <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                     }
-                    {activeColumn.includes('faixa') ? null :
-                      <Th><Button onClick={() => handleOrder('faixa')}>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    {activeColumn.includes('ageGroup') ? null :
+                      <Th><Button onClick={() => handleOrder('ageGroup')}>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                     }
                     {activeColumn.includes('age') ? null :
                       <Th><Button onClick={() => handleOrder('age')}>Idade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
@@ -390,29 +390,6 @@ const People = () => {
                 <Tbody>
 
                   {data?.person?.map((persons: any, index: any) => {
-                    var birthday = new Date(persons.birth)
-                    var age_now = year - birthday.getFullYear()
-                    var mont = month - birthday.getMonth()
-                    if (mont < 0 || (mont === 0 && day < birthday.getDate())) {
-                      age_now--;
-                    }
-                    var age_group = ''
-                    if (age_now >= 0 && age_now <= 12) {
-                      age_group = "Criança"
-                    }
-                    if (age_now >= 12 && age_now <= 18) {
-                      age_group = "Jovem"
-                    }
-                    if (age_now >= 18 && age_now <= 28) {
-                      age_group = "Jovem"
-                    }
-                    if (age_now >= 28 && age_now <= 55) {
-                      age_group = "Adulto"
-                    }
-                    if (age_now >= 55 && age_now <= 145) {
-                      age_group = "Idoso"
-                    }
-                    let Birth = birthday.toLocaleDateString()
                     let ConversionDate = new Date(persons.conversion)
                     let Conversion = ConversionDate.toLocaleDateString()
 
@@ -436,6 +413,11 @@ const People = () => {
                       || (filters.includes('nenhum') && persons.schooling === 'Nenhum')
                       || (filters.includes('sim') && persons.baptized === 'Sim')
                       || (filters.includes('nao') && persons.baptized === 'Não')
+                      || (filters.includes('kid') && persons.ageGroup === 'Criança')
+                      || (filters.includes('ad') && persons.ageGroup === 'Adolescente')
+                      || (filters.includes('young') && persons.ageGroup === 'Jovem')
+                      || (filters.includes('adult') && persons.ageGroup === 'Adulto')
+                      || (filters.includes('seniors') && persons.ageGroup === 'Idoso')
                       ? '' :
                       <Tr key={persons._id}>
                         {activeColumn.includes('name') ? null :
@@ -445,21 +427,20 @@ const People = () => {
                           <Td>{persons.email}</Td>
                         }
                         {activeColumn.includes('birth') ? null :
-                          <Td>{Birth}</Td>
+                          <Td>{persons.birth?.split('T')[0]}</Td>
                         }
                         {activeColumn.includes('phone1') ? null :
                           <Td>{persons.phone1},<br />{persons.phone2}</Td>
                         }
                         {activeColumn.includes('faixa') ? null :
-                          <Td>{age_group}</Td>
+                          <Td>{persons.ageGroup}</Td>
                         }
                         {activeColumn.includes('age') ? null :
-                          <Td>{age_now}</Td>
+                          <Td>{persons.age}</Td>
                         }
                         {activeColumn.includes('sex') ? null :
                           <Td>
                             {persons.sex}
-
                           </Td>
                         }
                         {activeColumn.includes('address') ? null :
