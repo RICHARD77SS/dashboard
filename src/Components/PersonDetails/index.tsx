@@ -22,39 +22,7 @@ const PersonDetails = () => {
   const { data: dataGroups } = useAxios('groups')
   const { id } = useParams();
   const { handleDelete } = React.useContext(PersonContext);
-  var date = new Date()
-  var day = date.getDate()
-  var month = date.getMonth() + 1
-  var year = date.getFullYear()
-
-  var birthday = new Date(data?.person[`${id}`].birth)
-
-  var age_now = year - birthday.getFullYear()
-  var mont = month - birthday.getMonth()
-  if (mont < 0 || (mont === 0 && day < birthday.getDate())) {
-    age_now--;
-  }
-
-  var age_group = ''
-
-  if (age_now >= 0 && age_now <= 12) {
-    age_group = "Criança"
-  }
-  if (age_now >= 12 && age_now <= 18) {
-    age_group = "Adolescente"
-  }
-  if (age_now >= 18 && age_now <= 28) {
-    age_group = "Jovem"
-  }
-  if (age_now >= 28 && age_now <= 55) {
-    age_group = "Adulto"
-  }
-  if (age_now >= 55 && age_now <= 145) {
-    age_group = "Idoso"
-  }
-
-  let BirthDate = new Date(data?.person[`${id}`].birth)
-  let Birth = BirthDate.toLocaleDateString();
+  
 
   let ConversionDate = new Date(data?.person[`${id}`].conversion)
   let Conversion = ConversionDate.toLocaleDateString()
@@ -70,7 +38,7 @@ const PersonDetails = () => {
           <h2>{data?.person[`${id}`].name}</h2>
           <FlexBetween>
             <Block>
-              <p><b>Idade:&nbsp;</b>{age_now}</p>
+              <p><b>Idade:&nbsp;</b>{data?.person[`${id}`].age}</p>
               <br />
               <p><b>Categorias:&nbsp;</b>{data?.person[`${id}`].category}</p>
               <br />
@@ -124,8 +92,8 @@ const PersonDetails = () => {
             <Tab title='Informações'>
               <PersonDetailsInfos
                 name={data?.person[`${id}`].name}
-                birth={Birth}
-                ageGroup={age_group}
+                birth={data?.person[`${id}`].birth?.split('T')[0]}
+                ageGroup={data?.person[`${id}`].ageGroup}
                 sex={data?.person[`${id}`].sex}
                 schooling={data?.person[`${id}`].schooling}
                 marital={data?.person[`${id}`].marital}
@@ -160,8 +128,8 @@ const PersonDetails = () => {
               <PersonDetailsEdit
                 name={data?.person[`${id}`].name}
                 password={data?.person[`${id}`].password}
-                birth={data?.person[`${id}`].birth}
-                ageGroup={age_group}
+                birth={data?.person[`${id}`].birth?.split('T')[0]}
+                ageGroup={data?.person[`${id}`].ageGroup}
                 sex={data?.person[`${id}`].sex}
                 schooling={data?.person[`${id}`].schooling}
                 marital={data?.person[`${id}`].marital}
@@ -185,6 +153,9 @@ const PersonDetails = () => {
                 id={data?.person[`${id}`]._id}
                 group={data?.person[`${id}`].group}
                 notes={data?.person[`${id}`].notes}
+                baptismDate={data?.person[`${id}`].baptismDate}
+                spouse={data?.person[`${id}`].spouse}
+                convertedSpouse={data?.person[`${id}`].convertedSpouse}
               />
             </Tab>
             <Tab title='Permissões'>
