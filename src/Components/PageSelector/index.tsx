@@ -1,12 +1,17 @@
 import Button from '../Button';
-import { Page} from './styles';
+import { Page } from './styles';
 
-const PageSelector = () => {
+interface Props {
+  previus?: () => void
+  next?: () => void
+  children?: number
+}
+const PageSelector = ({ previus, next, children }: Props) => {
   return (
     <Page>
-      <Button>Anterior</Button>
-      <Button>1</Button>
-      <Button>Próximo</Button>
+      <Button onClick={previus} disabled={children === 1 ? true : false}>Anterior</Button>
+      <Button >{children}</Button>
+      <Button onClick={next}>Próximo</Button>
     </Page>
   )
 }
