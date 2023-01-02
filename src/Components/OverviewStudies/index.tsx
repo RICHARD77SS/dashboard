@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import InputBlock from "../InputBlock";
 
 
-import { Description, Divf, Studie, Image } from "./styles"
+import { Description, Divf, Studie, Image, ScrollContent } from "./styles"
 import { useAxios } from "../../hooks/useAxios";
 import { StudiesContext } from "../../contexts/studiesContext";
 import React from 'react'
@@ -44,36 +44,24 @@ const OverviewStudies = () => {
   let finish = orientationFinish / allOrientation * 100
   let later = orientationLate / allOrientation * 100
 
-  const inProgress = `${progress}%`
-  const completed = `${finish}%`
-  const late = `${later}%`
+  const inProgress = `${progress.toFixed(1)}%`
+  const completed = `${finish.toFixed(1)}%`
+  const late = `${later.toFixed(1)}%`
   return (
     <Content>
-      <Box width='350px'>
+      <Box >
         <BoxHeader>
           <h3>Estudos</h3>
           <Button><Link to='/studies'>Ver todos</Link></Button>
         </BoxHeader>
-        <BoxContent>
-          {dataStudies?.studies.map((studies: any, index: number) => {
-            return (
+        <BoxContent width='500px'>
+          <ScrollContent>
 
-              <Studie key={index}>
-                <Image><Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
-                  studies._id,
-                  studies.name,
-                  studies.category,
-                  studies.content,
-                  studies.image,
-                  studies.file,
-                  studies.notification
-                )}>
-                  <img src={studies.image} alt="" />
-                </Button>
-                </Link>
-                </Image>
-                <InputBlock>
-                  <Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
+            {dataStudies?.studies.map((studies: any, index: number) => {
+              return (
+
+                <Studie key={index}>
+                  <Image><Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
                     studies._id,
                     studies.name,
                     studies.category,
@@ -82,23 +70,36 @@ const OverviewStudies = () => {
                     studies.file,
                     studies.notification
                   )}>
-                    <h4>{studies.name}</h4>
-                    <p>{studies.date?.split('T')[0]}</p>
+                    <img src={studies.image} alt="" />
                   </Button>
                   </Link>
-                </InputBlock>
-              </Studie>
-            )
-          })}
-
+                  </Image>
+                  <InputBlock>
+                    <Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
+                      studies._id,
+                      studies.name,
+                      studies.category,
+                      studies.content,
+                      studies.image,
+                      studies.file,
+                      studies.notification
+                    )}>
+                      <h4>{studies.name}</h4>
+                      <p>{studies.date?.split('T')[0]}</p>
+                    </Button>
+                    </Link>
+                  </InputBlock>
+                </Studie>
+              )
+            })}
+          </ScrollContent>
         </BoxContent>
       </Box>
-      <Box width='350px'>
+      <Box>
         <BoxHeader>
           <h3>Escolas</h3>
-
         </BoxHeader>
-        <BoxContent>
+        <BoxContent width='500px'>
           <Description>
 
             <span><span><GiGreekTemple /></span>Total de escolas</span>
@@ -116,11 +117,11 @@ const OverviewStudies = () => {
           </Description>
         </BoxContent>
       </Box>
-      <Box width='350px'>
+      <Box>
         <BoxHeader>
           <h3>Acompanhamento</h3>
         </BoxHeader>
-        <BoxContent>
+        <BoxContent width='500px'>
           <Divf>
             <Description>
               <p>Em andamento</p>
