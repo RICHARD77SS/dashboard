@@ -13,7 +13,7 @@ import PageSelector from '../PageSelector';
 import { Link } from 'react-router-dom';
 import Container from '../Container';
 import Content from '../Content';
-import BoxB from '../BoxB';
+import Box from '../Box';
 import BoxHeader from '../BoxHeader';
 import BoxContent from '../BoxContent';
 import Aside from '../Aside';
@@ -27,21 +27,31 @@ import Flex from '../Flex';
 
 const People = () => {
   const { data } = useAxios('person')
-
-  var date = new Date()
-  var day = date.getDate()
-  var month = date.getMonth() + 1
-  var year = date.getFullYear()
-
   const [order, setOrder] = React.useState(1)
   const [column, setColumn] = React.useState('')
   const [activeColumn, setActiveColum] = React.useState<string[]>([])
   const [filters, setFilters] = React.useState<string[]>([])
-
+  const [resultsPage, setResultsPage] = React.useState(20)
+  const [initialItem, setInitialItem] = React.useState(0)
+  const [finalItem, setFinalItem] = React.useState(resultsPage)
+  const [currentPages, setCurrentPages] = React.useState(1)
 
   const handleOrder = (fName: any) => {
     setOrder(-order)
     setColumn(fName)
+  }
+  const handleResults = (event: any) => {
+    setResultsPage(event.target.value)
+  }
+  const nextItem = () => {
+    setInitialItem(initialItem + resultsPage)
+    setFinalItem(finalItem + resultsPage)
+    setCurrentPages(currentPages + 1)
+  }
+  const previousItem = () => {
+    setInitialItem(initialItem - resultsPage)
+    setFinalItem(finalItem - resultsPage)
+    setCurrentPages(currentPages - 1)
   }
 
   const handleColumn = (event: any) => {
@@ -61,8 +71,9 @@ const People = () => {
     }
   }
   var Lenght = data?.person.length
-
-
+  let dados = data?.person[0]
+  let names = ['Nome', 'E-mail', 'Data De Nascimento', 'Sexo', 'Escolaridade', 'EstadoCivil', 'Documento 1', 'Documento 2', 'Telefones', 'Endereço', 'Bairro', 'CEP', 'Pais', 'Estado', 'Cidade', 'Grupos', 'Categorias', 'Cargo', 'Data de conversão', 'Batizado', 'Data de batismo', 'Criado em ', 'Nome do cônjugue', 'Faixa etária', 'Idade']
+  console.log(initialItem, finalItem, resultsPage)
   return (
     <Container>
       <br />
@@ -70,326 +81,67 @@ const People = () => {
       <h2>Pessoas cadastradas</h2>
       <br />
       <Content>
-        <BoxB>
+        <Box width='70%'>
           <BoxHeader title={`Resultados:${Lenght}`}>
           </BoxHeader>
           <BoxContent >
-            <TopTableOptions >
+            <TopTableOptions value={resultsPage} onChange={(event) => handleResults(event)}>
               <>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('name') ? true : false}
-                    value='name'
-                    id='name'
-                  />
-                  <label
-                    htmlFor='name'
-                  >Nome completo </label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('email') ? true : false}
-                    value='email'
-                    id='email'
-                  />
-                  <label
-                    htmlFor='email'
-                  >E-mail</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('birth') ? true : false}
-                    value='birth'
-                    id='birth'
-                  />
-                  <label
-                    htmlFor='birth'
-                  >Data de nascimento</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('phone1') ? true : false}
-                    value='phone1'
-                    id='phone1'
-                  />
-                  <label
-                    htmlFor='phone1'
-                  >Telefones</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('ageGroup') ? true : false}
-                    value='ageGroup'
-                    id='ageGroup'
-                  />
-                  <label
-                    htmlFor='ageGroup'
-                  >Faixa etária</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('age') ? true : false}
-                    value='age'
-                    id='age'
-                  />
-                  <label
-                    htmlFor='age'
-                  >Idade</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('sex') ? true : false}
-                    value='sex'
-                    id='sex'
-                  />
-                  <label
-                    htmlFor='sex'
-                  >Sexo</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('address') ? true : false}
-                    value='address'
-                    id='address'
-                  />
-                  <label
-                    htmlFor='address'
-                  >Endereço</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('zipcode') ? true : false}
-                    value='zipcode'
-                    id='zipcode'
-                  />
-                  <label
-                    htmlFor='zipcode'
-                  >CEP</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('city') ? true : false}
-                    value='city'
-                    id='city'
-                  />
-                  <label
-                    htmlFor='city'
-                  >Cidade</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('document1') ? true : false}
-                    value='document1'
-                    id='document1'
-                  />
-                  <label
-                    htmlFor='document1'
-                  >Documento 1</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('document2') ? true : false}
-                    value='document2'
-                    id='document2'
-                  />
-                  <label
-                    htmlFor='document2'
-                  >Documento 2</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('marital') ? true : false}
-                    value='marital'
-                    id='marital'
-                  />
-                  <label
-                    htmlFor='marital'
-                  >Estado civil</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('schooling') ? true : false}
-                    value='schooling'
-                    id='schooling'
-                  />
-                  <label
-                    htmlFor='schooling'
-                  >Escolaridade</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('spouse') ? true : false}
-                    value='spouse'
-                    id='spouse'
-                  />
-                  <label
-                    htmlFor='spouse'
-                  >Nome do cônjugue</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('conversion') ? true : false}
-                    value='conversion'
-                    id='conversion'
-                  />
-                  <label
-                    htmlFor='conversion'
-                  >Data de conversão</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('baptized') ? true : false}
-                    value='baptized'
-                    id='baptized'
-                  />
-                  <label
-                    htmlFor='baptized'
-                  >Batizado</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('baptismDate') ? true : false}
-                    value='baptismDate'
-                    id='baptismDate'
-                  />
-                  <label
-                    htmlFor='baptismDate'
-                  >Data de batismo</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('registerDate') ? true : false}
-                    value='registerDate'
-                    id='registerDate'
-                  />
-                  <label
-                    htmlFor='registerDate'
-                  >Criado em</label>
-                </Flex>
-                <Flex>
-                  <Input
-                    type='checkbox'
-                    onChange={(event) => handleColumn(event)}
-                    checked={activeColumn.includes('category') ? true : false}
-                    value='category'
-                    id='category'
-                  />
-                  <label
-                    htmlFor='category'
-                  >Categoria</label>
-                </Flex>
+                {dados ? Object.keys(dados)
+                  .filter((item: any) => item !== '__v'
+                    && item !== '_id'
+                    && item !== 'password'
+                    && item !== 'image'
+                    && item !== 'convertedSpouse'
+                    && item !== 'notes'
+                    && item !== 'phone2'
+                    && item !== 'number'
+                  ).map((keys: any, index: number) => {
+                    return (
+                      <Flex key={index}>
+                        <Input
+                          type='checkbox'
+                          onChange={(event) => handleColumn(event)}
+                          checked={activeColumn.includes(keys) ? true : false}
+                          value={keys}
+                          id={keys}
+                        />
+                        <label
+                          htmlFor={keys}
+                        >{names[index]}</label>
+                      </Flex>
+
+                    )
+                  }) : null}
               </>
             </TopTableOptions>
             <TableContainer>
               <Table>
                 <Thead>
                   <Tr>
-                    {activeColumn.includes('name') ? null :
-                      <Th>
-                        <Button onClick={() => handleOrder('name')}> Nome completo <p><BsArrowUp /><BsArrowDown /></p>
-                        </Button>
-                      </Th>
-                    }
-                    {activeColumn.includes('email') ? null :
-                      <Th><Button onClick={() => handleOrder('email')}>E-mail <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('birth') ? null :
-                      <Th><Button onClick={() => handleOrder('birth')}>Data de nascimento <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('phone1') ? null :
-                      <Th><Button onClick={() => handleOrder('phone1')}>Telefones <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('ageGroup') ? null :
-                      <Th><Button onClick={() => handleOrder('ageGroup')}>Faixa etária <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('age') ? null :
-                      <Th><Button onClick={() => handleOrder('age')}>Idade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('sex') ? null :
-                      <Th><Button onClick={() => handleOrder('sex')}>Sexo <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('address') ? null :
-                      <Th><Button onClick={() => handleOrder('address')}>Endereço <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('zipcode') ? null :
-                      <Th><Button onClick={() => handleOrder('zipcode')}>CEP <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('city') ? null :
-                      <Th><Button onClick={() => handleOrder('city')}>Cidade <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('document1') ? null :
-                      <Th><Button onClick={() => handleOrder('document1')}>Documento 1 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('document2') ? null :
-                      <Th><Button onClick={() => handleOrder('document2')}>Documento 2 <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('marital') ? null :
-                      <Th><Button onClick={() => handleOrder('marital')}>Estado civil<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('schooling') ? null :
-                      <Th><Button onClick={() => handleOrder('schooling')}>Escolaridade<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('spouse') ? null :
-                      <Th><Button onClick={() => handleOrder('spouse')}>Nome do cônjuge<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('conversion') ? null :
-                      <Th><Button onClick={() => handleOrder('conversion')}>Data de conversão<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('baptized') ? null :
-                      <Th><Button onClick={() => handleOrder('baptized')}>Batizado<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('baptismDate') ? null :
-                      <Th><Button onClick={() => handleOrder('baptismDate')}>Data de batismo<p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('registerDate') ? null :
-                      <Th><Button onClick={() => handleOrder('registerDate')}>Criado em <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
-                    {activeColumn.includes('category') ? null :
-                      <Th><Button onClick={() => handleOrder('category')}>Categoria <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    }
+                    {dados ? Object.keys(dados).filter((item: any) => item !== '__v'
+                      && item !== '_id'
+                      && item !== 'password'
+                      && item !== 'image'
+                      && item !== 'convertedSpouse'
+                      && item !== 'notes'
+                      && item !== 'phone2'
+                      && item !== 'number'
+                    ).map((keys: any, index: number) => {
+                      return (
+                        activeColumn.includes(keys) ? null :
+                          <Th key={index}>
+                            <Button onClick={() => handleOrder(keys)}>{names[index]}<p><BsArrowUp /><BsArrowDown /></p>
+                            </Button>
+                          </Th>
+
+                      )
+                    }) : null}
                   </Tr>
                 </Thead>
                 <Tbody>
 
-                  {data?.person?.map((persons: any, index: any) => {
+                  {data?.person?.slice(initialItem, finalItem).map((persons: any, index: any) => {
                     let ConversionDate = new Date(persons.conversion)
                     let Conversion = ConversionDate.toLocaleDateString()
 
@@ -418,8 +170,10 @@ const People = () => {
                       || (filters.includes('young') && persons.ageGroup === 'Jovem')
                       || (filters.includes('adult') && persons.ageGroup === 'Adulto')
                       || (filters.includes('seniors') && persons.ageGroup === 'Idoso')
+
                       ? '' :
                       <Tr key={persons._id}>
+
                         {activeColumn.includes('name') ? null :
                           <Td><Link to={`/persons/details/${index}`}><pre>{persons.name}</pre></Link></Td>
                         }
@@ -429,28 +183,16 @@ const People = () => {
                         {activeColumn.includes('birth') ? null :
                           <Td>{persons.birth?.split('T')[0]}</Td>
                         }
-                        {activeColumn.includes('phone1') ? null :
-                          <Td>{persons.phone1},<br />{persons.phone2}</Td>
-                        }
-                        {activeColumn.includes('faixa') ? null :
-                          <Td>{persons.ageGroup}</Td>
-                        }
-                        {activeColumn.includes('age') ? null :
-                          <Td>{persons.age}</Td>
-                        }
                         {activeColumn.includes('sex') ? null :
                           <Td>
                             {persons.sex}
                           </Td>
                         }
-                        {activeColumn.includes('address') ? null :
-                          <Td><pre>{persons.address}</pre></Td>
+                        {activeColumn.includes('schooling') ? null :
+                          <Td><pre>{persons.schooling}</pre></Td>
                         }
-                        {activeColumn.includes('zipcode') ? null :
-                          <Td>{persons.zipcode}</Td>
-                        }
-                        {activeColumn.includes('city') ? null :
-                          <Td><pre>{persons.city}</pre></Td>
+                        {activeColumn.includes('marital') ? null :
+                          <Td>{persons.marital}</Td>
                         }
                         {activeColumn.includes('document1') ? null :
                           <Td>{persons.document1}</Td>
@@ -458,14 +200,35 @@ const People = () => {
                         {activeColumn.includes('document2') ? null :
                           <Td>{persons.document2}</Td>
                         }
-                        {activeColumn.includes('marital') ? null :
-                          <Td>{persons.marital}</Td>
+                        {activeColumn.includes('phone1') ? null :
+                          <Td>{persons.phone1},<br />{persons.phone2}</Td>
                         }
-                        {activeColumn.includes('schooling') ? null :
-                          <Td><pre>{persons.schooling}</pre></Td>
+                        {activeColumn.includes('address') ? null :
+                          <Td><pre>{persons.address}</pre></Td>
                         }
-                        {activeColumn.includes('spouse') ? null :
-                          <Td>{persons.spouse}</Td>
+                        {activeColumn.includes('district') ? null :
+                          <Td><pre>{persons.district}</pre></Td>
+                        }
+                        {activeColumn.includes('zipcode') ? null :
+                          <Td>{persons.zipcode}</Td>
+                        }
+                        {activeColumn.includes('country') ? null :
+                          <Td><pre>{persons.copuntry}</pre></Td>
+                        }
+                        {activeColumn.includes('state') ? null :
+                          <Td><pre>{persons.state}</pre></Td>
+                        }
+                        {activeColumn.includes('city') ? null :
+                          <Td><pre>{persons.city}</pre></Td>
+                        }
+                        {activeColumn.includes('group') ? null :
+                          <Td><pre>{persons.group}</pre></Td>
+                        }
+                        {activeColumn.includes('category') ? null :
+                          <Td><pre>{persons.category}</pre></Td>
+                        }
+                        {activeColumn.includes('office') ? null :
+                          <Td><pre>{persons.office}</pre></Td>
                         }
                         {activeColumn.includes('conversion') ? null :
                           <Td>{Conversion}</Td>
@@ -479,18 +242,23 @@ const People = () => {
                         {activeColumn.includes('registerDate') ? null :
                           <Td><pre>{persons.registerDate?.split('T')[0]}</pre></Td>
                         }
-                        {activeColumn.includes('category') ? null :
-                          <Td><pre>{persons.category}</pre></Td>
+                        {activeColumn.includes('spouse') ? null :
+                          <Td>{persons.spouse}</Td>
+                        }
+                        {activeColumn.includes('ageGroup') ? null :
+                          <Td>{persons.ageGroup}</Td>
+                        }
+                        {activeColumn.includes('age') ? null :
+                          <Td>{persons.age}</Td>
                         }
                       </Tr>
-
                   }).sort((a: any, b: any) => a[column] < b[column] ? -order : order)}
                 </Tbody>
               </Table>
             </TableContainer>
-            <PageSelector />
+            <PageSelector previus={() => { previousItem() }} next={() => { nextItem() }}>{currentPages}</PageSelector>
           </BoxContent>
-        </BoxB>
+        </Box>
         <Aside>
           <Buttonb><Link to='/addpeople'>+Adicionar Pessoas</Link></Buttonb>
           <Filters>
@@ -501,21 +269,6 @@ const People = () => {
             <FilterOptions>
               <Input placeholder='Buscar'
                 type='search' />
-              <GroupType>
-                <h4>Categorias</h4>
-                <InputBlock>
-                  <Flex>
-                    <Input
-                      id='name'
-                      value='name'
-                      checked={filters.includes('name') ? true : false}
-                      type='checkbox'
-                      onChange={(event => handleFilter(event))}
-                    />
-                    <label htmlFor="name">name</label>
-                  </Flex>
-                </InputBlock>
-              </GroupType>
               <GroupType>
                 <h4>Sexo</h4>
                 <InputBlock>
@@ -733,21 +486,6 @@ const People = () => {
                       onChange={(event => handleFilter(event))}
                     />
                     <label htmlFor="nao">Não</label>
-                  </Flex>
-                </InputBlock>
-              </GroupType>
-              <GroupType>
-                <h4>Cargos</h4>
-                <InputBlock>
-                  <Flex>
-                    <Input
-                      id='name'
-                      value='name'
-                      checked={filters.includes('name') ? true : false}
-                      type='checkbox'
-                      onChange={(event => handleFilter(event))}
-                    />
-                    <label htmlFor="name">name</label>
                   </Flex>
                 </InputBlock>
               </GroupType>
