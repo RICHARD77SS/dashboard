@@ -7,7 +7,10 @@ declare module 'styled-components' {
       pri: string,
       sec: string,
       bac: string,
-      text: string
+      text: string,
+      hover: string,
+      border: string,
+      shadow: string,
     }
   }
 }
