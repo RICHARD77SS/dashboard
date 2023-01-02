@@ -54,6 +54,10 @@ export const GraphContainer = styled.div`
   align-items: center;
   border-radius: 10px;
   background: ${Props => Props.theme.colors.bac};
+  @media (max-width:768px){
+    width: 400px;
+    max-width: 400px;
+  }
 `
 export const GraphHeader = styled.div`
   width: 100%;
@@ -109,7 +113,10 @@ export const Situation = styled.div`
   }
 `
 export const Graph = styled.div`
-  width: 100%;
+  width: 700px;
+  @media (max-width: 768px) {
+    max-width: 650px;
+  }
 
 `
 export const Graph1 = styled.div`
@@ -143,4 +150,13 @@ export const Image = styled.div`
     height: 100%;
     border-radius: 40px;
   }
+`
+export const ScrollContent = styled.div`
+  width: 400px;
+  height: 300px;
+  overflow-y: scroll;
+  display: flex;
+  align-items:center;
+  gap:.5rem;
+  flex-direction:column
 `

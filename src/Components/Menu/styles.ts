@@ -7,7 +7,6 @@ export const Content = styled.div`
   display: none;
   z-index: 100;
   position: absolute; 
-
   @media (max-width:769px){
     display: flex;
     button {
@@ -28,8 +27,10 @@ export const Container = styled.div`
   left: 0;
   top: 100px;
   z-index: 100;
+  padding: 1rem 0;
+  border-radius: 10px;
   .navlink {
-    color: #fff;
+    color: ${Props => Props.theme.colors.text};
     font-size: 1.2rem;
   }
 `

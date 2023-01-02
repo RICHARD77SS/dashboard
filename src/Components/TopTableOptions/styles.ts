@@ -28,7 +28,7 @@ export const Options = styled.div`
     background: ${Props => Props.theme.colors.sec};
     padding: 0 1rem;
     height: 40px;
-    color: #fff;
+    color: ${Props=>Props.theme.colors.text};
     font-size: 1rem;
     border-radius: 5px; 
     :hover {
@@ -36,3 +36,4 @@ export const Options = styled.div`
     }
   }
 `
+

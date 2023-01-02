@@ -8,7 +8,7 @@ export const Buttonb = styled.div`
   padding: 0 1rem;
   height: 40px;
   border-radius: 20px;
-  color: #fff;
+  color: ${Props => Props.theme.colors.text};
   background: ${Props => Props.theme.colors.pri};
   display: flex;
   align-items:Center;
@@ -18,7 +18,6 @@ export const Buttonb = styled.div`
   }
   a {
     text-decoration: none;
-    color: #fff;
   }
 `
 export const Anotation = styled.div`
@@ -38,8 +37,8 @@ export const Anotation = styled.div`
   }
 `
 export const Mural = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,8 +46,8 @@ export const Mural = styled.div`
  
 `
 export const MuralContent = styled.div<Props>`
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,11 +64,17 @@ export const MuralContent = styled.div<Props>`
   }
 `
 export const Scroll = styled.div`
-  width: 200px;
-  height: 270px;
+  width: 100%;
+  height: auto;
   display: flex;
   align-items: start;
   justify-content: start;
   border-radius: 10px;
   overflow-x:scroll;
+  .control {
+    position:absolute;
+  }
+  .control.right{
+    left: 24rem;
+  }
 `

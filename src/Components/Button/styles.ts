@@ -8,13 +8,14 @@ export const Buttons = styled.button`
   display:flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5px;
+  color: ${Props => Props.theme.colors.text};
   cursor: pointer;
   :hover {
-    filter: brightness(.8);
+    background: ${Props => Props.theme.colors.hover};
   }
   a {
     text-decoration: none;
-    color: #fff;
     width: 100%;
     height: 100%;
     display: flex;

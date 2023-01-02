@@ -7,12 +7,13 @@ import Content from "../Content";
 
 import { Buttonb, Anotation, Mural, MuralContent, Scroll } from './styles';
 import { useAxios } from "../../hooks/useAxios";
-import Flex from "../Flex";
 
 const OverviewSchedules = () => {
   const { data: dataText } = useAxios('muralstext')
   const { data: dataImage } = useAxios('muralsimage')
   const { data: dataAnotation } = useAxios('anotations')
+
+
   return (
     <Content>
       <Box>
@@ -20,10 +21,10 @@ const OverviewSchedules = () => {
           <Button><Link to='/schedulewarnings' >Ver mais</Link></Button>
 
         </BoxHeader>
-        <BoxContent>
+        <BoxContent width="400px">
+          <Button className='control left' type='button'>l</Button>
           {dataText?.muralsText.length + dataImage?.muralsImage.length !== 0 ?
-            <Scroll>
-
+            <Scroll id='scrool'>
               {dataText?.muralsText.map((text: any, index: number) => {
                 return (
                   <Mural key={index}>
@@ -50,6 +51,7 @@ const OverviewSchedules = () => {
               <Buttonb><Link to='/schedulewarnings' >+Adicionar items</Link></Buttonb>
             </>
           }
+          <Button className='control right' type='button'>p</Button>
 
         </BoxContent>
       </Box>
@@ -57,7 +59,7 @@ const OverviewSchedules = () => {
         <BoxHeader title='Calendário'>
           <Button><Link to='/schedulecalendar'>Ver mais</Link></Button>
         </BoxHeader>
-        <BoxContent>
+        <BoxContent width="400px">
           <h4>Não há dados disponiveis</h4>
           <Buttonb><Link to='/schedulecalendar' >+Adicionar items</Link></Buttonb>
         </BoxContent>
@@ -66,7 +68,7 @@ const OverviewSchedules = () => {
         <BoxHeader title='Anotações'>
           <Button><Link to='/scheduleanotation'>Ver mais</Link></Button>
         </BoxHeader>
-        <BoxContent>
+        <BoxContent width="400px">
           {dataAnotation?.anotations.length !== 0 ? dataAnotation?.anotations.map((anotations: any, index: number) => {
             return (
               <>

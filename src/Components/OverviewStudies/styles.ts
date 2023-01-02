@@ -65,3 +65,12 @@ export const Image = styled.div`
     height: 100%;
   }
 `
+export const ScrollContent = styled.div`
+  width: 400px;
+  height: 300px;
+  overflow-y: scroll;
+  display: flex;
+  align-items:center;
+  gap:.5rem;
+  flex-direction:column
+`

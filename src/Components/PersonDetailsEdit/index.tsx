@@ -208,8 +208,8 @@ const PersonDetailsEdit = (Props: Props) => {
                 <p><b>Sexo: &nbsp;</b></p>
                 <select title='sex' value={sex} onChange={sexHandler} >
                   <option value=''></option>
-                  <option value='masculino'>Masculino</option>
-                  <option value='feminino'>Feminino</option>
+                  <option value='Masculino'>Masculino</option>
+                  <option value='Feminino'>Feminino</option>
                 </select>
               </InputBlock>
               <InputBlock>

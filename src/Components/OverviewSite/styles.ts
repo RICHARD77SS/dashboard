@@ -23,15 +23,14 @@ export const BoxRetHeader = styled.header`
   padding: 1rem;
   border-radius: 10px 10px 0 0;
   background: ${Props => Props.theme.colors.pri};
-  color: #fff;
+  color: ${Props => Props.theme.colors.text};
   button {
     height: 30px;
     padding: 0 1rem;
-    color: #000;
-
+    color: ${Props => Props.theme.colors.text};
     font-size: 1rem;
     border-radius: 10px;
-    background: ${Props => Props.theme.colors.bac};
+    border: 1px solid ${Props => Props.theme.colors.shadow};
   }
 
 `
@@ -51,7 +50,7 @@ export const BoxRetContent = styled.div`
     display: flex;
     align-items: center;
     font-size: 1.5rem;
-    color: ${Props => Props.theme.colors.pri};
+    color: ${Props => Props.theme.colors.text};
   }
 `
 export const DivLink = styled.div`
@@ -67,5 +66,8 @@ export const DivLink = styled.div`
 `
 export const LinkPub = styled.div`
   width: 100%;
-  height: 70%;
+  padding: 0 .5rem;
+  gap: .5rem;
+  display: flex;
+  flex-direction:column;
 `

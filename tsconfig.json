@@ -23,6 +23,7 @@
   "include": [
     "src",
     "../index.tsx",
-    "src/Components/FinancialReportsExpensesDailyStatement"
+    "src/Components/FinancialReportsExpensesDailyStatement",
+    "../styles.ts"
   ]
 }

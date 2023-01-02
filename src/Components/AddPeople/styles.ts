@@ -136,3 +136,13 @@ export const InputBlock = styled.div`
     width: 100%;
   }
 `
+export const Scroll = styled.div`
+  width: auto;
+  height: 150px;
+  overflow-y: scroll;
+  display: flex;
+  align-items:center;
+  gap:.5rem;
+  padding: 1rem;
+  flex-direction:column
+`

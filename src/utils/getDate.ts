@@ -1,7 +1,7 @@
 let dateNow = new Date()
-let dayNow = dateNow.getDate()
-let monthNow = dateNow.getMonth() + 1
-let yearNow = dateNow.getFullYear()
+export let dayNow = dateNow.getDate()
+export let monthNow = dateNow.getMonth() + 1
+export let yearNow = dateNow.getFullYear()
 
 export let NowDate: string
 

@@ -15,7 +15,8 @@ export const Container = styled.header`
   }
   button{
     font-size: 1rem;
-    color: #fff;
+    color: ${Props => Props.theme.colors.text};
+;
   }
 `
 
