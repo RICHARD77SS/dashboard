@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
 
-import { Container, Form, Content, Fieldset, Data, Header, DataContent, Flex, Block, Foto, InputBlock } from './styles';
+import { Container, Form, Content, Fieldset, Data, Header, DataContent, Flex, Block, Foto, InputBlock, Scroll } from './styles';
 
 import { PersonContext } from '../../contexts/personContext';
 import { useAxios } from '../../hooks/useAxios';
@@ -99,37 +99,29 @@ const AddPeople = () => {
                     <label htmlFor="foto">Foto</label>
                     <Foto>
                       <img src={image} alt="" />
-                      <input title='image' type='text' value={image} onChange={imageHandler} />
+                      <Input title='image' type='text' value={image} onChange={imageHandler} />
                     </Foto>
                   </Block>
                   <InputBlock>
                     <Block>
                       <label htmlFor="name">Nome</label>
-                      <input
+                      <Input
                         id='name'
                         name='name'
                         type='text'
                         value={name}
                         onChange={nameHandler}
-
-                        onKeyDown={e => {
-                          if (e.key === 'Enter') e.preventDefault();
-                        }}
                         required
                       />
                     </Block>
                     <Block>
                       <label htmlFor="password">Senha</label>
-                      <input
+                      <Input
                         id='password'
                         name='password'
                         type='text'
                         value={password}
                         onChange={passwordHandler}
-
-                        onKeyDown={e => {
-                          if (e.key === 'Enter') e.preventDefault();
-                        }}
                       />
                     </Block>
                   </InputBlock>
@@ -137,23 +129,19 @@ const AddPeople = () => {
                 <Flex>
                   <Block>
                     <label htmlFor="birth">Data de nascimento</label>
-                    <input
+                    <Input
                       name='birth'
                       id='birth'
                       value={birth}
                       onChange={birthHandler}
                       type='date'
-
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
+                      required
                     />
                   </Block>
                   <Block>
                     <label htmlFor="sex">Sexo</label>
                     <select title='sex' id='sexo' value={sex}
                       onChange={sexHandler} required>
-                      <option value='' ></option>
                       <option value='Masculino' >Masculino</option>
                       <option value='Feminino' >Feminino</option>
                     </select>
@@ -188,7 +176,6 @@ const AddPeople = () => {
                       <option value='Outros' >Outros</option>
                     </select>
                     {marital === 'Casado(a)' ?
-
                       <Flex>
                         <Block>
                           <label htmlFor="conjugue">Nome do Cônjugue</label>
@@ -197,8 +184,8 @@ const AddPeople = () => {
                         <Block>
                           <label htmlFor="convertedspouse">Cônjugue convertido</label>
                           <select title='selecte' id='convertedSpouse' value={convertedSpouse} onChange={convertedSpouseHandler}>
-                            <option value='true' >Sim</option>
-                            <option value='false' >Não</option>
+                            <option value='Sim' >Sim</option>
+                            <option value='Não' >Não</option>
                           </select>
                         </Block>
                       </Flex>
@@ -207,30 +194,22 @@ const AddPeople = () => {
                 </Block>
                 <Block>
                   <label htmlFor="document1">Documento 1</label>
-                  <input
+                  <Input
                     name='document1'
                     id='document1'
                     value={document1}
                     onChange={document1Handler}
                     type='number'
-
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
                   />
                 </Block>
                 <Block>
                   <label htmlFor="document2">Documento 2</label>
-                  <input
+                  <Input
                     name='document2'
                     id='document2'
                     value={document2}
                     onChange={document2Handler}
                     type='text'
-
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
                   />
                 </Block>
               </DataContent>
@@ -241,71 +220,75 @@ const AddPeople = () => {
               </Header>
               <DataContent>
                 <Block>
-                  <label htmlFor="group">Grupo</label>
+                  <label htmlFor="group">Grupos</label>
                   <Flex>
-                    {dataGroups?.groups.map((groups: any, index: any) => {
-                      return (
-                        <Flex>
-                          <Input key={index} name={groups.name} id={groups.name} type='checkbox' value={groups.name} onChange={groupHandler} />
-                          <label htmlFor={groups.name} >{groups.name}</label>
-                        </Flex>
-                      )
-                    })}
+                    <Scroll>
+                      {dataGroups?.groups.map((groups: any, index: any) => {
+                        return (
+
+                          <Flex>
+                            <Input key={index} name={groups.name} id={groups.name} type='checkbox' value={groups.name} onChange={groupHandler} />
+                            <label htmlFor={groups.name} >{groups.name}</label>
+                          </Flex>
+                        )
+                      })}
+                    </Scroll>
                   </Flex>
                 </Block>
                 <Block>
-                  <label htmlFor="category">Categoria</label>
+                  <label htmlFor="category">Categorias</label>
                   <Flex>
-                    {dataCategory?.category.map((category: any, index: any) => {
-                      return (
-                        <Flex>
-                          <Input key={index} name={category.name} id={category.name} type='checkbox' value={category.name} onChange={categoryHandler} />
-                          <label htmlFor={category.name}>{category.name}</label>
-                        </Flex>
-                      )
-                    })}
+                    <Scroll>
+
+                      {dataCategory?.category.map((category: any, index: any) => {
+                        return (
+                          <Flex>
+                            <Input key={index} name={category.name} id={category.name} type='checkbox' value={category.name} onChange={categoryHandler} />
+                            <label htmlFor={category.name}>{category.name}</label>
+                          </Flex>
+                        )
+                      })}
+                    </Scroll>
                   </Flex>
                 </Block>
                 <Block>
-                  <label htmlFor="office">Cargo</label>
+                  <label htmlFor="office">Cargos</label>
                   <Flex>
-                    {dataPositions?.positions.map((positions: any, index: any) => {
-                      return (
-                        <Flex>
-                          <Input key={index} id={positions.name} value={positions.name} onChange={officeHandler} type='checkbox' />
-                          <label htmlFor={positions.name}>{positions.name}</label>
-                        </Flex>
-                      )
-                    })}
+                    <Scroll>
+                      {dataPositions?.positions.map((positions: any, index: any) => {
+                        return (
+                          <Flex>
+                            <Input key={index} id={positions.name} value={positions.name} onChange={officeHandler} type='checkbox' />
+                            <label htmlFor={positions.name}>{positions.name}</label>
+                          </Flex>
+                        )
+                      })}
+                    </Scroll>
                   </Flex>
                 </Block>
                 <Block>
                   <label htmlFor="conversion">Data da conversão</label>
-                  <input
+                  <Input
                     name='conversion'
                     id='conversion'
                     value={conversion}
                     onChange={conversionHandler}
                     type='date'
-
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
                   />
                 </Block>
                 <Flex>
                   <Block>
                     <label htmlFor="baptized">Batizado(Sim ou Não)</label>
                     <select title='sele' id='baptis' value={baptized} onChange={baptizedHandler}>
-                      <option value='true' >Sim</option>
-                      <option value='false' >Não</option>
+                      <option value='Sim' >Sim</option>
+                      <option value='Não' >Não</option>
                     </select>
                   </Block>
                   <Block>
-                    {baptized ?
+                    {baptized === 'Sim' ?
                       <>
                         <label htmlFor="baptismdate">Data de batismo</label>
-                        <input id='baptismdate' type='date' value={baptismDate} onChange={baptismDateHandler} />
+                        <Input id='baptismdate' type='date' value={baptismDate} onChange={baptismDateHandler} />
                       </> : null}
                   </Block>
                 </Flex>
@@ -321,44 +304,32 @@ const AddPeople = () => {
                 <Flex>
                   <Block>
                     <label htmlFor="phone1">Telefone 1</label>
-                    <input
+                    <Input
                       name='phone1'
                       id='phone1'
                       value={phone1}
                       onChange={phone1Handler}
                       type='number'
-
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
                     />
                   </Block>
                   <Block>
                     <label htmlFor="phone2">Telefone 2</label>
-                    <input
+                    <Input
                       name='phone2'
                       id='phone2'
                       value={phone2}
                       onChange={phone2Handler}
                       type='number'
-
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
                     />
                   </Block>
                 </Flex>
                 <Block>
                   <label htmlFor="email">Email</label>
-                  <input
+                  <Input
                     id='email'
                     type='email'
                     value={email}
                     onChange={emailHandler}
-
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
                   />
                 </Block>
               </DataContent>
@@ -370,102 +341,76 @@ const AddPeople = () => {
               <DataContent>
                 <Block>
                   <label htmlFor="address">Endereço</label>
-                  <input
+                  <Input
                     name='address'
                     id='address'
                     value={address}
                     onChange={addressHandler}
                     type='text'
-
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
                   />
                 </Block>
                 <Block>
                   <label htmlFor="number">Numero</label>
-                  <input
+                  <Input
                     name='number'
                     id='number'
                     value={number}
                     onChange={numberHandler}
                     type='number'
-
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') e.preventDefault();
-                    }}
                   />
                 </Block>
                 <Flex>
                   <Block>
                     <label htmlFor="district">Bairro</label>
-                    <input
+                    <Input
                       name='district'
                       id='district'
                       value={district}
                       onChange={districtHandler}
                       type='text'
-
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
                     />
                   </Block>
                   <Block>
                     <label htmlFor="zipcode">CEP</label>
-                    <input
+                    <Input
                       name='zipcode'
                       id='zipcode'
                       value={zipcode}
                       onChange={zipcodeHandler}
                       type='number'
-
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
                     />
                   </Block>
                 </Flex>
                 <Flex>
                   <Block>
                     <label htmlFor="country">País</label>
-                    <input
+                    <Input
                       name='country'
                       id='country'
                       value={country}
                       onChange={countryHandler}
                       type='text'
-
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
                     />
                   </Block>
                   <Block>
                     <label htmlFor="state">Estado</label>
-                    <input
+                    <Input
                       name='state'
                       id='state'
                       value={state}
                       onChange={stateHandler}
                       type='text'
-
-                      onKeyDown={e => {
-                        if (e.key === 'Enter') e.preventDefault();
-                      }}
                     />
                   </Block>
                 </Flex>
                 <Block>
                   <label htmlFor="city">Cidade</label>
-                  <input
+                  <Input
                     name='city'
                     id='city'
                     value={city}
                     onChange={cityHandler}
                     type='text'
-
-
                   />
                 </Block>
               </DataContent>
@@ -483,7 +428,6 @@ const AddPeople = () => {
                   onChange={notesHandler}
                   cols={30}
                   rows={10}
-
                 ></textarea>
               </DataContent>
             </Data>
