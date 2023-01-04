@@ -5,12 +5,12 @@ export const Container = styled.div`
   align-items:center;
   justify-content: center;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-
+  z-index:100;
 `
 
 export const Content = styled.div`
@@ -18,7 +18,7 @@ export const Content = styled.div`
   height: auto;
   background: #fff;
   border-radius: 10px;
-  z-index: 15;
+  z-index: 150;
 `
 
 export const Box = styled.div`
@@ -45,7 +45,7 @@ export const BoxHeader = styled.div`
 
 export const BoxContent = styled.div`
   width: 100%;
-  height: 700px;
+  height: 600px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -60,30 +60,4 @@ export const BoxContent = styled.div`
     max-width: 350px;
     max-height: 300px;
   }
-`
-
-export const BoxFooter = styled.div`
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items:center;
-  justify-content:center;
-  border-radius: 0 0 10px 10px;
-  border-top: .5px solid black;
-  button {
-    padding: .5rem;
-    background: ${Props => Props.theme.colors.pri};
-    color: #fff;
-    border-radius: 20px;
-    font-size: 1rem;
-  }
-`
-export const Closed = styled.button`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 10;
 `

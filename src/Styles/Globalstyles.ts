@@ -43,6 +43,7 @@ const GlobalStyle = createGlobalStyle`
       color: ${Props => Props.theme.colors.text};
       button{
         color: ${Props => Props.theme.colors.text};
+        
       }
     }
   }

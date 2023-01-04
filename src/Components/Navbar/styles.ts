@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Nav = styled.nav`
   width: 100%;
-  height: 50px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,6 @@ export const Nav = styled.nav`
     font-size: 1rem;
     height: 50px;
     padding: 0 1rem;
-    color: #fff;
     @media (max-width:769px){
     display: none;
   }

@@ -1,11 +1,8 @@
-import Block from "../Block";
 import Button from "../Button";
-import Flex from "../Flex";
+import Close from "../Close";
 import FlexBetween from "../FlexBetween";
-import Input from "../Input";
-import InputBlock from "../InputBlock";
 
-import { Container, Content, Box, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
+import { Container, Content, Box, BoxHeader, BoxContent } from './styles'
 
 interface Props {
   children?: React.ReactNode;
@@ -18,18 +15,16 @@ const ModalColumn = ({ children, onClick }: Props) => {
         <Box>
           <BoxHeader>
             <FlexBetween>
-              <h3>Selecione a coluna</h3>
+              <h3>Selecione para ocultar a coluna</h3>
               <Button onClick={onClick}>Close</Button>
             </FlexBetween>
           </BoxHeader>
           <BoxContent>
             {children}
           </BoxContent>
-          <BoxFooter>
-          </BoxFooter>
         </Box>
       </Content>
-      <Closed onClick={onClick}></Closed>
+      <Close onClick={onClick}></Close>
     </Container>
   )
 }

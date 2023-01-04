@@ -44,10 +44,9 @@ export const FieldContent = styled.div`
   gap: 1rem;
   overflow-x: scroll;
   button {
-    padding: .5rem;
+    padding: .25rem ;
     background:  ${Props => Props.theme.colors.pri};
     border-radius: 5px;
-    color: #fff;
   }
 `
 
@@ -88,13 +87,13 @@ export const BoxContent = styled.div`
   align-items: center;
   flex-direction: column;
   gap: .5rem;
-  padding: .5rem;
+  padding: 1rem;
   button {
     padding: 0 1rem;
     height: 40px;
     border-radius: 10px;
-    color: #fff;
-    background: ${Props=>Props.theme.colors.pri};
+    background: ${Props => Props.theme.colors.pri};
+    box-shadow: 5px 5px 5px 0 ${Props => Props.theme.colors.shadow};
   }
 `
 export const InputContainer = styled.div`

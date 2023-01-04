@@ -18,32 +18,29 @@ export const Content = styled.div`
   height: auto;
   background: #fff;
   border-radius: 10px;
-  z-index: 15;
+  z-index: 150;
+  button {
+    padding: .5rem;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 0 ${Props => Props.theme.colors.shadow};
+    background:${Props => Props.theme.colors.red};
+    color:${Props => Props.theme.colors.bac};
+
+
+  }
+  [type=submit],[name=new]{
+    background:${Props => Props.theme.colors.green};
+    color:${Props => Props.theme.colors.bac};
+  }
 `
-
-export const Form = styled.form`
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-`
-
 export const BoxHeader = styled.div`
   width: 100%;
   height: 60px;
   border-bottom: .5px solid black;
   border-radius: 10px 10px 0 0;
-    button {
-      padding: .5rem;
-      border-radius: 20px;
-      background: #ddd;
-      box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
-    }
 `
 
-export const BoxContent = styled.div`  
+export const BoxContent = styled.div`
   width: 100%;
   height: auto;
   display: flex;
@@ -80,20 +77,4 @@ export const BoxFooter = styled.div`
   justify-content:center;
   border-radius: 0 0 10px 10px;
   border-top: .5px solid black;
-  button {
-    padding: .5rem;
-    background: ${Props => Props.theme.colors.pri};
-    color: #fff;
-    border-radius: 20px;
-    font-size: 1rem;
-  }
-`
-export const Closed = styled.button`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 10;
 `

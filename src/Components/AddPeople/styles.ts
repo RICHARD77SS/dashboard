@@ -22,8 +22,8 @@ export const Form = styled.form`
     height: 40px;
     border-radius: 30px;
     font-size: 1rem;
-    color: #fff;
     background: ${Props => Props.theme.colors.pri};
+    box-shadow: 5px 5px 5px ${Props => Props.theme.colors.shadow};
   }
   label {
     font-weight: 600;
@@ -137,7 +137,7 @@ export const InputBlock = styled.div`
   }
 `
 export const Scroll = styled.div`
-  width: auto;
+  width: 100%;
   height: 150px;
   overflow-y: scroll;
   display: flex;

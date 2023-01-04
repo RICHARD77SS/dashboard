@@ -6,6 +6,7 @@ import { Container, Content, Form } from './styles'
 import { AccountContext } from '../../contexts/accountContext';
 import Button from '../Button';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import Close from '../Close';
 
 const ModalAccountEdit = () => {
   const { name, description, nameHandler, descriptionHandler, handleSubmit, CloseModal } = React.useContext(AccountContext)
@@ -19,6 +20,7 @@ const ModalAccountEdit = () => {
           <Button type='submit'>Editar</Button>
         </Form>
       </Content>
+      <Close onClick={()=>CloseModal()} />
     </Container>
   )
 }

@@ -9,7 +9,7 @@ export const Page = styled.div`
     padding: 0 1rem;
     background: ${Props => Props.theme.colors.sec};
     font-size: 1rem;
-    color: #fff;
+    color: ${Props => Props.theme.colors.text};
     :nth-child(2){
       background: #fff;
       color: #000;

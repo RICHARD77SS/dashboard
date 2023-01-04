@@ -3,24 +3,25 @@ import Button from "../Button";
 import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
-import { Container, Content, Form, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
+import { Container, Content, BoxHeader, BoxContent, BoxFooter } from './styles'
 
 import { ExtraFieldsContext } from "../../contexts/extraFieldsContext";
-interface Props {
-  children?: React.ReactNode;
-  onClick?: any;
-}
-const NewImputFieldTextArea = ({ children, onClick }: Props) => {
+import Form from '../Form';
+import Close from '../Close';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+
+const ModalNewImputFieldTextArea = () => {
   const {
     handleSubmit,
     inputName,
     inputNameHandle,
-    setInputType
+    setInputType,
+    closeModalTextArea,
   } = React.useContext(ExtraFieldsContext)
 
   React.useEffect(() => {
     setInputType("textarea")
-  }, [])
+  }, [setInputType])
   return (
     <Container>
       <Content>
@@ -28,7 +29,7 @@ const NewImputFieldTextArea = ({ children, onClick }: Props) => {
           <BoxHeader>
             <FlexBetween>
               <h3>Criar</h3>
-              {children}
+              <Button type='button' onClick={() => closeModalTextArea()} ><AiOutlineCloseCircle size='30' /></Button>
             </FlexBetween>
           </BoxHeader>
           <BoxContent>
@@ -40,6 +41,7 @@ const NewImputFieldTextArea = ({ children, onClick }: Props) => {
                 type='text'
                 value={inputName}
                 onChange={inputNameHandle}
+                required
               />
             </InputBlock>
           </BoxContent>
@@ -48,9 +50,9 @@ const NewImputFieldTextArea = ({ children, onClick }: Props) => {
           </BoxFooter>
         </Form>
       </Content>
-      <Closed onClick={onClick}></Closed>
+      <Close onClick={() => closeModalTextArea()} />
     </Container>
   )
 }
 
-export default NewImputFieldTextArea;
+export default ModalNewImputFieldTextArea;

@@ -12,5 +12,13 @@ export const TdSt = styled.td`
   button{
     border: .5px solid ${Props => Props.theme.colors.shadow};
     color: ${Props => Props.theme.colors.text};
+    :first-child{
+      background: ${Props => Props.theme.colors.green};
+      color:${Props => Props.theme.colors.bac};
+    }
+    :last-child{
+      background: ${Props => Props.theme.colors.red};
+      color:${Props => Props.theme.colors.bac};
+    }
   }
 `

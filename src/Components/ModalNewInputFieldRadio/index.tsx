@@ -3,14 +3,14 @@ import Button from "../Button";
 import FlexBetween from "../FlexBetween";
 import Input from "../Input";
 import InputBlock from "../InputBlock";
-import { Container, Content, Form, BoxHeader, BoxContent, BoxFooter, Closed } from './styles'
+import { Container, Content, BoxHeader, BoxContent, BoxFooter } from './styles'
 
 import { ExtraFieldsContext } from "../../contexts/extraFieldsContext";
-interface Props {
-  children?: React.ReactNode;
-  onClick?: any;
-}
-const NewImputFieldRadio = ({ children, onClick }: Props) => {
+import Close from "../Close";
+import Form from "../Form";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
+const ModalNewImputFieldRadio = () => {
   const { handleSubmit,
     inputName,
     inputNameHandle,
@@ -18,7 +18,8 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
     inputOption,
     setInputType,
     RemoveOption,
-    AddOption
+    AddOption,
+    closeModalRadio
   } = React.useContext(ExtraFieldsContext)
 
   React.useEffect(() => {
@@ -31,7 +32,7 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
           <BoxHeader>
             <FlexBetween>
               <h3>Criar</h3>
-              {children}
+              <Button type='button' onClick={() => closeModalRadio()} ><AiOutlineCloseCircle size='30' /></Button>
             </FlexBetween>
           </BoxHeader>
           <BoxContent>
@@ -50,26 +51,27 @@ const NewImputFieldRadio = ({ children, onClick }: Props) => {
                 return (
                   <InputBlock key={index}>
                     <Input
-                      name='visitor'
+                      name='option'
                       type='text'
                       onChange={(event) => inputOptionHandle(event, index)}
-                      value={option.visitor}
+                      value={option.option}
+                      required
                     />
                     <Button type='button' onClick={() => RemoveOption(index)}>Apagar</Button>
                   </InputBlock>
                 )
               })}
             </InputBlock>
-            <Button type='button' onClick={() => AddOption()}>+ Adicionar nova opção</Button>
+            <Button type='button' name='new' onClick={() => AddOption()}>+ Adicionar nova opção</Button>
           </BoxContent>
           <BoxFooter>
             <Button type='submit'>Salvar</Button>
           </BoxFooter>
         </Form>
       </Content>
-      <Closed onClick={onClick}></Closed>
+      <Close onClick={() => closeModalRadio()} ></Close>
     </Container>
   )
 }
 
-export default NewImputFieldRadio;
+export default ModalNewImputFieldRadio;

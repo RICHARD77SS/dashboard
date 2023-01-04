@@ -7,6 +7,9 @@ export const Content = styled.div`
   display: none;
   z-index: 100;
   position: absolute; 
+  button{
+    color: ${Props => Props.theme.colors.text};
+  }
   @media (max-width:769px){
     display: flex;
     button {

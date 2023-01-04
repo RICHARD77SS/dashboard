@@ -10,7 +10,7 @@ export const Container = styled.div`
   left: 0;
   right: 0;
   background: rgba(0,0,0,0.4);
-  
+  z-index:100;
 `
 
 export const Content = styled.div`
@@ -22,9 +22,7 @@ export const Content = styled.div`
   align-items:Center;
   justify-content: center;
   flex-direction: column;
-  
   button {
-    
     border-radius: 20px;
     background: ${Props => Props.theme.colors.pri};
     color: #fff;
@@ -39,7 +37,6 @@ export const Content = styled.div`
     }
   }
 `
-
 export const Form = styled.form`
   width: 100%;
   height: auto;

@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Categorias, CategoriaHeader, CategoriasContainer, AddCategoria, AddHeader, Form, InputGroup } from './styles';
+import { Container, Content, Categorias, CategoriaHeader, CategoriasContainer, AddCategoria, AddHeader, InputGroup } from './styles';
 import { CategoryContext } from '../../contexts/categoryContext';
 import { useAxios } from '../../hooks/useAxios';
 import Table from '../Table';
@@ -11,6 +11,7 @@ import Th from '../Th';
 import Tbody from '../Tbody';
 import Td from '../Td';
 import Flex from '../Flex';
+import Form from '../Form';
 const Categories = () => {
   const { name,
     nameHandler,
@@ -25,6 +26,10 @@ const Categories = () => {
 
   return (
     <Container>
+      <br />
+      <br />
+      <br />
+      <h2>Categorias</h2>
       <Content>
         <Categorias>
           <CategoriaHeader>
@@ -42,7 +47,6 @@ const Categories = () => {
               </Thead>
               <Tbody>
                 {data?.category.map((category: any, index: any) => {
-
                   return (
                     <Tr key={index}>
                       <Td>{category.name}</Td>
@@ -70,7 +74,7 @@ const Categories = () => {
           <Form onSubmit={handleSubmit}>
             <InputGroup>
               <label htmlFor="name">Nome da Categoria</label>
-              <Input id='name' type='text' value={name} onChange={nameHandler} />
+              <Input id='name' type='text' value={name} onChange={nameHandler} required/>
             </InputGroup>
             <InputGroup>
               <label htmlFor="description">Descrição</label>

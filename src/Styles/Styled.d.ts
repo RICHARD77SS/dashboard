@@ -11,6 +11,9 @@ declare module 'styled-components' {
       hover: string,
       border: string,
       shadow: string,
+      red: string,
+      green: string,
+
     }
   }
 }

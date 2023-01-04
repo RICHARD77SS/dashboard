@@ -10,9 +10,8 @@ export const Container = styled.div`
   left: 0;
   right: 0;
   background: rgba(0,0,0,0.4);
-  
+  z-index: 150;
 `
-
 export const Content = styled.div`
   width: 600px;
   height: auto;
@@ -22,9 +21,8 @@ export const Content = styled.div`
   align-items:Center;
   justify-content: center;
   flex-direction: column;
-  
+  z-index: 150;
   button {
-    
     border-radius: 20px;
     background: ${Props => Props.theme.colors.pri};
     color: #fff;
@@ -38,14 +36,4 @@ export const Content = styled.div`
       background: #fff;
     }
   }
-`
-
-export const Form = styled.form`
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items:Center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
 `

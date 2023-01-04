@@ -522,10 +522,10 @@ const AddPeople = () => {
             })}
           </DataContent>
         </Data>
-        <Block>
+        <Flex>
           <Input name='accepted' type='checkbox' required />
           <p>Sou consciente das minhas responsabilidades com os dados cadastrados, em conformidade com a LGPD e GDPR. <a href='/'>Políticas de privacidade</a> </p>
-        </Block>
+        </Flex>
         <Button type='submit' onClick={() => getDate()}>Salvar dados</Button>
       </Form>
     </Container >

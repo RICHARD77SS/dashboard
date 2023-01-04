@@ -50,17 +50,7 @@ export const OfficeContainer = styled.div`
   }
 `
 
-export const Form = styled.form`
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 10px;
-  background: ${Props => Props.theme.colors.bac};
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
-`
+
 
 export const AddHeader = styled.div`
   width: 100%;

@@ -3,7 +3,7 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
-import CategoriesEdit from '../Components/CategoriesEdit';
+import CategoriesEdit from '../Components/ModalCategoriesEdit';
 
 export const CategoryContext = React.createContext();
 
