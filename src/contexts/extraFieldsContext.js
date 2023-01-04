@@ -4,7 +4,11 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 
-import AdditionalFieldEdit from '../Components/AdditionalFieldEdit';
+import AdditionalFieldEdit from '../Components/ModalAdditionalFieldEdit';
+import ModalNewInputFieldCheck from '../Components/ModalNewInputFieldCheck';
+import ModalNewInputFieldRadio from '../Components/ModalNewInputFieldRadio';
+import ModalNewInputFieldText from '../Components/ModalNewInputFieldText';
+import ModalNewInputFieldTextArea from '../Components/ModalNewInputFieldTextArea';
 export const ExtraFieldsContext = React.createContext();
 
 export function ExtraFieldsContextProvider({ children }) {
@@ -16,8 +20,6 @@ export function ExtraFieldsContextProvider({ children }) {
   const [inputType, setInputType] = React.useState('')
   const [inputOption, setInputOption] = React.useState([])
   const [openModalEdit1, setOpenModal1] = React.useState()
-  const [index, setIndex] = React.useState()
-
   const [openCheck, setOpenCheck] = React.useState(false)
   const [openRadio, setOpenRadio] = React.useState(false)
   const [openText, setOpenText] = React.useState(false)
@@ -32,9 +34,9 @@ export function ExtraFieldsContextProvider({ children }) {
 
   function AddOption() {
     let obj = {
-      option:""
+      option: ""
     }
-    setInputOption([...inputOption,obj])
+    setInputOption([...inputOption, obj])
   }
 
   function RemoveOption(index) {
@@ -43,12 +45,11 @@ export function ExtraFieldsContextProvider({ children }) {
     setInputOption(data)
   }
 
-  function inputOptionHandle(event,index) {
+  function inputOptionHandle(event, index) {
     let data = [...inputOption];
     data[index][event.target.name] = event.target.value;
     setInputOption(data);
   }
-
 
   function openModalCheck() {
     setInputName('')
@@ -56,51 +57,70 @@ export function ExtraFieldsContextProvider({ children }) {
   }
   function openModalRadio() {
     setInputName('')
-
     setOpenRadio(true)
   }
   function openModalText() {
     setInputName('')
-    setInputOption({})
+    setInputOption([])
     setOpenText(true)
   }
   function openModalTextArea() {
     setInputName('')
-    setInputOption({})
+    setInputOption([])
     setOpenTextArea(true)
   }
-
-  function OpenModal1(index, name) {
-    setInputName(name)
-
-    setOpenModal1(true)
-    setIndex(index)
+  function closeModalCheck() {
+    setOpenCheck(false)
   }
-  function closeModall() {
+  function closeModalRadio() {
+    setOpenRadio(false)
+  }
+  function closeModalText() {
+    setOpenText(false)
+  }
+  function closeModalTextArea() {
+    setOpenTextArea(false)
+  }
+  function CloseModal() {
     setOpenModal1(false)
   }
-
   function handleSubmit(event) {
     event.preventDefault()
-
+    setOpenModal1(false)
     setOpenCheck(false)
     setOpenRadio(false)
     setOpenText(false)
     setOpenTextArea(false)
-    window.alert('Campo adicionado')
     const extraFields = {
       inputName,
       inputType,
       inputOption
     }
-    api.post('extraFields', extraFields);
-    const updatedExtraFields = {
-      extraFields: [...data.extraFields, extraFields]
+    if (id) {
+      api.put(`extraFields/${id}`, extraFields)
+      window.alert('Campo editado')
+      const updatedExtraFields = {
+        extraFields: data.extraFields?.map((extraFields) => {
+          if (extraFields._id === id) {
+            return {
+              ...extraFields,
+              inputName,
+              inputType,
+              inputOption
+            };
+          }
+          return extraFields
+        }),
+      };
+      mutate(updatedExtraFields, false);
+    } else {
+      api.post('extraFields', extraFields);
+      window.alert('Campo adicionado')
+      const updatedExtraFields = {
+        extraFields: [...data.extraFields, extraFields]
+      }
+      mutate(updatedExtraFields, false)
     }
-    mutate(updatedExtraFields, false)
-
-    setOpenModal1(false)
-
   }
   function handleDelete(id) {
     api.delete(`extraFields/${id}`);
@@ -110,28 +130,12 @@ export function ExtraFieldsContextProvider({ children }) {
     };
     mutate(updatedExtraFields, false);
   }
-  function handleEdit(id) {
-
-    const extraFields = {
-      inputName,
-      inputType,
-      inputOption
-    }
-    api.put(`extraFields/${id}`, extraFields)
-    const updatedExtraFields = {
-      extraFields: data.extraFields?.map((extraFields) => {
-        if (extraFields._id === id) {
-          return {
-            ...extraFields,
-            inputName,
-            inputType,
-            inputOption
-          };
-        }
-        return extraFields
-      }),
-    };
-    mutate(updatedExtraFields, false);
+  function handleEdit(idField, nameField, optionField, inputTypeField) {
+    setId(idField)
+    setInputName(nameField)
+    setInputOption(optionField)
+    setInputType(inputTypeField)
+    setOpenModal1(true)
   }
 
   return <ExtraFieldsContext.Provider value={{
@@ -149,26 +153,28 @@ export function ExtraFieldsContextProvider({ children }) {
     handleEdit,
     setId,
     openModalEdit1,
-    OpenModal1,
-    closeModall,
-    openCheck,
-    setOpenCheck,
-    openModalCheck,
-    index,
+    CloseModal,
     id,
+    openModalCheck,
     openModalRadio,
     openModalText,
     openModalTextArea,
+    closeModalCheck,
+    closeModalRadio,
+    closeModalText,
+    closeModalTextArea,
+    openCheck,
     openRadio,
-    setOpenRadio,
     openText,
-    setOpenText,
     openTextArea,
-    setOpenTextArea,
     RemoveOption,
     AddOption
   }}>
     {children}
     {openModalEdit1 && <AdditionalFieldEdit />}
+    {openCheck && <ModalNewInputFieldCheck />}
+    {openRadio && <ModalNewInputFieldRadio />}
+    {openText && <ModalNewInputFieldText />}
+    {openTextArea && <ModalNewInputFieldTextArea />}
   </ExtraFieldsContext.Provider>
 }
