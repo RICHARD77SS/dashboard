@@ -8,10 +8,12 @@ import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
 import Flex from '../Flex';
-import { Container, Content, Offices, OfficeHeader, OfficeContainer, Form, AddHeader, AddContainer, InputGroup } from './styles';
+import { Container, Content, Offices, OfficeHeader, OfficeContainer, AddHeader, AddContainer, InputGroup } from './styles';
 
 import { PositionsContext } from '../../contexts/positionsContexts'
 import { useAxios } from '../../hooks/useAxios'
+import Form from '../Form';
+import Aside from '../Aside';
 
 const Office = () => {
   const { data } = useAxios('positions')
@@ -19,6 +21,10 @@ const Office = () => {
 
   return (
     <Container>
+      <br />
+      <br />
+      <br />
+      <h2>Cargos</h2>
       <Content>
         <Offices>
           <OfficeHeader>
@@ -53,18 +59,20 @@ const Office = () => {
             </Table>
           </OfficeContainer>
         </Offices>
-        <Form onSubmit={handleSubmit}>
-          <AddHeader>
-            <h3>Criar cargo</h3>
-          </AddHeader>
-          <AddContainer>
-            <InputGroup>
-              <label htmlFor="name">Nome do cargo</label>
-              <Input id='name' type='text' value={name} onChange={nameHandler} />
-            </InputGroup>
-            <Button type='submit'>Criar</Button>
-          </AddContainer>
-        </Form>
+        <Aside>
+          <Form onSubmit={handleSubmit}>
+            <AddHeader>
+              <h3>Criar cargo</h3>
+            </AddHeader>
+            <AddContainer>
+              <InputGroup>
+                <label htmlFor="name">Nome do cargo</label>
+                <Input id='name' type='text' value={name} onChange={nameHandler} required />
+              </InputGroup>
+              <Button type='submit'>Criar</Button>
+            </AddContainer>
+          </Form>
+        </Aside>
       </Content>
     </Container>
   )
