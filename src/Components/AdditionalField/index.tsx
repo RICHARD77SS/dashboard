@@ -2,10 +2,10 @@ import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
 import { Container, Content, Field, Header, FieldContent, AddField, FieldHeader, Box, BoxHeader, BoxContent, InputContainer, InputContainerB } from './styles';
-import NewImputFieldCheck from '../NewImputFieldCheck';
-import NewImputFieldRadio from '../NewImputFieldRadio';
-import NewImputFieldText from '../NewImputFieldText';
-import NewImputFieldTextArea from '../NewImputFieldTextArea';
+import NewImputFieldCheck from '../ModalNewInputFieldCheck';
+import NewImputFieldRadio from '../ModalNewInputFieldRadio';
+import NewImputFieldText from '../ModalNewInputFieldText';
+import NewImputFieldTextArea from '../ModalNewInputFieldTextArea';
 import Flex from '../Flex';
 import Table from '../Table';
 import Thead from '../Thead';
@@ -16,15 +16,13 @@ import Td from '../Td';
 
 import { useAxios } from '../../hooks/useAxios';
 import { ExtraFieldsContext } from '../../contexts/extraFieldsContext';
-import AdditionalFieldEdit from '../AdditionalFieldEdit';
 
 const AdditionalField = () => {
   const { data } = useAxios('extraFields')
   var Lenght = data?.extraFields?.length
   const {
     handleDelete,
-    openModalEdit1,
-    OpenModal1,
+    handleEdit,
     openCheck,
     openModalCheck,
     setOpenCheck,
@@ -41,9 +39,9 @@ const AdditionalField = () => {
 
   return (
     <Container>
-      {openModalEdit1 ?
-        <AdditionalFieldEdit></AdditionalFieldEdit>
-        : null}
+      <br />
+      <br />
+      <br />
       <Content>
         <Field>
           <Header>
@@ -67,15 +65,16 @@ const AdditionalField = () => {
                       <Td>{fields?.inputName}</Td>
                       <Td>{fields?.inputType}</Td>
                       <Td>
-                        {fields?.inputType !== 'text' && fields?.inputType !== 'textarea' ? Object.keys(fields?.inputOption).map((option: string, index: number) => fields?.inputOption[option] + '; ') : null}
+                        {fields?.inputType !== 'text' && fields?.inputType !== 'textarea' ?
+                          Object.keys(fields?.inputOption).map((option: string) =>
+                            fields.inputOption[option].option + '; ') : null}
                       </Td>
                       <Td>
                         <Flex>
-                          <Button onClick={() => OpenModal1(index, fields.inputName)}>Editar</Button>
+                          <Button onClick={() => handleEdit(fields._id, fields.inputName, fields.inputOption, fields.inputType)}>Editar</Button>
                           <Button onClick={() => handleDelete(fields._id)}>Remover</Button>
                         </Flex>
                       </Td>
-
                     </Tr>
                   )
                 })}
@@ -90,7 +89,6 @@ const AdditionalField = () => {
           <FieldContent>
             <h3>Escolha um tipo (exemplos abaixo):</h3>
             <Flex>
-
               <Box>
                 <BoxHeader>
                   <h3>Tipo Checkbox</h3>
@@ -111,12 +109,6 @@ const AdditionalField = () => {
                   </InputContainer>
                   <Button onClick={() => { openModalCheck() }}>Criar novo</Button>
                 </BoxContent>
-                {openCheck ?
-                  <NewImputFieldCheck onClick={() => { setOpenCheck(false) }}>
-                    <Button onClick={() => { setOpenCheck(false) }}>Close</Button>
-                  </NewImputFieldCheck>
-
-                  : null}
               </Box>
               <Box>
                 <BoxHeader>
@@ -138,12 +130,6 @@ const AdditionalField = () => {
                   </InputContainer>
                   <Button onClick={() => { openModalRadio() }}>Criar novo</Button>
                 </BoxContent>
-                {openRadio ?
-                  <NewImputFieldRadio onClick={() => { setOpenRadio(false) }}>
-                    <Button onClick={() => { setOpenRadio(false) }}>Close</Button>
-                  </NewImputFieldRadio>
-
-                  : null}
               </Box>
             </Flex>
             <Flex>
@@ -160,12 +146,6 @@ const AdditionalField = () => {
                   </InputContainerB>
                   <Button onClick={() => { openModalText() }}>Criar novo</Button>
                 </BoxContent>
-                {openText ?
-                  <NewImputFieldText onClick={() => { setOpenText(false) }}>
-                    <Button onClick={() => { setOpenText(false) }}>Close</Button>
-                  </NewImputFieldText>
-
-                  : null}
               </Box>
               <Box>
                 <BoxHeader>
@@ -179,12 +159,6 @@ const AdditionalField = () => {
                   </InputContainerB>
                   <Button onClick={() => { openModalTextArea() }}>Criar novo</Button>
                 </BoxContent>
-                {openTextArea ?
-                  <NewImputFieldTextArea onClick={() => { setOpenTextArea(false) }}>
-                    <Button onClick={() => { setOpenTextArea(false) }}>Close</Button>
-                  </NewImputFieldTextArea>
-
-                  : null}
               </Box>
             </Flex>
           </FieldContent>
