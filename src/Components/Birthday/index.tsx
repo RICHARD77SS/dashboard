@@ -2,9 +2,7 @@ import Button from '../Button';
 import Input from '../Input';
 import { useAxios } from '../../hooks/useAxios';
 import React from 'react'
-import { Container, ContainerHeader, Content, Header, BoxContent, Center, Options, Bottom } from './styles';
-
-import { AiOutlineCopy, AiOutlineDownload, AiOutlinePrinter, AiOutlineEye } from 'react-icons/ai';
+import { Center, Options } from './styles';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import Table from '../Table';
 import Thead from '../Thead';
@@ -14,7 +12,12 @@ import Tbody from '../Tbody';
 import Td from '../Td';
 import TabsBirthday from '../TabsBirthday/index';
 import Tab from '../Tab';
-import { useSortedData } from '../../utils/sortingTable';
+import PageSelector from './../PageSelector/index';
+import BoxContent from '../BoxContent';
+import BoxHeader from '../BoxHeader';
+import Box from '../Box';
+import { PersonContext } from '../../contexts/personContext';
+import Container from '../Container';
 
 
 const Birthday = () => {
@@ -90,31 +93,39 @@ const Birthday = () => {
     return data.getMonth() + 1 === 12 ? data.getMonth() + 1 : null
   })
   let dez = dezembro?.filter((i: number) => i === 12).length
-  const { items, requestSort, sortConfig } = useSortedData(data?.person ? data?.person : []);
+
+  const { items, requestSort, previousItem, nextItem, handleResults, resultsPage, currentPages, initialItem, finalItem } = React.useContext(PersonContext);
+  console.log(initialItem, finalItem)
   return (
     <Container>
-      <ContainerHeader>
-        <h3>Aniversários</h3>
-        <p>Pessoas &gt; Aniversários</p>
-      </ContainerHeader>
-      <Content>
-        <Header>
-          <h3>Selecione um mês</h3>
-        </Header>
+      <br />
+      <br />
+      <h3>Aniversários</h3>
+      <p>Pessoas &gt; Aniversários</p>
+      <br />
+      <Box>
+        <BoxHeader title='Selecione um mês'>
+        </BoxHeader>
         <BoxContent>
+          <Center>
+            <Options>
+              <Input type='number' step='20' min='20' max='400' value={resultsPage} onChange={(event) => handleResults(event)} />
+              <p>Resultados por página</p>
+            </Options>
+          </Center>
           <TabsBirthday>
             <Tab title={`Jan (${jan})`}>
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody >
 
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 1) {
@@ -128,7 +139,7 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -136,13 +147,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 2) {
@@ -157,7 +168,7 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -165,13 +176,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 3) {
@@ -186,7 +197,7 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -194,13 +205,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 4) {
@@ -215,7 +226,7 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -223,13 +234,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 5) {
@@ -243,7 +254,7 @@ const Birthday = () => {
                       )
                     }
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -251,13 +262,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 6) {
@@ -270,7 +281,7 @@ const Birthday = () => {
                       )
                     }
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -278,13 +289,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 7) {
@@ -297,7 +308,7 @@ const Birthday = () => {
                       )
                     }
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -306,7 +317,7 @@ const Birthday = () => {
                 <Thead>
                   <Tr>
                     <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
                     <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
@@ -324,7 +335,7 @@ const Birthday = () => {
                       )
                     }
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
 
                 </Tbody>
               </Table>
@@ -333,13 +344,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 9) {
@@ -354,7 +365,7 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -362,13 +373,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 10) {
@@ -383,7 +394,7 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -391,13 +402,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 11) {
@@ -412,7 +423,7 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
@@ -420,13 +431,13 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th>Imagem </Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items?.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 12) {
@@ -441,30 +452,15 @@ const Birthday = () => {
                     }
 
                     return (<></>)
-                  })}
+                  }).slice(initialItem, finalItem)}
                 </Tbody>
               </Table>
             </Tab>
           </TabsBirthday>
-          <Center>
-            <Options>
-              <Input type='number' step='20' min='0' max='100' />
-              <p>Resultados por página</p>
-            </Options>
-            <Options>
-              <Button><AiOutlineCopy /></Button>
-              <Button><AiOutlineDownload /></Button>
-              <Button><AiOutlinePrinter /></Button>
-              <Button><AiOutlineEye />Colunas</Button>
-            </Options>
-          </Center>
 
-          <Bottom>
-            <Button>Anterior</Button>
-            <Button>Proximo</Button>
-          </Bottom>
+          <PageSelector previus={() => { previousItem() }} next={() => { nextItem() }}>{currentPages}</PageSelector>
         </BoxContent>
-      </Content>
+      </Box>
     </Container>
   )
 }
