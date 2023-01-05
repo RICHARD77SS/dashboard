@@ -17,28 +17,28 @@ interface Props {
   sex?: string;
   schooling?: string;
   marital?: string;
-  document1?: string;
-  document2?: string;
-  category?: string;
-  office?: string;
-  conversion?: string;
+  document1?: number;
+  document2?: number;
+  category?: string[];
+  office?: string[];
+  conversion?: Date;
   batizm?: string;
-  dataCreation?: string;
-  phone1?: string;
-  phone2?: string;
+  dataCreation?: Date;
+  phone1?: number;
+  phone2?: number;
   email?: string;
   addres?: string;
   district?: string;
-  number?: string;
-  zipcode?: string;
+  number?: number;
+  zipcode?: number;
   city?: string;
   state?: string;
   country?: string;
   password?: string;
-  group?: string;
+  group?: string[];
   notes?: string;
   id?: string;
-  baptismDate?: string;
+  baptismDate?: Date;
   spouse?: string;
   convertedSpouse?: string;
 }
@@ -144,41 +144,39 @@ const PersonDetailsEdit = (Props: Props) => {
   let bdate = Props.birth
   let formatBirt = bdate?.split('T')[0]
 
-  let conversionDate = Props.conversion
-  let formatConversionDate = conversionDate?.split('T')[0]
-  let creationDate = registerDate?.split('T')[0]
+  console.log(conversion?.toString()?.split('T')[0])
   React.useEffect(() => {
-    setId(Props.id)
-    setName(Props.name)
-    setEmail(Props.email)
-    setPassword(Props.password)
-    setBirth(formatBirt)
-    setSex(Props.sex)
-    setSchooling(Props.schooling)
-    setMarital(Props.marital)
-    setDocument1(Props.document1)
-    setDocument2(Props.document2)
-    setPhone1(Props.phone1)
-    setPhone2(Props.phone2)
-    setAddress(Props.addres)
-    setNumber(Props.number)
-    setDistrict(Props.district)
-    setZipcode(Props.zipcode)
-    setCountry(Props.country)
-    setState(Props.state)
-    setCity(Props.city)
-    setGroup(Props.group)
-    setCategory(Props.category)
-    setOffice(Props.office)
-    setConversion(formatConversionDate)
-    setNotes(Props.notes)
-    setBaptized(Props.batizm)
-    setImage(Props.image)
-    setRegisterDate(Props.dataCreation)
-    setBaptismDate(Props.baptismDate)
-    setSpouse(Props.spouse)
-    setConvertedSpouse(Props.convertedSpouse)
-  }, [setId, Props.id, setName, Props.name, setEmail, Props.email, setPassword, Props.password, setBirth, formatBirt, setSex, Props.sex, setSchooling, Props.schooling, setMarital, Props.marital, setDocument1, Props.document1, setDocument2, Props.document2, setPhone1, Props.phone1, setPhone2, Props.phone2, setAddress, Props.addres, setNumber, Props.number, setDistrict, Props.district, setZipcode, Props.zipcode, setCountry, Props.country, setState, Props.state, setCity, Props.city, setGroup, Props.group, setCategory, Props.category, setOffice, Props.office, setConversion, formatConversionDate, setNotes, Props.notes, setBaptized, Props.batizm, setImage, Props.image, setRegisterDate, Props.dataCreation, Props.baptismDate, setBaptismDate, Props.spouse, Props.convertedSpouse, setSpouse, setConvertedSpouse])
+    setId(Props.id!)
+    setName(Props.name!)
+    setEmail(Props.email!)
+    setPassword(Props.password!)
+    setBirth(formatBirt!)
+    setSex(Props.sex!)
+    setSchooling(Props.schooling!)
+    setMarital(Props.marital!)
+    setDocument1(Props.document1!)
+    setDocument2(Props.document2!)
+    setPhone1(Props.phone1!)
+    setPhone2(Props.phone2!)
+    setAddress(Props.addres!)
+    setNumber(Props.number!)
+    setDistrict(Props.district!)
+    setZipcode(Props.zipcode!)
+    setCountry(Props.country!)
+    setState(Props.state!)
+    setCity(Props.city!)
+    setGroup(Props.group!)
+    setCategory(Props.category!)
+    setOffice(Props.office!)
+    setConversion(Props.conversion!)
+    setNotes(Props.notes!)
+    setBaptized(Props.batizm!)
+    setImage(Props.image!)
+    setRegisterDate(Props.dataCreation!)
+    setBaptismDate(Props.baptismDate!)
+    setSpouse(Props.spouse!)
+    setConvertedSpouse(Props.convertedSpouse!)
+  }, [setId, Props.id, setName, Props.name, setEmail, Props.email, setPassword, Props.password, setBirth, formatBirt, setSex, Props.sex, setSchooling, Props.schooling, setMarital, Props.marital, setDocument1, Props.document1, setDocument2, Props.document2, setPhone1, Props.phone1, setPhone2, Props.phone2, setAddress, Props.addres, setNumber, Props.number, setDistrict, Props.district, setZipcode, Props.zipcode, setCountry, Props.country, setState, Props.state, setCity, Props.city, setGroup, Props.group, setCategory, Props.category, setOffice, Props.office, setConversion, setNotes, Props.notes, setBaptized, Props.batizm, setImage, Props.image, setRegisterDate, Props.dataCreation, Props.baptismDate, setBaptismDate, Props.spouse, Props.convertedSpouse, setSpouse, setConvertedSpouse, Props.conversion])
   return (
     <Container >
       <Form >
@@ -361,7 +359,7 @@ const PersonDetailsEdit = (Props: Props) => {
               </Block>
               <InputBlock>
                 <p><b>Data de conversão: &nbsp;</b></p>
-                <Input type='date' value={conversion} onChange={conversionHandler} />
+                <Input type='date' value={conversion?.toString().split('T')[0]} onChange={conversionHandler} />
               </InputBlock>
               <InputBlock>
                 <p><b>Batizado: &nbsp;</b></p>
@@ -374,12 +372,12 @@ const PersonDetailsEdit = (Props: Props) => {
                 {baptized === 'Sim' ?
                   <>
                     <label htmlFor="baptismdate">Data de batismo</label>
-                    <Input id='baptismdate' type='date' value={baptismDate?.split('T')[0]} onChange={baptismDateHandler} />
+                    <Input id='baptismdate' type='date' value={baptismDate?.toString().split('T')[0]} onChange={baptismDateHandler} />
                   </> : null}
               </Block>
               <InputBlock>
                 <p><b>Perfil criado em: &nbsp;</b></p>
-                <Input type='date' onChange={registerDateHandler} value={creationDate} />
+                <Input type='date' onChange={registerDateHandler} value={registerDate?.toString().split('T')[0]} />
               </InputBlock>
             </BoxContent>
           </Box>

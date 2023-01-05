@@ -3,6 +3,7 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import { dayNow, monthNow, yearNow } from '../utils/getDate';
 import { personTypes, InitialValue, userContext } from './@types.personContext';
+import { useSortedData } from '../utils/sortingTable';
 
 export const PersonContext = React.createContext<personTypes>(InitialValue);
 
@@ -50,6 +51,8 @@ export const PersonContextProvider = ({ children }: userContext) => {
   const [initialItem, setInitialItem] = React.useState(InitialValue.initialItem)
   const [finalItem, setFinalItem] = React.useState(resultsPage)
   const [currentPages, setCurrentPages] = React.useState(InitialValue.currentPages)
+
+  const { items, requestSort, sortConfig } = useSortedData(data?.person ? data?.person : []);
   var Lenght = data?.person.length
   let dados = data?.person[0]
   let names = ['Nome', 'E-mail', 'Data De Nascimento', 'Sexo', 'Escolaridade', 'EstadoCivil', 'Documento 1', 'Documento 2', 'Telefones', 'Endereço', 'Bairro', 'CEP', 'Pais', 'Estado', 'Cidade', 'Grupos', 'Categorias', 'Cargo', 'Data de conversão', 'Batizado', 'Data de batismo', 'Criado em ', 'Nome do cônjugue', 'Faixa etária', 'Idade']
@@ -199,41 +202,6 @@ export const PersonContextProvider = ({ children }: userContext) => {
       setFilters((oldArr: string[]) => [...oldArr, event.target.value])
     }
   }
-
-  const useSortedData = (items: [], config = null) => {
-    const [sortConfig, setSortConfig] = React.useState<any>(config);
-
-    const sortedItems = React.useMemo(() => {
-      let sortableItems = [...items];
-      if (sortConfig !== null) {
-        sortableItems?.sort((a, b) => {
-          if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-          }
-          if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-          }
-          return 0;
-        });
-      }
-      return sortableItems;
-    }, [items, sortConfig]);
-
-    const requestSort = (key: string) => {
-      let direction = 'ascending';
-      if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === 'ascending'
-      ) {
-        direction = 'descending';
-      }
-      setSortConfig({ key, direction });
-    };
-    return { items: sortedItems, requestSort, sortConfig };
-  };
-  const { items, requestSort, sortConfig } = useSortedData(data?.person ? data?.person : []);
-  
   const handleResults = (event: React.ChangeEvent<HTMLInputElement>) => {
     setResultsPage(parseInt(event.target.value))
   }

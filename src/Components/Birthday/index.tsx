@@ -1,7 +1,7 @@
 import Button from '../Button';
 import Input from '../Input';
 import { useAxios } from '../../hooks/useAxios';
-
+import React from 'react'
 import { Container, ContainerHeader, Content, Header, BoxContent, Center, Options, Bottom } from './styles';
 
 import { AiOutlineCopy, AiOutlineDownload, AiOutlinePrinter, AiOutlineEye } from 'react-icons/ai';
@@ -14,11 +14,11 @@ import Tbody from '../Tbody';
 import Td from '../Td';
 import TabsBirthday from '../TabsBirthday/index';
 import Tab from '../Tab';
+import { useSortedData } from '../../utils/sortingTable';
 
 
 const Birthday = () => {
   const { data } = useAxios('person')
-
   let janeiro = data?.person.map((person: any, index: number) => {
     const data = new Date(person.birth)
     return data.getMonth() + 1 === 1 ? data.getMonth() + 1 : null
@@ -90,7 +90,7 @@ const Birthday = () => {
     return data.getMonth() + 1 === 12 ? data.getMonth() + 1 : null
   })
   let dez = dezembro?.filter((i: number) => i === 12).length
-
+  const { items, requestSort, sortConfig } = useSortedData(data?.person ? data?.person : []);
   return (
     <Container>
       <ContainerHeader>
@@ -242,7 +242,6 @@ const Birthday = () => {
                         </Tr>
                       )
                     }
-
                     return (<></>)
                   })}
                 </Tbody>
@@ -262,7 +261,6 @@ const Birthday = () => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 6) {
-
                       return (
                         <Tr key={index}>
                           <Td>{data.toLocaleDateString()}</Td>
@@ -271,7 +269,6 @@ const Birthday = () => {
                         </Tr>
                       )
                     }
-
                     return (<></>)
                   })}
                 </Tbody>
@@ -291,7 +288,6 @@ const Birthday = () => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 7) {
-
                       return (
                         <Tr key={index}>
                           <Td>{data.toLocaleDateString()}</Td>
@@ -300,7 +296,6 @@ const Birthday = () => {
                         </Tr>
                       )
                     }
-
                     return (<></>)
                   })}
                 </Tbody>
@@ -310,17 +305,16 @@ const Birthday = () => {
               <Table>
                 <Thead>
                   <Tr>
-                    <Th><Button>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('birth')}>Dia <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                     <Th><Button>Imagem <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
-                    <Th><Button>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
+                    <Th><Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.person.map((person: any, index: number) => {
+                  {items.map((person: any, index: number) => {
                     const data = new Date(person.birth)
                     const month = data.getMonth() + 1
                     if (month === 8) {
-
                       return (
                         <Tr key={index}>
                           <Td>{data.toLocaleDateString()}</Td>
@@ -329,7 +323,6 @@ const Birthday = () => {
                         </Tr>
                       )
                     }
-
                     return (<></>)
                   })}
 

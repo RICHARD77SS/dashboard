@@ -3,6 +3,7 @@ import React from 'react';
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import { useSortedData } from '../utils/sortingTable';
 
 export const StudiesContext = React.createContext();
 
@@ -19,7 +20,7 @@ export function StudiesContextProvider({ children }) {
   const [notification, setNotification] = React.useState(false)
   const [date, setDate] = React.useState(DateNow)
 
-
+  const { items, requestSort, sortConfig } = useSortedData(data?.studies ? data?.studies : []);
   function nameHandler(event) {
     setName(event.target.value);
   }
@@ -148,7 +149,8 @@ export function StudiesContextProvider({ children }) {
     handleDelete,
     setContent,
     handleClear,
-    id
+    id,
+    items, requestSort, sortConfig
   }}>
     {children}
   </StudiesContext.Provider>

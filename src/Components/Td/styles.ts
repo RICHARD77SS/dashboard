@@ -21,4 +21,9 @@ export const TdSt = styled.td`
       color:${Props => Props.theme.colors.bac};
     }
   }
+  a{
+    .edit{
+    background: ${Props => Props.theme.colors.green};
+    color:${Props => Props.theme.colors.bac};
+  }}
 `

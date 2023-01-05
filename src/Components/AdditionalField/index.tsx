@@ -23,15 +23,7 @@ const AdditionalField = () => {
   const {
     handleDelete,
     handleEdit,
-    openCheck,
     openModalCheck,
-    setOpenCheck,
-    openRadio,
-    setOpenRadio,
-    openText,
-    setOpenText,
-    openTextArea,
-    setOpenTextArea,
     openModalRadio,
     openModalText,
     openModalTextArea

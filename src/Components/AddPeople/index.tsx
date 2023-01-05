@@ -70,7 +70,7 @@ const AddPeople = () => {
   var Lenght = data?.person.length
 
   function getDate() {
-    let DateNow = new Date().toISOString()
+    let DateNow = new Date()
     setRegisterDate(DateNow)
   }
   const { data: datafield } = useAxios('extraFields')
@@ -271,7 +271,7 @@ const AddPeople = () => {
                   <Input
                     name='conversion'
                     id='conversion'
-                    value={conversion}
+                    value={conversion?.toString().split('T')[0]}
                     onChange={conversionHandler}
                     type='date'
                   />
@@ -288,7 +288,7 @@ const AddPeople = () => {
                     {baptized === 'Sim' ?
                       <>
                         <label htmlFor="baptismdate">Data de batismo</label>
-                        <Input id='baptismdate' type='date' value={baptismDate} onChange={baptismDateHandler} />
+                        <Input id='baptismdate' type='date' value={baptismDate?.toString().split('T')[0]} onChange={baptismDateHandler} />
                       </> : null}
                   </Block>
                 </Flex>
