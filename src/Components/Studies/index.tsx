@@ -1,8 +1,11 @@
+import React from "react"
 import Box from "../Box"
 import BoxContent from "../BoxContent"
 import BoxHeader from "../BoxHeader"
 import Button from "../Button"
 import Container from "../Container"
+import Flex from "../Flex"
+import PageSelector from "../PageSelector"
 import Table from "../Table"
 import Tbody from "../Tbody"
 import Td from "../Td"
@@ -10,18 +13,16 @@ import Th from "../Th"
 import Thead from "../Thead"
 import TopTableOptions from "../TopTableOptions"
 import Tr from "../Tr"
+
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
-import PageSelector from "../PageSelector"
 import { Link } from "react-router-dom"
-import { useAxios } from "../../hooks/useAxios"
-import Flex from "../Flex"
-import React from "react"
 import { StudiesContext } from "../../contexts/studiesContext"
 
 
+
 const Studies = () => {
-  const { data } = useAxios('studies');
-  const { handleDelete, handleEdit, handleClear } = React.useContext(StudiesContext);
+  const { handleDelete, handleEdit, handleClear, items, requestSort } = React.useContext(StudiesContext);
+
   return (
     <Container>
       <h3>Estudos</h3>
@@ -35,21 +36,21 @@ const Studies = () => {
             <Thead>
               <Tr>
                 <Th>
-                  <Flex>Nome <p><BsArrowUp /><BsArrowDown /></p></Flex>
+                  <Button onClick={() => requestSort('name')}>Nome <p><BsArrowUp /><BsArrowDown /></p></Button>
                 </Th>
                 <Th>
-                  <Flex>Categoria <p><BsArrowUp /><BsArrowDown /></p></Flex>
+                  <Button onClick={() => requestSort('category')}>Categoria <p><BsArrowUp /><BsArrowDown /></p></Button>
                 </Th>
                 <Th>
-                  <Flex>Criado em  <p><BsArrowUp /><BsArrowDown /></p></Flex>
+                  <Button onClick={() => requestSort('date')}>Criado em  <p><BsArrowUp /><BsArrowDown /></p></Button>
                 </Th>
                 <Th>
-                  <Flex>Ações <p><BsArrowUp /><BsArrowDown /></p></Flex>
+                  <Button>Ações</Button>
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
-              {data?.studies.map((estudo: any, index: number) => {
+              {items.map((estudo: any, index: number) => {
                 return (
 
                   <Tr key={index}>
@@ -64,15 +65,16 @@ const Studies = () => {
                     </Td>
                     <Td>
                       <Flex>
-                        <Link to={`/addstudies/${index}`}><Button type='button' onClick={() => handleEdit(
-                          estudo._id,
-                          estudo.name,
-                          estudo.category,
-                          estudo.content,
-                          estudo.image,
-                          estudo.file,
-                          estudo.notification
-                        )}>Editar</Button></Link>
+                        <Link to={`/addstudies/${index}`}>
+                          <Button className='edit' type='button' onClick={() => handleEdit(
+                            estudo._id,
+                            estudo.name,
+                            estudo.category,
+                            estudo.content,
+                            estudo.image,
+                            estudo.file,
+                            estudo.notification
+                          )}>Editar</Button></Link>
                         <Button type='button' onClick={() => handleDelete(estudo._id)}>Deletar</Button>
                       </Flex>
                     </Td>
