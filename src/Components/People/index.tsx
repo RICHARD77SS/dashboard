@@ -23,57 +23,31 @@ import TableContainer from '../TableContainer';
 import InputBlock from '../InputBlock';
 import Button from '../Button';
 import Flex from '../Flex';
+import { PersonContext } from '../../contexts/personContext';
 
 
 const People = () => {
   const { data } = useAxios('person')
-  const [order, setOrder] = React.useState(1)
-  const [column, setColumn] = React.useState('')
-  const [activeColumn, setActiveColum] = React.useState<string[]>([])
-  const [filters, setFilters] = React.useState<string[]>([])
-  const [resultsPage, setResultsPage] = React.useState(20)
-  const [initialItem, setInitialItem] = React.useState(0)
-  const [finalItem, setFinalItem] = React.useState(resultsPage)
-  const [currentPages, setCurrentPages] = React.useState(1)
-
-  const handleOrder = (fName: any) => {
-    setOrder(-order)
-    setColumn(fName)
-  }
-  const handleResults = (event: any) => {
-    setResultsPage(event.target.value)
-  }
-  const nextItem = () => {
-    setInitialItem(initialItem + resultsPage)
-    setFinalItem(finalItem + resultsPage)
-    setCurrentPages(currentPages + 1)
-  }
-  const previousItem = () => {
-    setInitialItem(initialItem - resultsPage)
-    setFinalItem(finalItem - resultsPage)
-    setCurrentPages(currentPages - 1)
-  }
-
-  const handleColumn = (event: any) => {
-    let nameColumn = event.target.value
-    if (activeColumn.indexOf(nameColumn) > -1) {
-      setActiveColum(prev => prev.filter((column: any) => column !== nameColumn))
-    } else {
-      setActiveColum((oldArr: string[]) => [...oldArr, event.target.value])
-    }
-  }
-  const handleFilter = (event: any) => {
-    let nameFilter = event.target.value
-    if (filters.indexOf(nameFilter) > -1) {
-      setFilters(prev => prev.filter((filter: any) => filter !== nameFilter))
-    } else {
-      setFilters((oldArr: string[]) => [...oldArr, event.target.value])
-    }
-  }
-  var Lenght = data?.person.length
-  let dados = data?.person[0]
-  let names = ['Nome', 'E-mail', 'Data De Nascimento', 'Sexo', 'Escolaridade', 'EstadoCivil', 'Documento 1', 'Documento 2', 'Telefones', 'Endereço', 'Bairro', 'CEP', 'Pais', 'Estado', 'Cidade', 'Grupos', 'Categorias', 'Cargo', 'Data de conversão', 'Batizado', 'Data de batismo', 'Criado em ', 'Nome do cônjugue', 'Faixa etária', 'Idade']
-  console.log(initialItem, finalItem, resultsPage)
+  const {
+    handleResults,
+    nextItem,
+    previousItem,
+    handleColumn,
+    handleFilter,
+    resultsPage,
+    filters,
+    initialItem,
+    finalItem,
+    activeColumn,
+    currentPages,
+    Lenght,
+    dados,
+    names,
+    items,
+    requestSort,
+    sortConfig
+  } = React.useContext(PersonContext)
+console.log(filters)
   return (
     <Container>
       <br />
@@ -110,7 +84,6 @@ const People = () => {
                           htmlFor={keys}
                         >{names[index]}</label>
                       </Flex>
-
                     )
                   }) : null}
               </>
@@ -131,7 +104,7 @@ const People = () => {
                       return (
                         activeColumn.includes(keys) ? null :
                           <Th key={index}>
-                            <Button onClick={() => handleOrder(keys)}>{names[index]}<p><BsArrowUp /><BsArrowDown /></p>
+                            <Button onClick={() => requestSort(keys)}>{names[index]}<p><BsArrowUp /><BsArrowDown /></p>
                             </Button>
                           </Th>
 
@@ -141,13 +114,13 @@ const People = () => {
                 </Thead>
                 <Tbody>
 
-                  {data?.person?.slice(initialItem, finalItem).map((persons: any, index: any) => {
+                  {items?.slice(initialItem, finalItem).map((persons: any, index: any) => {
                     let ConversionDate = new Date(persons.conversion)
                     let Conversion = ConversionDate.toLocaleDateString()
 
-                    return (filters.includes('feminino') && persons.sex === 'feminino')
-                      || (filters.includes('masculino') && persons.sex === 'masculino')
-                      || (filters.includes('solteiro') && persons.marital === 'solteiro')
+                    return (filters.includes('feminino') && persons.sex === 'Feminino')
+                      || (filters.includes('masculino') && persons.sex === 'Masculino')
+                      || (filters.includes('solteiro') && persons.marital === 'Solteiro')
                       || (filters.includes('casado') && persons.marital === 'Casado(a)')
                       || (filters.includes('viuvo') && persons.marital === 'Viúvo(a)')
                       || (filters.includes('divorciado') && persons.marital === 'Divorciado(a)')
@@ -252,7 +225,7 @@ const People = () => {
                           <Td>{persons.age}</Td>
                         }
                       </Tr>
-                  }).sort((a: any, b: any) => a[column] < b[column] ? -order : order)}
+                  })}
                 </Tbody>
               </Table>
             </TableContainer>
