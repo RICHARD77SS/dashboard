@@ -5,11 +5,15 @@ import { CardFronts, Options, Flex } from "./styles"
 
 interface Props {
   cardBg?: string;
+  bgColor?: string;
+  titleColor?: string;
+  textColor?: string;
+  spanColor?: string;
 }
 
+const CardFront = ({ cardBg, bgColor, titleColor, textColor, spanColor }: Props) => {
 
-const CardFront = ({ cardBg }: Props) => {
-  const elements = [
+  const [elementos, setElementos] = React.useState<any[]>([
     {
       id: 'draggable-1',
       x: '25.893462059620596%',
@@ -80,13 +84,7 @@ const CardFront = ({ cardBg }: Props) => {
       x: '56.60992547425474%',
       y: '592.9453125px'
     },
-  ]
-  const [elementos, setElementos] = React.useState<any>(elements)
-  const [frontBg, setFrontBg] = React.useState<any>()
-  const [frontTitleColor,setFrontTitleColor]=React.useState()
-  const [frontTextColor,setFrontTextColor]=React.useState()
-  const [FrontSpanColor,setFrontSpanColor]=React.useState()
-  const [frontBgColor,setFrontBgColor]=React.useState()
+  ])
 
   function onDragStart(event: any) {
     event.dataTransfer.setData('text/plain', event.target.id)
@@ -117,9 +115,13 @@ const CardFront = ({ cardBg }: Props) => {
     const dropzone = event.target;
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
+    let data = [...elementos]
+    data[id.split('-')[1] - 1].x = `${(event.clientX - left) / width * 100}%`
+    data[id.split('-')[1] - 1].y = `${event.clientY - top}px`
+    setElementos(data)
   }
 
-  function set(id:any,x: any, y: any) {
+  function set(id: any, x: any, y: any) {
     const draggableElement = document.getElementById(id)
     draggableElement!.style.left = x
     draggableElement!.style.top = y
@@ -127,16 +129,25 @@ const CardFront = ({ cardBg }: Props) => {
     const dropzone = document.getElementById('drop-zone')
     dropzone?.appendChild(draggableElement!)
   }
-  console.log(cardBg)
+
   React.useEffect(() => {
     if (elementos) {
-      elementos.forEach((element: any) => set(element.id, element.x, element.y))
+      elementos?.forEach((element: any) => set(element.id, element.x, element.y))
     }
   }, [elementos])
 
   return (
     <Flex>
-      <CardFronts cardBg={cardBg} id='drop-zone' className='drop-zone' onDragOver={(event) => onDragOver(event)} onDrop={(event) => onDrop(event)}>
+      <CardFronts
+        cardBg={cardBg}
+        bgColor={bgColor}
+        titleColor={titleColor}
+        textColor={textColor}
+        spanColor={spanColor}
+        id='drop-zone'
+        className='drop-zone'
+        onDragOver={(event) => onDragOver(event)}
+        onDrop={(event) => onDrop(event)} >
       </CardFronts>
       <Options>
         <img src="" alt="Person"
@@ -159,24 +170,24 @@ const CardFront = ({ cardBg }: Props) => {
             onDragEnd={(event) => onDragEnd(event)}
           >12384</p>
         </InputBlock>
-        <h3
+        <h2
           id='draggable-4'
           draggable='true'
           onDragStart={(event) => onDragStart(event)}
           onDragEnd={(event) => onDragEnd(event)}
-        >title</h3>
+        >title</h2>
         <span
           id='draggable-5'
           draggable='true'
           onDragStart={(event) => onDragStart(event)}
           onDragEnd={(event) => onDragEnd(event)}
         >Local</span>
-        <h4
+        <h3
           id='draggable-6'
           draggable='true'
           onDragStart={(event) => onDragStart(event)}
           onDragEnd={(event) => onDragEnd(event)}
-        >Cartão de membro</h4>
+        >Cartão de membro</h3>
         <InputBlock >
           <h5
             id='draggable-7'
