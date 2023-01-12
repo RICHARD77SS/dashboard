@@ -17,13 +17,13 @@ export function PersonalCardContextProvider({ children }: useContext) {
   const [frontTitleColor, setFrontTitleColor] = React.useState(initialValue.frontTitleColor);
   const [frontTextColor, setFrontTextColor] = React.useState(initialValue.frontTextColor);
   const [frontSpanColor, setFrontSpanColor] = React.useState(initialValue.frontSpanColor);
-  const [frontPositions, setFrontPositions] = React.useState<string[]>(initialValue.frontPositions);
+  const [frontPositions, setFrontPositions] = React.useState(initialValue.frontPositions);
   const [backBgImage, setBackBgImage] = React.useState(initialValue.backBgImage);
   const [backBgColor, setBackBgColor] = React.useState(initialValue.backBgColor);
   const [backTitleColor, setBackTitleColor] = React.useState(initialValue.backTitleColor);
   const [backTextColor, setBackTextColor] = React.useState(initialValue.backTextColor);
   const [backSpanColor, setBackSpanColor] = React.useState(initialValue.backSpanColor);
-  const [backPositions, setBackPositions] = React.useState<string[]>(initialValue.backPositions);
+  const [backPositions, setBackPositions] = React.useState(initialValue.backPositions);
 
   function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value)
@@ -64,6 +64,113 @@ export function PersonalCardContextProvider({ children }: useContext) {
   function backPositionsHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setBackPositions([])
   }
+
+  function onDragStart(event: any) {
+    event.dataTransfer.setData('text/plain', event.target.id)
+    event.dataTransfer.setData('left', event.clientX)
+    event.dataTransfer.setData('top', event.clientY)
+    event.currentTarget.style.background = 'yellow'
+  }
+  function onDragEnd(event: any) {
+    event.currentTarget.style.background = 'transparent'
+  }
+  function onDragOver(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+  }
+  function onDragEnter(event: any) {
+
+  }
+  function onDragLeave(event: any) {
+
+  }
+  function onDrop(event: any) {
+    event.preventDefault()
+    var width = window.innerWidth;
+    const element = event.dataTransfer.getData('text');
+    const draggableElement = document.getElementById(element)
+    const rect = document.getElementById(element)?.getBoundingClientRect()
+
+    let left = event.dataTransfer.getData('left') - rect!.left
+    let top = event.dataTransfer.getData('top') - rect!.top
+
+    draggableElement!.style.left = `${(event.clientX - left) / width * 100}%`
+    draggableElement!.style.top = `${event.pageY - top}px`
+
+    const dropzone = event.target;
+    dropzone.appendChild(draggableElement);
+    let data = [...frontPositions]
+    data[element.split('-')[1] - 1].x = `${(event.clientX - left) / width * 100}%`
+    data[element.split('-')[1] - 1].y = `${event.pageY - top}px`
+    setFrontPositions(data)
+    event.dataTransfer.clearData();
+
+  }
+
+  function set(element: any, x: any, y: any) {
+    const draggableElement = document.getElementById(element)
+    draggableElement!.style.left = x
+    draggableElement!.style.top = y
+    const dropzone = document.getElementById('drop-zone')
+    dropzone?.appendChild(draggableElement!)
+  }
+  React.useEffect(() => {
+    if (id) {
+      frontPositions?.forEach((element: any) => set(element.id, element.x, element.y))
+    }
+  }, [frontPositions, id])
+
+  function backOnDragStart(event: any) {
+    event.dataTransfer.setData('text/plain', event.target.id)
+    event.dataTransfer.setData('left', event.clientX)
+    event.dataTransfer.setData('top', event.clientY)
+    event.currentTarget.style.background = 'yellow'
+  }
+  function backOnDragEnd(event: any) {
+    event.currentTarget.style.background = 'transparent'
+  }
+  function backOnDragOver(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+  }
+  function backOnDragEnter(event: any) {
+
+  }
+  function backOnDragLeave(event: any) {
+
+  }
+
+  function backOnDrop(event: any) {
+    event.preventDefault()
+    var width = window.innerWidth;
+    const element = event.dataTransfer.getData('text');
+    const draggableElement = document.getElementById(element)
+    const rect = document.getElementById(element)?.getBoundingClientRect()
+
+    let left = event.dataTransfer.getData('left') - rect!.left
+    let top = event.dataTransfer.getData('top') - rect!.top
+
+    draggableElement!.style.left = `${(event.clientX - left) / width * 100}%`
+    draggableElement!.style.top = `${event.pageY - top}px`
+    const dropzone = event.target;
+    dropzone.appendChild(draggableElement);
+    let data = [...backPositions]
+    data[element.split('-')[1] - 1].x = `${(event.clientX - left) / width * 100}%`
+    data[element.split('-')[1] - 1].y = `${event.pageY - top}px`
+    setBackPositions(data)
+    event.dataTransfer.clearData();
+    console.log((event.clientX - left) / width * 100, event.pageY - top)
+  }
+  function backSet(element: any, x: any, y: any) {
+    const draggableElement = document.getElementById(element)
+    draggableElement!.style.left = x
+    draggableElement!.style.top = y
+    const dropzone = document.getElementById('drop-zone')
+    dropzone?.appendChild(draggableElement!)
+  }
+  React.useEffect(() => {
+    if (id) {
+      backPositions?.forEach((element: any) => set(element.id, element.x, element.y))
+    }
+  }, [backPositions, id])
 
   function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -133,13 +240,13 @@ export function PersonalCardContextProvider({ children }: useContext) {
     personalCardfrontTitleColor: string,
     personalCardfrontTextColor: string,
     personalCardfrontSpanColor: string,
-    personalCardfrontPositions: string[],
+    personalCardfrontPositions: [],
     personalCardbackBgImage: string,
     personalCardbackBgColor: string,
     personalCardbackTitleColor: string,
     personalCardbackTextColor: string,
     personalCardbackSpanColor: string,
-    personalCardbackPositions: string[],
+    personalCardbackPositions: [],
   ) {
     setId(personalCardid)
     setName(personalCardname)
@@ -157,6 +264,7 @@ export function PersonalCardContextProvider({ children }: useContext) {
     setBackPositions(personalCardbackPositions)
   }
   return <PersonalCardContext.Provider value={{
+    data,
     id,
     name,
     frontBgColor,
@@ -198,6 +306,20 @@ export function PersonalCardContextProvider({ children }: useContext) {
     setBackTextColor,
     setBackSpanColor,
     setBackPositions,
+    onDragStart,
+    onDragEnd,
+    onDragOver,
+    onDrop,
+    onDragEnter,
+    onDragLeave,
+    backOnDragEnter,
+    backOnDragLeave,
+    set,
+    backOnDragStart,
+    backOnDragEnd,
+    backOnDragOver,
+    backOnDrop,
+    backSet,
     handleSubmit,
     handleDelete,
     handleEdit
