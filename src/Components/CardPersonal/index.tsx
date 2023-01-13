@@ -14,9 +14,12 @@ import Th from '../Th';
 import Thead from '../Thead';
 import Tr from '../Tr';
 import { Content } from './styles'
+import { PersonalCardContext } from './../../contexts/personalCardContext';
+import Flex from '../Flex';
 
 
 const CardPersonal = () => {
+  const { data, handleEdit, handleDelete } = React.useContext(PersonalCardContext)
   return (
     <Container>
       <h3>Cartão pessoal</h3>
@@ -34,17 +37,42 @@ const CardPersonal = () => {
                 <Tr>
                   <Th>Nome do modelo</Th>
                   <Th>Criado em</Th>
-                  <Th>Atualizado em</Th>
                   <Th>Ações</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>Model Name</Td>
-                  <Td>Data</Td>
-                  <Td>Data</Td>
-                  <Td><EditRemove /></Td>
-                </Tr>
+                {data?.personalCard.map((card: any, index: number) => {
+                  return (
+                    <Tr key={index}>
+                      <Td>{card.name}</Td>
+                      <Td>Data</Td>
+                      <Td>
+                        <Flex>
+                          <Link to='/card'>
+                            <Button type='button' onClick={() => {
+                              handleEdit(card._id,
+                                card.name,
+                                card.frontBgColor,
+                                card.frontBgImage,
+                                card.frontTitleColor,
+                                card.frontTextColor,
+                                card.frontSpanColor,
+                                card.frontPositions,
+                                card.backBgImage,
+                                card.backBgColor,
+                                card.backTitleColor,
+                                card.backTextColor,
+                                card.backSpanColor,
+                                card.backPositions)
+                            }}>Editar</Button>
+                          </Link>
+                          <Button type='button' onClick={() => { handleDelete(card._id) }}>Apagar</Button>
+                        </Flex>
+                      </Td>
+                    </Tr>
+
+                  )
+                })}
               </Tbody>
             </Table>
           </BoxContent>
