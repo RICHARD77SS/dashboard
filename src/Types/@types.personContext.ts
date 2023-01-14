@@ -1,6 +1,4 @@
-export type useContext = {
-  children: React.ReactNode
-}
+
 export type personTypes = {
   id: string;
   name: string;
@@ -49,6 +47,7 @@ export type personTypes = {
   activeColumn: string[];
   items: string[];
   additionalField: any[];
+  data: { person: {}[] };
   setAdditionalField: (newState: any[]) => void;
   additionalFieldHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   requestSort: (key: string) => void;
@@ -130,6 +129,7 @@ export type personTypes = {
 }
 
 export const InitialValue = {
+  data: { person: [{}] },
   id: '',
   name: '',
   email: '',

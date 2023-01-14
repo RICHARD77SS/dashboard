@@ -4,21 +4,21 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import { useSortedData } from '../utils/sortingTable';
-import { studiesTypes, InitialValue, useContext } from '../Types/@types.studiesContext';
-
+import { studiesTypes, InitialValue } from '../Types/@types.studiesContext';
+import { useContext } from '../Types/@type.useContext';
 export const StudiesContext = React.createContext<studiesTypes>(InitialValue);
 
 export function StudiesContextProvider({ children }: useContext) {
   const { data, mutate } = useAxios('studies');
 
-  const [id, setId] = React.useState<string>(InitialValue.id);
-  const [name, setName] = React.useState<string>(InitialValue.name)
-  const [category, setCategory] = React.useState<string>(InitialValue.category)
-  const [content, setContent] = React.useState<string>(InitialValue.content)
+  const [id, setId] = React.useState(InitialValue.id);
+  const [name, setName] = React.useState(InitialValue.name)
+  const [category, setCategory] = React.useState(InitialValue.category)
+  const [content, setContent] = React.useState(InitialValue.content)
   const [image, setImage] = React.useState<any>(InitialValue.image)
   const [file, setFile] = React.useState<any>(InitialValue.file)
-  const [notification, setNotification] = React.useState<boolean>(InitialValue.notification)
-  const [date, setDate] = React.useState<Date>(InitialValue.date)
+  const [notification, setNotification] = React.useState(InitialValue.notification)
+  const [date, setDate] = React.useState(InitialValue.date)
 
   const { items, requestSort, sortConfig } = useSortedData(data?.studies ? data?.studies : []);
   function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -77,7 +77,7 @@ export function StudiesContextProvider({ children }: useContext) {
       window.alert('Estudo editado')
       handleClear()
       const updatedStudies = {
-        studies: data.studies?.map((studies: any) => {
+        studies: data.studies?.map((studies: { _id: string }) => {
           if (studies._id === id) {
             return {
               ...studies,
@@ -108,7 +108,7 @@ export function StudiesContextProvider({ children }: useContext) {
     api.delete(`studies/${id}`);
     window.alert('Estudo deletado')
     const updatedStudies = {
-      studies: data.studies?.filter((studies: any) => studies._id !== id)
+      studies: data.studies?.filter((studies: { _id: string }) => studies._id !== id)
     };
     mutate(updatedStudies, false)
   }
@@ -160,7 +160,8 @@ export function StudiesContextProvider({ children }: useContext) {
     date,
     setDate,
     items,
-    sortConfig
+    sortConfig,
+    data
   }}>
     {children}
   </StudiesContext.Provider>

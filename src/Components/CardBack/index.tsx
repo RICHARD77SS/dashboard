@@ -38,51 +38,51 @@ const CardBack = ({ cardBg, bgColor, titleColor, textColor, spanColor }: Props) 
       >
       </CardBacks>
       <Options>
-        <img src="" alt=""
+        <p
           id='dragabble-1'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
           onDragEnd={(event) => backOnDragEnd(event)}
-        />
+        >Rua : rest</p>
         <InputBlock>
-          <img src="" alt=""
+          <p
             id='dragabble-2'
             draggable='true'
             onDragStart={(event) => backOnDragStart(event)}
             onDragEnd={(event) => backOnDragEnd(event)}
-          />
+          >(11)090910901</p>
           <p
             id='dragabble-3'
             draggable='true'
             onDragStart={(event) => backOnDragStart(event)}
             onDragEnd={(event) => backOnDragEnd(event)}
-          >12384</p>
+          >(11)090910901</p>
         </InputBlock>
         <h3
           id='dragabble-4'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
           onDragEnd={(event) => backOnDragEnd(event)}
-        >title</h3>
+        >@email.com</h3>
         <span
           id='dragabble-5'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
           onDragEnd={(event) => backOnDragEnd(event)}
-        >Local</span>
+        >11/03/12</span>
         <h4
           id='dragabble-6'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
           onDragEnd={(event) => backOnDragEnd(event)}
-        >Cartão de membro</h4>
+        >11/03/12</h4>
         <InputBlock>
           <h5
             id='dragabble-7'
             draggable='true'
             onDragStart={(event) => backOnDragStart(event)}
             onDragEnd={(event) => backOnDragEnd(event)}
-          >Nome completo</h5>
+          >12030231023</h5>
           <p draggable>Nome here</p>
         </InputBlock>
         <InputBlock>

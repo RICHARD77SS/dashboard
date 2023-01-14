@@ -15,11 +15,10 @@ export const BoxContentSt = styled.div<Props>`
   border-radius: 0 0 10px 10px;
   background: ${Props => Props.theme.colors.bac};
   gap: 1rem;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+  box-shadow: 5px 5px 10px ${Props => Props.theme.colors.shadow};
   button {
     height: 30px;
     padding: 0 1rem;
-    color: #fff;
     font-size: 1rem;
     border-radius: 10px;
     background: ${Props => Props.theme.colors.sec};

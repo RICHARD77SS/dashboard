@@ -1,6 +1,4 @@
-export type useContext = {
-  children: React.ReactNode
-}
+
 export type studiesTypes = {
   id: string;
   name: string;
@@ -12,6 +10,7 @@ export type studiesTypes = {
   notification: boolean;
   items: string[];
   sortConfig: never[];
+  data: { studies: {}[] };
   nameHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   categoryHandler: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   contentHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -43,6 +42,7 @@ export const InitialValue = {
   date: new Date(),
   items: [],
   sortConfig: [],
+  data: { studies: [{}] },
   nameHandler: () => { },
   categoryHandler: () => { },
   contentHandler: () => { },

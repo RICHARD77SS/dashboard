@@ -1,12 +1,12 @@
+import React from 'react'
 import TabTitle from '../TabTitle';
-import { useState, ReactElement } from 'react';
 import { TabsButtons, TabContainer } from './styles'
 interface Props {
-  children: ReactElement[]
+  children: React.ReactElement[]
 }
 
 const TabsBirthday = (Props: Props) => {
-  const [selectedTab, setSelectedTab] = useState(0)
+  const [selectedTab, setSelectedTab] = React.useState(0)
 
   if (selectedTab === 0) {
     document.querySelector('.Jan')?.classList.add('active')

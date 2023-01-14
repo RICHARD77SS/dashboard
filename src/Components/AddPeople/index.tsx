@@ -63,9 +63,12 @@ const AddPeople = () => {
     baptized,
     convertedSpouse,
     image,
-    imageHandler
+    imageHandler,
+    additionalField,
+    setAdditionalField,
+    additionalFieldHandler
   } = React.useContext(PersonContext)
-
+  console.log(additionalField)
   const { data } = useAxios('person')
   var Lenght = data?.person.length
 
@@ -442,64 +445,46 @@ const AddPeople = () => {
               if (fields?.inputType === 'checkbox') {
                 return (
                   <Data key={index}>
-                    <Header title={fields?.inputName}></Header>
-
+                    <Header title={fields?.inputName}>{fields?.inputName}</Header>
                     <DataContent>
-                      <Flex>
-                        <Input type={fields.inputType} name='' />
-                        <label htmlFor="">
-                          {fields?.inputOption?.option1}
-                        </label>
-                      </Flex>
-                      <Flex>
-                        <Input type={fields.inputType} name='' />
-                        <label htmlFor="">
-                          {fields?.inputOption?.option2}
-                        </label>
-                      </Flex>
-                      <Flex>
-                        <Input type={fields.inputType} name='' />
-                        <label htmlFor="">
-                          {fields?.inputOption?.option3}
-                        </label>
-                      </Flex>
+                      {fields?.inputOption.map((option: any, index: number) => {
+                        return (
+                          <Flex key={index}>
+                            <Input type={fields.inputType} name='option' value={fields?.inputName + '*' + option.option} onChange={(event) => additionalFieldHandler(event)} />
+                            <label htmlFor="">
+                              {option.option}
+                            </label>
+                          </Flex>
+                        )
+                      })}
                     </DataContent>
                   </Data>)
               }
               if (fields?.inputType === 'radio') {
                 return (
                   <Data key={index}>
-                    <Header title={fields?.inputName}></Header>
-
+                    <Header title={fields?.inputName}>{fields?.inputName}</Header>
                     <DataContent>
-                      <Flex>
-                        <Input type={fields.inputType} name='' />
-                        <label htmlFor="">
-                          {fields?.inputOption?.option1}
-                        </label>
-                      </Flex>
-                      <Flex>
-                        <Input type={fields.inputType} name='' />
-                        <label htmlFor="">
-                          {fields?.inputOption?.option2}
-                        </label>
-                      </Flex>
-                      <Flex>
-                        <Input type={fields.inputType} name='' />
-                        <label htmlFor="">
-                          {fields?.inputOption?.option3}
-                        </label>
-                      </Flex>
+                      {fields?.inputOption.map((option: any, index: number) => {
+                        return (
+                          <Flex key={index}>
+                            <Input type={fields.inputType} name='option' value={fields?.inputName + '*' + option.option} onChange={(event) => additionalFieldHandler(event)} />
+                            <label htmlFor="">
+                              {option.option}
+                            </label>
+                          </Flex>
+                        )
+                      })}
                     </DataContent>
                   </Data>)
               }
               if (fields?.inputType === 'text') {
                 return (
                   <Data key={index}>
-                    <Header title={fields?.inputName}></Header>
+                    <Header title={fields?.inputName}>{fields?.inputName}</Header>
                     <DataContent>
                       <Flex>
-                        <Input type={fields.inputType} name='' />
+                        <Input type={fields.inputType} />
                       </Flex>
                     </DataContent>
                   </Data>)
@@ -507,10 +492,10 @@ const AddPeople = () => {
               if (fields?.inputType === 'textarea') {
                 return (
                   <Data key={index}>
-                    <Header title={fields?.inputName}></Header>
+                    <Header title={fields?.inputName} >{fields?.inputName}</Header>
                     <DataContent>
                       <Flex>
-                        <textarea title='textarea'></textarea>
+                        <Input title='textarea' />
                       </Flex>
                     </DataContent>
                   </Data>)

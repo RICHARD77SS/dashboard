@@ -1,9 +1,6 @@
 import React from 'react'
 import Button from '../Button';
 import Input from '../Input';
-import { Container, Content, Categorias, CategoriaHeader, CategoriasContainer, AddCategoria, AddHeader, InputGroup } from './styles';
-import { CategoryContext } from '../../contexts/categoryContext';
-import { useAxios } from '../../hooks/useAxios';
 import Table from '../Table';
 import Thead from '../Thead';
 import Tr from '../Tr';
@@ -12,6 +9,9 @@ import Tbody from '../Tbody';
 import Td from '../Td';
 import Flex from '../Flex';
 import Form from '../Form';
+import { CategoryContext } from '../../contexts/categoryContext';
+import { Container, Content, Categorias, CategoriaHeader, CategoriasContainer, AddCategoria, AddHeader, InputGroup } from './styles';
+
 const Categories = () => {
   const { name,
     nameHandler,
@@ -19,11 +19,11 @@ const Categories = () => {
     descriptionHandler,
     handleSubmit,
     handleEdit,
-    handleDelete
+    handleDelete,
+    length,
+    data
   } = React.useContext(CategoryContext)
-  const { data } = useAxios('category')
-  let length = data?.category?.length
-
+  
   return (
     <Container>
       <br />

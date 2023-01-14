@@ -45,7 +45,6 @@ const AddStudies = () => {
                 {data?.studiesCategory.map((category: any, index: number) => {
                   return (
                     <option key={index} value={category.name} >{category.name}</option>
-
                   )
                 })}
               </select>
@@ -72,7 +71,6 @@ const AddStudies = () => {
           </MiniBox>
           <MiniBox>
             <BoxHeader title='Anexar arquivo'>
-
             </BoxHeader>
             <BoxContent>
               <Button type='button'>Selecione um arquivo</Button>
@@ -80,7 +78,6 @@ const AddStudies = () => {
           </MiniBox>
           <MiniBox>
             <BoxHeader title='Notificações'>
-
             </BoxHeader>
             <BoxContent>
               <Input name='notification' type='checkbox' value='val' onChange={notificationHandler} />

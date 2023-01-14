@@ -68,7 +68,7 @@ export function PersonalCardContextProvider({ children }: useContext) {
   function onDragStart(event: any) {
     event.dataTransfer.setData('text/plain', event.target.id)
     event.dataTransfer.setData('left', event.clientX)
-    event.dataTransfer.setData('top', event.clientY)
+    event.dataTransfer.setData('top', event.pageY)
     event.currentTarget.style.background = 'yellow'
   }
   function onDragEnd(event: any) {
@@ -83,6 +83,8 @@ export function PersonalCardContextProvider({ children }: useContext) {
   function onDragLeave(event: any) {
 
   }
+  console.log(frontPositions)
+  console.log(backPositions)
   function onDrop(event: any) {
     event.preventDefault()
     var width = window.innerWidth;

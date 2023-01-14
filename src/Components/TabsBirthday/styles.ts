@@ -22,7 +22,7 @@ export const TabsButtons = styled.div`
   border-radius: 10px;
   flex-wrap: wrap; 
   .active {
-    background: ${Props => Props.theme.colors.sec};
-    color: ${Props => Props.theme.colors.bac};
+    background: ${Props => Props.theme.colors.green};
+    color: ${Props => Props.theme.colors.text};
   }
 `

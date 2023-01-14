@@ -11,13 +11,13 @@ import Flex from '../Flex';
 import { Container, Content, Offices, OfficeHeader, OfficeContainer, AddHeader, AddContainer, InputGroup } from './styles';
 
 import { PositionsContext } from '../../contexts/positionsContexts'
-import { useAxios } from '../../hooks/useAxios'
+
 import Form from '../Form';
 import Aside from '../Aside';
 
 const Office = () => {
-  const { data } = useAxios('positions')
-  const { name, nameHandler, handleSubmit, handleEdit, handleDelete } = React.useContext(PositionsContext);
+  
+  const { name, nameHandler, handleSubmit, handleEdit, handleDelete,data } = React.useContext(PositionsContext);
 
   return (
     <Container>
@@ -54,7 +54,6 @@ const Office = () => {
                     </Tr>
                   )
                 })}
-
               </Tbody>
             </Table>
           </OfficeContainer>

@@ -2,12 +2,13 @@ import React from 'react';
 import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import { dayNow, monthNow, yearNow } from '../utils/getDate';
-import { personTypes, InitialValue, userContext } from './@types.personContext';
+import { personTypes, InitialValue } from '../Types/@types.personContext';
+import { useContext } from '../Types/@type.useContext';
 import { useSortedData } from '../utils/sortingTable';
 
 export const PersonContext = React.createContext<personTypes>(InitialValue);
 
-export const PersonContextProvider = ({ children }: userContext) => {
+export const PersonContextProvider = ({ children }: useContext) => {
   const { data, mutate } = useAxios('person')
   const [id, setId] = React.useState(InitialValue.id);
   const [name, setName] = React.useState(InitialValue.name);
@@ -51,6 +52,17 @@ export const PersonContextProvider = ({ children }: userContext) => {
   const [initialItem, setInitialItem] = React.useState(InitialValue.initialItem)
   const [finalItem, setFinalItem] = React.useState(resultsPage)
   const [currentPages, setCurrentPages] = React.useState(InitialValue.currentPages)
+  const [additionalField, setAdditionalField] = React.useState<any[]>([])
+
+  function additionalFieldHandler(event: React.ChangeEvent<HTMLInputElement>) {
+    let name = event.target.value
+    if (additionalField.indexOf(name) > -1) {
+      setAdditionalField(prev => prev.filter(add => add !== name))
+    } else {
+      setAdditionalField(oldArr => [...oldArr, event.target.value]);
+    }
+
+  }
 
   const { items, requestSort, sortConfig } = useSortedData(data?.person ? data?.person : []);
   var Lenght = data?.person.length
@@ -181,7 +193,7 @@ export const PersonContextProvider = ({ children }: userContext) => {
   function officeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     let name = event.target.value
     if (office.indexOf(name) > -1) {
-      setOffice(prev => prev.filter(of => of !== name))
+      setOffice(prev => prev.filter((of: string) => of !== name))
     } else {
       setOffice(oldArr => [...oldArr, event.target.value]);
     };
@@ -189,7 +201,7 @@ export const PersonContextProvider = ({ children }: userContext) => {
   const handleColumn = (event: React.ChangeEvent<HTMLInputElement>) => {
     let nameColumn = event.target.value
     if (activeColumn.indexOf(nameColumn) > -1) {
-      setActiveColum(prev => prev.filter((column: any) => column !== nameColumn))
+      setActiveColum(prev => prev.filter((column: string) => column !== nameColumn))
     } else {
       setActiveColum((oldArr: string[]) => [...oldArr, event.target.value])
     }
@@ -197,7 +209,7 @@ export const PersonContextProvider = ({ children }: userContext) => {
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     let nameFilter = event.target.value
     if (filters.indexOf(nameFilter) > -1) {
-      setFilters(prev => prev.filter((filter: any) => filter !== nameFilter))
+      setFilters(prev => prev.filter((filter: string) => filter !== nameFilter))
     } else {
       setFilters((oldArr: string[]) => [...oldArr, event.target.value])
     }
@@ -281,7 +293,8 @@ export const PersonContextProvider = ({ children }: userContext) => {
       convertedSpouse,
       baptismDate,
       ageGroup,
-      age
+      age,
+      additionalField
     }
     api.post('person', person);
     window.alert('Usuario Cadastrado')
@@ -323,14 +336,15 @@ export const PersonContextProvider = ({ children }: userContext) => {
       convertedSpouse,
       baptismDate,
       ageGroup,
-      age
+      age,
+      additionalField
     }
     api.put(`person/${pid}`, person)
     window.alert('Atualizado')
     setModalDeletePeople(false)
     setModalAddPeople(false)
     const updatedPerson = {
-      person: data.person?.map((persons: any) => {
+      person: data.person?.map((persons: { _id: string }) => {
         if (persons._id === pid) {
           return {
             ...persons,
@@ -364,7 +378,8 @@ export const PersonContextProvider = ({ children }: userContext) => {
             convertedSpouse,
             baptismDate,
             ageGroup,
-            age
+            age,
+            additionalField
           };
         }
         setModal(false)
@@ -429,6 +444,7 @@ export const PersonContextProvider = ({ children }: userContext) => {
     Lenght,
     dados,
     names,
+    data,
     handleEdit,
     handleDelete,
     registerDateHandler,
@@ -505,7 +521,10 @@ export const PersonContextProvider = ({ children }: userContext) => {
     handleFilter,
     items,
     requestSort,
-    sortConfig
+    sortConfig,
+    additionalField,
+    setAdditionalField,
+    additionalFieldHandler
   }}>
     {children}
   </PersonContext.Provider>

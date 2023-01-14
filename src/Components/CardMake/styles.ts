@@ -2,6 +2,30 @@ import styled from 'styled-components'
 import Button from '../Button'
 
 
+export const Content = styled.div`
+  width: 90%;
+  height: auto;
+  display: flex;
+  align-items:center;
+  flex-direction:column;
+  gap: 1rem;
+`
+export const Box = styled.div`
+  width: 90%;
+  height: auto;
+  display: flex;
+  align-items:center;
+  flex-direction:column;
+
+`
+export const BoxContent = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items:center;
+  justify-content:space-between;
+
+`
 export const BoxFlex = styled.div`
   width: 100%;
   height: auto;
@@ -11,17 +35,17 @@ export const BoxFlex = styled.div`
 `
 
 export const Side = styled.div`
-  width: 30%;
-  height: 500px;
+  width: 100%;
+  height: 150px;
   display: flex;
   align-items:start;
-  justify-content: flex-start;
-  flex-direction: column;
+  justify-content: space-between;
   background: #fcc;
+  padding: 1rem;
 `
 
 export const Make = styled.div`
-  width: 70%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items:Center;
@@ -45,6 +69,7 @@ export const BgButton = styled(Button)`
   padding: 0;
 `
 export const Backgrounds = styled.div`
+  width: 100%;
   height: 150px;
   display: flex;
   align-items:start;
@@ -52,6 +77,7 @@ export const Backgrounds = styled.div`
   overflow-x: scroll;
   overflow-y: hidden;
   padding-top: 2rem;
+  background:#ccc;
 `
 
 export const Bg = styled.div`

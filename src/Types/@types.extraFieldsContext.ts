@@ -1,6 +1,3 @@
-export type useContext = {
-  children: React.ReactNode
-}
 
 export type extrafieldsType = {
   id: string;
@@ -8,10 +5,11 @@ export type extrafieldsType = {
   inputType: string;
   inputOption: any[];
   openModalEdit1: boolean;
-  openCheck: boolean
-  openRadio: boolean
-  openText: boolean
-  openTextArea: boolean
+  openCheck: boolean;
+  openRadio: boolean;
+  openText: boolean;
+  openTextArea: boolean;
+  data: { additionalField: {}[] };
   openModalCheck: () => void;
   openModalRadio: () => void;
   openModalText: () => void;
@@ -48,6 +46,7 @@ export const initialValue = {
   openText: false,
   openTextArea: false,
   openModalEdit1: false,
+  data: { additionalField: [{}] },
   openModalCheck: () => { },
   openModalRadio: () => { },
   openModalText: () => { },
