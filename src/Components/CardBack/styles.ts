@@ -17,6 +17,13 @@ export const CardBacks = styled.div<Props>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  .draggable {
+      position:absolute;
+    width: fit-content;
+    color:${Props => Props.textColor};
+    border: 1px dashed ${Props => Props.theme.colors.shadow};
+    cursor:pointer;
+  }
   img{
     position:absolute;
     width: 100px;
@@ -25,40 +32,7 @@ export const CardBacks = styled.div<Props>`
     cursor:pointer !important; 
   }
   h2{
-    position:absolute;
-    width: fit-content;
     font-size: 2rem;
-    color:${Props => Props.titleColor};
-    border: 1px dashed ${Props => Props.theme.colors.shadow};
-    cursor:pointer;
-  }
-  span{
-    position:absolute;
-    width: fit-content;
-    color:${Props => Props.spanColor};
-    border: 1px dashed ${Props => Props.theme.colors.shadow};
-    cursor:pointer;
-  }
-  h3{
-    position:absolute;
-    width: fit-content;
-    color:${Props => Props.titleColor};
-    border: 1px dashed ${Props => Props.theme.colors.shadow};
-    cursor:pointer;
-  }
-  h5{
-    position:absolute;
-    width: fit-content;
-    color:${Props => Props.spanColor};
-    border: 1px dashed ${Props => Props.theme.colors.shadow};
-    cursor:pointer;
-  } 
-  p{
-    position:absolute;
-    width: fit-content;
-    color:${Props => Props.textColor};
-    border: 1px dashed ${Props => Props.theme.colors.shadow};
-    cursor:pointer;
   }
 `
 export const Options = styled.div<Props>`

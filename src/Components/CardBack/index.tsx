@@ -38,95 +38,125 @@ const CardBack = ({ cardBg, bgColor, titleColor, textColor, spanColor }: Props) 
       >
       </CardBacks>
       <Options>
-        <p
-          id='dragabble-1'
+        <div className='draggable' id='dragabble-1'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
-          onDragEnd={(event) => backOnDragEnd(event)}
-        >Rua : rest</p>
+          onDragEnd={(event) => backOnDragEnd(event)}>
+          <p
+          >Endereço</p>
+          <h4
+          >Rua : rest</h4>
+        </div>
         <InputBlock>
-          <p
-            id='dragabble-2'
+          <div className='draggable' id='dragabble-2'
             draggable='true'
             onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >(11)090910901</p>
-          <p
-            id='dragabble-3'
+            onDragEnd={(event) => backOnDragEnd(event)}>
+            <p>Telefone 1</p>
+            <h4>(11)090910901</h4>
+          </div>
+          <div className='draggable' id='dragabble-3'
             draggable='true'
             onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >(11)090910901</p>
+            onDragEnd={(event) => backOnDragEnd(event)}>
+            <p>Telefone 2</p>
+            <h4>(11)090910901</h4>
+          </div>
         </InputBlock>
-        <h3
-          id='dragabble-4'
+        <div className='draggable' id='dragabble-4'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
-          onDragEnd={(event) => backOnDragEnd(event)}
-        >@email.com</h3>
-        <span
+          onDragEnd={(event) => backOnDragEnd(event)}>
+          <p>Email</p>
+          <h4
+          >@email.com</h4>
+        </div>
+        <div
+          className='draggable'
           id='dragabble-5'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
           onDragEnd={(event) => backOnDragEnd(event)}
-        >11/03/12</span>
-        <h4
+        >
+          <p>Data de converção</p>
+          <h4>21/02/2000</h4>
+        </div>
+        <div className='draggable'
           id='dragabble-6'
           draggable='true'
           onDragStart={(event) => backOnDragStart(event)}
           onDragEnd={(event) => backOnDragEnd(event)}
-        >11/03/12</h4>
-        <InputBlock>
-          <h5
-            id='dragabble-7'
-            draggable='true'
-            onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >12030231023</h5>
-          <p draggable>Nome here</p>
-        </InputBlock>
-        <InputBlock>
-          <h5
-            id='dragabble-8'
-            draggable='true'
-            onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >Cargos</h5>
-          <p
-            id='dragabble-9'
-            draggable='true'
-            onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >Diretor</p>
-        </InputBlock>
-        <InputBlock>
-          <h5
-            id='dragabble-10'
-            draggable='true'
-            onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >Estado civil</h5>
-          <p
-            id='dragabble-11'
-            draggable='true'
-            onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >Casado(a)</p>
-        </InputBlock>
-        <InputBlock>
-          <h5
-            id='dragabble-12'
-            draggable='true'
-            onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >Data de nascimento</h5>
-          <p
-            id='dragabble-13'
-            draggable='true'
-            onDragStart={(event) => backOnDragStart(event)}
-            onDragEnd={(event) => backOnDragEnd(event)}
-          >30/08/2000</p>
-        </InputBlock>
+        >
+          <p>Data de batismo</p>
+          <h4>20/03/2003</h4>
+        </div>
+        <div className='draggable'
+          id='dragabble-7'
+          draggable='true'
+          onDragStart={(event) => backOnDragStart(event)}
+          onDragEnd={(event) => backOnDragEnd(event)}
+        >
+          <p>Faixa etária</p>
+          <h4>Adulto</h4>
+        </div>
+
+
+        <div className='draggable'
+          id='dragabble-8'
+          draggable='true'
+          onDragStart={(event) => backOnDragStart(event)}
+          onDragEnd={(event) => backOnDragEnd(event)}
+        >
+          <p>Documento 1</p>
+          <h4>123321123</h4>
+        </div>
+        <div className='draggable'
+          id='dragabble-9'
+          draggable='true'
+          onDragStart={(event) => backOnDragStart(event)}
+          onDragEnd={(event) => backOnDragEnd(event)}
+        >
+          <p>Documento 2</p>
+          <h4>433214234</h4>
+        </div>
+
+        <div className='draggable'
+          id='dragabble-10'
+          draggable='true'
+          onDragStart={(event) => backOnDragStart(event)}
+          onDragEnd={(event) => backOnDragEnd(event)}
+        >
+          <p>Escolaridade</p>
+          <h4>Ensino médio</h4>
+        </div>
+        <div className='draggable'
+          id='dragabble-11'
+          draggable='true'
+          onDragStart={(event) => backOnDragStart(event)}
+          onDragEnd={(event) => backOnDragEnd(event)}
+        >
+          <p>Data de emissão</p>
+          <h4>14/08/2023</h4>
+        </div>
+
+        <div className='draggable'
+          id='dragabble-12'
+          draggable='true'
+          onDragStart={(event) => backOnDragStart(event)}
+          onDragEnd={(event) => backOnDragEnd(event)}
+        >
+          <p>Grupos</p>
+          <h4>res</h4>
+        </div>
+        <div className='draggable'
+          id='dragabble-13'
+          draggable='true'
+          onDragStart={(event) => backOnDragStart(event)}
+          onDragEnd={(event) => backOnDragEnd(event)}
+        >
+          <p>Validade</p>
+          <h4>1 ano</h4>
+        </div>
       </Options>
     </Flex>
   )
