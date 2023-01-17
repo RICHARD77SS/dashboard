@@ -21,7 +21,7 @@ const localName5 = 4
 const ReportsDistrict = () => {
   const { data } = useAxios('person')
   let district = data?.person.map((person: any) => person.district)
-
+  let districts = district.filter((item: any, i: any) => district.indexOf(item) === i)
   const PieData = {
     labels: ['Crianças', 'Adolescentes', 'Jovens', 'Adultos', 'Idosos'],
     datasets: [
@@ -60,7 +60,7 @@ const ReportsDistrict = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {district?.map((district: any) => {
+          {districts?.map((district: any) => {
             return (
               <Tr>
                 <Td>{district}</Td>
