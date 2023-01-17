@@ -16,14 +16,14 @@ import { Container } from './styles';
 const ReportsSex = () => {
   const { data } = useAxios('person')
   let mens = data?.person.map((person: any, index: any) => {
-    return person.sex === 'masculino' ? person.sex : 0
+    return person.sex === 'Masculino' ? person.sex : 0
   })
-  let male = mens?.filter((i: string) => i === 'masculino').length
+  let male = mens?.filter((i: string) => i === 'Masculino').length
 
   let womans = data?.person.map((person: any, index: any) => {
-    return person.sex === 'feminino' ? person.sex : 0
+    return person.sex === 'Feminino' ? person.sex : 0
   })
-  let female = womans?.filter((i: string) => i === 'feminino').length
+  let female = womans?.filter((i: string) => i === 'Feminino').length
   const PieData = {
     labels: ['Feminino', 'Masculino'],
     datasets: [
