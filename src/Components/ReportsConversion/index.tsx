@@ -16,7 +16,7 @@ import { Container, Content, Graph } from './styles';
 
 const ReportsConversion = () => {
   const { data } = useAxios('person')
-  let conversionDate = data?.person.map((person: any) => person.conversion.split('T')[0])
+  let conversionDate = data?.person.map((person: any) => person.conversion?.split('T')[0])
 
   const [now, setNow] = React.useState(NowDate)
   function nowHandler(event: any) {
@@ -58,7 +58,7 @@ const ReportsConversion = () => {
                 <Tr>
                   <Td><img src={person.image} alt="" /></Td>
                   <Td>{person.name}</Td>
-                  <Td>{person.conversion.split('T')[0]}</Td>
+                  <Td>{person.conversion?.split('T')[0]}</Td>
                 </Tr>
               )
             })}

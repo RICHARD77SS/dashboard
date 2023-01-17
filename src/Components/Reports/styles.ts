@@ -51,7 +51,7 @@ export const SideContent = styled.div`
     color: ${Props => Props.theme.colors.text};
     width: 100%;
     height: 30px;
-    background: #f4f4f4;
+    background:  ${Props => Props.theme.colors.pri};
     border-radius: 5px;
     font-size: 1rem;
     border: 1px solid ${Props => Props.theme.colors.pri};
@@ -61,7 +61,7 @@ export const SideContent = styled.div`
   }
   .navlink.active {
     background: ${Props => Props.theme.colors.sec};
-    color: #f4f4f4;
+    color: #393;
   }
 `
 export const GraphContainer = styled.div`

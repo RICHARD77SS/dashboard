@@ -159,7 +159,7 @@ export function PersonalCardContextProvider({ children }: useContext) {
     data[element.split('-')[1] - 1].y = `${event.pageY - top}px`
     setBackPositions(data)
     event.dataTransfer.clearData();
-    console.log((event.clientX - left) / width * 100, event.pageY - top)
+
   }
   function backSet(element: any, x: any, y: any) {
     const draggableElement = document.getElementById(element)
@@ -170,7 +170,8 @@ export function PersonalCardContextProvider({ children }: useContext) {
   }
   React.useEffect(() => {
     if (id) {
-      backPositions?.forEach((element: any) => set(element.id, element.x, element.y))
+      backPositions?.forEach((element: any) => backSet(element.id, element.x, element.y))
+      console.log(backPositions?.forEach((element: any) => backSet(element.id, element.x, element.y)))
     }
   }, [backPositions, id])
 

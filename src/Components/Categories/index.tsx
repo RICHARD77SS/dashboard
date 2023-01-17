@@ -56,11 +56,9 @@ const Categories = () => {
                         <Flex>
                           <Button onClick={() => handleEdit(category._id, category.name, category.description)}>Editar</Button>
                           <Button onClick={() => handleDelete(category._id)}>Remover</Button>
-
                         </Flex>
                       </Td>
                     </Tr>
-
                   )
                 })}
               </Tbody>
