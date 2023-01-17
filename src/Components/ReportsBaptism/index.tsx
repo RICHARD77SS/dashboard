@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAxios } from '../../hooks/useAxios';
 import Button from '../Button';
 import GraphContainer from '../GraphConteiner';
@@ -14,8 +15,8 @@ import { Container } from './styles';
 const ReportsBaptism = () => {
   const { data } = useAxios('person')
   let baptism = data?.person.map((person: any) => person.baptized)
-  const yes = baptism?.map((baptizm: any) => baptizm === true ? baptizm : 0).filter((i: any) => i === true).length
-  const no = baptism?.map((baptizm: any) => baptizm === false ? baptizm : 0).filter((i: any) => i === false).length
+  const yes = baptism?.map((baptizm: any) => baptizm === 'Sim' ? baptizm : 0).filter((i: any) => i === 'Sim').length
+  const no = baptism?.map((baptizm: any) => baptizm === 'Não' ? baptizm : 0).filter((i: any) => i === 'Não').length
 
   const PieData = {
     labels: ['Feminino', 'Masculino'],
@@ -53,12 +54,12 @@ const ReportsBaptism = () => {
           <Tr>
             <Td>Batizado (sim)</Td>
             <Td>{yes}</Td>
-            <Td><Button>Ver pessoas</Button></Td>
+            <Td><Link to='/people'>Ver pessoas</Link></Td>
           </Tr>
           <Tr>
             <Td>Batizado (Não)</Td>
             <Td>{no}</Td>
-            <Td><Button>Ver pessoas</Button></Td>
+            <Td><Link to='/people'>Ver pessoas</Link></Td>
           </Tr>
         </Tbody>
       </Table>
