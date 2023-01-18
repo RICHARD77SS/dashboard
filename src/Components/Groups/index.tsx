@@ -7,11 +7,33 @@ import Input from '../Input';
 import { Container, Content, Box, BoxHeader, BoxContent, CardsContainer, Page, Aside, Filters, FilterHeader, FilterOptions, GroupType, InputGroup, Flex } from './styles';
 import { Link } from 'react-router-dom';
 import { useAxios } from '../../hooks/useAxios';
+import TopTableOptions from '../TopTableOptions';
+import PageSelector from '../PageSelector';
 
 
 const Group = () => {
   const { data: dataGroups } = useAxios('groups')
   const { data: dataPerson } = useAxios('person')
+
+  const [initialItem, setInitialItem] = React.useState(0)
+  const [finalItem, setFinalItem] = React.useState(20)
+  const [resultsPage, setResultsPage] = React.useState(20)
+  const [currentPage, setCurrentPage] = React.useState(1)
+
+  const nextItem = () => {
+    setInitialItem(initialItem + resultsPage)
+    setFinalItem(finalItem + resultsPage)
+    setCurrentPage(currentPage + 1)
+  }
+  const previousItem = () => {
+    setInitialItem(initialItem - resultsPage)
+    setFinalItem(finalItem - resultsPage)
+    setCurrentPage(currentPage - 1)
+  }
+  const handleResults = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setResultsPage(parseInt(event.target.value))
+  }
+
   return (
     <Container>
       <h3>Grupos</h3>
@@ -21,8 +43,9 @@ const Group = () => {
             <h3>Resultados: 1</h3>
           </BoxHeader>
           <BoxContent>
+            <TopTableOptions value={resultsPage} onChange={(event) => handleResults(event)}></TopTableOptions>
             <CardsContainer>
-              {dataGroups?.groups?.map((groups: any, index: any) => {
+              {dataGroups?.groups?.slice(initialItem, finalItem).map((groups: any, index: any) => {
                 return (
                   <CardGroup key={index}
                     bg={groups.bg}
@@ -41,11 +64,7 @@ const Group = () => {
                 )
               })}
             </CardsContainer>
-            <Page>
-              <Button>Anterior</Button>
-              <Button>1</Button>
-              <Button>Próximo</Button>
-            </Page>
+            <PageSelector previus={() => { previousItem() }} next={() => { nextItem() }}>{currentPage}</PageSelector>
           </BoxContent>
         </Box>
         <Aside>
