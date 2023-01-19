@@ -1,8 +1,6 @@
 import React from 'react';
-import { BsArrowDown, BsArrowUp, BsFilter } from 'react-icons/bs';
 import Input from '../Input';
 import TopTableOptions from '../TopTableOptions';
-import { Buttonb, Filters, FilterHeader, FilterOptions, GroupType } from './styles';
 import Table from '../Table'
 import Thead from '../Thead';
 import Tr from '../Tr';
@@ -10,24 +8,23 @@ import Th from '../Th';
 import Tbody from '../Tbody';
 import Td from '../Td';
 import PageSelector from '../PageSelector';
-import { Link } from 'react-router-dom';
 import Container from '../Container';
 import Content from '../Content';
 import Box from '../Box';
 import BoxHeader from '../BoxHeader';
 import BoxContent from '../BoxContent';
 import Aside from '../Aside';
-
-import { useAxios } from '../../hooks/useAxios'
 import TableContainer from '../TableContainer';
 import InputBlock from '../InputBlock';
 import Button from '../Button';
 import Flex from '../Flex';
+import { Buttonb, Filters, FilterHeader, FilterOptions, GroupType } from './styles';
+import { BsArrowDown, BsArrowUp, BsFilter } from 'react-icons/bs';
 import { PersonContext } from '../../contexts/personContext';
+import { Link } from 'react-router-dom';
 
 
 const People = () => {
-  const { data } = useAxios('person')
   const {
     handleResults,
     nextItem,
@@ -44,10 +41,8 @@ const People = () => {
     dados,
     names,
     items,
-    requestSort,
-    sortConfig
+    requestSort
   } = React.useContext(PersonContext)
-console.log(filters)
   return (
     <Container>
       <br />
