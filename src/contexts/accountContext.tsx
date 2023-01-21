@@ -4,10 +4,11 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import ModalAccountEdit from '../Components/ModalAccountEdit';
+import { useContext } from '../Types/@type.useContext';
 
 export const AccountContext = React.createContext();
 
-export function AccountContextProvider({ children }) {
+export function AccountContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('account');
 
   const [id, setId] = React.useState();
