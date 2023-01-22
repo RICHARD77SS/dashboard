@@ -17,10 +17,10 @@ export function AccountContextProvider({ children }:useContext) {
 
   const [openModal, setOpenModal] = React.useState(false)
 
-  function nameHandler(event) {
+  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function descriptionHandler(event) {
+  function descriptionHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setDescription(event.target.value);
   }
 
@@ -31,7 +31,7 @@ export function AccountContextProvider({ children }:useContext) {
     setDescription('')
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event:React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal()
     const account = {
@@ -72,7 +72,7 @@ export function AccountContextProvider({ children }:useContext) {
     mutate(updatedAccount, false)
   }
 
-  function handleEdit(accountId, accountName, accountDescription) {
+  function handleEdit(accountId: string, accountName: string, accountDescription: string) {
     setName(accountName);
     setDescription(accountDescription);
     setId(accountId);
