@@ -22,7 +22,6 @@ const ScheduleMyAnnotations = () => {
     description,
     category,
     nameHandler,
-    descriptionHandler,
     categoryHandler,
     setDescription,
     handleSubmit,
@@ -44,7 +43,7 @@ const ScheduleMyAnnotations = () => {
           <Top>
             <Flex>
               <Input type='text' placeholder=' Título do estudo' value={name} onChange={nameHandler} />
-              <select title='categories' value={category} onClick={categoryHandler}>
+              <select title='categories' value={category} onChange={categoryHandler}>
                 <option value='' ></option>
                 {dataCategory?.categoryAnotations.map((category: any, index: number) => {
                   return (

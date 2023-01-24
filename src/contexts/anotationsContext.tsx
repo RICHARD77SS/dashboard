@@ -3,24 +3,26 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import { useContext } from '../Types/@type.useContext';
+import { AnotationsTypes, initialValue } from '../Types/@types.anotationsContext';
 
-export const AnotationsContext = React.createContext();
+export const AnotationsContext = React.createContext<AnotationsTypes>(initialValue);
 
-export function AnotationsContextProvider({ children }) {
+export function AnotationsContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('anotations');
 
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState('')
-  const [description, setDescription] = React.useState('')
-  const [category, setCategory] = React.useState('')
+  const [id, setId] = React.useState(initialValue.id);
+  const [name, setName] = React.useState(initialValue.name)
+  const [description, setDescription] = React.useState(initialValue.description)
+  const [category, setCategory] = React.useState(initialValue.category)
 
-  function nameHandler(event) {
+  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function descriptionHandler(event) {
+  function descriptionHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setDescription(event.target.value);
   }
-  function categoryHandler(event) {
+  function categoryHandler(event: React.ChangeEvent<HTMLSelectElement>) {
     setCategory(event.target.value);
   }
 
@@ -31,7 +33,7 @@ export function AnotationsContextProvider({ children }) {
     setCategory('')
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     Clear()
     const anotations = {
@@ -43,7 +45,7 @@ export function AnotationsContextProvider({ children }) {
       api.put(`anotations/${id}`, anotations)
       window.alert('anotations Editada')
       const updatedAnotations = {
-        anotations: data.anotations?.map((anotations) => {
+        anotations: data.anotations?.map((anotations:{_id:string}) => {
           if (anotations._id === id) {
             return {
               ...anotations,
@@ -65,16 +67,16 @@ export function AnotationsContextProvider({ children }) {
       mutate(updatedAnotations, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`anotations/${id}`);
     window.alert('anotations removido')
     const updatedAnotations = {
-      anotations: data.anotations?.filter((anotations) => anotations._id !== id)
+      anotations: data.anotations?.filter((anotations: { _id: string }) => anotations._id !== id)
     };
     mutate(updatedAnotations, false)
   }
 
-  function handleEdit(anotationsId, anotationsName, anotationsDescription, anotationsCategory) {
+  function handleEdit(anotationsId: string, anotationsName: string, anotationsDescription: string, anotationsCategory: string) {
     setId(anotationsId);
     setName(anotationsName);
     setDescription(anotationsDescription);
@@ -84,10 +86,12 @@ export function AnotationsContextProvider({ children }) {
     name,
     description,
     category,
+    setName,
+    setDescription,
+    setCategory,
     nameHandler,
     descriptionHandler,
     categoryHandler,
-    setDescription,
     handleSubmit,
     handleDelete,
     setId,
