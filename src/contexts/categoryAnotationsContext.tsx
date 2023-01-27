@@ -3,30 +3,33 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import { useContext } from '../Types/@type.useContext';
+import { CategoryAnotationsTypes,initialValue } from '../Types/@types.categoryAnotationsContext';
 
-export const CategoryAnotationsContext = React.createContext();
+export const CategoryAnotationsContext = React.createContext<CategoryAnotationsTypes>(initialValue);
 
-export function CategoryAnotationsContextProvider({ children }) {
+export function CategoryAnotationsContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('categoryanotations');
 
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState()
-  const [description, setDescription] = React.useState()
+  const [id, setId] = React.useState(initialValue.id);
+  const [name, setName] = React.useState(initialValue.name)
+  const [description, setDescription] = React.useState(initialValue.description)
 
-  function nameHandler(event) {
+  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function descriptionHandler(event) {
+  function descriptionHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setDescription(event.target.value);
   }
 
   function CloseModal() {
-    setId('')
-    setName('')
-    setDescription('')
+    setId(initialValue.id)
+    setName(initialValue.name)
+    setDescription(initialValue.description)
+
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal() 
     const categoryAnotations = {
@@ -37,7 +40,7 @@ export function CategoryAnotationsContextProvider({ children }) {
       api.put(`categoryanotations/${id}`, categoryAnotations)
       window.alert('categoryAnotations Editada')
       const updatedCategoryAnotations = {
-        categoryAnotations: data.categoryAnotations?.map((categoryAnotations) => {
+        categoryAnotations: data.categoryAnotations?.map((categoryAnotations:{_id:string}) => {
           if (categoryAnotations._id === id) {
             return {
               ...categoryAnotations,
@@ -58,16 +61,16 @@ export function CategoryAnotationsContextProvider({ children }) {
       mutate(updatedCategoryAnotations, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`categoryanotations/${id}`);
     window.alert('CategoryAnotations removido')
     const updatedCategoryAnotations = {
-      categoryAnotations: data.categoryAnotations?.filter((categoryAnotations) => categoryAnotations._id !== id)
+      categoryAnotations: data.categoryAnotations?.filter((categoryAnotations: { _id: string }) => categoryAnotations._id !== id)
     };
     mutate(updatedCategoryAnotations, false)
   }
 
-  function handleEdit(categoryId, categoryName, categoryDescription) {
+  function handleEdit(categoryId: string, categoryName: string, categoryDescription: string) {
     setName(categoryName);
     setDescription(categoryDescription);
     setId(categoryId);
@@ -75,6 +78,8 @@ export function CategoryAnotationsContextProvider({ children }) {
   return <CategoryAnotationsContext.Provider value={{
     name,
     description,
+    setName,
+    setDescription,
     nameHandler,
     descriptionHandler,
     handleSubmit,
