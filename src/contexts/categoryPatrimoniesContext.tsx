@@ -4,10 +4,11 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import CategoriesPatrimoniesEdit from '../Components/CategoriesPatrimoniesEdit';
+import { useContext } from '../Types/@type.useContext';
 
 export const CategoryPatrimoniesContext = React.createContext();
 
-export function CategoryPatrimoniesContextProvider({ children }) {
+export function CategoryPatrimoniesContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('categorypatrimonies');
 
   const [id, setId] = React.useState();
@@ -16,10 +17,10 @@ export function CategoryPatrimoniesContextProvider({ children }) {
 
   const [openModal, setOpenModal] = React.useState(false)
 
-  function nameHandler(event) {
+  function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function descriptionHandler(event) {
+  function descriptionHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setDescription(event.target.value);
   }
 
@@ -33,7 +34,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
     setDescription('')
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event:React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal()
     const categoryPatrimonies = {
@@ -44,7 +45,7 @@ export function CategoryPatrimoniesContextProvider({ children }) {
       api.put(`categorypatrimonies/${id}`, categoryPatrimonies)
       window.alert('categorypatrimonies Editada')
       const updatedCategoryPatrimonies = {
-        categoryPatrimonies: data.categoryPatrimonies?.map((categoryPatrimonies) => {
+        categoryPatrimonies: data.categoryPatrimonies?.map((categoryPatrimonies:{_id:string}) => {
           if (categoryPatrimonies._id === id) {
             return {
               ...categoryPatrimonies,
@@ -65,16 +66,16 @@ export function CategoryPatrimoniesContextProvider({ children }) {
       mutate(updatedCategoryPatrimonies, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`categorypatrimonies/${id}`);
     window.alert('CategoryPatrimonies removido')
     const updatedCategoryPatrimonies = {
-      categoryPatrimonies: data.categoryPatrimonies?.filter((categoryPatrimonies) => categoryPatrimonies._id !== id)
+      categoryPatrimonies: data.categoryPatrimonies?.filter((categoryPatrimonies:{_id:string}) => categoryPatrimonies._id !== id)
     };
     mutate(updatedCategoryPatrimonies, false)
   }
 
-  function handleEdit(categoryId, categoryName, categoryDescription) {
+  function handleEdit(categoryId: string, categoryName: string, categoryDescription: string) {
     setName(categoryName);
     setDescription(categoryDescription);
     setId(categoryId);
