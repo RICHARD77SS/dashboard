@@ -5,15 +5,16 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import CategoriesPatrimoniesEdit from '../Components/CategoriesPatrimoniesEdit';
 import { useContext } from '../Types/@type.useContext';
+import { CategoryPatrimoniesTypes, initialValue } from '../Types/@types.categoryPatrimonies';
 
-export const CategoryPatrimoniesContext = React.createContext();
+export const CategoryPatrimoniesContext = React.createContext<CategoryPatrimoniesTypes>(initialValue);
 
-export function CategoryPatrimoniesContextProvider({ children }:useContext) {
+export function CategoryPatrimoniesContextProvider({ children }: useContext) {
   const { data, mutate } = useAxios('categorypatrimonies');
 
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState()
-  const [description, setDescription] = React.useState()
+  const [id, setId] = React.useState(initialValue.id);
+  const [name, setName] = React.useState(initialValue.name)
+  const [description, setDescription] = React.useState(initialValue.description)
 
   const [openModal, setOpenModal] = React.useState(false)
 
@@ -28,13 +29,13 @@ export function CategoryPatrimoniesContextProvider({ children }:useContext) {
     setOpenModal(true)
   }
   function CloseModal() {
-    setId('')
+    setId(initialValue.id)
     setOpenModal(false)
-    setName('')
-    setDescription('')
+    setName(initialValue.name)
+    setDescription(initialValue.description)
   }
 
-  function handleSubmit(event:React.ChangeEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal()
     const categoryPatrimonies = {
@@ -45,7 +46,7 @@ export function CategoryPatrimoniesContextProvider({ children }:useContext) {
       api.put(`categorypatrimonies/${id}`, categoryPatrimonies)
       window.alert('categorypatrimonies Editada')
       const updatedCategoryPatrimonies = {
-        categoryPatrimonies: data.categoryPatrimonies?.map((categoryPatrimonies:{_id:string}) => {
+        categoryPatrimonies: data.categoryPatrimonies?.map((categoryPatrimonies: { _id: string }) => {
           if (categoryPatrimonies._id === id) {
             return {
               ...categoryPatrimonies,
@@ -66,11 +67,11 @@ export function CategoryPatrimoniesContextProvider({ children }:useContext) {
       mutate(updatedCategoryPatrimonies, false)
     }
   }
-  function handleDelete(id:string) {
+  function handleDelete(id: string) {
     api.delete(`categorypatrimonies/${id}`);
     window.alert('CategoryPatrimonies removido')
     const updatedCategoryPatrimonies = {
-      categoryPatrimonies: data.categoryPatrimonies?.filter((categoryPatrimonies:{_id:string}) => categoryPatrimonies._id !== id)
+      categoryPatrimonies: data.categoryPatrimonies?.filter((categoryPatrimonies: { _id: string }) => categoryPatrimonies._id !== id)
     };
     mutate(updatedCategoryPatrimonies, false)
   }
@@ -84,6 +85,8 @@ export function CategoryPatrimoniesContextProvider({ children }:useContext) {
   return <CategoryPatrimoniesContext.Provider value={{
     name,
     description,
+    setName,
+    setDescription,
     nameHandler,
     descriptionHandler,
     handleSubmit,
