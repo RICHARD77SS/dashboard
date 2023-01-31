@@ -16,7 +16,7 @@ export function CategoryPatrimoniesContextProvider({ children }: useContext) {
   const [name, setName] = React.useState(initialValue.name)
   const [description, setDescription] = React.useState(initialValue.description)
 
-  const [openModal, setOpenModal] = React.useState(false)
+  const [openModal, setOpenModal] = React.useState(initialValue.openModal)
 
   function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
