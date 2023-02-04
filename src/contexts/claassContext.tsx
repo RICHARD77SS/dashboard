@@ -5,24 +5,23 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios'
 import ModalEditClass from '../Components/ModalEditClass';
 import { useContext } from '../Types/@type.useContext';
+import { initialValue, ClaassTypes } from '../Types/@type.claassContext';
 
-export const ClaassContext = React.createContext();
-export function ClaassContextProvider({ children }:useContext) {
+export const ClaassContext = React.createContext<ClaassTypes>(initialValue);
+export function ClaassContextProvider({ children }: useContext) {
   let DateNow = new Date().toISOString()
   const { data, mutate } = useAxios('studies');
-  const [id, setId] = React.useState('')
-  const [name, setName] = React.useState('')
-  const [school, setSchool] = React.useState('')
-  const [time, setTime] = React.useState('')
-  const [status, setStatus] = React.useState('')
-  const [description, setDescription] = React.useState('')
-  const [date, setDate] = React.useState(DateNow)
+  const [id, setId] = React.useState(initialValue.id)
+  const [name, setName] = React.useState(initialValue.name)
+  const [school, setSchool] = React.useState(initialValue.school)
+  const [time, setTime] = React.useState(initialValue.time)
+  const [status, setStatus] = React.useState(initialValue.status)
+  const [description, setDescription] = React.useState(initialValue.description)
+  const [date, setDate] = React.useState(initialValue.date)
+  const [openModal, setOpenModal] = React.useState(initialValue.openModal)
+  const [participants, setParticipants] = React.useState(initialValue.participants)
 
-  const [openModal, setOpenModal] = React.useState(false)
-
-  const [participants, setParticipants] = React.useState<string[]>([])
-
-  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
+  function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
   function schoolHandler(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -70,7 +69,7 @@ export function ClaassContextProvider({ children }:useContext) {
       window.alert('turma Editada')
 
       const updatedClaass = {
-        claass: data.claass?.map((claass:{_id:string}) => {
+        claass: data.claass?.map((claass: { _id: string }) => {
           if (claass._id === id) {
             return {
               ...claass,
@@ -97,7 +96,7 @@ export function ClaassContextProvider({ children }:useContext) {
       mutate(updatedClaass, false)
     }
   }
-  function handleDelete(id:string) {
+  function handleDelete(id: string) {
     api.delete(`claass/${id}`);
     window.alert('Turma deletada')
     const updatedClaass = {
@@ -139,6 +138,8 @@ export function ClaassContextProvider({ children }:useContext) {
     setStatus,
     setParticipants,
     setId,
+    date,
+    setDate,
     id
   }}>
     {children}
