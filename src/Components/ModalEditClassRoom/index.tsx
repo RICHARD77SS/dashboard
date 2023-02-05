@@ -44,7 +44,7 @@ const ModalEditClassRoom = () => {
               <select title='text' id='discipline' value={discipline} onChange={disciplineHandler} >
                 <option value=''></option>
                 {dataSubjects?.subjects.map((subjects: any, index: number) => {
-                  return idx === `${subjects.classIndex}` ?
+                  return idx === subjects.classIndex ?
                     <option key={index} value={subjects.name}>{subjects.name}</option>
 
                     : null
@@ -61,18 +61,18 @@ const ModalEditClassRoom = () => {
             <textarea title="rem" id="" value={remarks} onChange={remarksHandler}></textarea>
           </InputBlock>
           <InputBlock>
-            <label htmlFor="remarkers">Participantes</label>
+            <label htmlFor="participants">Participantes</label>
             {dataPerson?.person.map((person: any, index: number) => {
               return (
                 <Flex key={index}>
-                  <Input type='checkbox' id={person.name} name={person.name} value={person.name} onClick={participantsHandler} />
+                  <Input type='checkbox' id={person.name} name={person.name} value={person.name} onChange={participantsHandler} />
                   <label htmlFor={person.name}>{person.name}</label>
                 </Flex>
               )
             })}
           </InputBlock>
           <InputBlock>
-            <label htmlFor="remarkers">Anotações</label>
+            <label htmlFor="anotations">Anotações</label>
             <textarea title="rem" id="" value={notes} onChange={notesHandler}></textarea>
           </InputBlock>
           <Button type='submit'>Salvar</Button>

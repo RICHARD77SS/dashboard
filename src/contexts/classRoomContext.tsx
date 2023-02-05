@@ -5,40 +5,40 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios'
 import ModalEditClassRoom from '../Components/ModalEditClassRoom';
+import { useContext } from '../Types/@type.useContext';
+import { classRoomTypes, initialValue } from '../Types/@type.classRoomContext';
 
-export const ClassRoomContext = React.createContext();
-export function ClassRoomContextProvider({ children }) {
+export const ClassRoomContext = React.createContext<classRoomTypes>(initialValue);
+export function ClassRoomContextProvider({ children }: useContext) {
   const { data, mutate } = useAxios('studies');
 
-  const [id, setId] = React.useState('')
-  const [discipline, setDiscipline] = React.useState('')
-  const [topic, setTopic] = React.useState('')
-  const [remarks, setRemarks] = React.useState('')
-  const [notes, setNotes] = React.useState('')
-  const [date, setDate] = React.useState('')
+  const [id, setId] = React.useState(initialValue.id)
+  const [discipline, setDiscipline] = React.useState(initialValue.discipline)
+  const [topic, setTopic] = React.useState(initialValue.topic)
+  const [remarks, setRemarks] = React.useState(initialValue.remarks)
+  const [notes, setNotes] = React.useState(initialValue.notes)
+  const [date, setDate] = React.useState(initialValue.date)
+  const [openModal, setOpenModal] = React.useState(initialValue.openModal)
+  const [index, setIndex] = React.useState(initialValue.index)
+  const [participants, setParticipants] = React.useState<string[]>([])
 
-  const [openModal, setOpenModal] = React.useState(false)
-  const [index, setIndex] = React.useState()
-
-  const [participants, setParticipants] = React.useState([])
-
-  function disciplineHandler(event) {
+  function disciplineHandler(event: React.ChangeEvent<HTMLSelectElement>) {
     setDiscipline(event.target.value);
   }
-  function topicHandler(event) {
+  function topicHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setTopic(event.target.value);
   }
-  function remarksHandler(event) {
+  function remarksHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setRemarks(event.target.value);
   }
-  function notesHandler(event) {
+  function notesHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setNotes(event.target.value);
   }
-  function dateHandler(event) {
+  function dateHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setDate(event.target.value);
   }
 
-  function participantsHandler(event) {
+  function participantsHandler(event: React.ChangeEvent<HTMLInputElement>) {
     let name = event.target.value
     if (participants.indexOf(name) > -1) {
       setParticipants(prev => prev.filter(part => part !== name))
@@ -47,19 +47,19 @@ export function ClassRoomContextProvider({ children }) {
     }
   }
   function CloseModal() {
-    setId('')
-    setDiscipline('')
-    setTopic('')
-    setRemarks('')
-    setNotes('')
-    setOpenModal(false)
-    setIndex('')
+    setId(initialValue.id)
+    setDiscipline(initialValue.discipline)
+    setTopic(initialValue.topic)
+    setRemarks(initialValue.remarks)
+    setNotes(initialValue.notes)
+    setOpenModal(initialValue.openModal)
+    setIndex(initialValue.index)
   }
-  function OpenModal(index) {
+  function OpenModal(index: number) {
     setIndex(index)
     setOpenModal(true)
   }
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     const classRoom = {
       date,
@@ -74,7 +74,7 @@ export function ClassRoomContextProvider({ children }) {
       window.alert('turma Editada')
 
       const updatedClaass = {
-        classRoom: data.classRoom?.map((classRoom) => {
+        classRoom: data.classRoom?.map((classRoom: { _id: string }) => {
           if (classRoom._id === id) {
             return {
               ...classRoom,
@@ -99,15 +99,15 @@ export function ClassRoomContextProvider({ children }) {
       mutate(updatedClaass, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id: string) {
     api.delete(`classroom/${id}`);
     window.alert('Turma deletada')
     const updatedClaass = {
-      classRoom: data.classRoom?.filter((classRoom) => classRoom._id !== id)
+      classRoom: data.classRoom?.filter((classRoom: { _id: string }) => classRoom._id !== id)
     };
     mutate(updatedClaass, false)
   }
-  function handleEdit(classRoomId, classRoomDiscipline, classRoomTopic, classRoomRemarks, classRoomNotes) {
+  function handleEdit(classRoomId: string, classRoomDiscipline: string, classRoomTopic: string, classRoomRemarks: string, classRoomNotes: string, classRoomParticipants: string) {
     setId(classRoomId)
     setDiscipline(classRoomDiscipline)
     setTopic(classRoomTopic)
@@ -115,6 +115,15 @@ export function ClassRoomContextProvider({ children }) {
     setNotes(classRoomNotes)
   }
   return <ClassRoomContext.Provider value={{
+    discipline,
+    participants,
+    topic,
+    notes,
+    remarks,
+    openModal,
+    id,
+    date,
+    index,
     setId,
     setDiscipline,
     setTopic,
@@ -125,22 +134,13 @@ export function ClassRoomContextProvider({ children }) {
     topicHandler,
     notesHandler,
     remarksHandler,
-    discipline,
-    participants,
-    topic,
-    notes,
-    remarks,
     handleSubmit,
     handleEdit,
     handleDelete,
-    openModal,
     OpenModal,
     setParticipants,
-    id,
     CloseModal,
-    date,
     dateHandler,
-    index
   }}>
     {children}
     {openModal && <ModalEditClassRoom />}
