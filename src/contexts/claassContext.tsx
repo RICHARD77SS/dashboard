@@ -19,7 +19,7 @@ export function ClaassContextProvider({ children }: useContext) {
   const [description, setDescription] = React.useState(initialValue.description)
   const [date, setDate] = React.useState(initialValue.date)
   const [openModal, setOpenModal] = React.useState(initialValue.openModal)
-  const [participants, setParticipants] = React.useState(initialValue.participants)
+  const [participants, setParticipants] = React.useState<string[]>(initialValue.participants)
 
   function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
@@ -104,7 +104,7 @@ export function ClaassContextProvider({ children }: useContext) {
     };
     mutate(updatedClaass, false)
   }
-  function handleEdit(claassId: string, claassName: string, claassSchool: string, claassTime: string, claassStatus: string, claassDescription: string, claassParticipants: string[]) {
+  function handleEdit(claassId: string, claassName: string, claassSchool: string, claassTime: string, claassStatus: string, claassDescription: string, claassParticipants: any) {
     setId(claassId)
     setName(claassName)
     setSchool(claassSchool)
@@ -140,7 +140,8 @@ export function ClaassContextProvider({ children }: useContext) {
     setId,
     date,
     setDate,
-    id
+    id,
+    Clear
   }}>
     {children}
   </ClaassContext.Provider>

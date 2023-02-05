@@ -5,17 +5,17 @@ export type ClaassTypes = {
   time: string;
   status: string;
   date: Date;
-  participants: any;
+  participants: string[];
   description: string;
   openModal: boolean;
   setName: (newValue: string) => void;
   setSchool: (newValue: string) => void;
   setTime: (newValue: string) => void;
   setStatus: (newValue: string) => void;
-  setDate: (newValue: string) => void;
+  setDate: (newValue: Date) => void;
   setDescription: (newValue: string) => void;
   setId: (newValue: string) => void;
-  setParticipants: (newValue: any) => void;
+  setParticipants: (newValue: string[]) => void;
   setOpenModal: (newValue: boolean) => void;
   nameHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   schoolHandler: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -44,6 +44,7 @@ export const initialValue = {
   setStatus: () => { },
   setDescription: () => { },
   setParticipants: () => { },
+  setDate: () => { },
   nameHandler: () => { },
   schoolHandler: () => { },
   timeHandler: () => { },
