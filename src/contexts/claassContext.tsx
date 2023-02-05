@@ -4,12 +4,11 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios'
 import ModalEditClass from '../Components/ModalEditClass';
-import { useContext } from '../Types/@type.useContext';
-import { initialValue, ClaassTypes } from '../Types/@type.claassContext';
+import { useContext } from '../Types/@types.useContext';
+import { initialValue, ClaassTypes } from '../Types/@types.claassContext';
 
 export const ClaassContext = React.createContext<ClaassTypes>(initialValue);
 export function ClaassContextProvider({ children }: useContext) {
-  let DateNow = new Date().toISOString()
   const { data, mutate } = useAxios('studies');
   const [id, setId] = React.useState(initialValue.id)
   const [name, setName] = React.useState(initialValue.name)
@@ -46,12 +45,16 @@ export function ClaassContextProvider({ children }: useContext) {
     }
   }
   function Clear() {
-    setId('')
-    setName('')
-    setDescription('')
-    setSchool('')
-    setStatus('')
-    setTime('')
+    setId(initialValue.id)
+    setName(initialValue.name)
+    setDescription(initialValue.description)
+    setSchool(initialValue.school)
+    setStatus(initialValue.status)
+    setTime(initialValue.time)
+
+  }
+  function CloseModal() {
+    setOpenModal(initialValue.openModal)
   }
   function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -141,9 +144,11 @@ export function ClaassContextProvider({ children }: useContext) {
     date,
     setDate,
     id,
-    Clear
+    Clear,
+    CloseModal
   }}>
     {children}
+    {<ModalEditClass /> && openModal}
   </ClaassContext.Provider>
 
 }

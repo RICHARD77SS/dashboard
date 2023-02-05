@@ -27,6 +27,7 @@ export type ClaassTypes = {
   handleDelete: (id: string) => void;
   handleEdit: (claassId: string, claassName: string, claassSchool: string, claassTime: string, claassStatus: string, claassDescription: string, claassParticipants: string[]) => void;
   Clear: () => void;
+  CloseModal: () => void;
 }
 export const initialValue = {
   id: '',
@@ -57,4 +58,5 @@ export const initialValue = {
   handleEdit: () => { },
   setOpenModal: () => { },
   Clear: () => { },
+  CloseModal: () => { },
 }

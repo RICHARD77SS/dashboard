@@ -4,19 +4,19 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import OfficeEdit from '../Components/OfficeEdit';
-import { useContext } from '../Types/@type.useContext';
-import { initialValue, officeType } from '../Types/@type.officeContext';
+import { useContext } from '../Types/@types.useContext';
+import { initialValue, officeType } from '../Types/@types.officeContext';
 
 export const PositionsContext = React.createContext<officeType>(initialValue);
 
-export function PositionsContextProvider({ children }:useContext) {
+export function PositionsContextProvider({ children }: useContext) {
   const { data, mutate } = useAxios('positions');
 
   const [id, setId] = React.useState(initialValue.id);
   const [name, setName] = React.useState(initialValue.name)
   const [openModal, setOpenModal] = React.useState(initialValue.openModal)
 
-  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
+  function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value)
   }
   function CloseModal() {
@@ -24,7 +24,7 @@ export function PositionsContextProvider({ children }:useContext) {
     setName(initialValue.name)
     setId(initialValue.id)
   }
-  function handleSubmit(event:React.ChangeEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     window.alert('Cargo adicionado')
     const positions = { name }
@@ -32,7 +32,7 @@ export function PositionsContextProvider({ children }:useContext) {
     if (id) {
       api.put(`position/${id}`, positions)
       const updatedPositions = {
-        positions: data.position?.map((positions:{_id:string}) => {
+        positions: data.position?.map((positions: { _id: string }) => {
           if (positions._id === id) {
             return {
               ...positions,
@@ -51,15 +51,15 @@ export function PositionsContextProvider({ children }:useContext) {
       mutate(updatedPositions, false)
     }
   }
-  function handleDelete(id:string) {
+  function handleDelete(id: string) {
     api.delete(`positions/${id}`);
     window.alert('Cargo removido')
     const updatedPositions = {
-      positions: data.positions?.filter((positions:{_id:string})=>positions._id !== id)
+      positions: data.positions?.filter((positions: { _id: string }) => positions._id !== id)
     }
     mutate(updatedPositions, false)
   }
-  function handleEdit(positionId:string, positionName:string) {
+  function handleEdit(positionId: string, positionName: string) {
     setName(positionName)
     setId(positionId)
     setOpenModal(true)

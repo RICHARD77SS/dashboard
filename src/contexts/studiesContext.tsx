@@ -5,7 +5,7 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import { useSortedData } from '../utils/sortingTable';
 import { studiesTypes, InitialValue } from '../Types/@types.studiesContext';
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 export const StudiesContext = React.createContext<studiesTypes>(InitialValue);
 
 export function StudiesContextProvider({ children }: useContext) {

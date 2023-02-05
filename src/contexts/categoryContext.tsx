@@ -5,7 +5,7 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import CategoriesEdit from '../Components/ModalCategoriesEdit';
 import { PersonCategoryType, initialValue } from '../Types/@types.personCategoryContext';
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 
 export const CategoryContext = React.createContext<PersonCategoryType>(initialValue);
 

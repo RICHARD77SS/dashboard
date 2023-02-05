@@ -174,7 +174,7 @@ const ViewClass = () => {
             </Tab>
             <Tab title='Aulas'>
               <Box>
-                <Button className='buttonadd' type='button' onClick={() => OpenModal(id)}>+ Adicionar Aula</Button>
+                <Button className='buttonadd' type='button' onClick={() => OpenModal(id ? id : '')}>+ Adicionar Aula</Button>
               </Box>
             </Tab>
             <Tab title='Arquivos'>

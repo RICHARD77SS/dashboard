@@ -4,12 +4,12 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import CategoriesScheduleEdit from '../Components/CategoriesScheduleEdit';
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 import { CategorySchedule, initialValue } from '../Types/@types.categorySchedule';
 
 export const CategoryScheduleContext = React.createContext<CategorySchedule>(initialValue);
 
-export function CategoryScheduleContextProvider({ children }:useContext) {
+export function CategoryScheduleContextProvider({ children }: useContext) {
   const { data, mutate } = useAxios('categoryschedule');
 
   const [id, setId] = React.useState(initialValue.id);
@@ -42,7 +42,7 @@ export function CategoryScheduleContextProvider({ children }:useContext) {
       api.put(`categoryschedule/${id}`, categorySchedule)
       window.alert('categoryschedule Editada')
       const updatedCategorySchedule = {
-        categorySchedule: data.categorySchedule?.map((categorySchedule:{_id:string}) => {
+        categorySchedule: data.categorySchedule?.map((categorySchedule: { _id: string }) => {
           if (categorySchedule._id === id) {
             return {
               ...categorySchedule,
@@ -63,11 +63,11 @@ export function CategoryScheduleContextProvider({ children }:useContext) {
       mutate(updatedCategorySchedule, false)
     }
   }
-  function handleDelete(id:string) {
+  function handleDelete(id: string) {
     api.delete(`categoryschedule/${id}`);
     window.alert('Categoryschedule removido')
     const updatedCategorySchedule = {
-      categorySchedule: data.categorySchedule?.filter((categorySchedule:{_id:string}) => categorySchedule._id !== id)
+      categorySchedule: data.categorySchedule?.filter((categorySchedule: { _id: string }) => categorySchedule._id !== id)
     };
     mutate(updatedCategorySchedule, false)
   }

@@ -4,7 +4,7 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import CategoriesPatrimoniesEdit from '../Components/CategoriesPatrimoniesEdit';
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 import { CategoryPatrimoniesTypes, initialValue } from '../Types/@types.categoryPatrimonies';
 
 export const CategoryPatrimoniesContext = React.createContext<CategoryPatrimoniesTypes>(initialValue);

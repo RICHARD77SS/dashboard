@@ -15,7 +15,7 @@ const CategoriesPatrimoniesEdit = () => {
         <Form onSubmit={handleSubmit}>
           <Button type='button' onClick={() => CloseModal()}><AiOutlineCloseCircle size='30' /></Button>
           <Input type='text' value={name} onChange={nameHandler} />
-          <Input type='text' value={description} onChange={descriptionHandler} />
+          <textarea title='description' value={description} onChange={descriptionHandler} ></textarea>
           <Button type='submit'>Editar</Button>
         </Form>
       </Content>

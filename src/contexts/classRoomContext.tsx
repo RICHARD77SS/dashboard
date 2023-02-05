@@ -5,8 +5,8 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios'
 import ModalEditClassRoom from '../Components/ModalEditClassRoom';
-import { useContext } from '../Types/@type.useContext';
-import { classRoomTypes, initialValue } from '../Types/@type.classRoomContext';
+import { useContext } from '../Types/@types.useContext';
+import { classRoomTypes, initialValue } from '../Types/@types.classRoomContext';
 
 export const ClassRoomContext = React.createContext<classRoomTypes>(initialValue);
 export function ClassRoomContextProvider({ children }: useContext) {
@@ -55,7 +55,7 @@ export function ClassRoomContextProvider({ children }: useContext) {
     setOpenModal(initialValue.openModal)
     setIndex(initialValue.index)
   }
-  function OpenModal(index: number) {
+  function OpenModal(index: string) {
     setIndex(index)
     setOpenModal(true)
   }
@@ -124,6 +124,7 @@ export function ClassRoomContextProvider({ children }: useContext) {
     id,
     date,
     index,
+    setIndex,
     setId,
     setDiscipline,
     setTopic,

@@ -10,7 +10,7 @@ import ModalNewInputFieldRadio from '../Components/ModalNewInputFieldRadio';
 import ModalNewInputFieldText from '../Components/ModalNewInputFieldText';
 import ModalNewInputFieldTextArea from '../Components/ModalNewInputFieldTextArea';
 import { extrafieldsType, initialValue } from '../Types/@types.extraFieldsContext'
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 
 export const ExtraFieldsContext = React.createContext<extrafieldsType>(initialValue);
 
@@ -103,7 +103,7 @@ export function ExtraFieldsContextProvider({ children }: useContext) {
       api.put(`extraFields/${id}`, extraFields)
       window.alert('Campo editado')
       const updatedExtraFields = {
-        extraFields: data.extraFields?.map((extraFields: {_id:string}) => {
+        extraFields: data.extraFields?.map((extraFields: { _id: string }) => {
           if (extraFields._id === id) {
             return {
               ...extraFields,

@@ -3,7 +3,7 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import { dayNow, monthNow, yearNow } from '../utils/getDate';
 import { personTypes, InitialValue } from '../Types/@types.personContext';
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 import { useSortedData } from '../utils/sortingTable';
 
 export const PersonContext = React.createContext<personTypes>(InitialValue);

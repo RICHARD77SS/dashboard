@@ -3,12 +3,12 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 import { AnotationsTypes, initialValue } from '../Types/@types.anotationsContext';
 
 export const AnotationsContext = React.createContext<AnotationsTypes>(initialValue);
 
-export function AnotationsContextProvider({ children }:useContext) {
+export function AnotationsContextProvider({ children }: useContext) {
   const { data, mutate } = useAxios('anotations');
 
   const [id, setId] = React.useState(initialValue.id);
@@ -16,7 +16,7 @@ export function AnotationsContextProvider({ children }:useContext) {
   const [description, setDescription] = React.useState(initialValue.description)
   const [category, setCategory] = React.useState(initialValue.category)
 
-  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
+  function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
   function descriptionHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -45,7 +45,7 @@ export function AnotationsContextProvider({ children }:useContext) {
       api.put(`anotations/${id}`, anotations)
       window.alert('anotations Editada')
       const updatedAnotations = {
-        anotations: data.anotations?.map((anotations:{_id:string}) => {
+        anotations: data.anotations?.map((anotations: { _id: string }) => {
           if (anotations._id === id) {
             return {
               ...anotations,
@@ -67,7 +67,7 @@ export function AnotationsContextProvider({ children }:useContext) {
       mutate(updatedAnotations, false)
     }
   }
-  function handleDelete(id:string) {
+  function handleDelete(id: string) {
     api.delete(`anotations/${id}`);
     window.alert('anotations removido')
     const updatedAnotations = {

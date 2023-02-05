@@ -2,7 +2,7 @@ import React from 'react';
 
 import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
-import { useContext } from '../Types/@type.useContext';
+import { useContext } from '../Types/@types.useContext';
 import { initialValue, PersonalCardTypes } from '../Types/@types.personalCardContext';
 
 export const PersonalCardContext = React.createContext<PersonalCardTypes>(initialValue);

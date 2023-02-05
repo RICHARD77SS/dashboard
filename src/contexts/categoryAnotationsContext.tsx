@@ -3,19 +3,19 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
-import { useContext } from '../Types/@type.useContext';
-import { CategoryAnotationsTypes,initialValue } from '../Types/@types.categoryAnotationsContext';
+import { useContext } from '../Types/@types.useContext';
+import { CategoryAnotationsTypes, initialValue } from '../Types/@types.categoryAnotationsContext';
 
 export const CategoryAnotationsContext = React.createContext<CategoryAnotationsTypes>(initialValue);
 
-export function CategoryAnotationsContextProvider({ children }:useContext) {
+export function CategoryAnotationsContextProvider({ children }: useContext) {
   const { data, mutate } = useAxios('categoryanotations');
 
   const [id, setId] = React.useState(initialValue.id);
   const [name, setName] = React.useState(initialValue.name)
   const [description, setDescription] = React.useState(initialValue.description)
 
-  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
+  function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
   function descriptionHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -31,7 +31,7 @@ export function CategoryAnotationsContextProvider({ children }:useContext) {
 
   function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
-    CloseModal() 
+    CloseModal()
     const categoryAnotations = {
       name,
       description
@@ -40,7 +40,7 @@ export function CategoryAnotationsContextProvider({ children }:useContext) {
       api.put(`categoryanotations/${id}`, categoryAnotations)
       window.alert('categoryAnotations Editada')
       const updatedCategoryAnotations = {
-        categoryAnotations: data.categoryAnotations?.map((categoryAnotations:{_id:string}) => {
+        categoryAnotations: data.categoryAnotations?.map((categoryAnotations: { _id: string }) => {
           if (categoryAnotations._id === id) {
             return {
               ...categoryAnotations,
@@ -61,7 +61,7 @@ export function CategoryAnotationsContextProvider({ children }:useContext) {
       mutate(updatedCategoryAnotations, false)
     }
   }
-  function handleDelete(id:string) {
+  function handleDelete(id: string) {
     api.delete(`categoryanotations/${id}`);
     window.alert('CategoryAnotations removido')
     const updatedCategoryAnotations = {
