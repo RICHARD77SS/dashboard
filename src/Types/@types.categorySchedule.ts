@@ -13,21 +13,28 @@ export type CategorySchedule = {
   setPhone1: (newValue: string) => void;
   setPhone2: (newValue: string) => void;
   setAnotations: (newValue: string) => void;
-  nameHandler: ;
-  emailHandler: ;
-  categoryHandler: ;
-  typeHandler: ;
-  phone1Handler: ;
-  phone2Handler: ;
-  anotationsHandler: ;
-  handleSubmit: ;
-  handleDelete: ;
-  setId: ;
-  id: ;
-  openModal: ;
-  handleEdit: ;
-  setOpenModal: ;
-  CloseModal: ;
+  nameHandler: (event: React.ChangeEvent<HTMLInputElement>)=>void;
+  emailHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  categoryHandler: (event: React.ChangeEvent<HTMLSelectElement) => void;
+  typeHandler: (event: React.ChangeEvent<HTMLSelectElement) => void;
+  phone1Handler: (event: React.ChangeEvent<HTMLInputElement) => void;
+  phone2Handler: (event: React.ChangeEvent<HTMLInputElement) => void;
+  anotationsHandler: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
+  handleDelete: (id:string) => void;
+  setId: () => void;
+  id: string;
+  openModal: boolean;
+  handleEdit: (contactId: string,
+    contactName: string,
+    contactEmail: string,
+    contactCategory: string,
+    contactType: string,
+    contactPhone1: string,
+    contactPhone2: string,
+    contactAnotations: string) => void;
+  setOpenModal: () => void;
+  CloseModal: () => void;
 }
 export const initialValue = {
   name: '',
