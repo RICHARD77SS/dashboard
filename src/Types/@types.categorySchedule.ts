@@ -3,28 +3,28 @@ export type CategorySchedule = {
   email: string;
   category: string;
   type: string;
-  phone1: number;
-  phone2: number;
+  phone1: string;
+  phone2: string;
   anotations: string;
-  setName: (newValue:string)=>void;
+  id: string;
+  openModal: boolean;
+  setName: (newValue: string) => void;
   setEmail: (newValue: string) => void;
   setCategory: (newValue: string) => void;
   setType: (newValue: string) => void;
   setPhone1: (newValue: string) => void;
   setPhone2: (newValue: string) => void;
   setAnotations: (newValue: string) => void;
-  nameHandler: (event: React.ChangeEvent<HTMLInputElement>)=>void;
+  nameHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   emailHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  categoryHandler: (event: React.ChangeEvent<HTMLSelectElement) => void;
-  typeHandler: (event: React.ChangeEvent<HTMLSelectElement) => void;
-  phone1Handler: (event: React.ChangeEvent<HTMLInputElement) => void;
-  phone2Handler: (event: React.ChangeEvent<HTMLInputElement) => void;
+  categoryHandler: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  typeHandler: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  phone1Handler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  phone2Handler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   anotationsHandler: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
-  handleDelete: (id:string) => void;
-  setId: () => void;
-  id: string;
-  openModal: boolean;
+  handleDelete: (id: string) => void;
+  setId: (newValue: string) => void;
   handleEdit: (contactId: string,
     contactName: string,
     contactEmail: string,
@@ -33,22 +33,37 @@ export type CategorySchedule = {
     contactPhone1: string,
     contactPhone2: string,
     contactAnotations: string) => void;
-  setOpenModal: () => void;
+  setOpenModal: (newValue: boolean) => void;
   CloseModal: () => void;
 }
 export const initialValue = {
   name: '',
-  description: '',
-  setName: ()=>{},
-  setDescription: () => {},
-  nameHandler: ()=>{},
-  descriptionHandler: () => {},
-  handleSubmit: () => {},
-  handleDelete: ()=>{},
-  setId: () => {},
+  email: '',
+  category: '',
+  type: 'Pessoa fisica',
+  phone1: '',
+  phone2: '',
+  anotations: '',
   id: '',
   openModal: false,
-  handleEdit: () => {},
-  setOpenModal: () => {},
-  CloseModal: () => {},
+  setName: () => { },
+  setEmail: () => { },
+  setCategory: () => { },
+  setType: () => { },
+  setPhone1: () => { },
+  setPhone2: () => { },
+  setAnotations: () => { },
+  nameHandler: () => { },
+  emailHandler: () => { },
+  categoryHandler: () => { },
+  typeHandler: () => { },
+  phone1Handler: () => { },
+  phone2Handler: () => { },
+  anotationsHandler: () => { },
+  handleSubmit: () => { },
+  handleDelete: () => { },
+  setId: () => { },
+  handleEdit: () => { },
+  setOpenModal: () => { },
+  CloseModal: () => { },
 }

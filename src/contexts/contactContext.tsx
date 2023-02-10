@@ -5,21 +5,22 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import ModalContactEdit from '../Components/ModalContactEdit';
 import { useContext } from '../Types/@types.useContext';
+import { CategorySchedule,initialValue } from '../Types/@types.categorySchedule';
 
-export const ContactContext = React.createContext();
+export const ContactContext = React.createContext<CategorySchedule>(initialValue);
 
 export function ContactContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('contact');
 
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState()
-  const [email, setEmail] = React.useState()
-  const [category, setCategory] = React.useState()
-  const [type, setType] = React.useState('Pessoa fisica')
-  const [phone1, setPhone1] = React.useState()
-  const [phone2, setPhone2] = React.useState()
-  const [anotations, setAnotations] = React.useState()
-  const [openModal, setOpenModal] = React.useState(false)
+  const [id, setId] = React.useState(initialValue.id);
+  const [name, setName] = React.useState(initialValue.name)
+  const [email, setEmail] = React.useState(initialValue.email)
+  const [category, setCategory] = React.useState(initialValue.category)
+  const [type, setType] = React.useState(initialValue.type)
+  const [phone1, setPhone1] = React.useState<string>(initialValue.phone1)
+  const [phone2, setPhone2] = React.useState(initialValue.phone2)
+  const [anotations, setAnotations] = React.useState(initialValue.anotations)
+  const [openModal, setOpenModal] = React.useState(initialValue.openModal)
 
   function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
@@ -44,15 +45,15 @@ export function ContactContextProvider({ children }:useContext) {
   }
 
   function CloseModal() {
-    setOpenModal(false)
-    setId('')
-    setName('')
-    setEmail('')
-    setCategory('')
-    setType('')
-    setPhone1('')
-    setPhone2('')
-    setAnotations('')
+    setOpenModal(initialValue.openModal)
+    setId(initialValue.id)
+    setName(initialValue.name)
+    setEmail(initialValue.email)
+    setCategory(initialValue.category)
+    setType(initialValue.type)
+    setPhone1(initialValue.phone1)
+    setPhone2(initialValue.phone2)
+    setAnotations(initialValue.anotations)
   }
 
   function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
