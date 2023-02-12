@@ -4,30 +4,32 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import ModalAccountEdit from '../Components/ModalAccountEdit';
+import { useContext } from '../Types/@types.useContext';
+import { DocumentsTypes, initialValue } from '../Types/@types.documentsContext';
 
-export const DocumentsContext = React.createContext();
+export const DocumentsContext = React.createContext<DocumentsTypes>(initialValue);
 
-export function DocumentsContextProvider({ children }) {
+export function DocumentsContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('documents');
 
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState('')
-  const [description, setDescription] = React.useState('')
+  const [id, setId] = React.useState(initialValue.id);
+  const [name, setName] = React.useState(initialValue.name)
+  const [description, setDescription] = React.useState(initialValue.description)
 
-  function nameHandler(event) {
+  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function descriptionHandler(event) {
+  function descriptionHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setDescription(event.target.value);
   }
 
   function CloseModal() {
-    setId('')
-    setName('')
-    setDescription('')
+    setId(initialValue.id)
+    setName(initialValue.name)
+    setDescription(initialValue.description)
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal()
     const documents = {
@@ -38,7 +40,7 @@ export function DocumentsContextProvider({ children }) {
       api.put(`documents/${id}`, documents)
       window.alert('documents Editada')
       const updatedDocuments = {
-        documents: data.documents?.map((documents) => {
+        documents: data.documents?.map((documents:{_id:string}) => {
           if (documents._id === id) {
             return {
               ...documents,
@@ -59,16 +61,16 @@ export function DocumentsContextProvider({ children }) {
       mutate(updatedDocuments, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`documents/${id}`);
     window.alert('documents removido')
     const updatedDocuments = {
-      documents: data.documents?.filter((documents) => documents._id !== id)
+      documents: data.documents?.filter((documents:{_id:string}) => documents._id !== id)
     };
     mutate(updatedDocuments, false)
   }
 
-  function handleEdit(documentId, documentName, documentDescription) {
+  function handleEdit(documentId: string, documentName: string, documentDescription: string) {
     setName(documentName);
     setDescription(documentDescription);
     setId(documentId);
@@ -76,16 +78,16 @@ export function DocumentsContextProvider({ children }) {
   return <DocumentsContext.Provider value={{
     name,
     description,
+    setName,
+    setDescription,
     nameHandler,
     descriptionHandler,
     handleSubmit,
     handleDelete,
     setId,
     id,
-    setName,
-    setDescription,
     handleEdit,
-    CloseModal
+    CloseModal,
   }}>
     {children}
   </DocumentsContext.Provider>
