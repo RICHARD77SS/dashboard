@@ -3,34 +3,36 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import { useContext } from '../Types/@types.useContext';
 import ModalCustCenterEdit from '../Components/ModalCustCenterEdit';
+import { CustCenterTypes, initialValue } from '../Types/@types.custCenterContext';
 
-export const CustCenterContext = React.createContext();
+export const CustCenterContext = React.createContext<CustCenterTypes>(initialValue);
 
-export function CustCenterContextProvider({ children }) {
+export function CustCenterContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('custcenter');
 
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState()
-  const [description, setDescription] = React.useState()
+  const [id, setId] = React.useState(initialValue.id);
+  const [name, setName] = React.useState(initialValue.name)
+  const [description, setDescription] = React.useState(initialValue.description)
 
-  const [openModal, setOpenModal] = React.useState(false)
+  const [openModal, setOpenModal] = React.useState(initialValue.openModal)
 
-  function nameHandler(event) {
+  function nameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function descriptionHandler(event) {
+  function descriptionHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setDescription(event.target.value);
   }
 
   function CloseModal() {
-    setOpenModal(false)
-    setId('')
-    setName('')
-    setDescription('')
+    setOpenModal(initialValue.openModal)
+    setId(initialValue.id)
+    setName(initialValue.name)
+    setDescription(initialValue.description)
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal()
     const custCenter = {
@@ -41,7 +43,7 @@ export function CustCenterContextProvider({ children }) {
       api.put(`custcenter/${id}`, custCenter)
       window.alert('custcenter Editada')
       const updatedCustCenter = {
-        custCenter: data.custCenter?.map((custCenter) => {
+        custCenter: data.custCenter?.map((custCenter:{_id:string}) => {
           if (custCenter._id === id) {
             return {
               ...custCenter,
@@ -62,16 +64,16 @@ export function CustCenterContextProvider({ children }) {
       mutate(updatedCustCenter, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`custcenter/${id}`);
     window.alert('custCenter removido')
     const updatedCustCenter = {
-      custCenter: data.custCenter?.filter((custCenter) => custCenter._id !== id)
+      custCenter: data.custCenter?.filter((custCenter: { _id: string }) => custCenter._id !== id)
     };
     mutate(updatedCustCenter, false)
   }
 
-  function handleEdit(custcenterId, custcenterName, custcenterDescription) {
+  function handleEdit(custcenterId: string, custcenterName: string, custcenterDescription: string) {
     setName(custcenterName);
     setDescription(custcenterDescription);
     setId(custcenterId);
@@ -80,6 +82,8 @@ export function CustCenterContextProvider({ children }) {
   return <CustCenterContext.Provider value={{
     name,
     description,
+    setName,
+    setDescription,
     nameHandler,
     descriptionHandler,
     handleSubmit,
