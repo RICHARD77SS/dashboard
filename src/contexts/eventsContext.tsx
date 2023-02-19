@@ -4,10 +4,11 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import ModalAccountEdit from '../Components/ModalAccountEdit';
+import { useContext } from '../Types/@types.useContext';
 
 export const EventsContext = React.createContext();
 
-export function EventsContextProvider({ children }) {
+export function EventsContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('events');
 
   const [id, setId] = React.useState();
