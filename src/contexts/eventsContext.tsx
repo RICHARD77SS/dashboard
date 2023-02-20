@@ -5,13 +5,14 @@ import api from '../services/api';
 import { useAxios } from '../hooks/useAxios';
 import ModalAccountEdit from '../Components/ModalAccountEdit';
 import { useContext } from '../Types/@types.useContext';
+import { eventsTypes, initialValue } from '../Types/@types.eventsContext';
 
-export const EventsContext = React.createContext();
+export const EventsContext = React.createContext<eventsTypes>(initialValue);
 
 export function EventsContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('events');
 
-  const [id, setId] = React.useState();
+  const [id, setId] = React.useState('');
   const [name, setName] = React.useState('')
   const [subName, setSubName] = React.useState('')
   const [startDate, setStartDate] = React.useState('')
@@ -21,39 +22,39 @@ export function EventsContextProvider({ children }:useContext) {
   const [value, setValue] = React.useState('')
   const [numberOfVacancies, setNumberOfVacancies] = React.useState('')
   const [formOfPayment, setFormOfPayment] = React.useState('')
-  const [schedule, setSchedule] = React.useState([])
+  const [schedule, setSchedule] = React.useState<any[]>([])
   const [aboutTheEvent, setAboutTheEvent] = React.useState('')
   const [place, setPlace] = React.useState('')
   const [image, setImage] = React.useState('')
-  const [speakers, setSpeakers] = React.useState([])
+  const [speakers, setSpeakers] = React.useState<any[]>([])
 
   const [openModal, setOpenModal] = React.useState(false)
 
-  function nameHandler(event) {
+  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function subNameHandler(event) {
+  function subNameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setSubName(event.target.value);
   }
-  function startDateHandler(event) {
+  function startDateHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setStartDate(event.target.value)
   }
-  function endDateHandler(event) {
+  function endDateHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setEndDate(event.target.value)
   }
-  function notificationHandler(event) {
+  function notificationHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setNotification(event.target.checked)
   }
-  function paymentHandler(event) {
+  function paymentHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setPayment(event.target.value)
   }
-  function valueHandler(event) {
+  function valueHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value)
   }
-  function numberOfVacanciesHandler(event) {
+  function numberOfVacanciesHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setNumberOfVacancies(event.target.value)
   }
-  function formOfPaymentHandler(event) {
+  function formOfPaymentHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setFormOfPayment(event.target.value)
   }
 
@@ -65,27 +66,27 @@ export function EventsContextProvider({ children }:useContext) {
     }
     setSchedule([...schedule, obj])
   }
-  function scheduleHandler(event, index) {
+  function scheduleHandler(event: React.ChangeEvent<HTMLInputElement>, index:number) {
     let data = [...schedule];
     data[index][event.target.name] = event.target.value;
     setSchedule(data)
   }
-  function RemoveSchedule(index) {
+  function RemoveSchedule(index:number) {
     let data = [...schedule];
     data.splice(index, 1)
     setSchedule(data)
   }
 
 
-  function aboutTheEventHandler(event) {
+  function aboutTheEventHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setAboutTheEvent(event.target.value)
   }
 
-  function placeHandler(event) {
+  function placeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setPlace(event.target.value)
   }
 
-  function imageHandler(event) {
+  function imageHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setImage(event.target.value)
   }
 
@@ -97,12 +98,12 @@ export function EventsContextProvider({ children }:useContext) {
     }
     setSpeakers([...speakers, obj])
   }
-  function RemoveSpeakers(index) {
+  function RemoveSpeakers(index:number) {
     let data = [...speakers]
     data.splice(index, 1)
     setSpeakers(data)
   }
-  function speakersHandler(event, index) {
+  function speakersHandler(event: React.ChangeEvent<HTMLInputElement>, index:number) {
     let data = [...speakers]
     data[index][event.target.name] = event.target.value
     setSpeakers(data)
@@ -127,7 +128,7 @@ export function EventsContextProvider({ children }:useContext) {
     setSpeakers([])
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal()
     const events = {
@@ -150,7 +151,7 @@ export function EventsContextProvider({ children }:useContext) {
       api.put(`events/${id}`, events)
       window.alert('events Editada')
       const updatedEvents = {
-        events: data.events?.map((events) => {
+        events: data.events?.map((events:{_id:string}) => {
           if (events._id === id) {
             return {
               ...events,
@@ -183,30 +184,30 @@ export function EventsContextProvider({ children }:useContext) {
       mutate(updatedEvents, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`events/${id}`);
     window.alert('events removido')
     const updatedEvents = {
-      events: data.events?.filter((events) => events._id !== id)
+      events: data.events?.filter((events: { _id: string }) => events._id !== id)
     };
     mutate(updatedEvents, false)
   }
 
-  function handleEdit(eventsId,
-    eventsName,
-    eventsSubName,
-    eventsStartDate,
-    eventsEndDate,
-    eventsNotification,
-    eventsPayment,
-    eventsValue,
-    eventsNumberOfVacancies,
-    eventsFormOfPayment,
-    eventsSchedule,
-    eventsAboutTheEvent,
-    eventsPlace,
-    eventsImage,
-    eventsSpeakers
+  function handleEdit(eventsId:string,
+    eventsName: string,
+    eventsSubName: string,
+    eventsStartDate: string,
+    eventsEndDate: string,
+    eventsNotification: boolean,
+    eventsPayment: string,
+    eventsValue: string,
+    eventsNumberOfVacancies: string,
+    eventsFormOfPayment: string,
+    eventsSchedule:any[],
+    eventsAboutTheEvent: string,
+    eventsPlace: string,
+    eventsImage: string,
+    eventsSpeakers:any[]
   ) {
     setId(eventsId)
     setName(eventsName)
