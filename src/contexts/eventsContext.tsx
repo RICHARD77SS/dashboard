@@ -12,23 +12,23 @@ export const EventsContext = React.createContext<eventsTypes>(initialValue);
 export function EventsContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('events');
 
-  const [id, setId] = React.useState('');
-  const [name, setName] = React.useState('')
-  const [subName, setSubName] = React.useState('')
-  const [startDate, setStartDate] = React.useState('')
-  const [endDate, setEndDate] = React.useState('')
-  const [notification, setNotification] = React.useState(false)
-  const [payment, setPayment] = React.useState('')
-  const [value, setValue] = React.useState('')
-  const [numberOfVacancies, setNumberOfVacancies] = React.useState('')
-  const [formOfPayment, setFormOfPayment] = React.useState('')
-  const [schedule, setSchedule] = React.useState<any[]>([])
-  const [aboutTheEvent, setAboutTheEvent] = React.useState('')
-  const [place, setPlace] = React.useState('')
-  const [image, setImage] = React.useState('')
-  const [speakers, setSpeakers] = React.useState<any[]>([])
+  const [id, setId] = React.useState(initialValue.id);
+  const [name, setName] = React.useState(initialValue.name)
+  const [subName, setSubName] = React.useState(initialValue.subName)
+  const [startDate, setStartDate] = React.useState(initialValue.startDate)
+  const [endDate, setEndDate] = React.useState(initialValue.endDate)
+  const [notification, setNotification] = React.useState(initialValue.notification)
+  const [payment, setPayment] = React.useState(initialValue.payment)
+  const [value, setValue] = React.useState(initialValue.value)
+  const [numberOfVacancies, setNumberOfVacancies] = React.useState(initialValue.numberOfVacancies)
+  const [formOfPayment, setFormOfPayment] = React.useState(initialValue.formOfPayment)
+  const [schedule, setSchedule] = React.useState<any[]>(initialValue.schedule)
+  const [aboutTheEvent, setAboutTheEvent] = React.useState(initialValue.aboutTheEvent)
+  const [place, setPlace] = React.useState(initialValue.place)
+  const [image, setImage] = React.useState(initialValue.image)
+  const [speakers, setSpeakers] = React.useState<any[]>(initialValue.speakers)
 
-  const [openModal, setOpenModal] = React.useState(false)
+  const [openModal, setOpenModal] = React.useState(initialValue.openModal)
 
   function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
@@ -110,22 +110,22 @@ export function EventsContextProvider({ children }:useContext) {
   }
 
   function CloseModal() {
-    setId('')
-    setOpenModal(false)
-    setName('')
-    setSubName('')
-    setStartDate('')
-    setEndDate('')
-    setNotification(false)
-    setPayment('')
-    setValue('')
-    setNumberOfVacancies('')
-    setFormOfPayment('')
-    setSchedule([])
-    setAboutTheEvent('')
-    setPlace('')
-    setImage('')
-    setSpeakers([])
+    setId(initialValue.id)
+    setOpenModal(initialValue.openModal)
+    setName(initialValue.name)
+    setSubName(initialValue.subName)
+    setStartDate(initialValue.startDate)
+    setEndDate(initialValue.endDate)
+    setNotification(initialValue.notification)
+    setPayment(initialValue.payment)
+    setValue(initialValue.value)
+    setNumberOfVacancies(initialValue.numberOfVacancies)
+    setFormOfPayment(initialValue.formOfPayment)
+    setSchedule(initialValue.schedule)
+    setAboutTheEvent(initialValue.aboutTheEvent)
+    setPlace(initialValue.place)
+    setImage(initialValue.image)
+    setSpeakers(initialValue.speakers)
   }
 
   function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {

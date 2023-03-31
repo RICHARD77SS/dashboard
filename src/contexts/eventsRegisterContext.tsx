@@ -3,74 +3,72 @@ import React from 'react'
 import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
+import { useContext } from '../Types/@types.useContext';
+import { eventsRegisterTypes, initialValue } from '../Types/@types.eventsRegisterContest';
 
-export const EventsRegisterContext = React.createContext();
+export const EventsRegisterContext = React.createContext<eventsRegisterTypes>(initialValue);
 
-export function EventsRegisterContextProvider({ children }) {
+export function EventsRegisterContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('eventsregister');
 
-  const [id, setId] = React.useState();
+  const [id, setId] = React.useState(initialValue.id);
 
-  const [name, setName] = React.useState('')
-  const [evento, setEvento] = React.useState('')
-  const [phone, setPhone] = React.useState()
-  const [email, setEmail] = React.useState('')
-  const [address, setAddress] = React.useState('')
-  const [number, setNumber] = React.useState()
-  const [district, setDistrict] = React.useState('')
-  const [zipCode, setZipCode] = React.useState()
-  const [country, setCountry] = React.useState('')
-  const [state, setState] = React.useState('')
-  const [city, setCity] = React.useState('')
-  const [payment, setPayment] = React.useState('')
-  const [date, setDate] = React.useState('')
+  const [name, setName] = React.useState(initialValue.name)
+  const [evento, setEvento] = React.useState(initialValue.evento)
+  const [phone, setPhone] = React.useState(initialValue.phone)
+  const [email, setEmail] = React.useState(initialValue.email)
+  const [address, setAddress] = React.useState(initialValue.address)
+  const [number, setNumber] = React.useState(initialValue.number)
+  const [district, setDistrict] = React.useState(initialValue.district)
+  const [zipCode, setZipCode] = React.useState(initialValue.zipCode)
+  const [country, setCountry] = React.useState(initialValue.country)
+  const [state, setState] = React.useState(initialValue.state)
+  const [city, setCity] = React.useState(initialValue.city)
+  const [payment, setPayment] = React.useState(initialValue.payment)
+  const [date, setDate] = React.useState(initialValue.date)
 
-  React.useEffect(() => {
-    setDate(new Date().toISOString())
-  }, [setDate])
-
-  function nameHandler(event) {
+  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function eventoHandler(event) {
+  function eventoHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setEvento(event.target.value);
   }
-  function phoneHandler(event) {
+  function phoneHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setPhone(event.target.value)
   }
-  function emailHandler(event) {
+  function emailHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value)
   }
-  function addressHandler(event) {
+  function addressHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setAddress(event.target.value)
   }
-  function numberHandler(event) {
+  function numberHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setNumber(event.target.value)
   }
-  function districtHandler(event) {
+  function districtHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setDistrict(event.target.value)
   }
-  function zipCodeHandler(event) {
+  function zipCodeHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setZipCode(event.target.value)
   }
 
-  function countryHandler(event) {
+  function countryHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setCountry(event.target.value)
   }
 
-  function stateHandler(event) {
+  function stateHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setState(event.target.value)
   }
 
-  function cityHandler(event) {
+  function cityHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setCity(event.target.value)
   }
 
-  function paymentHandler(event) {
+  function paymentHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setPayment(event.target.value)
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event:React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     const eventsRegister = {
       name,
@@ -91,7 +89,7 @@ export function EventsRegisterContextProvider({ children }) {
       api.put(`eventsregister/${id}`, eventsRegister)
       window.alert('eventsRegister Editada')
       const updatedEventsRegister = {
-        eventsRegister: data.eventsRegister?.map((eventsRegister) => {
+        eventsRegister: data.eventsRegister?.map((eventsRegister:{_id:string}) => {
           if (eventsRegister._id === id) {
             return {
               ...eventsRegister,
@@ -124,28 +122,28 @@ export function EventsRegisterContextProvider({ children }) {
     }
   }
 
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`eventsregister/${id}`);
     window.alert('eventsRegister removido')
     const updatedEventsRegister = {
-      eventsRegister: data.eventsRegister?.filter((eventsRegister) => eventsRegister._id !== id)
+      eventsRegister: data.eventsRegister?.filter((eventsRegister:{_id:string}) => eventsRegister._id !== id)
     };
     mutate(updatedEventsRegister, false)
   }
 
-  function handleEdit(eventsId,
-    eventsName,
-    eventsEvento,
-    eventsPhone,
-    eventsEmail,
-    eventsAddress,
-    eventsNumber,
-    eventsDistrict,
-    eventsZipCode,
-    eventsCountry,
-    eventsState,
-    eventsCity,
-    eventsPayment,
+  function handleEdit(eventsId:string,
+    eventsName:string,
+    eventsEvento:string,
+    eventsPhone:number,
+    eventsEmail: string,
+    eventsAddress: string,
+    eventsNumber:number,
+    eventsDistrict: string,
+    eventsZipCode:number,
+    eventsCountry: string,
+    eventsState: string,
+    eventsCity: string,
+    eventsPayment: string,
   ) {
     setId(eventsId)
     setName(eventsName)
@@ -162,6 +160,7 @@ export function EventsRegisterContextProvider({ children }) {
     setPayment(eventsPayment)
   }
   return <EventsRegisterContext.Provider value={{
+    id,
     name,
     evento,
     phone,
@@ -189,7 +188,6 @@ export function EventsRegisterContextProvider({ children }) {
     handleSubmit,
     handleDelete,
     setId,
-    id,
     handleEdit,
     setName,
     setEvento,

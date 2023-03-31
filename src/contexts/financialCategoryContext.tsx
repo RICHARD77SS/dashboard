@@ -4,26 +4,27 @@ import api from '../services/api';
 
 import { useAxios } from '../hooks/useAxios';
 import ModalFinancialCategoryEdit from '../Components/ModalFinancialCategoryEdit';
+import { useContext } from '../Types/@types.useContext';
 
 export const FinancialCategoryContext = React.createContext();
 
-export function FinancialCategoryContextProvider({ children }) {
+export function FinancialCategoryContextProvider({ children }:useContext) {
   const { data, mutate } = useAxios('financialcategory');
 
-  const [id, setId] = React.useState();
-  const [name, setName] = React.useState()
-  const [description, setDescription] = React.useState()
-  const [type, setType] = React.useState()
+  const [id, setId] = React.useState('');
+  const [name, setName] = React.useState('')
+  const [description, setDescription] = React.useState('')
+  const [type, setType] = React.useState('')
 
   const [openModal, setOpenModal] = React.useState(false)
 
-  function nameHandler(event) {
+  function nameHandler(event:React.ChangeEvent<HTMLInputElement>) {
     setName(event.target.value);
   }
-  function descriptionHandler(event) {
+  function descriptionHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setDescription(event.target.value);
   }
-  function typeHandler(event) {
+  function typeHandler(event: React.ChangeEvent<HTMLInputElement>) {
     setType(event.target.value);
   }
 
@@ -35,7 +36,7 @@ export function FinancialCategoryContextProvider({ children }) {
     setType('')
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
     event.preventDefault()
     CloseModal()
     const financialCategory = {
@@ -48,7 +49,7 @@ export function FinancialCategoryContextProvider({ children }) {
       window.alert('Categoria Editada')
       
       const updatedFinancialCategory = {
-        financialCategory: data.financialCategory?.map((financialCategory) => {
+        financialCategory: data.financialCategory?.map((financialCategory:{_id:string}) => {
           if (financialCategory._id === id) {
             return {
               ...financialCategory,
@@ -70,16 +71,16 @@ export function FinancialCategoryContextProvider({ children }) {
       mutate(updatedFinancialCategory, false)
     }
   }
-  function handleDelete(id) {
+  function handleDelete(id:string) {
     api.delete(`financialcategory/${id}`);
     window.alert('financialcategory removido')
     const updatedFinancialCategory = {
-      financialCategory: data.financialCategory?.filter((financialCategory) => financialCategory._id !== id)
+      financialCategory: data.financialCategory?.filter((financialCategory:{_id:string}) => financialCategory._id !== id)
     };
     mutate(updatedFinancialCategory, false)
   }
 
-  function handleEdit(financialcategoryId, financialcategoryName, financialcategoryDescription, financialcategoryType) {
+  function handleEdit(financialcategoryId:string, financialcategoryName:string, financialcategoryDescription:string, financialcategoryType:string) {
     setName(financialcategoryName);
     setDescription(financialcategoryDescription);
     setId(financialcategoryId);
